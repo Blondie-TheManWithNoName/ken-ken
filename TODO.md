@@ -34,7 +34,7 @@
 	* ~~Brute Force~~ &rarr; [OEIS A002860](https://oeis.org/A002860)
 	* ~~Branch And Bound~~
 	* Candidate Search
-		1) Cridar una funció inversa de cada operació que retorni una llista de vectors candidats que la satisfan (veure [`INVERSE.md`](./INVERSE.md))
+		1) Cridar una funció inversa de cada operació que retorni una llista de vectors candidats que la satisfan
 		2) Amb els principis dels Latin Squares i el mètode de Line Reduction anar descartant candidats
 - [ ] UML de la capa de `model`
 - [ ] Drivers tutorials

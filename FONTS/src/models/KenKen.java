@@ -95,7 +95,7 @@ public class KenKen {
 		return true;
 	}
 
-	public boolean check() throws OperandsDoNotMatchException {
+	public boolean check() throws OperandsDoNotMatchException, NonIntegerResultException {
 		if (numbersRepeatInRows() || numbersRepeatInColumns())
 			return false;
 		for (Group group : groups)

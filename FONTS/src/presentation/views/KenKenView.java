@@ -1,9 +1,6 @@
 package presentation.views;
 
-import exceptions.CellHasNoGroupException;
-import exceptions.EraseFixedValueException;
-import exceptions.OperandsDoNotMatchException;
-import exceptions.ValueOutOfBoundsException;
+import exceptions.*;
 import models.Group;
 import models.KenKen;
 import presentation.controllers.KenKenController;
@@ -73,7 +70,7 @@ public class KenKenView extends JFrame {
 				JOptionPane.showMessageDialog(this, "Congratulations, you solved the KenKen!", "Success", JOptionPane.INFORMATION_MESSAGE);
 			else
 				JOptionPane.showMessageDialog(this, "Oops... continue trying!", "Failure", JOptionPane.ERROR_MESSAGE);
-		} catch (OperandsDoNotMatchException e) {
+		} catch (OperandsDoNotMatchException | NonIntegerResultException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}

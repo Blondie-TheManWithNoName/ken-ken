@@ -1,5 +1,6 @@
 package tests;
 
+import exceptions.NonIntegerResultException;
 import exceptions.OperandsDoNotMatchException;
 import models.operations.OperationLCM;
 import org.junit.Test;
@@ -9,7 +10,7 @@ public class OperationLCMTest {
 	private final static OperationLCM op6 = new OperationLCM(6);
 
 	@Test
-	public void check() throws OperandsDoNotMatchException {
+	public void check() throws OperandsDoNotMatchException, NonIntegerResultException {
 		assert !op3.check(new int[] {2, 3});
 		assert op3.check(new int[] {3, 1});
 		assert op3.check(new int[] {3, 3});
