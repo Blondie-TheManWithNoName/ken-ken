@@ -7,6 +7,7 @@
 	<ol>
 		<li><a href="#sobre-el-projecte">Sobre el Projecte</a></li>
 		<li><a href="#llenguatge-i-llibreries">Llenguatge i Llibreries</a></li>
+		<li><a href="#consideracions">Consideracions</a></li>
 		<li><a href="#execució-del-pograma">Execució del Programa</a></li>
 		<li><a href="#referències">Referències</a></li>
 	</ol>
@@ -36,6 +37,10 @@ I utilitza les següents llibreries per a realitzar testejos (incloses en el VC)
 
 [![JUnit][JUnit]][JUnit-url]
 [![Hamcrest][Hamcrest]][Hamcrest-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Consideracions
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
