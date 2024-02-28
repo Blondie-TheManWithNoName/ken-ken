@@ -61,8 +61,8 @@ A continuació s'explica com es pot executar el programa del projecte.
 
 2. Des d'una terminal ens dirigim a la carpeta on volem el projecte i el clonem allà:
 ```bash
-git clone TODO:REPO_NAME
-cd TODO:
+git clone https://repo.fib.upc.es/grau-prop/subgrup-prop41.3.git
+cd subgrup-prop41.3
 ```
 
 3. El VC ja trackeja els executables JAR que són a la carpeta EXE, així que directament podem probar el programa sencer amb
