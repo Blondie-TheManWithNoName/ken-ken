@@ -45,6 +45,7 @@
 ### 2024-03-06
 - [ ] Format estàndard per fitxers &rarr; Dani
 - [ ] Començar `Candidate Search` &rarr; Brian
+- [ ] Començar tests
 
 ### 2024-02-28
 - [X] Repositori GitLab &rarr; subgrup-prop41.3
