@@ -43,7 +43,8 @@
 		1) Comprovar que la solució sigui correcte (en la pròpia base de dades)
 
 ### 2024-03-06
-- [ ] Format estàndard per fitxers
+- [ ] Format estàndard per fitxers &rarr; Dani
+- [ ] Començar `Candidate Search` &rarr; Brian
 
 ### 2024-02-28
 - [X] Repositori GitLab &rarr; subgrup-prop41.3
@@ -61,7 +62,7 @@
 	* NO &rarr; tot en fitxers
 - [ ] Afegir més operacions de les que diu l'enunciat
 	* `OperationEquality(int target)` &rarr; `OperationLimitedOperands("=", target, 1)`
-	* x^y &rarr; GRAN^petit
+	* `OperationPower(int target)` &rarr; GRAN^petit
 - [X] Lògica de la divisó:
 	* ~~Divisió entera (5 / 2 = 2)~~
 	* Forçar divisió exacte (5 / 2 => ERROR)
