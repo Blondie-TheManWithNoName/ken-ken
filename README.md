@@ -36,6 +36,7 @@ Aquest projecte ha estat desenvolupat amb el JDK 11.0.21 distribuït per Oracle.
 I utilitza les següents llibreries per a realitzar testejos (incloses en el VC):
 
 [![JUnit][JUnit]][JUnit-url]
+
 [![Hamcrest][Hamcrest]][Hamcrest-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -55,7 +56,7 @@ A continuació s'explica com es pot executar el programa del projecte.
 	- En cas que l'output indiqui una altra versió caldrà editar la variables d'entorn `$PATH` per a executar la versió que volem de Java:
 
 	```bash
-	# Canviar '/path/to/java/' per la ruta del JDK 11.0.21
+	# Canviar '/path/to/java' per la ruta del JDK 11.0.21
 	export PATH=/path/to/java/bin:$PATH
 	```
 
@@ -75,7 +76,7 @@ java -jar EXE/KenKen.jar
 make compile
 ```
 
-5. El propi `makefile` inclou un entry-point explicant les diverses funcionalitats que implementa:
+5. El propi `makefile` inclou un target explicant les diverses funcionalitats que implementa:
 ```bash
 make help
 ```
