@@ -30,12 +30,13 @@
 	* `JLabel` a la `BorderLayout.NORTH` de la `CellView`
 - [X] ~~És correcte crear els casos d'ús abstractes per a `IA Solve` i/o `Load KenKen`?~~
 - [X] ~~És correcte crear els casos d'ús de `DB Connector`?~~
-- [ ] Algorismes de resolució de KenKens:
+- [X] Algorismes de resolució de KenKens:
 	* ~~Brute Force~~ &rarr; [OEIS A002860](https://oeis.org/A002860)
 	* ~~Branch And Bound~~
 	* Candidate Search
 		1) Cridar una funció inversa de cada operació que retorni una llista de vectors candidats que la satisfan
 		2) Amb els principis dels Latin Squares i el mètode de Line Reduction anar descartant candidats
+	* Backtracking
 - [ ] UML de la capa de `model`
 - [ ] Drivers tutorials
 - [ ] Guardar també la sol·lució també en guardar un KenKen?
@@ -43,9 +44,14 @@
 		1) Comprovar que la solució sigui correcte (en la pròpia base de dades)
 
 ### 2024-03-06
-- [ ] Format estàndard per fitxers &rarr; Dani
+- [ ] Format estàndard per fitxers
+- [ ] Afegir operacions &rarr; Dani
+	* `OperationEquality(int target)` &rarr; `OperationLimitedOperands("=", target, 1)`
+	* `OperationPower(int target)` &rarr; `OperationLimitedOperands("^", target, 2)` (GRAN^petit)
 - [ ] Començar `Candidate Search` &rarr; Brian
-- [ ] Començar tests
+- [X] `Backtracking` &rarr; Oriol
+- [ ] Posar-se al dia &rarr; Noah
+- [ ] Començar els tests
 
 ### 2024-02-28
 - [X] Repositori GitLab &rarr; subgrup-prop41.3
@@ -61,9 +67,7 @@
 		2) ~~NoSQL~~
 			- ~~Firebase~~
 	* NO &rarr; tot en fitxers
-- [ ] Afegir més operacions de les que diu l'enunciat
-	* `OperationEquality(int target)` &rarr; `OperationLimitedOperands("=", target, 1)`
-	* `OperationPower(int target)` &rarr; GRAN^petit
+- [X] Afegir més operacions de les que diu l'enunciat
 - [X] Lògica de la divisó:
 	* ~~Divisió entera (5 / 2 = 2)~~
 	* Forçar divisió exacte (5 / 2 => ERROR)

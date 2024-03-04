@@ -2,8 +2,8 @@ package presentation.custom;
 
 import javax.swing.*;
 
-public class CustomJButton extends JButton {
-	public CustomJButton(String text) {
+public class JCustomButton extends JButton {
+	public JCustomButton(String text) {
 		super(text);
 		setFocusable(false);
 	}

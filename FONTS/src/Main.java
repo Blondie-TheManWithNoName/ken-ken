@@ -1,6 +1,8 @@
 import exceptions.*;
 import models.KenKen;
+import models.KenKenSolver;
 import models.operations.*;
+import presentation.views.KenKenSolverView;
 import presentation.views.KenKenView;
 
 import javax.swing.*;
@@ -23,25 +25,13 @@ public class Main {
 			kenKen.addCellToLastGrop(2, 0);
 			kenKen.addCellToLastGrop(2, 1);
 
-			kenKen.setPosition(0, 0, 3);
-			kenKen.setPosition(0, 1, 1);
-			kenKen.setPosition(0, 2, 2);
-			kenKen.setPosition(1, 0, 1);
-			kenKen.setPosition(1, 1, 2);
-			kenKen.setPosition(1, 2, 3);
-			kenKen.setPosition(2, 0, 2);
-			kenKen.setPosition(2, 1, 3);
-			kenKen.setPosition(2, 2, 1);
-		} catch (GroupCellsNotContiguousException | TooManyOperandsException | CellAlreadyInGroupException | ValueOutOfBoundsException e) {
+			kenKen.checkAllCellsHaveGroup();
+		} catch (GroupCellsNotContiguousException | TooManyOperandsException | CellAlreadyInGroupException | CellHasNoGroupException e) {
 			System.out.println(e.getMessage());
 			return;
 		}
 
-		try {
-			KenKenView view = new KenKenView(kenKen);
-			SwingUtilities.invokeLater(view::start);
-		} catch (CellHasNoGroupException e) {
-			System.out.println(e.getMessage());
-		}
+		KenKenView view = new KenKenSolverView(new KenKenSolver(kenKen));
+		SwingUtilities.invokeLater(view::start);
 	}
 }

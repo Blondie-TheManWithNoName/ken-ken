@@ -5,6 +5,7 @@ import models.operations.Operation;
 import models.operations.OperationLimitedOperands;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Group {
@@ -36,6 +37,13 @@ public class Group {
 
 	public String getNotation() {
 		return operation.getNotation();
+	}
+
+	public boolean isValidMove(int value, int size) {
+		int[] operands = cells.stream().mapToInt(Cell::getValue).filter(v -> v != 0).toArray();
+		int[] newOperands = Arrays.copyOf(operands, operands.length + 1);
+		newOperands[operands.length] = value;
+		return operation.isValidCandidate(newOperands, cells.size(), size);
 	}
 
 	public boolean check() throws OperandsDoNotMatchException, NonIntegerResultException {

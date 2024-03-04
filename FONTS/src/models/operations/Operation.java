@@ -18,9 +18,15 @@ public abstract class Operation {
 		return symbol;
 	}
 
+	public int getTarget() {
+		return target;
+	}
+
 	public String getNotation() {
 		return symbol + target;
 	}
+
+	public abstract boolean isValidCandidate(int[] operands, int groupSize, int max);
 
 	public abstract int calculate(int[] operands) throws OperandsDoNotMatchException, NonIntegerResultException;
 

@@ -27,6 +27,10 @@ public class KenKen {
 		return groups;
 	}
 
+	public Group getGroup(int row, int col) {
+		return board[row][col].getGroup();
+	}
+
 	public int getValue(int row, int col) {
 		return board[row][col].getValue();
 	}
@@ -45,7 +49,7 @@ public class KenKen {
 		board[row][col].setFixedValue(value);
 	}
 
-	public void setPosition(int row, int col, int value) throws ValueOutOfBoundsException {
+	public void setPosition(int row, int col, int value) throws ValueOutOfBoundsException, RewriteFixedPositionException {
 		if (value < 1 || value > size)
 			throw new ValueOutOfBoundsException(value);
 		board[row][col].setValue(value);
@@ -55,31 +59,39 @@ public class KenKen {
 		board[row][col].erase();
 	}
 
-	public boolean hasTopBorder(int row, int col) throws CellHasNoGroupException {
-		if (!board[row][col].hasGroup())
-			throw new CellHasNoGroupException(row, col);
+	public void clear() {
+		for (int i = 0; i < size; i++)
+			for (int j = 0; j < size; j++) {
+				try {
+					board[i][j].erase();
+				} catch (EraseFixedValueException ignored) {}
+			}
+	}
+
+	public void checkAllCellsHaveGroup() throws CellHasNoGroupException {
+		for (int i = 0; i < size; i++)
+			for (int j = 0; j < size; j++)
+				if (!board[i][j].hasGroup())
+					throw new CellHasNoGroupException(i, j);
+	}
+
+	public boolean hasTopBorder(int row, int col) {
 		return row == 0;
 	}
 
-	public boolean hasLeftBorder(int row, int col) throws CellHasNoGroupException {
-		if (!board[row][col].hasGroup())
-			throw new CellHasNoGroupException(row, col);
+	public boolean hasLeftBorder(int row, int col) {
 		if (col == 0)
 			return true;
 		return !board[row][col].getGroup().hasCell(board[row][col - 1]);
 	}
 
-	public boolean hasBottomBorder(int row, int col) throws CellHasNoGroupException {
-		if (!board[row][col].hasGroup())
-			throw new CellHasNoGroupException(row, col);
+	public boolean hasBottomBorder(int row, int col) {
 		if (row == size - 1)
 			return true;
 		return !board[row][col].getGroup().hasCell(board[row + 1][col]);
 	}
 
-	public boolean hasRightBorder(int row, int col) throws CellHasNoGroupException {
-		if (!board[row][col].hasGroup())
-			throw new CellHasNoGroupException(row, col);
+	public boolean hasRightBorder(int row, int col) {
 		return col == size - 1;
 	}
 

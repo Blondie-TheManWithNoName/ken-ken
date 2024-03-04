@@ -1,6 +1,7 @@
 package models;
 
 import exceptions.EraseFixedValueException;
+import exceptions.RewriteFixedPositionException;
 
 public class Cell {
 	private final int row;
@@ -34,7 +35,9 @@ public class Cell {
 		return fixed;
 	}
 
-	public void setValue(int value) {
+	public void setValue(int value) throws RewriteFixedPositionException {
+		if (fixed)
+			throw new RewriteFixedPositionException(row, col);
 		this.value = value;
 	}
 
