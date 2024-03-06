@@ -36,11 +36,15 @@ Aquest projecte ha estat desenvolupat amb el JDK 11.0.21 distribuït per Oracle.
 I utilitza les següents llibreries per a realitzar testejos (incloses en el VC):
 
 [![JUnit][JUnit]][JUnit-url]
+
 [![Hamcrest][Hamcrest]][Hamcrest-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Consideracions
+
+Per a aquest project s'han tingut en compte diverses consideracions:
+* La divisió en els KenKen han de ser exactes. És a dir, si l'objectiu d'un dels grups és `/2` la parella de números `(2, 5)` no seria vàlida, ja que tot i que la seva divisió entera és `2 // 5 = 2` la seva divisió decimal és `2 / 5 = 2.5 ≠ 5`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -55,7 +59,7 @@ A continuació s'explica com es pot executar el programa del projecte.
 	- En cas que l'output indiqui una altra versió caldrà editar la variables d'entorn `$PATH` per a executar la versió que volem de Java:
 
 	```bash
-	# Canviar '/path/to/java/' per la ruta del JDK 11.0.21
+	# Canviar '/path/to/java' per la ruta del JDK 11.0.21
 	export PATH=/path/to/java/bin:$PATH
 	```
 
@@ -75,7 +79,7 @@ java -jar EXE/KenKen.jar
 make compile
 ```
 
-5. El propi `makefile` inclou un entry-point explicant les diverses funcionalitats que implementa:
+5. El propi `makefile` inclou un target explicant les diverses funcionalitats que implementa:
 ```bash
 make help
 ```

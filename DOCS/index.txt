@@ -1,0 +1,11 @@
+Els diagrames han estat fets en Visual Paradigm 17.1 (Community Edition), que es pot descarregar des de la seva web oficial:
+	https://www.visual-paradigm.com/download/community.jsp
+
+DIAGRAMA DE CASOS D'ÚS
+======================
+
+TODO:
+
+
+
+

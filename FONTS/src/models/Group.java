@@ -1,9 +1,6 @@
 package models;
 
-import exceptions.CellAlreadyInGroupException;
-import exceptions.GroupCellsNotContiguousException;
-import exceptions.OperandsDoNotMatchException;
-import exceptions.TooManyOperandsException;
+import exceptions.*;
 import models.operations.Operation;
 import models.operations.OperationLimitedOperands;
 
@@ -41,7 +38,7 @@ public class Group {
 		return operation.getNotation();
 	}
 
-	public boolean check() throws OperandsDoNotMatchException {
+	public boolean check() throws OperandsDoNotMatchException, NonIntegerResultException {
 		for (Cell cell : cells)
 			if (cell.getValue() == 0)
 				return false;

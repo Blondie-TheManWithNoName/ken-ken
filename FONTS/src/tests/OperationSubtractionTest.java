@@ -1,5 +1,6 @@
 package tests;
 
+import exceptions.NonIntegerResultException;
 import exceptions.OperandsDoNotMatchException;
 import models.operations.OperationSubtraction;
 import org.junit.Test;
@@ -8,7 +9,7 @@ public class OperationSubtractionTest {
 	private final static OperationSubtraction op3 = new OperationSubtraction(3);
 
 	@Test
-	public void check() {
+	public void check() throws NonIntegerResultException {
 		try {
 			op3.check(new int[]{1, 2, 3});
 			assert false;
