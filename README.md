@@ -44,7 +44,8 @@ I utilitza les següents llibreries per a realitzar testejos (incloses en el VC)
 ## Consideracions
 
 Per a aquest project s'han tingut en compte diverses consideracions:
-* La divisió en els KenKen han de ser exactes. És a dir, si l'objectiu d'un dels grups és `/2` la parella de números `(2, 5)` no seria vàlida, ja que tot i que la seva divisió entera és `2 // 5 = 2` la seva divisió decimal és `2 / 5 = 2.5 ≠ 5`.
+* La divisió en els KenKen han de ser exactes. És a dir, si l'objectiu d'un dels grups és `/2` la parella de números `(2, 5)` no seria vàlida, ja que tot i que la seva divisió entera és `2 // 5 = 2` la seva divisió decimal és `2 / 5 = 2.5 ≠ 2`.
+* La potència, al ser l'única operació no commutativa* té una restricció per saber en quin ordre fer-la. Com que serà un grup de 2 úniques cel·les contigues, el número no podrà ser igual, per tant sempre s'evaluarà el número més gran elevat al més petit. De tal manera `(2, 3)` sempre serà `3^2 = 9` i mai `2^3 = 8`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
