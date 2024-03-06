@@ -11,6 +11,7 @@
 - [ ] Jocs de proves
 
 ### En un futur...
+- [ ] Comentar-ho tot
 - [ ] Implementar cronòmetre
 	* Pausar / Reanudar
 - [ ] Sistema de puntuació:
@@ -44,7 +45,12 @@
 		1) Comprovar que la solució sigui correcte (en la pròpia base de dades)
 
 ### 2024-03-13
-- [ ] Comentar-ho tot
+- [ ] Generar KenKen:
+	* N&times;N
+	* M grups
+	* &tau; topologia
+	* &delta; grup
+	* Fixed values
 
 ### 2024-03-06
 - [X] Afegir més operacions de les que diu l'enunciat &rarr; Dani
