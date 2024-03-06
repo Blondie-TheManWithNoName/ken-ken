@@ -12,8 +12,7 @@ public class OperationPower extends OperationLimitedOperands {
 		if (operands.length != nOperands)
 			throw new OperandsDoNotMatchException(symbol, nOperands, operands.length);
 		if (operands[0] < operands[1])
-			return operands[1] ^ operands[0];
-		return operands[0] ^ operands[1];
+			return (int) Math.pow(operands[1], operands[0]);
+		return (int) Math.pow(operands[0], operands[1]);
 	}
-    
 }

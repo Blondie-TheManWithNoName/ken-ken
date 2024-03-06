@@ -45,7 +45,7 @@
 ### 2024-03-13
 
 ### 2024-03-06
-- [ ] Afegir més operacions de les que diu l'enunciat &rarr; Dani
+- [X] Afegir més operacions de les que diu l'enunciat &rarr; Dani
 	* `OperationEquality(int target)` &rarr; `OperationLimitedOperands("=", target, 1)`
 	* `OperationPower(int target)` &rarr; GRAN^petit
 - [ ] Començar `Candidate Search` &rarr; Brian
