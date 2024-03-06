@@ -43,6 +43,9 @@ I utilitza les següents llibreries per a realitzar testejos (incloses en el VC)
 
 ## Consideracions
 
+Per a aquest project s'han tingut en compte diverses consideracions:
+* La divisió en els KenKen han de ser exactes. És a dir, si l'objectiu d'un dels grups és `/2` la parella de números `(2, 5)` no seria vàlida, ja que tot i que la seva divisió entera és `2 // 5 = 2` la seva divisió decimal és `2 / 5 = 2.5 ≠ 5`.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Execució del Programa
