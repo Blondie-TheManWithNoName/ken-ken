@@ -1,6 +1,5 @@
 package models.operations;
 
-import exceptions.NonIntegerResultException;
 import exceptions.OperandsDoNotMatchException;
 
 import java.util.List;

@@ -3,9 +3,32 @@ package models.operations;
 import exceptions.NonIntegerResultException;
 import exceptions.OperandsDoNotMatchException;
 
+import java.util.Arrays;
+
 public class OperationDivision extends OperationLimitedOperands {
 	public OperationDivision(int target) {
 		super("/", target, 2);
+	}
+
+	@Override
+	public boolean isValidCandidate(int[] operands, int groupSize, int max) {
+		if (operands.length == nOperands) {
+			try {
+				return calculate(operands) == target;
+			} catch (OperandsDoNotMatchException ignored) {
+			} catch (NonIntegerResultException e) {
+				return false;
+			}
+		}
+		int[] newOperands = Arrays.copyOf(operands, operands.length + 1);
+		for (int i = 1; i <= max; i++) {
+			if (i == operands[0])
+				continue;
+			newOperands[1] = i;
+			if (isValidCandidate(newOperands, groupSize, max))
+				return true;
+		}
+		return false;
 	}
 
 	@Override

@@ -6,6 +6,13 @@ public class OperationGCD extends Operation {
 	}
 
 	@Override
+	public boolean isValidCandidate(int[] operands, int groupSize, int max) {
+		if (operands.length == groupSize)
+			return calculate(operands) == target;
+		return calculate(operands) >= target;
+	}
+
+	@Override
 	public int calculate(int[] operands) {
 		return GCD(operands);
 	}

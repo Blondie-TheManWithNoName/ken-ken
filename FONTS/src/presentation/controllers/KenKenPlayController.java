@@ -1,18 +1,18 @@
 package presentation.controllers;
 
-import presentation.views.KenKenView;
+import presentation.views.KenKenPlayView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class KenKenController implements ActionListener {
-	public final static String CHECK_BUTTON_AC = "CHECK_KENKEN";
+public class KenKenPlayController implements ActionListener {
+	public final static String CHECK_KENKEN_AC = "CHECK_KENKEN";
 	public final static String SELECT_CELL_AC = "SELECT_CELL_";
 	public final static String SET_CELL_TO_AC = "SET_CELL_TO_";
 
-	private final KenKenView view;
+	private final KenKenPlayView view;
 
-	public KenKenController(KenKenView view) {
+	public KenKenPlayController(KenKenPlayView view) {
 		this.view = view;
 	}
 
@@ -23,13 +23,11 @@ public class KenKenController implements ActionListener {
 			int row = Integer.parseInt(parts[2]);
 			int col = Integer.parseInt(parts[3]);
 			view.selectCell(row, col);
-		}
-		if (e.getActionCommand().startsWith(SET_CELL_TO_AC)) {
+		} else if (e.getActionCommand().startsWith(SET_CELL_TO_AC)) {
 			String[] parts = e.getActionCommand().split("_");
 			int value = Integer.parseInt(parts[3]);
 			view.setValue(value);
-		}
-		if (e.getActionCommand().equals(CHECK_BUTTON_AC)) {
+		} else if (e.getActionCommand().equals(CHECK_KENKEN_AC)) {
 			view.check();
 		}
 	}
