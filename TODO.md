@@ -44,6 +44,7 @@
 		1) Comprovar que la solució sigui correcte (en la pròpia base de dades)
 
 ### 2024-03-13
+- [ ] Comentar-ho tot
 
 ### 2024-03-06
 - [X] Afegir més operacions de les que diu l'enunciat &rarr; Dani

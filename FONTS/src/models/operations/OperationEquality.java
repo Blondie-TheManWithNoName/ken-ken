@@ -8,6 +8,11 @@ public class OperationEquality extends OperationLimitedOperands {
 	}
 
 	@Override
+	public boolean isValidCandidate(int[] operands, int groupSize, int max) {
+		return operands[0] == target;
+	}
+
+	@Override
 	public int calculate(int[] operands) throws OperandsDoNotMatchException {
 		if (operands.length != nOperands) 
 			throw new OperandsDoNotMatchException(symbol, nOperands, operands.length);
