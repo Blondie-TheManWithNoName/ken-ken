@@ -39,7 +39,7 @@ public class KenKen {
 		groups.add(new Group(operation));
 	}
 
-	public void addCellToLastGrop(int row, int col) throws GroupCellsNotContiguousException, TooManyOperandsException, CellAlreadyInGroupException {
+	public void addCellToLastGrop(int row, int col) throws TooManyOperandsException, CellAlreadyInGroupException {
 		groups.get(groups.size() - 1).addCell(board[row][col]);
 	}
 
@@ -68,11 +68,14 @@ public class KenKen {
 			}
 	}
 
-	public void checkAllCellsHaveGroup() throws CellHasNoGroupException {
+	public void checkCellsGroups() throws CellHasNoGroupException, GroupCellsNotContiguousException {
 		for (int i = 0; i < size; i++)
 			for (int j = 0; j < size; j++)
 				if (!board[i][j].hasGroup())
 					throw new CellHasNoGroupException(i, j);
+		for (Group group : groups)
+			if (!group.cellsAreContiguous())
+				throw new GroupCellsNotContiguousException();
 	}
 
 	public boolean hasTopBorder(int row, int col) {

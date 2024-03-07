@@ -28,12 +28,12 @@ public class KenKenSolverTest {
 			kenKen.addGroup(new OperationAddition(5));
 			kenKen.addCellToLastGrop(2, 0);
 			kenKen.addCellToLastGrop(2, 1);
-		} catch (GroupCellsNotContiguousException | TooManyOperandsException | CellAlreadyInGroupException e) {
+		} catch (TooManyOperandsException | CellAlreadyInGroupException e) {
 			assert false;
 		}
 		try {
-			kenKen.checkAllCellsHaveGroup();
-		} catch (CellHasNoGroupException e) {
+			kenKen.checkCellsGroups();
+		} catch (CellHasNoGroupException | GroupCellsNotContiguousException e) {
 			assert false;
 		}
 
@@ -78,12 +78,12 @@ public class KenKenSolverTest {
 			kenKen.addCellToLastGrop(3, 1);
 			kenKen.addCellToLastGrop(3, 2);
 			kenKen.addCellToLastGrop(3, 3);
-		} catch (GroupCellsNotContiguousException | TooManyOperandsException | CellAlreadyInGroupException e) {
+		} catch (TooManyOperandsException | CellAlreadyInGroupException e) {
 			assert false;
 		}
 		try {
-			kenKen.checkAllCellsHaveGroup();
-		} catch (CellHasNoGroupException e) {
+			kenKen.checkCellsGroups();
+		} catch (CellHasNoGroupException | GroupCellsNotContiguousException e) {
 			assert false;
 		}
 
@@ -120,12 +120,12 @@ public class KenKenSolverTest {
 			kenKen.addGroup(new OperationAddition(5));
 			kenKen.addCellToLastGrop(2, 0);
 			kenKen.addCellToLastGrop(2, 1);
-		} catch (GroupCellsNotContiguousException | TooManyOperandsException | CellAlreadyInGroupException e) {
+		} catch (TooManyOperandsException | CellAlreadyInGroupException e) {
 			assert false;
 		}
 		try {
-			kenKen.checkAllCellsHaveGroup();
-		} catch (CellHasNoGroupException e) {
+			kenKen.checkCellsGroups();
+		} catch (CellHasNoGroupException | GroupCellsNotContiguousException e) {
 			assert false;
 		}
 

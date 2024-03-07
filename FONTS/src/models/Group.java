@@ -16,9 +16,7 @@ public class Group {
 		this.operation = operation;
 	}
 
-	public void addCell(Cell cell) throws GroupCellsNotContiguousException, TooManyOperandsException, CellAlreadyInGroupException {
-		if (!checkCellsAreAdjacents(cell))
-			throw new GroupCellsNotContiguousException(cell.getRow(), cell.getCol());
+	public void addCell(Cell cell) throws TooManyOperandsException, CellAlreadyInGroupException {
 		if (operation instanceof OperationLimitedOperands && cells.size() >=  ((OperationLimitedOperands) operation).getNOperands())
 			throw new TooManyOperandsException(operation.getSymbol(), ((OperationLimitedOperands) operation).getNOperands());
 		if (cell.hasGroup())
@@ -39,6 +37,23 @@ public class Group {
 		return operation.getNotation();
 	}
 
+	public boolean cellsAreContiguous() {
+		if (cells.size() < 2)
+			return true;
+		for (Cell currentCell : cells) {
+			boolean adjacent = false;
+			for (Cell otherCell : cells) {
+				if (currentCell.isAdjacent(otherCell)) {
+					adjacent = true;
+					break;
+				}
+			}
+			if (!adjacent)
+				return false;
+		}
+		return true;
+	}
+
 	public boolean isValidMove(int value, int size) {
 		int[] operands = cells.stream().mapToInt(Cell::getValue).filter(v -> v != 0).toArray();
 		int[] newOperands = Arrays.copyOf(operands, operands.length + 1);
@@ -51,14 +66,5 @@ public class Group {
 			if (cell.getValue() == 0)
 				return false;
 		return operation.check(cells.stream().mapToInt(Cell::getValue).toArray());
-	}
-
-	private boolean checkCellsAreAdjacents(Cell cell) {
-		if (cells.isEmpty())
-			return true;
-		for (Cell c : cells)
-			if (c.isAdjacent(cell))
-				return true;
-		return false;
 	}
 }
