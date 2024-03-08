@@ -74,7 +74,7 @@ public class KenKen {
 				if (!board[i][j].hasGroup())
 					throw new CellHasNoGroupException(i, j);
 		for (Group group : groups)
-			if (!group.cellsAreContiguous())
+			if (!group.cellsAreAdjacent())
 				throw new GroupCellsNotContiguousException();
 	}
 

@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Random;
 
 public class OperationFactory {
-	private final static Class<? extends Operation>[] operations = new Class[] {
+	private final static Class<? extends Operation>[] OPERATIONS = new Class[] {
 			OperationAddition.class,
 			OperationGCD.class,
 			OperationLCM.class,
 			OperationMultiplication.class
 	};
-	private final static Class<? extends OperationLimitedOperands>[] operationsLimited = new Class[] {
+	private final static Class<? extends OperationLimitedOperands>[] OPERATIONS_LIMITED = new Class[] {
 			OperationDivision.class,
 			OperationEquality.class,
 			OperationPower.class,
@@ -25,10 +25,10 @@ public class OperationFactory {
 	};
 
 	public static Operation createOperation(int[] operands) throws CannotCreateOperationException {
-		List<Class<? extends Operation>> validOperations = new ArrayList<>(List.of(operations));
+		List<Class<? extends Operation>> validOperations = new ArrayList<>(List.of(OPERATIONS));
 
 		Random random = new Random();
-		for (Class<? extends OperationLimitedOperands> operation : operationsLimited) {
+		for (Class<? extends OperationLimitedOperands> operation : OPERATIONS_LIMITED) {
 			Operation createdOperation = null;
 			try {
 				createdOperation = createOperation(operation, 0);

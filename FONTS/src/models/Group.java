@@ -33,11 +33,7 @@ public class Group {
 		return cells.get(index);
 	}
 
-	public String getNotation() {
-		return operation.getNotation();
-	}
-
-	public boolean cellsAreContiguous() {
+	public boolean cellsAreAdjacent() {
 		if (cells.size() < 2)
 			return true;
 		for (Cell currentCell : cells) {
@@ -52,6 +48,10 @@ public class Group {
 				return false;
 		}
 		return true;
+	}
+
+	public String getNotation() {
+		return operation.getNotation();
 	}
 
 	public boolean isValidMove(int value, int size) {
