@@ -1,6 +1,10 @@
 package models;
 
 public class Topology {
+	public final static int[][] BLOCK_SHAPE = {{1, 1}, {1, 1}};
+	public final static int[][] J_SHAPE = {{0, 1}, {0, 1}, {1, 1}};
+	public final static int[][] L_SHAPE = {{1, 0}, {1, 0}, {1, 1}};
+
 	private final int[][] shape;
 
 	public Topology(int[][] shape) {

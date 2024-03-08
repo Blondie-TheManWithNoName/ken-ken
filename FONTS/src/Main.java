@@ -12,22 +12,7 @@ import javax.swing.*;
 
 public class Main {
 	public static void main(String[] args) {
-		int[][] blockShape = {
-			{1, 1},
-			{1, 1}
-		};
-		int[][] lShape = {
-			{1, 0},
-			{1, 0},
-			{1, 1}
-		};
-		int[][] jShape = {
-			{0, 1},
-			{0, 1},
-			{1, 1}
-		};
-
-		KenKenGenerator generator = new KenKenGenerator(4, new Topology(jShape));
+		KenKenGenerator generator = new KenKenGenerator(4, new Topology(Topology.L_SHAPE));
 		KenKen kenKen;
 		try {
 			kenKen = generator.generate();
