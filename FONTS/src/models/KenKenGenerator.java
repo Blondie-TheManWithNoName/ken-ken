@@ -111,22 +111,41 @@ public class KenKenGenerator {
 	}
 
 	private boolean topologyFits(int[][] groupMap, int[][] shape, int row, int col) {
+		int rowOffset = 0;
+		for (int i = 0; i < shape.length; i++)
+			if (shape[i][0] == 1) {
+				rowOffset = i;
+				break;
+			}
+
 		for (int i = 0; i < shape.length; i++)
 			for (int j = 0; j < shape[0].length; j++)
-				if (shape[i][j] != 0) {
-					if (row + i >= size || col + j >= size)
+				if (shape[i][j] == 1) {
+					int rotatedRow = row + i - rowOffset;
+					int rotatedCol = col + j;
+
+					if (rotatedRow < 0 || rotatedRow >= groupMap.length)
 						return false;
-					if (groupMap[row + i][col + j] != 0)
+					if (rotatedCol < 0 || rotatedCol >= groupMap[0].length)
+						return false;
+					if (groupMap[rotatedRow][rotatedCol] != 0)
 						return false;
 				}
 		return true;
 	}
 
 	private void createGroup(int[][] groupMap, int[][] shape, int row, int col, int nextGroup) {
+		int rowOffset = 0;
+		for (int i = 0; i < shape.length; i++)
+			if (shape[i][0] == 1) {
+				rowOffset = i;
+				break;
+			}
+
 		for (int i = 0; i < shape.length; i++)
 			for (int j = 0; j < shape[0].length; j++)
-				if (shape[i][j] != 0)
-					groupMap[row + i][col + j] = nextGroup;
+				if (shape[i][j] == 1)
+					groupMap[row + i - rowOffset][col + j] = nextGroup;
 	}
 
 	private void removeGroup(int[][] groupMap, int[][] shape, int row, int col) {

@@ -12,7 +12,7 @@ import javax.swing.*;
 
 public class Main {
 	public static void main(String[] args) {
-		KenKenGenerator generator = new KenKenGenerator(4, new Topology(Topology.L_SHAPE));
+		KenKenGenerator generator = new KenKenGenerator(4, new Topology(Topology.T_SHAPE));
 		KenKen kenKen;
 		try {
 			kenKen = generator.generate();
