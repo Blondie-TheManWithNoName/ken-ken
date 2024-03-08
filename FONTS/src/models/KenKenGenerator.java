@@ -46,25 +46,11 @@ public class KenKenGenerator {
 
 	private void generateGroups(KenKen kenKen) throws CellHasNoGroupException, GroupCellsNotContiguousException, CannotCreateOperationException {
 		int[][] groupMap = new int[size][size];
-		while(hasEmptySpaces(groupMap)) {
-			// TODO: implement group generation
-			groupMap[0][0] = 1;
-			groupMap[0][1] = 1;
-			groupMap[0][2] = 1;
-			groupMap[0][3] = 2;
-			groupMap[1][0] = 1;
-			groupMap[1][1] = 2;
-			groupMap[1][2] = 2;
-			groupMap[1][3] = 2;
-			groupMap[2][0] = 3;
-			groupMap[2][1] = 3;
-			groupMap[2][2] = 3;
-			groupMap[2][3] = 4;
-			groupMap[3][0] = 3;
-			groupMap[3][1] = 4;
-			groupMap[3][2] = 4;
-			groupMap[3][3] = 4;
-		}
+
+		// TODO: make this method boolean for a good backtracking
+		generateGroups(groupMap, 0, 0, 1);
+		if (hasEmptySpaces(groupMap))
+			throw new CellHasNoGroupException();
 
 		HashMap<Integer, List<int[]>> groups = new HashMap<>();
 		for (int i = 0; i < size; i++)
@@ -101,6 +87,45 @@ public class KenKenGenerator {
 		}
 
 		kenKen.checkCellsGroups();
+	}
+
+	private void generateGroups(int[][] groupMap, int row, int col, int nextGroup) {
+		if (row == size) {
+			row = 0;
+			if (++col == size)
+				return;
+		}
+
+		if (groupMap[row][col] != 0)
+			generateGroups(groupMap, row + 1, col, nextGroup);
+
+		for (int i = 0; i < 4; i++) {
+			if (topologyFits(groupMap, row, col)) {
+				generateGroup(groupMap, row, col, nextGroup);
+				generateGroups(groupMap, row + 1, col, nextGroup + 1);
+			}
+			topology.rotateClockwise();
+		}
+		generateGroups(groupMap, row + 1, col, nextGroup);
+	}
+
+	private boolean topologyFits(int[][] groupMap, int row, int col) {
+		for (int i = 0; i < topology.getHeight(); i++)
+			for (int j = 0; j < topology.getWidth(); j++)
+				if (topology.getShape()[i][j] != 0) {
+					if (row + i >= size || col + j >= size)
+						return false;
+					if (groupMap[row + i][col + j] != 0)
+						return false;
+				}
+		return true;
+	}
+
+	private void generateGroup(int[][] groupMap, int row, int col, int nextGroup) {
+		for (int i = 0; i < topology.getHeight(); i++)
+			for (int j = 0; j < topology.getWidth(); j++)
+				if (topology.getShape()[i][j] != 0)
+					groupMap[row + i][col + j] = nextGroup;
 	}
 
 	private boolean hasEmptySpaces(int[][] groupMap) {

@@ -18,4 +18,12 @@ public class Topology {
 				newShape[j][shape.length - i - 1] = shape[i][j];
 		shape = newShape;
 	}
+
+	public int getHeight() {
+		return shape.length;
+	}
+
+	public int getWidth() {
+		return shape[0].length;
+	}
 }
