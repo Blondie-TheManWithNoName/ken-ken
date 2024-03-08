@@ -1,7 +1,7 @@
 package models;
 
 public class Topology {
-	private int[][] shape;
+	private final int[][] shape;
 
 	public Topology(int[][] shape) {
 		this.shape = shape;
@@ -11,19 +11,18 @@ public class Topology {
 		return shape;
 	}
 
-	public void rotateClockwise() {
-		int[][] newShape = new int[shape[0].length][shape.length];
-		for (int i = 0; i < shape.length; i++)
-			for (int j = 0; j < shape[i].length; j++)
-				newShape[j][shape.length - i - 1] = shape[i][j];
-		shape = newShape;
+	public int[][] rotateQuarters(int quarters) {
+		int[][] newShape = shape;
+		for (int i = 0; i < quarters % 4; i++)
+			newShape = rotate90deg(newShape);
+		return newShape;
 	}
 
-	public int getHeight() {
-		return shape.length;
-	}
-
-	public int getWidth() {
-		return shape[0].length;
+	private int[][] rotate90deg(int[][] current) {
+		int[][] newShape = new int[current[0].length][current.length];
+		for (int i = 0; i < current.length; i++)
+			for (int j = 0; j < current[i].length; j++)
+				newShape[j][current.length - i - 1] = current[i][j];
+		return newShape;
 	}
 }

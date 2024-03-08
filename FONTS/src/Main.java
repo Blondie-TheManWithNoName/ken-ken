@@ -27,7 +27,7 @@ public class Main {
 			{1, 1}
 		};
 
-		KenKenGenerator generator = new KenKenGenerator(4, new Topology(lShape));
+		KenKenGenerator generator = new KenKenGenerator(4, new Topology(jShape));
 		KenKen kenKen;
 		try {
 			kenKen = generator.generate();
