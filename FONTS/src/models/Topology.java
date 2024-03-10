@@ -5,6 +5,8 @@ public class Topology {
 	public final static int[][] J_SHAPE = {{0, 1}, {0, 1}, {1, 1}};
 	public final static int[][] L_SHAPE = {{1, 0}, {1, 0}, {1, 1}};
 	public final static int[][] T_SHAPE = {{1, 1, 1}, {0, 1, 0}};
+	public final static int[][] I_SHAPE = {{1}, {1}, {1}, {1}};
+	public final static int[][] DASH_SHAPE = {{1, 1}};
 
 	private final int[][] shape;
 
