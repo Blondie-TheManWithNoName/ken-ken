@@ -97,7 +97,8 @@ public class KenKenGenerator {
 		if (groupMap[row][col] != 0)
 			return generateGroups(groupMap, row + 1, col, nextGroup);
 
-		for (int i = 0; i < 4; i++) {
+		int lowRand = new Random().nextInt(3);
+		for (int i = lowRand; i < lowRand + 4; i++) {
 			int[][] shape = topology.rotateQuarters(i);
 			if (topologyFits(groupMap, shape, row, col)) {
 				createGroup(groupMap, shape, row, col, nextGroup);
