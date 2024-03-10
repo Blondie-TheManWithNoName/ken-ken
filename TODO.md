@@ -46,11 +46,11 @@
 
 ### 2024-03-13
 - [ ] Generar KenKen:
-	* N&times;N
-	* M grups
-	* &tau; topologia
-	* &delta; grup
-	* Fixed values
+	- [X] N&times;N
+	- [ ] M grups
+	- [X] &tau; topologia
+	- [ ] &delta; grup
+	- [ ] Fixed values
 
 ### 2024-03-06
 - [X] Afegir més operacions de les que diu l'enunciat &rarr; Dani
