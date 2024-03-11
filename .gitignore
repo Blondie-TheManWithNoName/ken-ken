@@ -33,6 +33,9 @@ out/
 kenken.vpp.*
 .kenken.vpp.*
 
+### Illustrator Files ###
+*.ai
+
 ### META-INF ###
 META-INF/
 

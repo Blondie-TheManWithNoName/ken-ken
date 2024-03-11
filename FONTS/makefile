@@ -5,6 +5,7 @@ compile:
 	@cd src && javac -d ../out Main.java
 	@mkdir -p out/META-INF
 	@echo "Manifest-Version: 1.0\nMain-Class: Main" > out/META-INF/MANIFEST.MF
+	@cp -r sprites out/sprites
 	@echo "Done."
 
 run:
