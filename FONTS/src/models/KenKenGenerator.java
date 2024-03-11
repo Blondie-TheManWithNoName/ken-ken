@@ -8,10 +8,12 @@ import java.util.*;
 
 public class KenKenGenerator {
 	private final int size;
+	private final int fixedValues;
 	private final Topology topology;
 
-	public KenKenGenerator(int size, Topology topology) {
+	public KenKenGenerator(int size, int fixedValues, Topology topology) {
 		this.size = size;
+		this.fixedValues = fixedValues;
 		this.topology = topology;
 	}
 
@@ -42,6 +44,18 @@ public class KenKenGenerator {
 					kenKen.setPosition(i, j, latinSquare[i][j]);
 				} catch (ValueOutOfBoundsException | RewriteFixedPositionException ignored) {}
 			}
+
+		for (int i = 0; i < fixedValues; i++) {
+			int row = new Random().nextInt(size);
+			int col = new Random().nextInt(size);
+			if (kenKen.isFixed(row, col)) {
+				i--;
+				continue;
+			}
+			try {
+				kenKen.setFixedPosition(row, col, latinSquare[row][col]);
+			} catch (ValueOutOfBoundsException ignored) {}
+		}
 	}
 
 	private void generateGroups(KenKen kenKen) throws CellHasNoGroupException, GroupCellsNotContiguousException, CannotCreateOperationException {
