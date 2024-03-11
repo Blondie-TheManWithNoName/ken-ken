@@ -10,7 +10,7 @@ import java.awt.*;
 public class KenKenSolverView extends KenKenView {
 	private final KenKenSolver solver;
 
-	private final JButton solveButton = new JCustomButton("Solve");
+	private final JCustomButton solveButton = new JCustomButton("Solve");
 
 	private final KenKenSolverController controller = new KenKenSolverController(this);
 
