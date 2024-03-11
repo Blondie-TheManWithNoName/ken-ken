@@ -3,30 +3,32 @@ package presentation.views;
 import exceptions.*;
 import models.KenKen;
 import presentation.controllers.KenKenPlayController;
+import presentation.custom.JKenKenCell;
 import presentation.custom.JCustomButton;
+import presentation.custom.JSetCellValue;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class KenKenPlayView extends KenKenView {
-	private final SetCellToPanel setCellToPanel;
-	private final JButton checkButton = new JCustomButton("Check");
+	private final JSetCellValue setCellValue;
+	private final JCustomButton checkButton = new JCustomButton("Check");
 
 	private final KenKenPlayController controller = new KenKenPlayController(this);
 
-	private CellView selected;
+	private JKenKenCell selected;
 
 	public KenKenPlayView(KenKen kenKen) {
 		super(kenKen);
-		this.setCellToPanel = new SetCellToPanel(kenKen.getSize(), controller);
+		this.setCellValue = new JSetCellValue(kenKen.getSize(), controller);
 	}
 
 	public void selectCell(int row, int col) {
 		if (selected != null)
 			selected.deselect();
-		selected = kenKenPanel.getCellView(row, col);
+		selected = kenKenPanel.getCell(row, col);
 		selected.select();
-		setCellToPanel.enableAllBut(kenKen.getValue(row, col));
+		setCellValue.enableAllBut(kenKen.getValue(row, col));
 	}
 
 	public void setValue(int value) {
@@ -37,7 +39,7 @@ public class KenKenPlayView extends KenKenView {
 				else
 					kenKen.setPosition(selected.getRow(), selected.getCol(), value);
 				selected.setValue(value);
-				setCellToPanel.enableAllBut(value);
+				setCellValue.enableAllBut(value);
 			} catch (EraseFixedValueException | ValueOutOfBoundsException ignored) {
 			} catch (RewriteFixedPositionException e) {
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -49,7 +51,7 @@ public class KenKenPlayView extends KenKenView {
 		if (selected != null) {
 			selected.deselect();
 			selected = null;
-			setCellToPanel.disableAll();
+			setCellValue.disableAll();
 		}
 		if (!kenKen.isFull()) {
 			JOptionPane.showMessageDialog(this, "You must fill all the cells before checking the KenKen!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -73,7 +75,7 @@ public class KenKenPlayView extends KenKenView {
 			for (int j = 0; j < kenKen.getSize(); j++)
 				if (!kenKen.isFixed(i, j))
 					kenKenPanel.addController(i, j, controller, KenKenPlayController.SELECT_CELL_AC + i + "_" + j);
-		add(setCellToPanel, BorderLayout.NORTH);
+		add(setCellValue, BorderLayout.NORTH);
 
 		checkButton.addActionListener(controller);
 		checkButton.setActionCommand(KenKenPlayController.CHECK_KENKEN_AC);

@@ -1,26 +1,26 @@
-package presentation.views;
+package presentation.custom;
 
 import presentation.controllers.KenKenPlayController;
-import presentation.custom.JCustomButton;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class SetCellToPanel extends JPanel {
+public class JSetCellValue extends JPanel {
 	private final int size;
-	private final JButton[] setCellToButtons;
+	private final JCustomButton[] setCellToButtons;
+
 	private final KenKenPlayController controller;
 
-	public SetCellToPanel(int size, KenKenPlayController controller) {
+	public JSetCellValue(int size, KenKenPlayController controller) {
 		this.size = size;
-		this.setCellToButtons = new JButton[size + 1];
+		this.setCellToButtons = new JCustomButton[size + 1];
 		this.controller = controller;
 		configureLayout();
 		disableAll();
 	}
 
 	public void disableAll() {
-		for (JButton button : setCellToButtons)
+		for (JCustomButton button : setCellToButtons)
 			button.setEnabled(false);
 	}
 
@@ -30,7 +30,7 @@ public class SetCellToPanel extends JPanel {
 	}
 
 	private void configureLayout() {
-		setPreferredSize(new Dimension(size * CellView.CELL_SIZE, CellView.CELL_SIZE));
+		setPreferredSize(new Dimension(size * JKenKenCell.CELL_SIZE, JKenKenCell.CELL_SIZE));
 		GridBagLayout gridBag = new GridBagLayout();
 		setLayout(gridBag);
 		GridBagConstraints c = new GridBagConstraints();

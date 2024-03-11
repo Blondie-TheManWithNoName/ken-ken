@@ -1,17 +1,16 @@
-package presentation.views;
+package presentation.custom;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
-public class CellView extends JButton {
+public class JKenKenCell extends JButton {
 	public static final int CELL_SIZE = 50;
 
 	private final int row;
 	private final int col;
 	private final boolean[] hasBorders = new boolean[4];
 
-	public CellView(int row, int col, int value) {
+	public JKenKenCell(int row, int col, int value) {
 		this.row = row;
 		this.col = col;
 		setValue(value);
