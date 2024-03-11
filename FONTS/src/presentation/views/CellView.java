@@ -10,7 +10,7 @@ public class CellView extends JButton {
 	private final int col;
 	private final boolean[] hasBorders = new boolean[4];
 
-	CellView(int row, int col, int value) {
+	public CellView(int row, int col, int value) {
 		this.row = row;
 		this.col = col;
 		setValue(value);

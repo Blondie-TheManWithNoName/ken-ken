@@ -33,7 +33,7 @@ public class KenKenSolverView extends KenKenView {
 		super.repaint();
 		for (int row = 0; row < kenKen.getSize(); row++)
 			for (int col = 0; col < kenKen.getSize(); col++)
-				cellViews[row][col].setValue(kenKen.getValue(row, col));
+				kenKenPanel.setValue(row, col, kenKen.getValue(row, col));
 	}
 
 	@Override

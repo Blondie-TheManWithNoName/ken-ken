@@ -24,7 +24,7 @@ public class KenKenPlayView extends KenKenView {
 	public void selectCell(int row, int col) {
 		if (selected != null)
 			selected.deselect();
-		selected = cellViews[row][col];
+		selected = kenKenPanel.getCellView(row, col);
 		selected.select();
 		setCellToPanel.enableAllBut(kenKen.getValue(row, col));
 	}
@@ -69,14 +69,10 @@ public class KenKenPlayView extends KenKenView {
 	protected void configureLayout() {
 		super.configureLayout();
 
-		for (int i = 0; i < kenKen.getSize(); i++) {
-			for (int j = 0; j < kenKen.getSize(); j++) {
-				if (!kenKen.isFixed(i, j)) {
-					cellViews[i][j].addActionListener(controller);
-					cellViews[i][j].setActionCommand(KenKenPlayController.SELECT_CELL_AC + i + "_" + j);
-				}
-			}
-		}
+		for (int i = 0; i < kenKen.getSize(); i++)
+			for (int j = 0; j < kenKen.getSize(); j++)
+				if (!kenKen.isFixed(i, j))
+					kenKenPanel.addController(i, j, controller, KenKenPlayController.SELECT_CELL_AC + i + "_" + j);
 		add(setCellToPanel, BorderLayout.NORTH);
 
 		checkButton.addActionListener(controller);
