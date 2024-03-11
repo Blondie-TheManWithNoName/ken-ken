@@ -1,6 +1,7 @@
 package presentation.views;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class CellView extends JButton {
@@ -56,12 +57,21 @@ public class CellView extends JButton {
 	}
 
 	public void paintBorders() {
-		setBorder(BorderFactory.createMatteBorder(
-				hasBorders[0] ? 1 : 0,
-				hasBorders[1] ? 1 : 0,
-				hasBorders[2] ? 1 : 0,
-				hasBorders[3] ? 1 : 0,
-				Color.BLACK
+		setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createMatteBorder(
+						hasBorders[0] ? 1 : 0,
+						hasBorders[1] ? 1 : 0,
+						hasBorders[2] ? 1 : 0,
+						hasBorders[3] ? 1 : 0,
+						Color.BLACK
+				),
+				BorderFactory.createMatteBorder(
+						!hasBorders[0] ? 1 : 0,
+						!hasBorders[1] ? 1 : 0,
+						0,
+						0,
+						Color.LIGHT_GRAY
+				)
 		));
 	}
 
