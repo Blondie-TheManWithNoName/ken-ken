@@ -82,13 +82,21 @@ public class KenKen {
 	public boolean hasLeftBorder(int row, int col) {
 		if (col == 0)
 			return true;
-		return !board[row][col].getGroup().hasCell(board[row][col - 1]);
+		try {
+			return !board[row][col].getGroup().hasCell(board[row][col - 1]);
+		} catch (NullPointerException e) {
+			return false;
+		}
 	}
 
 	public boolean hasBottomBorder(int row, int col) {
 		if (row == size - 1)
 			return true;
-		return !board[row][col].getGroup().hasCell(board[row + 1][col]);
+		try {
+			return !board[row][col].getGroup().hasCell(board[row + 1][col]);
+		} catch (NullPointerException e) {
+			return false;
+		}
 	}
 
 	public boolean hasRightBorder(int row, int col) {
