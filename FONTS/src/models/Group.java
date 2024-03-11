@@ -16,6 +16,10 @@ public class Group {
 		this.operation = operation;
 	}
 
+	public Operation getOperation() {
+		return operation;
+	}
+
 	public void addCell(Cell cell) throws GroupCellsNotContiguousException, TooManyOperandsException, CellAlreadyInGroupException {
 		if (!checkCellsAreAdjacents(cell))
 			throw new GroupCellsNotContiguousException(cell.getRow(), cell.getCol());

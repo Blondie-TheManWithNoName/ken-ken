@@ -32,6 +32,15 @@ public class JKenKenPanel extends JPanel {
 		cells[row][col].setValue(value);
 	}
 
+	public void setFixedValue(int row, int col, int value) {
+		cells[row][col].setValue(value);
+		cells[row][col].setFixed();
+	}
+
+	public void clearValue(int row, int col) {
+		cells[row][col].setValue(0);
+	}
+
 	private void configureLayout() {
 		setLayout(new GridLayout(kenKen.getSize(), kenKen.getSize()));
 		setBorder(BorderFactory.createEmptyBorder(MARGIN, MARGIN, MARGIN, MARGIN));

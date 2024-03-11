@@ -56,11 +56,20 @@ public class Cell {
 		value = 0;
 	}
 
+	public void clear() {
+		value = 0;
+		fixed = false;
+	}
+
 	public boolean hasGroup() {
 		return group != null;
 	}
 
 	public boolean isAdjacent(Cell cell) {
 		return Math.abs(row - cell.getRow()) + Math.abs(col - cell.getCol()) == 1;
+	}
+
+	public void clearGroup() {
+		group = null;
 	}
 }

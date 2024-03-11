@@ -59,6 +59,10 @@ public class KenKen {
 		board[row][col].erase();
 	}
 
+	public void clearValue(int row, int col) {
+		board[row][col].clear();
+	}
+
 	public void clear() {
 		for (int i = 0; i < size; i++)
 			for (int j = 0; j < size; j++) {
@@ -122,6 +126,13 @@ public class KenKen {
 			if (!group.check())
 				return false;
 		return true;
+	}
+
+	public void clearGroups() {
+		for (Cell[] row : board)
+			for (Cell cell : row)
+				cell.clearGroup();
+		groups.clear();
 	}
 
 	private boolean numbersRepeatInRows() {
