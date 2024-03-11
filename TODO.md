@@ -62,7 +62,7 @@
 ### 2024-02-28
 - [X] Repositori GitLab &rarr; subgrup-prop41.3
 - [X] Preguntar pel format de lliurament:
-	* Arxius `index.txt` a TOTS els directoris o només `.`, `/DOCS`, `/EXE` i `/FONTS`?
+	* Arxius `index.txt` ~~a TOTS els directoris o~~ només a `.`, `/DOCS`, `/EXE` i `/FONTS`
 - [X] ~~Farem servir una base de dades?~~
 	* ~~SÍ &rarr; on la hostegem?~~
 		1) ~~SQL~~
