@@ -3,6 +3,7 @@ package presentation.views;
 import exceptions.*;
 import models.Group;
 import models.KenKen;
+import models.color.ColorFactory;
 import models.operations.Operation;
 import models.operations.OperationFactory;
 import presentation.ProposeKenKenTool;
@@ -21,8 +22,8 @@ public class ProposeKenKenView extends JFrame {
 	private final MainMenuView mainMenuView;
 	private final int size;
 	private final KenKen kenKen;
-	private final Map<Group, Color> groups = new HashMap<>();
-	private final Map<JKenKenCell, Group> cells = new HashMap<>();
+	private final Map<Group, Color> groups = new LinkedHashMap<>();
+	private final Map<JKenKenCell, Group> cells = new LinkedHashMap<>();
 
 	private final JProposeKenKenToolBar toolBar;
 
@@ -52,7 +53,7 @@ public class ProposeKenKenView extends JFrame {
 	}
 
 	public void setTool(JToolBarItem toolBarItem) {
-		if (activeTool == toolBarItem.getTool()) {
+		if (activeTool == toolBarItem.getTool() && activeTool != ProposeKenKenTool.ADD_TO_GROUP) {
 			activeTool = null;
 			toolBar.unsetActiveAll();
 			setCursor(Cursor.getDefaultCursor());
@@ -233,13 +234,7 @@ public class ProposeKenKenView extends JFrame {
 	}
 
 	private void createGroup(Operation operation) {
-		groups.put(new Group(operation), createRandomColor());
-	}
-
-	private Color createRandomColor() {
-		// FIXME: create different colors (always same colors generated)
-		List<Color> colors = new ArrayList<>(groups.values());
-		return new Color((int) (Math.random() * 0x1000000));
+		groups.put(new Group(operation), ColorFactory.nextColor(new ArrayList<>(groups.values())));
 	}
 
 	private Group askGroup() {
