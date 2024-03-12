@@ -1,5 +1,7 @@
 package presentation.custom;
 
+import models.Group;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,6 +12,8 @@ public class JKenKenCell extends JButton {
 	private final int col;
 	private final boolean[] hasBorders = new boolean[4];
 
+	private final JLabel notationLabel = new JLabel();
+
 	public JKenKenCell(int row, int col, int value) {
 		this.row = row;
 		this.col = col;
@@ -18,6 +22,10 @@ public class JKenKenCell extends JButton {
 		setHorizontalAlignment(SwingConstants.CENTER);
 		setPreferredSize(new Dimension(CELL_SIZE, CELL_SIZE));
 		setOpaque(true);
+		notationLabel.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 0));
+		notationLabel.setFont(new Font("Arial", Font.PLAIN, 10));
+		setLayout(new BorderLayout());
+		add(notationLabel, BorderLayout.NORTH);
 	}
 
 	public int getRow() {
@@ -75,12 +83,7 @@ public class JKenKenCell extends JButton {
 	}
 
 	public void addGroupLabel(String notation) {
-		JLabel label = new JLabel(notation);
-		label.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 0));
-		label.setFont(new Font("Arial", Font.PLAIN, 10));
-
-		setLayout(new BorderLayout());
-		add(label, BorderLayout.NORTH);
+		notationLabel.setText(notation);
 	}
 
 	public void select() {
@@ -89,5 +92,15 @@ public class JKenKenCell extends JButton {
 
 	public void deselect() {
 		setBackground(null);
+	}
+
+	public void addToGroup(Group group, Color color) {
+		setBackground(color);
+		addGroupLabel(group.getNotation());
+	}
+
+	public void removeFromGroup() {
+		setBackground(null);
+		notationLabel.setText("");
 	}
 }

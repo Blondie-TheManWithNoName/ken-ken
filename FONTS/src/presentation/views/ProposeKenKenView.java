@@ -1,13 +1,10 @@
 package presentation.views;
 
-import exceptions.CellAlreadyInGroupException;
-import exceptions.GroupCellsNotContiguousException;
-import exceptions.TooManyOperandsException;
-import exceptions.ValueOutOfBoundsException;
+import exceptions.*;
 import models.Group;
 import models.KenKen;
 import models.operations.Operation;
-import models.operations.OperationAddition;
+import models.operations.OperationFactory;
 import presentation.ProposeKenKenTool;
 import presentation.controllers.ProposeKenKenController;
 import presentation.custom.*;
@@ -55,9 +52,9 @@ public class ProposeKenKenView extends JFrame {
 	}
 
 	public void setTool(JToolBarItem toolBarItem) {
-		toolBar.unsetActiveAll();
 		if (activeTool == toolBarItem.getTool()) {
 			activeTool = null;
+			toolBar.unsetActiveAll();
 			setCursor(Cursor.getDefaultCursor());
 			return;
 		}
@@ -72,7 +69,24 @@ public class ProposeKenKenView extends JFrame {
 		}
 		if (toolBarItem.getTool() == ProposeKenKenTool.CREATE_GROUP) {
 			askOperation();
+		} else if (toolBarItem.getTool() == ProposeKenKenTool.DELETE_GROUP) {
+			if (groups.isEmpty()) {
+				JOptionPane.showMessageDialog(this, "There are no groups to delete", "No groups", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			Group group = askGroup();
+			if (group == null)
+				return;
+			if (JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this group? This action cannot be undone.", "Delete group", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION)
+				deleteGroup(group);
 		} else {
+			if (toolBarItem.getTool() == ProposeKenKenTool.REMOVE_FROM_GROUP) {
+				if (cells.isEmpty()) {
+					JOptionPane.showMessageDialog(this, "There are no cells to remove from any group", "No cells", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+			}
+			toolBar.unsetActiveAll();
 			activeTool = toolBarItem.getTool();
 			toolBarItem.setActive();
 			setCursor(toolBarItem.getToolCursor());
@@ -106,14 +120,29 @@ public class ProposeKenKenView extends JFrame {
 				return;
 			}
 			cells.put(kenKenPanel.getCell(row, col), selectedGroup);
-			kenKenPanel.getCell(row, col).setBackground(groups.get(selectedGroup));
+			kenKenPanel.getCell(row, col).addToGroup(selectedGroup, groups.get(selectedGroup));
 		} else if (activeTool == ProposeKenKenTool.REMOVE_FROM_GROUP) {
 			cells.remove(kenKenPanel.getCell(row, col));
-			kenKenPanel.getCell(row, col).setBackground(null);
+			kenKenPanel.getCell(row, col).removeFromGroup();
 		}
 	}
 
 	public void generateGroups() {
+		if (cells.size() < size * size) {
+			JOptionPane.showMessageDialog(this, "There are cells without a group", "Incomplete groups", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		for (Group group : groups.keySet()) {
+			boolean hasCells = false;
+			for (JKenKenCell cell : cells.keySet()) {
+				if (cells.get(cell) == group) {
+					hasCells = true;
+					break;
+				}
+			}
+			if (!hasCells)
+				deleteGroup(group);
+		}
 		for (Group group : groups.keySet()) {
 			kenKen.addGroup(group.getOperation());
 			for (JKenKenCell cell : cells.keySet()) {
@@ -131,6 +160,7 @@ public class ProposeKenKenView extends JFrame {
 		}
 		// TODO: checkAllCellsHaveGroup();
 		// TODO: do something with the KenKen
+		JOptionPane.showMessageDialog(this, "KenKen generated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public void exit() {
@@ -194,8 +224,11 @@ public class ProposeKenKenView extends JFrame {
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
 			String selectedOption = (String) comboBox.getSelectedItem();
 			int intValue = (int) spinner.getValue();
-			// FIXME: createGroup(); using OperationFactory
-			createGroup(new OperationAddition(intValue));
+			try {
+				createGroup(OperationFactory.createOperation(selectedOption, intValue));
+			} catch (CannotCreateOperationException ignored) {
+				JOptionPane.showMessageDialog(this, "An error occurred while creating the operation", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 
@@ -222,5 +255,19 @@ public class ProposeKenKenView extends JFrame {
 			return (Group) groups.keySet().toArray()[selectedIndex];
 		}
 		return null;
+	}
+
+	private void deleteGroup(Group group) {
+		groups.remove(group);
+		List<JKenKenCell> toRemove = new ArrayList<>();
+		for (JKenKenCell cell : cells.keySet()) {
+			if (cells.get(cell) == group) {
+				toRemove.add(cell);
+				cell.removeFromGroup();
+			}
+		}
+		toRemove.forEach(cells::remove);
+		if (selectedGroup == group)
+			selectedGroup = null;
 	}
 }

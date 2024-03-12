@@ -12,8 +12,9 @@ public class JProposeKenKenToolBar extends JToolBar {
 
 	private final JToolBarItem[] toolBarItems = new JToolBarItem[]{
 			new JToolBarItem(ProposeKenKenTool.SET_FIXED_VALUE),
-			new JToolBarItem(ProposeKenKenTool.ADD_TO_GROUP),
 			new JToolBarItem(ProposeKenKenTool.CREATE_GROUP),
+			new JToolBarItem(ProposeKenKenTool.DELETE_GROUP),
+			new JToolBarItem(ProposeKenKenTool.ADD_TO_GROUP),
 			new JToolBarItem(ProposeKenKenTool.REMOVE_FROM_GROUP)
 	};
 

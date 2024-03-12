@@ -6,6 +6,7 @@ import java.awt.*;
 public enum ProposeKenKenTool {
 	SET_FIXED_VALUE("Set/Clean given values", "fixed_value"),
 	CREATE_GROUP("Create a new group", "create_group"),
+	DELETE_GROUP("Delete an existing group", "delete_group"),
 	ADD_TO_GROUP("Add cells to a group", "add_to_group"),
 	REMOVE_FROM_GROUP("Remove cells from their group", "remove_from_group");
 
