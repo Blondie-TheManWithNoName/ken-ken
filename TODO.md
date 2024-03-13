@@ -46,6 +46,7 @@
 
 ### 2024-03-20
 - [ ] Format estàndard per fitxers
+- [ ] `DomainController`
 
 ### 2024-03-13
 - [X] Generar KenKen:
