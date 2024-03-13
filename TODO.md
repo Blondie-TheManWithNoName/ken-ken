@@ -44,12 +44,15 @@
 	* SÍ &rarr; Cost computacional de resolució massa elevat
 		1) Comprovar que la solució sigui correcte (en la pròpia base de dades)
 
+### 2024-03-20
+- [ ] Format estàndard per fitxers
+
 ### 2024-03-13
 - [X] Generar KenKen:
 	- [X] N&times;N
 	- [X] &tau; topologia
 	- [X] Fixed values
-- [ ] Format estàndard per fitxers
+- [X] Proposar KenKen
 
 ### 2024-03-06
 - [X] Afegir més operacions de les que diu l'enunciat
