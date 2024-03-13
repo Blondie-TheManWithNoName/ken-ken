@@ -1,6 +1,6 @@
 package presentation.views;
 
-import models.KenKenProposer;
+import models.kenken.KenKenProposer;
 import presentation.controllers.MainMenuController;
 import presentation.custom.JCustomButton;
 

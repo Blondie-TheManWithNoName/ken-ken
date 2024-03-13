@@ -4,8 +4,8 @@ import exceptions.CellAlreadyInGroupException;
 import exceptions.CellHasNoGroupException;
 import exceptions.GroupCellsNotContiguousException;
 import exceptions.TooManyOperandsException;
-import models.KenKen;
-import models.KenKenSolver;
+import models.kenken.KenKen;
+import models.kenken.KenKenSolver;
 import models.operations.*;
 import org.junit.Test;
 

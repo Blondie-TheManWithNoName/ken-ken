@@ -1,6 +1,6 @@
 package presentation.views;
 
-import models.KenKen;
+import models.kenken.KenKen;
 import presentation.custom.JKenKenPanel;
 
 import javax.swing.*;

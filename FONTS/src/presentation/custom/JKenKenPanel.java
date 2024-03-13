@@ -1,7 +1,7 @@
 package presentation.custom;
 
-import models.Group;
-import models.KenKen;
+import models.kenken.Group;
+import models.kenken.KenKen;
 
 import javax.swing.*;
 import java.awt.*;

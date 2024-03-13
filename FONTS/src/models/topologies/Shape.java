@@ -1,4 +1,4 @@
-package models;
+package models.topologies;
 
 public enum Shape {
 	BLOCK(new int[][]{{1, 1}, {1, 1}}),

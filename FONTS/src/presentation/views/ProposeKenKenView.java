@@ -1,8 +1,8 @@
 package presentation.views;
 
 import exceptions.*;
-import models.Group;
-import models.KenKenProposer;
+import models.kenken.Group;
+import models.kenken.KenKenProposer;
 import models.operations.OperationFactory;
 import presentation.ProposeKenKenTool;
 import presentation.controllers.ProposeKenKenController;

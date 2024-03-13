@@ -1,4 +1,4 @@
-package models;
+package models.kenken;
 
 import exceptions.*;
 import models.operations.Operation;

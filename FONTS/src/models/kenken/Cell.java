@@ -1,4 +1,4 @@
-package models;
+package models.kenken;
 
 import exceptions.EraseFixedValueException;
 import exceptions.RewriteFixedPositionException;

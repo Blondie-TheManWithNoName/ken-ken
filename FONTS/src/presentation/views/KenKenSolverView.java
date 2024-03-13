@@ -1,6 +1,6 @@
 package presentation.views;
 
-import models.KenKenSolver;
+import models.kenken.KenKenSolver;
 import presentation.controllers.KenKenSolverController;
 import presentation.custom.JCustomButton;
 

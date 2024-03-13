@@ -1,6 +1,6 @@
 package presentation.custom;
 
-import models.Group;
+import models.kenken.Group;
 
 import javax.swing.*;
 import java.awt.*;

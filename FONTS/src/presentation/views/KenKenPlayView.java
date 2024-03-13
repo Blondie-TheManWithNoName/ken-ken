@@ -1,7 +1,7 @@
 package presentation.views;
 
 import exceptions.*;
-import models.KenKen;
+import models.kenken.KenKen;
 import presentation.controllers.KenKenPlayController;
 import presentation.custom.JKenKenCell;
 import presentation.custom.JCustomButton;

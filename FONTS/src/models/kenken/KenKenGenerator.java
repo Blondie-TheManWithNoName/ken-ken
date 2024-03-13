@@ -1,6 +1,7 @@
-package models;
+package models.kenken;
 
 import exceptions.*;
+import models.topologies.Topology;
 import models.operations.Operation;
 import models.operations.OperationFactory;
 

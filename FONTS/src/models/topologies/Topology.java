@@ -1,4 +1,4 @@
-package models;
+package models.topologies;
 
 public class Topology {
 	private final int[][] shape;
