@@ -1,9 +1,6 @@
 package models;
 
-import exceptions.CellAlreadyInGroupException;
-import exceptions.GroupCellsNotContiguousException;
-import exceptions.TooManyOperandsException;
-import exceptions.ValueOutOfBoundsException;
+import exceptions.*;
 import models.color.ColorFactory;
 import models.operations.Operation;
 
@@ -78,8 +75,9 @@ public class KenKenProposer {
 		cellGroups.entrySet().removeIf(entry -> entry.getValue() == group);
 	}
 
-	public void generateGroups() throws TooManyOperandsException {
-		if (cellGroups.size() < getSize() * getSize()); // TODO: throw new CellsWithNoGroupException();
+	public void generateGroups() throws TooManyOperandsException, CellAlreadyInGroupException, CellHasNoGroupException, GroupCellsNotContiguousException {
+		if (cellGroups.size() < getSize() * getSize())
+			throw new CellHasNoGroupException();
 
 		for (Group group : new ArrayList<>(groupColors.keySet()))
 			if (!cellGroups.containsValue(group))
@@ -91,14 +89,13 @@ public class KenKenProposer {
 				if (cellGroups.get(cell) == group) {
 					try {
 						kenKen.addCellToLastGrop(cell.getRow(), cell.getCol());
-					} catch (GroupCellsNotContiguousException | CellAlreadyInGroupException ignored) {
-					} catch (TooManyOperandsException e) {
+					} catch (CellAlreadyInGroupException | TooManyOperandsException e) {
 						kenKen.clearGroups();
 						throw e;
 					}
 				}
 		}
 
-		// TODO: checkCellGroups();
+		kenKen.checkCellsGroups();
 	}
 }

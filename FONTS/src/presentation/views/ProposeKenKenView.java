@@ -104,8 +104,8 @@ public class ProposeKenKenView extends JFrame {
 	public void generateGroups() {
 		try {
 			kenKenProposer.generateGroups();
-		} catch (TooManyOperandsException e) {
-			JOptionPane.showMessageDialog(this, "There are groups with too many cells, please refer to the documentation to know more about this error", "Groups with too many cells", JOptionPane.ERROR_MESSAGE);
+		} catch (TooManyOperandsException | CellAlreadyInGroupException | CellHasNoGroupException | GroupCellsNotContiguousException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Error generating the KenKen", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
