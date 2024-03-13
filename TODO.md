@@ -11,14 +11,9 @@
 - [ ] Jocs de proves
 
 ### En un futur...
-- [ ] Comentar-ho tot
+- [ ] Comentar-ho tot amb `JavaDoc`
 - [ ] Implementar cronòmetre
 	* Pausar / Reanudar
-- [ ] Sistema de puntuació:
-	* Per mida (9&times;9 més difícil que 3&times;3)
-	* Per tipus d'operacions (* més difícil que +)
-	* Per número de grups (com més grups, més fàcil) ???
-	* Per temps de resolució
 - [ ] Afegir un codi d'error a les excepcions? &rarr; només té lògic si en fem un manual
 - [ ] Implementar guardar partida
 - [ ] Assistència CPU durant la solució:
@@ -46,7 +41,12 @@
 
 ### 2024-03-20
 - [ ] Format estàndard per fitxers
-- [ ] `DomainController`
+- [ ] `DomainController` &rarr; Oriol
+- [ ] Sistema de puntuació &rarr; Dani
+	* Per mida (9&times;9 més difícil que 3&times;3)
+	* Per tipus d'operacions (* més difícil que +)
+	* Per número de grups (com més grups, més fàcil) ???
+	* Per temps de resolució
 
 ### 2024-03-13
 - [X] Generar KenKen:
