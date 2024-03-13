@@ -2,7 +2,7 @@
 
 ### Per la primera entrega! (22 d'abril)
 - [X] Diagrama de casos d'ús
-- [ ] Diagrama UML
+- [X] Diagrama UML
 - [ ] Classes implementades per cadascú
 - [ ] Descripció de les ED i Algoritmes
 - [ ] Codi
@@ -44,20 +44,21 @@
 	* SÍ &rarr; Cost computacional de resolució massa elevat
 		1) Comprovar que la solució sigui correcte (en la pròpia base de dades)
 
+### 2024-03-20
+- [ ] Format estàndard per fitxers
+
 ### 2024-03-13
-- [ ] Generar KenKen:
-	* N&times;N
-	* M grups
-	* &tau; topologia
-	* &delta; grup
-	* Fixed values
+- [X] Generar KenKen:
+	- [X] N&times;N
+	- [X] &tau; topologia
+	- [X] Fixed values
+- [X] Proposar KenKen
 
 ### 2024-03-06
-- [X] Afegir més operacions de les que diu l'enunciat &rarr; Dani
+- [X] Afegir més operacions de les que diu l'enunciat
 	* `OperationEquality(int target)` &rarr; `OperationLimitedOperands("=", target, 1)`
 	* `OperationPower(int target)` &rarr; GRAN^petit
-- [ ] Començar `Candidate Search` &rarr; Brian
-- [ ] Format estàndard per fitxers
+- [X] Analitzar el diagrama UML (ensenyar-li al professor)
 
 ### 2024-02-28
 - [X] Repositori GitLab &rarr; subgrup-prop41.3
