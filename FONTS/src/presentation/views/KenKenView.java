@@ -7,8 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class KenKenView extends JFrame {
-	protected final static int MARGIN = 5;
-
 	protected final KenKen kenKen;
 	protected final JKenKenPanel kenKenPanel;
 

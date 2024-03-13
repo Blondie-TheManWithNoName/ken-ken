@@ -23,6 +23,10 @@ public class KenKen {
 		return size;
 	}
 
+	public Cell getCell(int row, int col) {
+		return board[row][col];
+	}
+
 	public List<Group> getGroups() {
 		return groups;
 	}

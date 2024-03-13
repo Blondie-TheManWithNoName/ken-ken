@@ -1,5 +1,6 @@
 package presentation.views;
 
+import models.KenKenProposer;
 import presentation.controllers.MainMenuController;
 import presentation.custom.JCustomButton;
 
@@ -36,9 +37,9 @@ public class MainMenuView extends JFrame {
 				JOptionPane.showMessageDialog(this, "The size must be a number.", "Invalid size", JOptionPane.ERROR_MESSAGE);
 				continue;
 			}
-			if (size >= 2 && size <= ProposeKenKenView.MAX_SIZE)
+			if (size >= 2 && size <= KenKenProposer.MAX_SIZE)
 				break;
-			JOptionPane.showMessageDialog(this, "The size must be between 2 and " + ProposeKenKenView.MAX_SIZE + " (inclusive).", "Invalid size", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "The size must be between 2 and " + KenKenProposer.MAX_SIZE + " (inclusive).", "Invalid size", JOptionPane.ERROR_MESSAGE);
 		}
 
 		new ProposeKenKenView(this, size).start();
