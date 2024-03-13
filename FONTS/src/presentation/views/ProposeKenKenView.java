@@ -42,9 +42,7 @@ public class ProposeKenKenView extends JFrame {
 
 	public void setTool(JToolBarItem toolBarItem) {
 		if (activeTool == toolBarItem.getTool() && activeTool != ProposeKenKenTool.ADD_TO_GROUP) {
-			activeTool = null;
-			toolBar.unsetActiveAll();
-			setCursor(Cursor.getDefaultCursor());
+			selectNoTools();
 			return;
 		}
 
@@ -195,8 +193,20 @@ public class ProposeKenKenView extends JFrame {
 	}
 
 	private void deleteGroup(Group group) {
+		for (int i = 0; i < kenKenProposer.getSize(); i++)
+			for (int j = 0; j < kenKenProposer.getSize(); j++)
+				if (kenKenProposer.getCellGroup(i, j) == group)
+					kenKenPanel.getCell(i, j).removeFromGroup();
 		kenKenProposer.deleteGroup(group);
 		if (selectedGroup == group)
 			selectedGroup = null;
+		if (activeTool == ProposeKenKenTool.ADD_TO_GROUP)
+			selectNoTools();
+	}
+
+	private void selectNoTools() {
+		activeTool = null;
+		toolBar.unsetActiveAll();
+		setCursor(Cursor.getDefaultCursor());
 	}
 }

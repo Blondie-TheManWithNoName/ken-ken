@@ -57,6 +57,10 @@ public class KenKenProposer {
 		return (Group) groupColors.keySet().toArray()[index];
 	}
 
+	public Group getCellGroup(int row, int col) {
+		return cellGroups.get(kenKen.getCell(row, col));
+	}
+
 	public Color getGroupColor(Group group) {
 		return groupColors.get(group);
 	}
