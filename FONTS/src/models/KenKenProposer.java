@@ -28,12 +28,12 @@ public class KenKenProposer {
 		return kenKen;
 	}
 
-	public void setFixedPosition(int row, int column, int value) throws ValueOutOfBoundsException {
-		kenKen.setFixedPosition(row, column, value);
+	public void setFixedPosition(int row, int col, int value) throws ValueOutOfBoundsException {
+		kenKen.setFixedPosition(row, col, value);
 	}
 
-	public void clearFixedPosition(int row, int column) {
-		kenKen.clearValue(row, column);
+	public void clearFixedPosition(int row, int col) {
+		kenKen.clearValue(row, col);
 	}
 
 	public boolean anyGroup() {
