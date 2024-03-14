@@ -11,6 +11,7 @@ public class KenKenGenerator {
 	private final int size;
 	private final int fixedValues;
 	private final Topology topology;
+	private KenKen kenKen;
 
 	public KenKenGenerator(int size, int fixedValues, Topology topology) {
 		this.size = size;
@@ -18,13 +19,22 @@ public class KenKenGenerator {
 		this.topology = topology;
 	}
 
-	public KenKen generate() throws CellHasNoGroupException, GroupCellsNotContiguousException, CannotCreateOperationException {
-		KenKen kenKen = new KenKen(size);
+	public KenKen getKenKen() {
+		return kenKen;
+	}
+
+	public boolean generate() {
+		kenKen = new KenKen(size);
 		generateLatinSquare(kenKen);
-		generateGroups(kenKen);
+		try {
+			generateGroups(kenKen);
+		} catch (CellHasNoGroupException | GroupCellsNotContiguousException | CannotCreateOperationException e) {
+			kenKen = null;
+			return false;
+		}
 
 		kenKen.clear();
-		return kenKen;
+		return true;
 	}
 
 	private void generateLatinSquare(KenKen kenKen) {
