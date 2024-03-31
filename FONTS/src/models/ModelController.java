@@ -2,13 +2,22 @@ package models;
 
 import exceptions.*;
 import models.kenken.*;
+import models.operations.Operation;
 import models.operations.OperationFactory;
 import models.topologies.Topology;
+import persistence.PersistenceController;
+import persistence.dto.CellDTO;
+import persistence.dto.GroupDTO;
+import persistence.dto.KenKenDTO;
+import persistence.dto.OperationDTO;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ModelController {
 	public static final int MAX_SIZE = 15;
+
+	private final PersistenceController persistenceController = new PersistenceController();
 
 	private KenKenProposer proposer;
 	private KenKenGenerator generator;
@@ -95,7 +104,13 @@ public class ModelController {
 
 	/* LOAD KENKEN */
 
-	// TODO: load();
+	public KenKen loadKenKen(String path) throws CannotLoadKenKenException {
+		try {
+			return fromDTO(persistenceController.loadKenKen(path));
+		} catch (IOException | CannotCreateOperationException | CellAlreadyInGroupException | TooManyOperandsException e) {
+			throw new CannotLoadKenKenException();
+		}
+	}
 
 	/* LOAD SAVED GAME */
 
@@ -104,5 +119,19 @@ public class ModelController {
 	private int getScore() {
 		// TODO: Dani
 		return 0;
+	}
+
+	private static KenKen fromDTO(KenKenDTO dto) throws CannotCreateOperationException, CellAlreadyInGroupException, TooManyOperandsException {
+		KenKen kenKen = new KenKen(dto.getSize());
+		for (GroupDTO group : dto.getGroups()) {
+			kenKen.addGroup(fromDTO(group.getOperation()));
+			for (CellDTO cell : group.getCells())
+				kenKen.addCellToLastGrop(cell.getRow() - 1, cell.getCol() - 1);
+		}
+		return kenKen;
+	}
+
+	private static Operation fromDTO(OperationDTO dto) throws CannotCreateOperationException {
+		return OperationFactory.createOperation(dto.getSymbol(), dto.getTarget());
 	}
 }
