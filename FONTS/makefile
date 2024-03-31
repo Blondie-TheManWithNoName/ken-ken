@@ -6,6 +6,7 @@ compile: clean
 	@mkdir -p out/META-INF
 	@echo "Manifest-Version: 1.0\nMain-Class: Main" > out/META-INF/MANIFEST.MF
 	@cp -r sprites out/sprites
+	@cp -r data out/data
 	@echo "Done."
 
 run:
@@ -36,6 +37,7 @@ endif
 	@echo "Compiling $(FILE)..."
 	@cd src && javac -d ../out -cp .:../lib/junit-4.13.1.jar tests/$(FILE).java
 	@cp -r sprites out/sprites
+	@cp -r data out/data
 	@echo "Done."
 	@echo "Running test for $(FILE)...\n"
 	@cd out && java -cp .:../lib/junit-4.13.1.jar:../lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore tests.$(FILE)
@@ -55,6 +57,7 @@ endif
 	@mkdir -p out/META-INF
 	@echo "Manifest-Version: 1.0\nMain-Class: testgames.$(FILE)" > out/META-INF/MANIFEST.MF
 	@cp -r sprites out/sprites
+	@cp -r data out/data
 	@echo "Building test game for $(FILE)...\n"
 	@cd out && jar cvfm ../../EXE/testgames/$(FILE).jar META-INF/MANIFEST.MF -C . .
 	@echo "Done."
