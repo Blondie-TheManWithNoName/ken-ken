@@ -11,6 +11,7 @@
 - [ ] Jocs de proves
 
 ### En un futur...
+- [ ] Capa de `persistence`
 - [ ] Comentar-ho tot amb `JavaDoc`
 - [ ] Implementar cronòmetre
 	* Pausar / Reanudar
@@ -39,8 +40,7 @@
 	* SÍ &rarr; Cost computacional de resolució massa elevat
 		1) Comprovar que la solució sigui correcte (en la pròpia base de dades)
 
-### 2024-03-20
-- [ ] Format estàndard per fitxers
+### ~~2024-03-20~~ &rarr; 2024-04-10
 - [ ] `DomainController` &rarr; Oriol
 - [ ] Sistema de puntuació &rarr; Dani
 	* Per mida (9&times;9 més difícil que 3&times;3)
