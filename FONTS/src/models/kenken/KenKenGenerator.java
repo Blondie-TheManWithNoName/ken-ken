@@ -33,7 +33,7 @@ public class KenKenGenerator {
 			return false;
 		}
 
-		kenKen.clear();
+		kenKen.erase();
 		return true;
 	}
 
@@ -104,7 +104,7 @@ public class KenKenGenerator {
 			kenKen.addGroup(groupOperations.get(group));
 			for (int[] position : groups.get(group)) {
 				try {
-					kenKen.addCellToLastGrop(position[0], position[1]);
+					kenKen.addCellToLastGroup(position[0], position[1]);
 				} catch (TooManyOperandsException | CellAlreadyInGroupException ignored) {}
 			}
 		}

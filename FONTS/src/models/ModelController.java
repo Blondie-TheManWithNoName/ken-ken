@@ -126,7 +126,7 @@ public class ModelController {
 		for (GroupDTO group : dto.getGroups()) {
 			kenKen.addGroup(fromDTO(group.getOperation()));
 			for (CellDTO cell : group.getCells())
-				kenKen.addCellToLastGrop(cell.getRow() - 1, cell.getCol() - 1);
+				kenKen.addCellToLastGroup(cell.getRow() - 1, cell.getCol() - 1);
 		}
 		return kenKen;
 	}

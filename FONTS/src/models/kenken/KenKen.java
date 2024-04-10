@@ -6,11 +6,24 @@ import models.operations.Operation;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * KenKen class, to create kenken
+ */
 public class KenKen {
+
+	/* Size of KenKen */
 	private final int size;
+	/* Matrix containing all the KenKen cells*/
 	private final Cell[][] board;
+	/* List of groups */
 	private final List<Group> groups = new ArrayList<>();
 
+
+	/**
+	 * Contructor method, creates matrix cell and initializes every as an empty one
+	 * @param size, size of KenKen
+	 */
 	public KenKen(int size) {
 		this.size = size;
 		this.board = new Cell[size][size];
@@ -19,55 +32,121 @@ public class KenKen {
 				this.board[i][j] = new Cell(i, j);
 	}
 
+	/**
+	 * Consultor method for the KenKen size
+	 * @return size
+	 */
 	public int getSize() {
 		return size;
 	}
 
+	/**
+	 * Getter method for a cell given its coordinates
+	 * @param row, defines the row of the KenKen to get the cell from
+	 * @param col, defines the column of the KenKen to get the cell from
+	 * @return the cell
+	 */
 	public Cell getCell(int row, int col) {
 		return board[row][col];
 	}
 
+	/**
+	 * Getter method for the groups of the KenKen
+	 * @return list with the groups
+	 */
 	public List<Group> getGroups() {
 		return groups;
 	}
 
+	/**
+	 * Getter method for a group given coordinates of a cell
+	 * @param row, defines the row of the KenKen to get the cell from
+	 * @param col, defines the column of the KenKen to get the cell from
+	 * @return group
+	 */
 	public Group getGroup(int row, int col) {
 		return board[row][col].getGroup();
 	}
 
+	/**
+	 * Getter method for the value of a cell given its coordinates
+	 * @param row, defines the row of the KenKen to get the cell from
+	 * @param col, defines the column of the KenKen to get the cell from
+	 * @return the value
+	 */
 	public int getValue(int row, int col) {
 		return board[row][col].getValue();
 	}
 
+	/**
+	 * Method to add a new group to the KenKen
+	 * @param operation, operation to be perfomed on the group
+	 */
 	public void addGroup(Operation operation) {
 		groups.add(new Group(operation));
 	}
 
-	public void addCellToLastGrop(int row, int col) throws TooManyOperandsException, CellAlreadyInGroupException {
+	/**
+	 * Adds the cell of the given coordinates to the last group created
+	 * @param row, defines the row of the KenKen to get the cell from
+	 * @param col, defines the column of the KenKen to get the cell from
+	 * @throws TooManyOperandsException when the operation accepts a limited number of operands (OperationDivision, OperationEquality, OperationPower, OperationSubtraction)
+	 * @throws CellAlreadyInGroupException when the cell is already part of a group
+	 */
+	public void addCellToLastGroup(int row, int col) throws TooManyOperandsException, CellAlreadyInGroupException {
 		groups.get(groups.size() - 1).addCell(board[row][col]);
 	}
 
+	/**
+	 * Method to set a fixed value to a cell
+	 * @param row, defines the row of the KenKen to get the cell from
+	 * @param col, defines the column of the KenKen to get the cell from
+	 * @param value, defines the number of the fixed value of the cell
+	 * @throws ValueOutOfBoundsException when the value is smaller than 1 or bigger than the KenKen size
+	 */
 	public void setFixedPosition(int row, int col, int value) throws ValueOutOfBoundsException {
 		if (value < 1 || value > size)
 			throw new ValueOutOfBoundsException(value);
 		board[row][col].setFixedValue(value);
 	}
 
+	/**
+	 *
+	 * @param row, defines the row of the KenKen to get the cell from
+	 * @param col, defines the column of the KenKen to get the cell from
+	 * @param value, defines the number of the value to put on the cell
+	 * @throws ValueOutOfBoundsException when the value is smaller than 1 or bigger than the KenKen size
+	 * @throws RewriteFixedPositionException when trying to modify a position with a fixed value already set
+	 */
 	public void setPosition(int row, int col, int value) throws ValueOutOfBoundsException, RewriteFixedPositionException {
 		if (value < 1 || value > size)
 			throw new ValueOutOfBoundsException(value);
 		board[row][col].setValue(value);
 	}
 
+	/**
+	 * Method to set the value of a cell to 0, if its not fixed
+	 * @param row, defines the number of the fixed value
+	 * @param col, defines the number of the fixed value
+	 * @throws EraseFixedValueException when trying to remove the value of a position with a fixed value already set
+	 */
 	public void erasePosition(int row, int col) throws EraseFixedValueException {
 		board[row][col].erase();
 	}
 
-	public void clearValue(int row, int col) {
+	/**
+	 * Method to set the value of a cell to 0, fixed or not
+	 * @param row, defines the number of the fixed value
+	 * @param col, defines the number of the fixed value
+	 */
+	public void clearPosition(int row, int col) {
 		board[row][col].clear();
 	}
 
-	public void clear() {
+	/**
+	 * Method to erase all cells from the KenKen
+	 */
+	public void erase() {
 		for (int i = 0; i < size; i++)
 			for (int j = 0; j < size; j++) {
 				try {
@@ -76,6 +155,11 @@ public class KenKen {
 			}
 	}
 
+	/**
+	 * Method to check if all cells are assigned to a group and if all the groups fulfill with the KenKen rules
+	 * @throws CellHasNoGroupException when a cell is not assigned to a group
+	 * @throws GroupCellsNotContiguousException when a group contains one or more cells not contiguous
+	 */
 	public void checkCellsGroups() throws CellHasNoGroupException, GroupCellsNotContiguousException {
 		for (int i = 0; i < size; i++)
 			for (int j = 0; j < size; j++)

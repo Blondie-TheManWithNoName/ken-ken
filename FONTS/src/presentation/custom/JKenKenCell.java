@@ -19,6 +19,7 @@ public class JKenKenCell extends JButton {
 		this.col = col;
 		setValue(value);
 		setForeground(Color.GRAY);
+		setBackground(Color.WHITE);
 		setHorizontalAlignment(SwingConstants.CENTER);
 		setPreferredSize(new Dimension(CELL_SIZE, CELL_SIZE));
 		setOpaque(true);

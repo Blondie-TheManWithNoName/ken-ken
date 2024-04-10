@@ -33,7 +33,7 @@ public class KenKenProposer {
 	}
 
 	public void clearFixedPosition(int row, int col) {
-		kenKen.clearValue(row, col);
+		kenKen.clearPosition(row, col);
 	}
 
 	public boolean anyGroup() {
@@ -88,7 +88,7 @@ public class KenKenProposer {
 			for (Cell cell : cellGroups.keySet())
 				if (cellGroups.get(cell) == group) {
 					try {
-						kenKen.addCellToLastGrop(cell.getRow(), cell.getCol());
+						kenKen.addCellToLastGroup(cell.getRow(), cell.getCol());
 					} catch (CellAlreadyInGroupException | TooManyOperandsException e) {
 						kenKen.clearGroups();
 						throw e;
