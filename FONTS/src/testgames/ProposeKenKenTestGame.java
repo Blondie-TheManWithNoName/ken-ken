@@ -33,7 +33,8 @@ public class ProposeKenKenTestGame {
 					"3. Add cell to group\n" +
 					"4. Remove cell from group\n" +
 					"5. Generate\n" +
-					"0. Exit");
+					"0. Exit"
+			);
 
 			do {
 				System.out.print("Option: ");
