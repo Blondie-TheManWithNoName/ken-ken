@@ -11,6 +11,9 @@ public class OperationDivision extends OperationLimitedOperands {
 	}
 
 	@Override
+	/**
+	 * check if the operands that the solver write are valid to solve the division
+	 */
 	public boolean isValidCandidate(int[] operands, int groupSize, int max) {
 		if (operands.length == nOperands) {
 			try {
@@ -32,6 +35,9 @@ public class OperationDivision extends OperationLimitedOperands {
 	}
 
 	@Override
+	/**
+	 * calculate the division of the operands the solver write
+	 */
 	public int calculate(int[] operands) throws OperandsDoNotMatchException, NonIntegerResultException {
 		if (operands.length != nOperands)
 			throw new OperandsDoNotMatchException(symbol, nOperands, operands.length);

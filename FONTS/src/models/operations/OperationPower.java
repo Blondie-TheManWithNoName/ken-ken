@@ -10,6 +10,13 @@ public class OperationPower extends OperationLimitedOperands {
 		super("^", target, 2);
 	}
 
+	/**
+	 * check if the operands the solver write are valid to solve the power (big^small)
+	 * @param operands array of numbers that the solver write
+	 * @param groupSize number of cells of the group
+	 * @param max (only used in LimitedOperands) maximum value allowed to put on the KenKen
+	 * @return true if the operands are valid to solve the power, false otherwise
+	 */
 	@Override
 	public boolean isValidCandidate(int[] operands, int groupSize, int max) {
 		if (operands.length == nOperands) {
@@ -28,6 +35,12 @@ public class OperationPower extends OperationLimitedOperands {
 		return false;
 	}
 
+	/**
+	 * calculate the result of the power (big^small)
+	 * @param operands array of numbers that the solver write
+	 * @return the result of the power
+	 * @throws OperandsDoNotMatchException if the operands have not the excepted result, throw this exception
+	 */
 	@Override
 	public int calculate(int[] operands) throws OperandsDoNotMatchException {
 		if (operands.length != nOperands)

@@ -6,6 +6,9 @@ public class OperationAddition extends Operation {
 	}
 
 	@Override
+	/**
+	 * check if the operands that the solver write are valid to solve the sum
+	 */
 	public boolean isValidCandidate(int[] operands, int groupSize, int max) {
 		if (operands.length == groupSize)
 			return calculate(operands) == target;
@@ -13,6 +16,9 @@ public class OperationAddition extends Operation {
 	}
 
 	@Override
+	/**
+	 * calculate the sum of the operands the solver write
+	 */
 	public int calculate(int[] operands) {
 		int result = 0;
 		for (int operand : operands)
