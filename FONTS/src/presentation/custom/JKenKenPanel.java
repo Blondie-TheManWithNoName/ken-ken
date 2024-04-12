@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class JKenKenPanel extends JPanel {
-	private final static int MARGIN = 5;
+	private final static int MARGIN = 6;
 
 	private final KenKen kenKen;
 	private final JKenKenCell[][] cells;
@@ -43,18 +43,25 @@ public class JKenKenPanel extends JPanel {
 
 	private void configureLayout() {
 		setLayout(new GridLayout(kenKen.getSize(), kenKen.getSize()));
-		setBorder(BorderFactory.createEmptyBorder(MARGIN, MARGIN, MARGIN, MARGIN));
+		setBorder(BorderFactory.createMatteBorder(MARGIN, MARGIN, MARGIN, MARGIN, new Color(57, 64, 86)));
 		for (int i = 0; i < kenKen.getSize(); i++) {
-			for (int j = 0; j < kenKen.getSize(); j++) {
-				cells[i][j] = new JKenKenCell(i, j, kenKen.getValue(i, j));
-				if (kenKen.hasTopBorder(i, j))
-					cells[i][j].hasTopBorder();
-				if (kenKen.hasLeftBorder(i, j))
-					cells[i][j].hasLeftBorder();
-				if (kenKen.hasBottomBorder(i, j))
-					cells[i][j].hasBottomBorder();
-				if (kenKen.hasRightBorder(i, j))
-					cells[i][j].hasRightBorder();
+			for (int j = 0; j < kenKen.getSize() ; j++) {
+				if (cells[i][j] == null) cells[i][j] = new JKenKenCell(i, j, kenKen.getValue(i, j));
+				if (j + 1 < kenKen.getSize() && cells[i ][j + 1] == null) cells[i][j + 1] = new JKenKenCell(i, j + 1, kenKen.getValue(i, j + 1));
+				if (i + 1 < kenKen.getSize() && cells[i + 1][j] == null) cells[i + 1][j] = new JKenKenCell(i + 1, j, kenKen.getValue(i + 1, j));
+
+				if (j + 1 < kenKen.getSize() && !kenKen.sameGroup(i, j, i, j + 1))
+				{
+					cells[i][j].setRightBorder();
+					cells[i][j + 1].setLeftBorder();
+				}
+				if (i + 1< kenKen.getSize() && !kenKen.sameGroup(i, j, i + 1, j))
+				{
+					cells[i][j].setBottomBorder();
+					cells[i + 1][j].setTopBorder();
+				}
+
+
 				cells[i][j].paintBorders();
 				if (kenKen.isFixed(i, j))
 					cells[i][j].setFixed();

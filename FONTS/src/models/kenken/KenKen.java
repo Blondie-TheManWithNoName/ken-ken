@@ -126,8 +126,8 @@ public class KenKen {
 
 	/**
 	 * Method to set the value of a cell to 0, if its not fixed
-	 * @param row, defines the number of the fixed value
-	 * @param col, defines the number of the fixed value
+	 * @param row, defines the row of the KenKen to get the cell from
+	 * @param col, defines the column of the KenKen to get the cell from
 	 * @throws EraseFixedValueException when trying to remove the value of a position with a fixed value already set
 	 */
 	public void erasePosition(int row, int col) throws EraseFixedValueException {
@@ -136,8 +136,8 @@ public class KenKen {
 
 	/**
 	 * Method to set the value of a cell to 0, fixed or not
-	 * @param row, defines the number of the fixed value
-	 * @param col, defines the number of the fixed value
+	 * @param row, defines the row of the KenKen to get the cell from
+	 * @param col, defines the column of the KenKen to get the cell from
 	 */
 	public void clearPosition(int row, int col) {
 		board[row][col].clear();
@@ -170,38 +170,33 @@ public class KenKen {
 				throw new GroupCellsNotContiguousException();
 	}
 
-	public boolean hasTopBorder(int row, int col) {
-		return row == 0;
+	/**
+	 *
+	 * @param row1, defines the row of the KenKen to get the first cell from
+	 * @param col1, defines the column of the KenKen to get the first cell from
+	 * @param row2, defines the row of the KenKen to get the second cell from
+	 * @param col2, defines the column of the KenKen to get the second cell from
+	 * @return true if they are in the same group and false if not
+	 */
+	public boolean sameGroup(int row1, int col1, int row2, int col2)
+	{
+		return board[row1][col1].getGroup().hasCell(board[row2][col2]);
 	}
 
-	public boolean hasLeftBorder(int row, int col) {
-		if (col == 0)
-			return true;
-		try {
-			return !board[row][col].getGroup().hasCell(board[row][col - 1]);
-		} catch (NullPointerException e) {
-			return false;
-		}
-	}
-
-	public boolean hasBottomBorder(int row, int col) {
-		if (row == size - 1)
-			return true;
-		try {
-			return !board[row][col].getGroup().hasCell(board[row + 1][col]);
-		} catch (NullPointerException e) {
-			return false;
-		}
-	}
-
-	public boolean hasRightBorder(int row, int col) {
-		return col == size - 1;
-	}
-
+	/**
+	 * Check if a cell has a fixed value
+	 * @param row, defines the row of the KenKen to get the cell from
+	 * @param col, defines the column of the KenKen to get the cell from
+	 * @return true if cell is fixed, false if not fixed
+	 */
 	public boolean isFixed(int row, int col) {
 		return board[row][col].isFixed();
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public boolean isFull() {
 		for (int i = 0; i < size; i++)
 			for (int j = 0; j < size; j++)
