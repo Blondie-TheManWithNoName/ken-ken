@@ -36,6 +36,9 @@ kenken.vpp.*
 ### Illustrator Files ###
 *.ai
 
+### EXE data folder ###
+EXE/**/data/
+
 ### META-INF ###
 META-INF/
 
