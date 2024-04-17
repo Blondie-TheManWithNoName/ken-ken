@@ -124,8 +124,11 @@ public class KenKenProposer {
 	 * @param row, defines the row of the KenKen to get the cell from
 	 * @param col, defines the column of the KenKen to get the cell from
 	 * @param group, defines the group to put the cell on
+	 * @throws GroupDoesNotExistException when the group does not exist
 	 */
-	public void addCellToGroup(int row, int col, Group group) {
+	public void addCellToGroup(int row, int col, Group group) throws GroupDoesNotExistException {
+		if (!groupColors.containsKey(group))
+			throw new GroupDoesNotExistException();
 		cellGroups.put(kenKen.getCell(row, col), group);
 	}
 

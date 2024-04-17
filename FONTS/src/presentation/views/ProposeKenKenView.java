@@ -93,7 +93,11 @@ public class ProposeKenKenView extends JFrame {
 				}
 			}
 		} else if (activeTool == ProposeKenKenTool.ADD_TO_GROUP) {
-			kenKenProposer.addCellToGroup(row, col, selectedGroup);
+			try {
+				kenKenProposer.addCellToGroup(row, col, selectedGroup);
+			} catch (GroupDoesNotExistException e) {
+				// TODO: handle this
+			}
 			kenKenPanel.getCell(row, col).addToGroup(selectedGroup, kenKenProposer.getGroupColor(selectedGroup));
 		} else if (activeTool == ProposeKenKenTool.REMOVE_FROM_GROUP) {
 			kenKenProposer.removeCellGroup(row, col);
