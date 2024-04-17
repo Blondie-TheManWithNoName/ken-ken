@@ -1,7 +1,6 @@
 package tests;
 
 import exceptions.*;
-import models.color.ColorFactory;
 import models.kenken.Group;
 import models.kenken.KenKenProposer;
 import models.operations.*;
