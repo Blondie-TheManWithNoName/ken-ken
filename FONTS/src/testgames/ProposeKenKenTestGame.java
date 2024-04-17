@@ -19,7 +19,7 @@ public class ProposeKenKenTestGame {
 		try {
 			kenken = driver.loadKenKen();
 		} catch (CannotLoadKenKenException e) {
-			System.out.println("Error loading KenKen: " + e.getMessage());
+			System.out.println(e.getMessage());
 			return;
 		}
 		System.out.println("KenKen loaded successfully!\n");
