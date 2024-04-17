@@ -25,19 +25,23 @@ public class KenKenProposerTest {
         groups[3] = kenKenProposer.createGroup(new OperationDivision(2));
         groups[4] = kenKenProposer.createGroup(new OperationEquality(1));
 
-        kenKenProposer.addCellToGroup(0, 0, groups[0]);
-        kenKenProposer.addCellToGroup(0, 1, groups[0]);
+		try {
+			kenKenProposer.addCellToGroup(0, 0, groups[0]);
+            kenKenProposer.addCellToGroup(0, 1, groups[0]);
 
-        kenKenProposer.addCellToGroup(0, 2, groups[1]);
-        kenKenProposer.addCellToGroup(1, 2, groups[1]);
+            kenKenProposer.addCellToGroup(0, 2, groups[1]);
+            kenKenProposer.addCellToGroup(1, 2, groups[1]);
 
-        kenKenProposer.addCellToGroup(1, 0, groups[2]);
-        kenKenProposer.addCellToGroup(2, 0, groups[2]);
+            kenKenProposer.addCellToGroup(1, 0, groups[2]);
+            kenKenProposer.addCellToGroup(2, 0, groups[2]);
 
-        kenKenProposer.addCellToGroup(1, 1, groups[3]);
-        kenKenProposer.addCellToGroup(2, 1, groups[3]);
+            kenKenProposer.addCellToGroup(1, 1, groups[3]);
+            kenKenProposer.addCellToGroup(2, 1, groups[3]);
 
-        kenKenProposer.addCellToGroup(2, 2, groups[4]);
+            kenKenProposer.addCellToGroup(2, 2, groups[4]);
+		} catch (GroupDoesNotExistException e) {
+            assert false;
+		}
     }
 
 
@@ -47,7 +51,7 @@ public class KenKenProposerTest {
     }
 
     @Test
-    public void setFixedPositionTest() throws  ValueOutOfBoundsException
+    public void setFixedPositionTest()
     {
         try {
             kenKenProposer.setFixedPosition(0, 0, 4);
@@ -98,9 +102,13 @@ public class KenKenProposerTest {
         kenKenProposer.removeCellGroup(2, 2);
         assertNull("Group for cell(2, 2) should be null now", kenKenProposer.getCellGroup(2, 2));
 
-        kenKenProposer.addCellToGroup(2, 2, groups[3]);
-        kenKenProposer.addCellToGroup(2, 2, groups[4]);
-        kenKenProposer.removeCellGroup(2, 2);
+		try {
+            kenKenProposer.addCellToGroup(2, 2, groups[3]);
+			kenKenProposer.addCellToGroup(2, 2, groups[4]);
+		} catch (GroupDoesNotExistException e) {
+            assert false;
+		}
+		kenKenProposer.removeCellGroup(2, 2);
         assertNull("Group for cell(2, 2) should be null now", kenKenProposer.getCellGroup(2, 2));
 
     }
@@ -115,7 +123,7 @@ public class KenKenProposerTest {
     }
 
     @Test
-    public void generateGroupsTest() throws  TooManyOperandsException, CellAlreadyInGroupException, CellHasNoGroupException, GroupCellsNotContiguousException
+    public void generateGroupsTest()
     {
         kenKenProposer.removeCellGroup(2, 2);
 
@@ -127,8 +135,16 @@ public class KenKenProposerTest {
         {
             assert true;
         }
-        kenKenProposer.addCellToGroup(2, 2, groups[3]);
-        try {
+        catch (TooManyOperandsException | GroupCellsNotContiguousException | CellAlreadyInGroupException e)
+        {
+            assert false;
+        }
+		try {
+			kenKenProposer.addCellToGroup(2, 2, groups[3]);
+		} catch (GroupDoesNotExistException e) {
+			assert false;
+		}
+		try {
             kenKenProposer.generateGroups();
             assert false;
         }
@@ -136,10 +152,18 @@ public class KenKenProposerTest {
         {
             assert true;
         }
+        catch (CellHasNoGroupException | GroupCellsNotContiguousException | CellAlreadyInGroupException e)
+        {
+            assert false;
+        }
 
-        kenKenProposer.addCellToGroup(2, 2, groups[2]);
+		try {
+			kenKenProposer.addCellToGroup(2, 2, groups[2]);
+		} catch (GroupDoesNotExistException e) {
+			assert false;
+		}
 
-        try {
+		try {
             kenKenProposer.generateGroups();
             assert false;
         }
@@ -147,11 +171,19 @@ public class KenKenProposerTest {
         {
             assert true;
         }
+        catch (TooManyOperandsException | CellHasNoGroupException | CellAlreadyInGroupException e)
+        {
+            assert false;
+        }
 
 
-        kenKenProposer.addCellToGroup(0, 0, groups[2]);
+		try {
+			kenKenProposer.addCellToGroup(0, 0, groups[2]);
+		} catch (GroupDoesNotExistException e) {
+            assert false;
+		}
 
-        try {
+		try {
             kenKenProposer.generateGroups();
             assert false;
         }
@@ -159,21 +191,37 @@ public class KenKenProposerTest {
         {
             assert true;
         }
+        catch (TooManyOperandsException | GroupCellsNotContiguousException | CellHasNoGroupException e)
+        {
+            assert false;
+        }
 
         kenKenProposer.removeCellGroup(0, 0);
-        kenKenProposer.addCellToGroup(0, 0, groups[0]);
-        kenKenProposer.removeCellGroup(2, 2);
-        kenKenProposer.addCellToGroup(2, 2, groups[4]); // ERROR
+		try {
+			kenKenProposer.addCellToGroup(0, 0, groups[0]);
+		} catch (GroupDoesNotExistException e) {
+			assert false;
+		}
+		kenKenProposer.removeCellGroup(2, 2);
+		try {
+			kenKenProposer.addCellToGroup(2, 2, groups[4]);
+		} catch (GroupDoesNotExistException e) {
+			assert true;
+		}
 
+        groups[4] = kenKenProposer.createGroup(new OperationEquality(1));
         try {
+            kenKenProposer.addCellToGroup(2, 2, groups[4]);
+        } catch (GroupDoesNotExistException e) {
+            assert false;
+        }
+
+		try {
             kenKenProposer.generateGroups();
             assert true;
         } catch (TooManyOperandsException | GroupCellsNotContiguousException | CellHasNoGroupException |
                  CellAlreadyInGroupException e) {
             assert false;
         }
-
-
     }
-
 }

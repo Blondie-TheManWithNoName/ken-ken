@@ -51,21 +51,11 @@ public class ModelController {
 		return proposer.getGroupNotationsEnum();
 	}
 
-	// TODO: delete
-	public void proposerDeleteGroup(int index) {
-		proposer.deleteGroup(proposer.getGroup(index));
-	}
-
 	public void proposerDeleteGroup(Group group) {
 		proposer.deleteGroup(group);
 	}
 
-	// TODO: delete
-	public void proposerAddCellToGroup(int row, int col, int groupIndex) {
-		proposer.addCellToGroup(row, col, proposer.getGroup(groupIndex));
-	}
-
-	public void proposerAddCellToGroup(int row, int col, Group group) {
+	public void proposerAddCellToGroup(int row, int col, Group group) throws GroupDoesNotExistException {
 		proposer.addCellToGroup(row, col, group);
 	}
 
