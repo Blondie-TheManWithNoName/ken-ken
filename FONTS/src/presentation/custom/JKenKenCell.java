@@ -7,7 +7,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class JKenKenCell extends JButton {
-	public static final int CELL_SIZE = 75;
+	public static final int CELL_SIZE = 50;
 
 	private final int row;
 	private final int col;
@@ -19,13 +19,13 @@ public class JKenKenCell extends JButton {
 		this.row = row;
 		this.col = col;
 		setValue(value);
-		setForeground(new Color(210, 215, 223));
-		setBackground(new Color(245, 245, 245));
+		setForeground(Color.GRAY);
+		setBackground(Color.WHITE);
 		setHorizontalAlignment(SwingConstants.CENTER);
 		setPreferredSize(new Dimension(CELL_SIZE, CELL_SIZE));
 		setOpaque(true);
-		notationLabel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-		notationLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+		notationLabel.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+		notationLabel.setFont(new Font("Arial", Font.PLAIN, 10));
 		setLayout(new BorderLayout());
 		add(notationLabel, BorderLayout.NORTH);
 	}
@@ -68,18 +68,18 @@ public class JKenKenCell extends JButton {
 	public void paintBorders() {
 		setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createMatteBorder(
-				borders[0] ? 3 : 0,
-				borders[1] ? 3 : 0,
-				borders[2] ? 3 : 0,
-				borders[3] ? 3 : 0,
-						new Color(57, 64, 86)
+						borders[0] ? 2 : 0,
+						borders[1] ? 2 : 0,
+						borders[2] ? 2 : 0,
+						borders[3] ? 2 : 0,
+						Color.BLACK
 				),
 				BorderFactory.createMatteBorder(
-				borders[0] ? 0 : 1,
-				borders[1] ? 0 : 1,
-				borders[2] ? 0 : 1,
-				borders[3] ? 0 : 1,
-						new Color(157, 165, 190)
+						borders[0] ? 0 : 1,
+						borders[1] ? 0 : 1,
+						borders[2] ? 0 : 1,
+						borders[3] ? 0 : 1,
+						Color.LIGHT_GRAY
 				)
 		));
 	}

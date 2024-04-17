@@ -1,15 +1,18 @@
 package models.operations;
 
-import exceptions.CannotCreateOperationException;
-import exceptions.NonIntegerResultException;
-import exceptions.OperandsDoNotMatchException;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import exceptions.CannotCreateOperationException;
+import exceptions.NonIntegerResultException;
+import exceptions.OperandsDoNotMatchException;
+
+/**
+ * Factory class for creating operations for KenKen puzzles.
+ */
 public class OperationFactory {
 	private final static Class<? extends Operation>[] OPERATIONS = new Class[] {
 			OperationAddition.class,
@@ -24,6 +27,13 @@ public class OperationFactory {
 			OperationSubtraction.class
 	};
 
+	/**
+     * Creates an operation with the given operands.
+     *
+     * @param operands The list of operands for the operation.
+     * @return The created operation.
+     * @throws CannotCreateOperationException If the operation cannot be created.
+     */
 	public static Operation createOperation(int[] operands) throws CannotCreateOperationException {
 		List<Class<? extends Operation>> validOperations = new ArrayList<>(List.of(OPERATIONS));
 
@@ -46,6 +56,25 @@ public class OperationFactory {
 		return createOperation(validOperations.get(random.nextInt(validOperations.size())), 0);
 	}
 
+	/**
+     * Creates an operation with the given operands and included operations.
+     *
+     * @param allowedOperations					The set of operation types to include.
+     * @return									The created operation.
+     * @throws CannotCreateOperationException	If the operation cannot be created.
+     */
+	public static Operation createOperation(List<Class<? extends Operation>> allowedOperations) throws CannotCreateOperationException {
+		return createOperation(allowedOperations.get(new Random().nextInt(allowedOperations.size())), 0);
+	}
+
+	/**
+     * Creates an operation with the given operation class and result.
+     *
+     * @param operationClass The class of the operation.
+     * @param result         The result of the operation.
+     * @return The created operation.
+     * @throws CannotCreateOperationException If the operation cannot be created.
+     */
 	public static Operation createOperation(Class<? extends Operation> operationClass, int result) throws CannotCreateOperationException {
 		try {
 			Constructor<? extends Operation> constructor = operationClass.getConstructor(int.class);
@@ -55,6 +84,14 @@ public class OperationFactory {
 		}
 	}
 
+	/**
+     * Creates an operation with the given symbol and result.
+     *
+     * @param symbol The symbol representing the operation.
+     * @param result The result of the operation.
+     * @return The created operation.
+     * @throws CannotCreateOperationException If the operation cannot be created.
+     */
 	public static Operation createOperation(String symbol, int result) throws CannotCreateOperationException {
 		Operation operation;
 		for (Class<? extends Operation> op : OPERATIONS) {
