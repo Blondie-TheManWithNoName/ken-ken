@@ -178,8 +178,7 @@ public class KenKen {
 	 * @param col2, defines the column of the KenKen to get the second cell from
 	 * @return true if they are in the same group and false if not
 	 */
-	public boolean sameGroup(int row1, int col1, int row2, int col2)
-	{
+	public boolean sameGroup(int row1, int col1, int row2, int col2) {
 		return board[row1][col1].getGroup().hasCell(board[row2][col2]);
 	}
 
