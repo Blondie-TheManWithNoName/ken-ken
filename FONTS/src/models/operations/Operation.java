@@ -67,13 +67,6 @@ public abstract class Operation {
 		return calculate(operands) == target;
 	}
 
-	/**
-	 *
-	 * @param max
-	 * @param size
-	 * @return
-	 * @throws OperandsDoNotMatchException
-	 */
 	public List<int[]> inverse(int max, int size) throws OperandsDoNotMatchException {
 		List<int[]> result = new ArrayList<>();
 

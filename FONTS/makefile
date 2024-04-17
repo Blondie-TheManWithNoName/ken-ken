@@ -57,7 +57,7 @@ endif
 	@mkdir -p out/META-INF
 	@echo "Manifest-Version: 1.0\nMain-Class: testgames.$(FILE)" > out/META-INF/MANIFEST.MF
 	@cp -r sprites out/sprites
-	@cp -r data out/data
+	@cp -r data ../EXE/testgames/data
 	@echo "Building test game for $(FILE)...\n"
 	@cd out && jar cvfm ../../EXE/testgames/$(FILE).jar META-INF/MANIFEST.MF -C . .
 	@echo "Done."

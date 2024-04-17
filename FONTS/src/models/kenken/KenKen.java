@@ -183,7 +183,7 @@ public class KenKen {
 	}
 
 	/**
-	 * Check if a cell has a fixed value
+	 * Checks if a cell has a fixed value
 	 * @param row, defines the row of the KenKen to get the cell from
 	 * @param col, defines the column of the KenKen to get the cell from
 	 * @return true if cell is fixed, false if not fixed
@@ -193,17 +193,24 @@ public class KenKen {
 	}
 
 	/**
-	 *
-	 * @return
+	 * Checks if all the cells have a value
+	 * @return true if all the cells have a value
 	 */
 	public boolean isFull() {
 		for (int i = 0; i < size; i++)
 			for (int j = 0; j < size; j++)
-				if (board[i][j].getValue() == 0)
+				if (board[i][j].isEmpty())
 					return false;
 		return true;
 	}
 
+	/**
+	 *
+	 * Checks if the KenKen
+	 * @return true if the KenKen fulfills the rules, false otherwise
+	 * @throws OperandsDoNotMatchException when the operands dont have the expected result
+	 * @throws NonIntegerResultException when the result or the operation is negative
+	 */
 	public boolean check() throws OperandsDoNotMatchException, NonIntegerResultException {
 		if (numbersRepeatInRows() || numbersRepeatInColumns())
 			return false;
@@ -213,6 +220,9 @@ public class KenKen {
 		return true;
 	}
 
+	/**
+	 * Removes all the groups from the cells and the KenKen
+	 */
 	public void clearGroups() {
 		for (Cell[] row : board)
 			for (Cell cell : row)
@@ -220,6 +230,10 @@ public class KenKen {
 		groups.clear();
 	}
 
+	/**
+	 * Check if all the rows contain different numbers
+	 * @return true if numbers in a row are repeated, false otherwise
+	 */
 	private boolean numbersRepeatInRows() {
 		for (int i = 0; i < size; i++) {
 			boolean[] numbers = new boolean[size];
@@ -235,6 +249,10 @@ public class KenKen {
 		return false;
 	}
 
+	/**
+	 * Check if all the column contain different numbers
+	 * @return true if numbers in a column are repeated, false otherwise
+	 */
 	private boolean numbersRepeatInColumns() {
 		for (int i = 0; i < size; i++) {
 			boolean[] numbers = new boolean[size];

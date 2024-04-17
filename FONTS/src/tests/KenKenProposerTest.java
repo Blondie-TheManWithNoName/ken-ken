@@ -1,7 +1,6 @@
 package tests;
 
 import exceptions.*;
-import models.color.ColorFactory;
 import models.kenken.Group;
 import models.kenken.KenKenProposer;
 import models.operations.*;
@@ -219,8 +218,7 @@ public class KenKenProposerTest {
 		try {
             kenKenProposer.generateGroups();
             assert true;
-        } catch (TooManyOperandsException | GroupCellsNotContiguousException | CellHasNoGroupException |
-                 CellAlreadyInGroupException e) {
+        } catch (CellAlreadyInGroupException e) {
             assert false;
         }
     }
