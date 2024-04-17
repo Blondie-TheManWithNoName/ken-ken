@@ -168,8 +168,7 @@ public class KenKenProposerTest {
         try {
             kenKenProposer.generateGroups();
             assert true;
-        } catch (TooManyOperandsException | GroupCellsNotContiguousException | CellHasNoGroupException |
-                 CellAlreadyInGroupException e) {
+        } catch (CellAlreadyInGroupException e) {
             assert false;
         }
 
