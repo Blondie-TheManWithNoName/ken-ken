@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class JKenKenPanel extends JPanel {
-	private final static int MARGIN = 6;
+	private final static int MARGIN = 4;
 
 	private final KenKen kenKen;
 	private final JKenKenCell[][] cells;
@@ -43,7 +43,7 @@ public class JKenKenPanel extends JPanel {
 
 	private void configureLayout() {
 		setLayout(new GridLayout(kenKen.getSize(), kenKen.getSize()));
-		setBorder(BorderFactory.createMatteBorder(MARGIN, MARGIN, MARGIN, MARGIN, new Color(57, 64, 86)));
+		setBorder(BorderFactory.createMatteBorder(MARGIN, MARGIN, MARGIN, MARGIN, Color.BLACK));
 		for (int i = 0; i < kenKen.getSize(); i++) {
 			for (int j = 0; j < kenKen.getSize() ; j++) {
 				if (cells[i][j] == null) cells[i][j] = new JKenKenCell(i, j, kenKen.getValue(i, j));
