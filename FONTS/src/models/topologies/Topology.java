@@ -11,6 +11,15 @@ public class Topology {
 		this.shape = shape.getShape();
 	}
 
+	public int size() {
+		int size = 0;
+		for (int[] row : shape)
+			for (int cell : row)
+				if (cell != 0)
+					size++;
+		return size;
+	}
+
 	public int[][] rotateQuarters(int quarters) {
 		int[][] newShape = shape;
 		for (int i = 0; i < quarters % 4; i++)

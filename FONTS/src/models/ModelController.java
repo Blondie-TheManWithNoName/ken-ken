@@ -93,8 +93,8 @@ public class ModelController {
 
 	/* GENERATE KENKEN */
 
-	public boolean generateKenKen(int size, int fixedCells, Topology topology, List<OperationType.OperationType> includedOperations) {
-        generator = new KenKenGenerator(size, fixedCells, topology, includedOperations);
+	public boolean generateKenKen(int size, int fixedCells, Topology topology, List<Class<? extends Operation>> operations) throws OperandsDoNotMatchException {
+        generator = new KenKenGenerator(size, fixedCells, topology, operations);
         return generator.generate();
     }
 

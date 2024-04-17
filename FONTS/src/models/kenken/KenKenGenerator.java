@@ -1,13 +1,6 @@
 package models.kenken;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 import exceptions.CannotCreateOperationException;
 import exceptions.CellAlreadyInGroupException;
@@ -20,9 +13,8 @@ import exceptions.TooManyOperandsException;
 import exceptions.ValueOutOfBoundsException;
 import models.operations.Operation;
 import models.operations.OperationFactory;
-import models.operations.OperationType;
+import models.operations.OperationLimitedOperands;
 import models.topologies.Topology;
-
 
 /**
  * A class for generating KenKen puzzles.
@@ -31,7 +23,7 @@ public class KenKenGenerator {
 	private final int size;
 	private final int fixedValues;
 	private final Topology topology;
-	private final Set<OperationType> allowedOperations;
+	private final List<Class<? extends Operation>> allowedOperations;
 	private KenKen kenKen;
 
 	/**
@@ -40,12 +32,21 @@ public class KenKenGenerator {
      * @param size              the size of the KenKen puzzle grid
      * @param fixedValues       the number of fixed values in the puzzle
      * @param topology          the topology of the puzzle grid
-     * @param allowedOperations the set of allowed operation types for generating groups
+     * @param allowedOperations the list of allowed operation for generating the groups
      */
-	public KenKenGenerator(int size, int fixedValues, Topology topology, Set<OperationType> allowedOperations) {
+	public KenKenGenerator(int size, int fixedValues, Topology topology, List<Class<? extends Operation>> allowedOperations) throws OperandsDoNotMatchException {
         this.size = size;
         this.fixedValues = fixedValues;
         this.topology = topology;
+		int topologySize = topology.size();
+		for (Class<? extends Operation> operation : allowedOperations)
+			if (OperationLimitedOperands.class.isAssignableFrom(operation)) {
+				try {
+					OperationLimitedOperands op = (OperationLimitedOperands) OperationFactory.createOperation(operation, 0);
+					if (op.getNOperands() != topologySize)
+						throw new OperandsDoNotMatchException(op.getSymbol(), topologySize, op.getNOperands());
+				} catch (CannotCreateOperationException ignored) {}
+			}
         this.allowedOperations = allowedOperations;
     }
 
@@ -131,8 +132,6 @@ public class KenKenGenerator {
         if (!generateGroups(groupMap, 0, 0, 1))
             throw new CellHasNoGroupException();
 
-        List<OperationType> allowedOperationList = new ArrayList<>(allowedOperations);
-
         HashMap<Integer, List<int[]>> groups = new HashMap<>();
         for (int i = 0; i < size; i++)
             for (int j = 0; j < size; j++) {
@@ -148,11 +147,8 @@ public class KenKenGenerator {
                 groupValues.add(kenKen.getValue(position[0], position[1]));
             int[] operands = groupValues.stream().mapToInt(i -> i).toArray();
 
-            Set<OperationType> filteredOperationSet = new HashSet<>(allowedOperations);
-            filteredOperationSet.retainAll(OperationFactory.getOperationTypes(operands.length));
-            OperationType selectedOperationType = allowedOperationList.get(new Random().nextInt(allowedOperationList.size()));
+			Operation operation = OperationFactory.createOperation(allowedOperations);
 
-            Operation operation = OperationFactory.createOperation(selectedOperationType, operands);
             int result = 0;
             try {
                 result = operation.calculate(operands);
@@ -275,7 +271,7 @@ public class KenKenGenerator {
 	private void removeGroup(int[][] groupMap, int[][] shape, int row, int col) {
 		for (int i = 0; i < shape.length; i++)
 			for (int j = 0; j < shape[0].length; j++)
-				if (shape[i][j] != 0)
+				if (shape[i][j] != 0 && row + i < size && col + j < size)
 					groupMap[row + i][col + j] = 0;
 	}
 

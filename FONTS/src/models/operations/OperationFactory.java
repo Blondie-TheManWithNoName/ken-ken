@@ -5,7 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import exceptions.CannotCreateOperationException;
 import exceptions.NonIntegerResultException;
@@ -26,7 +25,7 @@ public class OperationFactory {
 			OperationEquality.class,
 			OperationPower.class,
 			OperationSubtraction.class
-	};2
+	};
 
 	/**
      * Creates an operation with the given operands.
@@ -60,63 +59,13 @@ public class OperationFactory {
 	/**
      * Creates an operation with the given operands and included operations.
      *
-     * @param operands           The list of operands for the operation.
-     * @param includedOperations The set of operation types to include.
-     * @return The created operation.
-     * @throws CannotCreateOperationException If the operation cannot be created.
+     * @param allowedOperations					The set of operation types to include.
+     * @return									The created operation.
+     * @throws CannotCreateOperationException	If the operation cannot be created.
      */
-	public static Operation createOperation(List<Integer> operands, Set<OperationType> includedOperations) throws CannotCreateOperationException {
-        List<Class<? extends Operation>> validOperations = new ArrayList<>();
-
-        // Add allowed operations to the list of valid operations
-        for (OperationType type : includedOperations) {
-            switch (type) {
-                case ADDITION:
-                    validOperations.add(OperationAddition.class);
-                    break;
-                case SUBTRACTION:
-                    validOperations.add(OperationSubtraction.class);
-                    break;
-                case MULTIPLICATION:
-                    validOperations.add(OperationMultiplication.class);
-                    break;
-                case DIVISION:
-                    validOperations.add(OperationDivision.class);
-                    break;
-                case EQUALITY:
-                    validOperations.add(OperationEquality.class);
-                    break;
-                case POWER:
-                    validOperations.add(OperationPower.class);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        Random random = new Random();
-        for (Class<? extends OperationLimitedOperands> operation : OPERATIONS_LIMITED) {
-            if (!validOperations.contains(operation)) {
-                continue;
-            }
-            Operation createdOperation;
-            try {
-                createdOperation = createOperation(operation, 0);
-            } catch (CannotCreateOperationException e) {
-                continue;
-            }
-            try {
-                if (createdOperation.isValidCandidate(operands, operands.size(), 0)) {
-                    createdOperation.setOperands(operands);
-                    return createdOperation;
-                }
-            } catch (OperandsDoNotMatchException | NonIntegerResultException ignored) {
-            }
-        }
-
-        Class<? extends Operation> selectedOperationClass = validOperations.get(random.nextInt(validOperations.size()));
-        return createOperation(selectedOperationClass, operands);
-    }
+	public static Operation createOperation(List<Class<? extends Operation>> allowedOperations) throws CannotCreateOperationException {
+		return createOperation(allowedOperations.get(new Random().nextInt(allowedOperations.size())), 0);
+	}
 
 	/**
      * Creates an operation with the given operation class and result.
