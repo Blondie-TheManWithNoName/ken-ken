@@ -6,12 +6,10 @@ import models.operations.Operation;
 import models.operations.OperationFactory;
 import models.topologies.Topology;
 import persistence.PersistenceController;
-import persistence.dto.CellDTO;
-import persistence.dto.GroupDTO;
-import persistence.dto.KenKenDTO;
-import persistence.dto.OperationDTO;
+import persistence.dto.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -26,7 +24,6 @@ public class ModelController {
 
 	private KenKen activeKenKen;
 	// TODO: Stopwatch class
-	private List<Score> scores;
 
 	// TODO: delete
 	public KenKen getActiveKenKen() {
@@ -105,6 +102,18 @@ public class ModelController {
 		}
 	}
 
+	/* PLAY KENKEN */
+
+	public boolean check() throws NonIntegerResultException, OperandsDoNotMatchException {
+		return activeKenKen.check();
+	}
+
+	public void saveScore(String username) throws InvalidUsernameException, IOException {
+		if (username.contains(" ") || username.isEmpty())
+			throw new InvalidUsernameException();
+		persistenceController.saveScore(new ScoreDTO(username, getScore()));
+	}
+
 	/* SAVE GAME */
 
 	public boolean saveGame() {
@@ -129,6 +138,23 @@ public class ModelController {
 			throw new CannotLoadKenKenException();
 		}
 	}
+
+	/* CHECK RANKING */
+
+	public List<Score> checkRanking() throws CannotLoadScoresException {
+		List<Score> scores = new ArrayList<>();
+		List<ScoreDTO> scoreDTOS;
+		try {
+			scoreDTOS = persistenceController.loadScores();
+		} catch (IOException e) {
+			throw new CannotLoadScoresException();
+		}
+		for (ScoreDTO scoreDTO : scoreDTOS)
+			scores.add(new Score(scoreDTO.getUser(), scoreDTO.getScore()));
+		return scores;
+	}
+
+	/* PRIVATE METHODS */
 
 	private int getScore() {
 		// TODO: think about the implementation

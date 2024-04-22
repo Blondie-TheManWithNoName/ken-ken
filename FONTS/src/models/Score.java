@@ -8,4 +8,12 @@ public class Score {
 		this.user = user;
 		this.score = score;
 	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public int getScore() {
+		return score;
+	}
 }
