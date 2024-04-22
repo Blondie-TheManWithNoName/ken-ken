@@ -13,8 +13,12 @@ public class PersistenceController {
 		return KenKenDAO.load(path);
 	}
 
+	public void saveKenKen(KenKenDTO kenKenDTO, String path) throws IOException {
+		KenKenDAO.save(kenKenDTO, path);
+	}
+
 	public void saveGame(KenKenDTO kenKenDTO) throws IOException {
-		KenKenDAO.save(kenKenDTO);
+		KenKenDAO.saveGame(kenKenDTO);
 	}
 
 	public KenKenDTO loadSavedGame(String path) throws IOException {

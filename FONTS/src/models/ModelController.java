@@ -90,6 +90,19 @@ public class ModelController {
 		activeKenKen = generator.getKenKen();
 	}
 
+	/* EXPORT KENKEN */
+
+	public boolean exportKenKen(String path) {
+		if (activeKenKen == null)
+			return false;
+		try {
+			persistenceController.saveKenKen(toDTO(activeKenKen), path);
+			return true;
+		} catch (IOException e) {
+			return false;
+		}
+	}
+
 	/* LOAD KENKEN */
 
 	public KenKen loadKenKen(String path) throws CannotLoadKenKenException {
