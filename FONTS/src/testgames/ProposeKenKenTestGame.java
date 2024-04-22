@@ -1,36 +1,32 @@
 package testgames;
 
-import exceptions.CannotLoadKenKenException;
+import exceptions.CellAlreadyInGroupException;
+import exceptions.CellHasNoGroupException;
+import exceptions.GroupCellsNotContiguousException;
+import exceptions.TooManyOperandsException;
 import models.kenken.KenKen;
 import testgames.drivers.AiSolveDriver;
 import testgames.drivers.ExportKenKenDriver;
-import testgames.drivers.LoadKenKenDriver;
+import testgames.drivers.KenKenProposerDriver;
 import testgames.drivers.PlayKenKenDriver;
 
 import java.io.IOException;
 import java.util.Scanner;
 
 public class ProposeKenKenTestGame {
-	private static final LoadKenKenDriver loadKenKenDriver = new LoadKenKenDriver("data/proposed_tg.kenken");
+	private static final KenKenProposerDriver proposer = new KenKenProposerDriver();
 	private static final AiSolveDriver aiSolveDriver = new AiSolveDriver();
 	private static final ExportKenKenDriver exportKenKenDriver = new ExportKenKenDriver();
 	private static final PlayKenKenDriver playKenKenDriver = new PlayKenKenDriver();
 	private static final Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
+		KenKen kenken;
 		int choice;
 
 		System.out.println("=== ProposeKenKenTestGame ===\n");
 
-		System.out.println("Loading KenKen from 'data/proposed_tg.kenken'...");
-		KenKen kenken;
-		try {
-			kenken = loadKenKenDriver.loadKenKen();
-		} catch (CannotLoadKenKenException e) {
-			System.out.println(e.getMessage());
-			return;
-		}
-		System.out.println("KenKen loaded successfully!\n");
+		kenken = proposer.propose();
 
 		System.out.println("What would you like to do with the KenKen?");
 		System.out.println("\t1. AI Solve");
