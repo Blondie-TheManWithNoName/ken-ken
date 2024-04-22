@@ -1,3 +1,9 @@
 La carpeta EXE/ conté els executables del projecte.
 
 En la primera entrega, aquests són els jocs de prova de dins la subcarpeta testgames/ que inclou un arxiu markdown per a cada un indicant-ne el seu objecte de prova, altres elements integrats, drivers, fitxers de dades necessaris, valors i efectes estudiats i un petit manual molt bàsic amb el seu funcionament.
+
+Arxius:
+
+- testgames/*.jar: executables dels jocs de prova
+- testgames/*.md: explicació de cada joc de prova
+- testgames/data: carpeta amb els arxius necessaris per als jocs de prova
