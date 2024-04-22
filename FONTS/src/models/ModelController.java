@@ -59,14 +59,9 @@ public class ModelController {
 		proposer.removeCellGroup(row, col);
 	}
 
-	public boolean proposerGenerate() {
-		try {
-			proposer.generateGroups();
-		} catch (TooManyOperandsException | GroupCellsNotContiguousException | CellHasNoGroupException |
-				 CellAlreadyInGroupException e) {
-			return false;
-		}
-		return true;
+	public KenKen proposerGenerate() throws CellAlreadyInGroupException, CellHasNoGroupException, GroupCellsNotContiguousException, TooManyOperandsException {
+		proposer.generateGroups();
+		return proposer.getKenKen();
 	}
 
 	/* GENERATE KENKEN */
