@@ -1,9 +1,5 @@
 package testgames;
 
-import exceptions.CellAlreadyInGroupException;
-import exceptions.CellHasNoGroupException;
-import exceptions.GroupCellsNotContiguousException;
-import exceptions.TooManyOperandsException;
 import models.kenken.KenKen;
 import testgames.drivers.AiSolveDriver;
 import testgames.drivers.ExportKenKenDriver;
