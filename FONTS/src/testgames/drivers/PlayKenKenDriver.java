@@ -138,6 +138,10 @@ public class PlayKenKenDriver {
 				String[] values = sValues.split(" ");
 				for (String val : values) {
 					int v = Integer.parseInt(val);
+					if (r >= size) {
+						System.out.println("Ignoring " + v + " due to exceeding the KenKen size");
+						continue;
+					}
 					System.out.println("Inserting " + v  + " on (" +  (r + 1) + ", " + (c + 1) + ")");
 					try
 					{
