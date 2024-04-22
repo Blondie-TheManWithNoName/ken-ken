@@ -14,7 +14,7 @@ public class SolveKenKenTestGame {
 	private static final ModelController controller = new ModelController();
 	private static final Scanner scanner = new Scanner(System.in);
 
-	public static void main(String[] args) throws CannotLoadKenKenException  {
+	public static void main(String[] args) {
 		try {System.out.println(args[0]);
 		KenKen kenken = controller.loadKenKen(args[0]);
 		int row, col;

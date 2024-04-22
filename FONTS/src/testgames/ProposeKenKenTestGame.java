@@ -7,6 +7,7 @@ import testgames.drivers.ExportKenKenDriver;
 import testgames.drivers.LoadKenKenDriver;
 import testgames.drivers.PlayKenKenDriver;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ProposeKenKenTestGame {
@@ -21,7 +22,7 @@ public class ProposeKenKenTestGame {
 
 		System.out.println("=== ProposeKenKenTestGame ===\n");
 
-		System.out.println("Loading KenKen from data/proposed_tg.kenken...");
+		System.out.println("Loading KenKen from 'data/proposed_tg.kenken'...");
 		KenKen kenken;
 		try {
 			kenken = loadKenKenDriver.loadKenKen();
@@ -50,7 +51,11 @@ public class ProposeKenKenTestGame {
 				aiSolveDriver.solve(kenken);
 				break;
 			case 2:
-				exportKenKenDriver.export(kenken);
+				try {
+					exportKenKenDriver.export(kenken);
+				} catch (IOException e) {
+					System.out.println(e.getMessage());
+				}
 				break;
 			case 3:
 				playKenKenDriver.play(kenken);

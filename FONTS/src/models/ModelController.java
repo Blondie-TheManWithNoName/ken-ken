@@ -19,18 +19,12 @@ public class ModelController {
 	private final PersistenceController persistenceController = new PersistenceController();
 
 	private KenKenProposer proposer;
-	private KenKenGenerator generator;
 	private KenKenSolver solver;
 
 	private KenKen activeKenKen;
 	// TODO: Stopwatch class
 
-	// TODO: delete
-	public KenKen getActiveKenKen() {
-		return activeKenKen;
-	}
-
-	// TODO: delete
+	// TODO: delete method
 	public void setActiveKenKen(KenKen activeKenKen) {
 		this.activeKenKen = activeKenKen;
 	}
@@ -41,7 +35,6 @@ public class ModelController {
 		proposer = new KenKenProposer(size);
 	}
 
-	// TODO: delete
 	public Group proposerCreateGroup(String symbol, int target) {
 		try {
 			return proposer.createGroup(OperationFactory.createOperation(symbol, target));
@@ -79,25 +72,15 @@ public class ModelController {
 	/* GENERATE KENKEN */
 
 	public boolean generateKenKen(int size, int fixedCells, Topology topology, List<Class<? extends Operation>> operations) throws OperandsDoNotMatchException {
-        generator = new KenKenGenerator(size, fixedCells, topology, operations);
-        return generator.generate();
+        return new KenKenGenerator(size, fixedCells, topology, operations).generate();
     }
-
-	public void generatorPlay() {
-		activeKenKen = generator.getKenKen();
-	}
 
 	/* EXPORT KENKEN */
 
-	public boolean exportKenKen(String path) {
+	public void exportKenKen(String path) throws IOException {
 		if (activeKenKen == null)
-			return false;
-		try {
-			persistenceController.saveKenKen(toDTO(activeKenKen), path);
-			return true;
-		} catch (IOException e) {
-			return false;
-		}
+			return;
+		persistenceController.saveKenKen(toDTO(activeKenKen), path);
 	}
 
 	/* LOAD KENKEN */
@@ -147,15 +130,10 @@ public class ModelController {
 
 	/* SAVE GAME */
 
-	public boolean saveGame() {
+	public void saveGame() throws IOException {
 		if (activeKenKen == null)
-			return false;
-		try {
-			persistenceController.saveGame(toDTO(activeKenKen));
-			return true;
-		} catch (IOException e) {
-			return false;
-		}
+			return;
+		persistenceController.saveGame(toDTO(activeKenKen));
 	}
 
 	/* LOAD SAVED GAME */
