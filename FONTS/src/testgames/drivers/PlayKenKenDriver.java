@@ -7,6 +7,8 @@ import exceptions.ValueOutOfBoundsException;
 import models.ModelController;
 import models.kenken.KenKen;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -30,9 +32,10 @@ public class PlayKenKenDriver {
 		while (true) {
 			System.out.println("What would you like to do?");
 			System.out.println("\t1. Make a move");
-			System.out.println("\t2. Check");
-			System.out.println("\t3. Save and exit");
-			System.out.println("\t4. Exit\n");
+			System.out.println("\t2. Load moves from file");
+			System.out.println("\t3. Check");
+			System.out.println("\t4. Save and exit");
+			System.out.println("\t5. Exit\n");
 			do {
 				System.out.print("Choice: ");
 				try {
@@ -40,13 +43,17 @@ public class PlayKenKenDriver {
 				} catch (Exception e) {
 					choice = 0;
 				}
-			} while (choice < 1 || choice > 4);
+			} while (choice < 1 || choice > 5);
 
 			switch (choice) {
 				case 1:
 					askForMove();
 					break;
+
 				case 2:
+					loadMoves();
+					break;
+				case 3:
 					if (controller.check()) {
 						System.out.println("Congratulations! You solved the KenKen!");
 						while (true) {
@@ -65,9 +72,9 @@ public class PlayKenKenDriver {
 						System.out.println("Not yet! Keep going!");
 					}
 					break;
-				case 3:
-					controller.saveGame();
 				case 4:
+					controller.saveGame();
+				case 5:
 					exit();
 			}
 		}
@@ -113,5 +120,38 @@ public class PlayKenKenDriver {
 	private void exit() {
 		System.out.println("Exiting...");
 		System.exit(0);
+	}
+
+	private void loadMoves() {
+		System.out.println("insert file (.values) name within data folder:");
+		scanner.nextLine();
+		final String path = scanner.nextLine();
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader("data/" + path + ".values"));
+			int r = 0, c = 0;
+			String sValues;
+			while ((sValues = reader.readLine()) != null) {
+				String[] values = sValues.split(" ");
+				for (String val : values) {
+					int v = Integer.parseInt(val);
+					System.out.println("Inserting " + v  + " on (" +  (r + 1) + ", " + (c + 1) + ")");
+					try
+					{
+						controller.makeMove(r, c, v);
+					}
+					catch (EraseFixedValueException | RewriteFixedPositionException | ValueOutOfBoundsException e) {
+						System.out.println(e.getMessage());
+					}
+                    ++c;
+					if (c >= size){
+						++r;
+						c = 0;
+					}
+				}
+
+			}
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
