@@ -21,7 +21,7 @@ import java.util.Random;
  * It contains the main methods that the view can call to interact with the model.
  */
 public class ModelController {
-	public static final int MAX_SIZE = 15;
+	public static final int MAX_SIZE = 10;
 
 	private final PersistenceController persistenceController = new PersistenceController();
 
