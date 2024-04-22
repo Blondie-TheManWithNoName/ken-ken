@@ -118,7 +118,6 @@ public class KenKenGenerator {
 
 	/**
      * Generates groups of cells for the KenKen puzzle with only allowed operations.
-     * 
      * The method filters the allowed operation types and selects operations
      * based on the allowed types when generating groups.
      *

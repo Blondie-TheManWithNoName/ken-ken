@@ -1,0 +1,30 @@
+La carpeta FONTS/ conté el codi del projecte dins el subdirectori src/ on s'hi troben totes les classes, organitzades en paquets. Inclou el codi dels tests JUnit i els jocs de proba.
+
+També conté la carpeta lib/ amb les llibreries del projecte, la carpeta data/ amb els fitxers utilitzats durant el desenvolupament del project, i la carpeta sprites/ amb les imatges utilitzades en les vistes implementades amb swing.
+
+Inclou un Makefile que ja té un target 'make help' explicant-ne el funcionament.
+
+Arxius:
+	- makefile: makefile (consultar-ne el funcionament amb 'make help')
+	- data/: directori amb els fitxers de dades
+	- lib/: directori amb les llibreries
+	- sprites/: directori amb els recursos gràfics d'algunes vistes swing
+	- src/exceptions/: directori amb totes les exceptions del sistema
+	- src/models: directori amb la capa de domini, organitzada en:
+		- color/: només conté el ColorFactory
+		- kenken/: classes que defineixen el KenKen, així com el generator, proposer i solver
+		- operations/: les operacions
+		- topologies/: la classse Topology i l'enumeració Shape, utilitzades per a definir les topologies
+		- ModelController.java: controlador de la capa de domini
+		- Score.java: classe per a representar la puntuació d'un usuari
+	- src/persistence/: directori amb la capa de persistència, organitzada en:
+		- dao/: els DAO (Data Access Object)
+		- dto/: els DTO (Data Transfer Object)
+		- PersistenceController.java: controlador de persistència
+	- src/presentation/: directori amb la capa de presentació, organitzada en:
+		- controllers/: els controladors de les vistes
+		- custom/: recursos customitzats usats en diverses vistes
+		- vies/: les vistes swing
+		- ProposeKenKenTool.java: enumeració de les eines de la vista de proposta de KenKen
+	- src/testgames/: els jocs de prova; en el subdirectori drivers/, els drivers
+	- src/tests/: els tests de JUnit
