@@ -4,6 +4,7 @@ En la primera entrega, aquests són els jocs de prova que incloue un arxiu markd
 
 Arxius:
 
-- **/*.jar: executables del jocs de prova
-- **/*.md: explicació del joc de prova
-- **/data: carpeta amb els arxius necessaris per al jocs de prova
+- data: carpeta amb els arxius necessaris per als jocss de prova
+- per cada joc de prova...
+	- **/*.jar: executables del jocs de prova
+	- **/*.md: explicació del joc de prova
