@@ -11,16 +11,30 @@ public class KenKenSolver {
 		this.kenKen = kenKen;
 	}
 
+	/**
+	 * Consultor method for the kenken
+	 * @return the kenken
+	 */
 	public KenKen getKenKen() {
 		return kenKen;
 	}
 
+	/**
+	 * public method to solve a kenken
+	 * @return true if it's possible to solve the kenken, false otherwise
+	 */
 	public boolean solve() {
 		kenKen.erase();
 		return solve(0, 0);
 	}
 
-	private boolean solve(int row, int col) {
+	/**
+	 * solve the kenken
+	 * @param row the row of the cell that we want to write a value
+	 * @param col the col of the cell that we want to write a value
+	 * @return true if it's possible to solve the kenken, false otherwise
+	 */
+	boolean solve(int row, int col) {
 		if (row == kenKen.getSize()) {
 			row = 0;
 			if (++col == kenKen.getSize())
@@ -46,6 +60,13 @@ public class KenKenSolver {
 		return false;
 	}
 
+	/**
+	 * check if the value can be written in the cell with position row and column
+	 * @param row the row of the cell
+	 * @param col the column of the cell
+	 * @param value the value we want to put in the cell
+	 * @return true if the value is valid in the cell, false otherwise
+	 */
 	private boolean isValidMove(int row, int col, int value) {
 		for (int i = 0; i < kenKen.getSize(); i++) {
 			if (kenKen.getValue(row, i) == value || kenKen.getValue(i, col) == value)
