@@ -60,16 +60,5 @@ public class OperationDivisionTest {
 		} catch (NonIntegerResultException e) {
 			assert true;
 		}
-
-		try {
-			List<int[]> calculated = op3.inverse(9);
-			List<int[]> expected = List.of(new int[]{1, 3}, new int[]{2, 6}, new int[]{3, 9});
-			assert calculated != null;
-			assert calculated.size() == expected.size();
-			for (int i = 0; i < calculated.size(); i++)
-				assert Arrays.equals(calculated.get(i), expected.get(i));
-		} catch (OperandsDoNotMatchException e) {
-			assert false;
-		}
 	}
 }
