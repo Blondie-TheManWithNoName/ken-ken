@@ -33,6 +33,7 @@ public class KenKenGenerator {
      * @param fixedValues       the number of fixed values in the puzzle
      * @param topology          the topology of the puzzle grid
      * @param allowedOperations the list of allowed operation for generating the groups
+	 * @throws OperandsDoNotMatchException if the number of operands does not match the topology size
      */
 	public KenKenGenerator(int size, int fixedValues, Topology topology, List<Class<? extends Operation>> allowedOperations) throws OperandsDoNotMatchException {
         this.size = size;

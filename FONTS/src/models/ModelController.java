@@ -33,6 +33,7 @@ public class ModelController {
 
 	/**
 	 * Method to set the active KenKen.
+	 * @param activeKenKen KenKen to set as active.
 	 */
 	public void setActiveKenKen(KenKen activeKenKen) {
 		this.activeKenKen = activeKenKen;

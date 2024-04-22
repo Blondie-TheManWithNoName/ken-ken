@@ -37,7 +37,8 @@ public class Topology {
 	}
 
 	/**
-	 * Getter for the shape of the block.
+	 * Method that rotates the shape of the block a certain number of quarters.
+	 * @param quarters Number of quarters to rotate the shape of the block.
 	 * @return Matrix of 1s and 0s that represents the shape of the block.
 	 */
 	public int[][] rotateQuarters(int quarters) {
@@ -48,7 +49,8 @@ public class Topology {
 	}
 
 	/**
-	 * Getter for the shape of the block.
+	 * Method that rotates the shape of the block 90 degrees.
+	 * @param current Matrix of 1s and 0s that represents the shape of the block.
 	 * @return Matrix of 1s and 0s that represents the shape of the block.
 	 */
 	private int[][] rotate90deg(int[][] current) {
