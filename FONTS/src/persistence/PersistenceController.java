@@ -22,7 +22,7 @@ public class PersistenceController {
 	}
 
 	public KenKenDTO loadSavedGame(String path) throws IOException {
-		return KenKenDAO.loadSavedGame(path);
+		return KenKenDAO.load(path);
 	}
 
 	public void saveScore(ScoreDTO scoreDTO) throws IOException {
