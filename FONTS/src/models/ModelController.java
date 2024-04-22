@@ -19,7 +19,6 @@ public class ModelController {
 	private final PersistenceController persistenceController = new PersistenceController();
 
 	private KenKenProposer proposer;
-	private KenKenGenerator generator;
 	private KenKenSolver solver;
 
 	private KenKen activeKenKen;
@@ -73,13 +72,8 @@ public class ModelController {
 	/* GENERATE KENKEN */
 
 	public boolean generateKenKen(int size, int fixedCells, Topology topology, List<Class<? extends Operation>> operations) throws OperandsDoNotMatchException {
-        generator = new KenKenGenerator(size, fixedCells, topology, operations);
-        return generator.generate();
+        return new KenKenGenerator(size, fixedCells, topology, operations).generate();
     }
-
-	public void generatorPlay() {
-		activeKenKen = generator.getKenKen();
-	}
 
 	/* EXPORT KENKEN */
 
