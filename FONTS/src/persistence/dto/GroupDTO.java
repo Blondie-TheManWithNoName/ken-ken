@@ -34,9 +34,9 @@ public class GroupDTO {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(operation).append(" ").append(cells.length).append(" ");
+		sb.append(operation).append(" ").append(cells.length);
 		for (CellDTO cell : cells)
-			sb.append(cell).append(" ");
+			sb.append(" ").append(cell);
 		return sb.toString();
 	}
 }
