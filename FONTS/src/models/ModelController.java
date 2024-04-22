@@ -30,6 +30,11 @@ public class ModelController {
 		return activeKenKen;
 	}
 
+	// TODO: delete
+	public void setActiveKenKen(KenKen activeKenKen) {
+		this.activeKenKen = activeKenKen;
+	}
+
 	/* PROPOSE KENKEN */
 
 	public void proposeKenKen(int size) {
@@ -71,14 +76,6 @@ public class ModelController {
 		return true;
 	}
 
-	public void proposerPlay() {
-		activeKenKen = proposer.getKenKen();
-	}
-
-	public void proposerAiSolve() {
-		solver = new KenKenSolver(activeKenKen);
-	}
-
 	/* GENERATE KENKEN */
 
 	public boolean generateKenKen(int size, int fixedCells, Topology topology, List<Class<? extends Operation>> operations) throws OperandsDoNotMatchException {
@@ -115,10 +112,31 @@ public class ModelController {
 		}
 	}
 
+	/* AI SOLVE KENKEN */
+
+	public void setAiSolve() {
+		solver = new KenKenSolver(activeKenKen);
+	}
+
+	public boolean aiSolve() {
+		return solver.solve();
+	}
+
 	/* PLAY KENKEN */
 
-	public boolean check() throws NonIntegerResultException, OperandsDoNotMatchException {
-		return activeKenKen.check();
+	public void makeMove(int row, int col, int value) throws EraseFixedValueException, RewriteFixedPositionException, ValueOutOfBoundsException {
+		if (value == 0)
+			activeKenKen.erasePosition(row, col);
+		else
+			activeKenKen.setPosition(row, col, value);
+	}
+
+	public boolean check() {
+		try {
+			return activeKenKen.check();
+		} catch (OperandsDoNotMatchException | NonIntegerResultException e) {
+			return false;
+		}
 	}
 
 	public void saveScore(String username) throws InvalidUsernameException, IOException {

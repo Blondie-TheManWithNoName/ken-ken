@@ -1,14 +1,14 @@
-package testgames;
+package testgames.drivers;
 
 import exceptions.CannotLoadKenKenException;
 import models.ModelController;
 import models.kenken.KenKen;
 
-public class Driver {
-	private final String path;
+public class LoadKenKenDriver {
 	private final ModelController controller = new ModelController();
+	private final String path;
 
-	public Driver(String path) {
+	public LoadKenKenDriver(String path) {
 		this.path = path;
 	}
 
