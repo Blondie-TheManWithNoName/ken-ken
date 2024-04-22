@@ -13,6 +13,7 @@ import persistence.dto.OperationDTO;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 public class ModelController {
 	public static final int MAX_SIZE = 15;
@@ -131,7 +132,7 @@ public class ModelController {
 
 	private int getScore() {
 		// TODO: think about the implementation
-		return 0;
+		return new Random().nextInt(15000);
 	}
 
 	private static KenKenDTO toDTO(KenKen kenKen) {
