@@ -88,6 +88,12 @@ public class ModelController {
 	public KenKen loadKenKen(String path) throws CannotLoadKenKenException {
 		try {
 			activeKenKen = fromDTO(persistenceController.loadKenKen(path));
+			try {
+				activeKenKen.checkCellsGroups();
+			} catch (CellHasNoGroupException | GroupCellsNotContiguousException e) {
+				activeKenKen = null;
+				throw new CannotLoadKenKenException();
+			}
 			return activeKenKen;
 		} catch (IOException | CannotCreateOperationException | CellAlreadyInGroupException | TooManyOperandsException |
 				 ValueOutOfBoundsException | RewriteFixedPositionException e) {
@@ -141,6 +147,12 @@ public class ModelController {
 	public KenKen loadSavedGame(String path) throws CannotLoadKenKenException {
 		try {
 			activeKenKen = fromDTO(persistenceController.loadSavedGame(path));
+			try {
+				activeKenKen.checkCellsGroups();
+			} catch (CellHasNoGroupException | GroupCellsNotContiguousException e) {
+				activeKenKen = null;
+				throw new CannotLoadKenKenException();
+			}
 			return activeKenKen;
 		} catch (IOException | CannotCreateOperationException | CellAlreadyInGroupException | TooManyOperandsException |
 				 ValueOutOfBoundsException | RewriteFixedPositionException e) {
