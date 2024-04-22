@@ -26,15 +26,5 @@ public abstract class OperationLimitedOperands extends Operation {
 		return nOperands;
 	}
 
-	@Override
-	
-	public List<int[]> inverse(int max, int size) throws OperandsDoNotMatchException {
-		if (size != nOperands)
-			throw new OperandsDoNotMatchException(symbol, nOperands, size);
-		return super.inverse(max, size);
-	}
 
-	public List<int[]> inverse(int max) throws OperandsDoNotMatchException {
-		return inverse(max, nOperands);
-	}
 }
