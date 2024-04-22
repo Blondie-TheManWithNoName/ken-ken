@@ -18,12 +18,12 @@ public class ProposeKenKenTestGame {
 	private static final Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
+		KenKen kenken;
 		int choice;
 
 		System.out.println("=== ProposeKenKenTestGame ===\n");
 
 		System.out.println("Loading KenKen from 'data/proposed_tg.kenken'...");
-		KenKen kenken;
 		try {
 			kenken = loadKenKenDriver.loadKenKen();
 		} catch (CannotLoadKenKenException e) {
