@@ -24,7 +24,6 @@ public class ModelController {
 	private KenKen activeKenKen;
 	// TODO: Stopwatch class
 
-	// TODO: delete method
 	public void setActiveKenKen(KenKen activeKenKen) {
 		this.activeKenKen = activeKenKen;
 	}
