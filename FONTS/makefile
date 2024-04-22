@@ -1,11 +1,17 @@
 all: compile run
 
-compile: clean
+compile:
 	@echo "Compiling..."
 	@cd src && javac -d ../out Main.java
 	@mkdir -p out/META-INF
 	@echo "Manifest-Version: 1.0\nMain-Class: Main" > out/META-INF/MANIFEST.MF
 	@cp -r sprites out/sprites
+	@cp -r data out/data
+	@echo "Done."
+
+drivers:
+	@echo "Compiling drivers..."
+	@cd src && javac -d ../out testgames/drivers/*.java
 	@cp -r data out/data
 	@echo "Done."
 
@@ -67,6 +73,7 @@ h help usage:
 	@echo "   [all]: Compile and run the program."
 	@echo "\nUsage: make [compile|run|build|clean]"
 	@echo "   compile: Compile the source code."
+	@echo "   drivers: Compile the drivers."
 	@echo "   run: Run the program (must be compiled first)."
 	@echo "   build: Build the program into a JAR file (must be compiled first)."
 	@echo "   clean: Deletes the out/ folder."
