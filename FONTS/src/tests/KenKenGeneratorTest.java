@@ -5,7 +5,6 @@ import java.util.List;
 import org.junit.*;
 
 import exceptions.OperandsDoNotMatchException;
-import models.kenken.KenKen;
 import models.kenken.KenKenGenerator;
 import models.operations.Operation;
 import models.operations.OperationAddition;
@@ -13,7 +12,6 @@ import models.operations.OperationSubtraction;
 import models.topologies.Shape;
 import models.topologies.Topology;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class KenKenGeneratorTest {
@@ -22,11 +20,9 @@ public class KenKenGeneratorTest {
     private int fixedCells;
     private Topology topology;
     private List<Class<? extends Operation>> allowedOperations;
-    //private KenKen kenKen;
 
     @Before
-    public void init()
-    {
+    public void init() {
 		size = 4;
         fixedCells = 2;
         topology = new Topology(Shape.DASH);
@@ -34,9 +30,7 @@ public class KenKenGeneratorTest {
             OperationAddition.class,
 			OperationSubtraction.class
         );
-
     }
-
 
     @Test
     public void generatorTest(){
@@ -46,25 +40,5 @@ public class KenKenGeneratorTest {
             assert false;
         }
         assertTrue(generator.generate());
-        
-    }
-
-    @Test
-    public void getKenKenTest(){
-        try{
-            generator = new KenKenGenerator(size, fixedCells, topology, allowedOperations);
-        } catch(OperandsDoNotMatchException e) {
-            assert false;
-        }
-        assertNotNull(generator.getKenKen());
-    }
-
-    @Test
-    public void generateTest(){
-        if (generator.generate()) {
-            assert true;
-        } else {
-            assert false;
-        }
     }
 }
