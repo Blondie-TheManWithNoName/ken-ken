@@ -21,7 +21,7 @@ public class ProposeKenKenTestGame {
 
 		System.out.println("=== ProposeKenKenTestGame ===\n");
 
-		System.out.println("Loading KenKen from data/proposed_tg.kenken...");
+		System.out.println("Loading KenKen from 'data/proposed_tg.kenken'...");
 		KenKen kenken;
 		try {
 			kenken = loadKenKenDriver.loadKenKen();
