@@ -1,14 +1,21 @@
 package models.operations;
 
+/**
+ * OperationGCD class is a class that extends Operation class and implements the GCD operation
+ */
 public class OperationGCD extends Operation {
+	/**
+	 * constructor of the OperationGCD class
+	 * @param target the target number that the solver should reach
+	 */
 	public OperationGCD(int target) {
 		super("gcd", target);
 	}
 
-	@Override
 	/**
-	 * check if the operands that the solver write are valid to solve the GCD
+	 * Check if the operands that the solver write are valid to solve the GCD
 	 */
+	@Override
 	public boolean isValidCandidate(int[] operands, int groupSize, int max) {
 		if (operands.length == groupSize)
 			return calculate(operands) == target;
@@ -17,7 +24,7 @@ public class OperationGCD extends Operation {
 
 
 	/**
-	 * calculate the result of the GCD the solver write
+	 * Calculate the result of the GCD the solver write
 	 */
 	@Override
 	public int calculate(int[] operands) {
@@ -25,7 +32,7 @@ public class OperationGCD extends Operation {
 	}
 
 	/**
-	 * return the GCD of two numbers
+	 * Return the GCD of two numbers
 	 * @param a first number
 	 * @param b second number
 	 * @return the GCD of a and b
@@ -37,7 +44,7 @@ public class OperationGCD extends Operation {
 	}
 
 	/**
-	 * return the GCD of an array of numbers
+	 * Return the GCD of an array of numbers
 	 * @param numbers array of numbers
 	 * @return the gcd of the array
 	 */

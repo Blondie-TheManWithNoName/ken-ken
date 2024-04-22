@@ -5,13 +5,20 @@ import exceptions.OperandsDoNotMatchException;
 
 import java.util.Arrays;
 
+/**
+ * OperationPower class is used to solve the power operation (big^small)
+ */
 public class OperationPower extends OperationLimitedOperands {
+	/**
+	 * Constructor of OperationPower
+	 * @param target the target number of the operation
+	 */
 	public OperationPower(int target) {
 		super("^", target, 2);
 	}
 
 	/**
-	 * check if the operands the solver write are valid to solve the power (big^small)
+	 * Check if the operands the solver write are valid to solve the power (big^small)
 	 * @param operands array of numbers that the solver write
 	 * @param groupSize number of cells of the group
 	 * @param max (only used in LimitedOperands) maximum value allowed to put on the KenKen
@@ -36,7 +43,7 @@ public class OperationPower extends OperationLimitedOperands {
 	}
 
 	/**
-	 * calculate the result of the power (big^small)
+	 * Calculate the result of the power (big^small)
 	 * @param operands array of numbers that the solver write
 	 * @return the result of the power
 	 * @throws OperandsDoNotMatchException if the operands have not the excepted result, throw this exception

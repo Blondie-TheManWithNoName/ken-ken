@@ -6,12 +6,10 @@ import models.operations.Operation;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * KenKen class, to create kenken
  */
 public class KenKen {
-
 	/* Size of KenKen */
 	private final int size;
 	/* Matrix containing all the KenKen cells*/
@@ -19,9 +17,8 @@ public class KenKen {
 	/* List of groups */
 	private final List<Group> groups = new ArrayList<>();
 
-
 	/**
-	 * Contructor method, creates matrix cell and initializes every as an empty one
+	 * Constructor method, creates matrix cell and initializes every as an empty one
 	 * @param size, size of KenKen
 	 */
 	public KenKen(int size) {
@@ -171,7 +168,7 @@ public class KenKen {
 	}
 
 	/**
-	 *
+	 * Method to check if two cells are in the same group
 	 * @param row1, defines the row of the KenKen to get the first cell from
 	 * @param col1, defines the column of the KenKen to get the first cell from
 	 * @param row2, defines the row of the KenKen to get the second cell from

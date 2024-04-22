@@ -1,13 +1,19 @@
 package models.operations;
 
+/**
+ * OperationLCM class is a class that extends Operation class and implements the LCM operation
+ */
 public class OperationLCM extends Operation {
+	/**
+	 * Constructor of the OperationLCM class
+	 * @param target the target number that the solver should reach
+	 */
 	public OperationLCM(int target) {
 		super("lcm", target);
 	}
 
-
 	/**
-	 * check if the operands that the solver write are valid to solve the LCM
+	 * Check if the operands that the solver write are valid to solve the LCM
 	 */
 	@Override
 	public boolean isValidCandidate(int[] operands, int groupSize, int max) {
@@ -16,9 +22,8 @@ public class OperationLCM extends Operation {
 		return calculate(operands) <= target;
 	}
 
-
 	/**
-	 * calculate the LCM of the operands the solver write
+	 * Calculate the LCM of the operands the solver write
 	 */
 	@Override
 	public int calculate(int[] operands) {
@@ -26,7 +31,7 @@ public class OperationLCM extends Operation {
 	}
 
 	/**
-	 * return the LCM of two operands
+	 * Return the LCM of two operands
 	 * @param a first number
 	 * @param b second number
 	 * @return the LCM of a and b
@@ -36,10 +41,9 @@ public class OperationLCM extends Operation {
 	}
 
 	/**
-	 * return the LCM of an array of numbers
+	 * Return the LCM of an array of numbers
 	 * @param numbers array of numbers
 	 * @return the lcm of the array
-	 *
 	 */
 	private static int LCM(int[] numbers) {
 		int lcm = numbers[0];

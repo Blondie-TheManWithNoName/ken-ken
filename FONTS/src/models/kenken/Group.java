@@ -8,16 +8,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class that represents a group of cells in the KenKen puzzle
+ */
 public class Group {
-
 	// Operation for the group
 	private final Operation operation;
-
 	// List of cells
 	private final List<Cell> cells = new ArrayList<>();
 
 	/**
-	 * Contrusctor for group
+	 * Constructor for group
 	 * @param operation takes the operation to be applied to the group
 	 */
 	public Group(Operation operation) {
@@ -26,12 +27,16 @@ public class Group {
 
 	/**
 	 * Getter of operation from the group
-	 * @returns the operation of the group
+	 * @return the operation of the group
 	 */
 	public Operation getOperation() {
 		return operation;
 	}
 
+	/**
+	 * Getter for the cells of the group
+	 * @return the list of cells of the group
+	 */
 	public List<Cell> getCells() {
 		return cells;
 	}
@@ -105,14 +110,12 @@ public class Group {
 	 * @return true if the value fits the KenKen and Group conditions
 	 */
 	public boolean isValidMove(int value, int size) {
-//		int[] operands = cells.stream().mapToInt(Cell::getValue).filter(v -> v != 0).toArray();
 		int[] operands =  cells.stream().filter(cell -> !cell.isEmpty()).mapToInt(Cell::getValue).toArray();
 
 		int[] newOperands = Arrays.copyOf(operands, operands.length + 1);
 		newOperands[operands.length] = value;
 		return operation.isValidCandidate(newOperands, cells.size(), size);
 	}
-
 
 	/**
 	 * Checks if the group is not empty, and then if all the values fulfill its target

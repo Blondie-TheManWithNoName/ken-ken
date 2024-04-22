@@ -13,6 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * ModelController class.
+ * <p>
+ * Controller class that manages the model of the application.
+ * It is responsible for the communication between the view and the model.
+ * It contains the main methods that the view can call to interact with the model.
+ */
 public class ModelController {
 	public static final int MAX_SIZE = 15;
 
@@ -24,16 +31,31 @@ public class ModelController {
 	private KenKen activeKenKen;
 	// TODO: Stopwatch class
 
+	/**
+	 * Method to set the active KenKen.
+	 */
 	public void setActiveKenKen(KenKen activeKenKen) {
 		this.activeKenKen = activeKenKen;
 	}
 
 	/* PROPOSE KENKEN */
 
+	/**
+	 * Method to propose a KenKen.
+	 *
+	 * @param size Size of the KenKen.
+	 */
 	public void proposeKenKen(int size) {
 		proposer = new KenKenProposer(size);
 	}
 
+	/**
+	 * Method to propose a group.
+	 *
+	 * @param symbol Symbol of the operation.
+	 * @param target Target of the operation.
+	 * @return The proposed group.
+	 */
 	public Group proposerCreateGroup(String symbol, int target) {
 		try {
 			return proposer.createGroup(OperationFactory.createOperation(symbol, target));
@@ -42,18 +64,45 @@ public class ModelController {
 		}
 	}
 
+	/**
+	 * Method to delete a group.
+	 * @param group Group to delete.
+	 */
 	public void proposerDeleteGroup(Group group) {
 		proposer.deleteGroup(group);
 	}
 
+	/**
+	 * Method to add a cell to a group.
+	 *
+	 * @param row Row of the cell.
+	 * @param col Column of the cell.
+	 * @param group Group to add the cell to.
+	 * @throws GroupDoesNotExistException If the group does not exist.
+	 */
 	public void proposerAddCellToGroup(int row, int col, Group group) throws GroupDoesNotExistException {
 		proposer.addCellToGroup(row, col, group);
 	}
 
+	/**
+	 * Method to remove a cell from a group.
+	 *
+	 * @param row Row of the cell.
+	 * @param col Column of the cell.
+	 */
 	public void proposerRemoveCellGroup(int row, int col) {
 		proposer.removeCellGroup(row, col);
 	}
 
+	/**
+	 * Method to generate a KenKen.
+	 *
+	 * @return The generated KenKen.
+	 * @throws CellAlreadyInGroupException If a cell is already in a group.
+	 * @throws CellHasNoGroupException If a cell has no group.
+	 * @throws GroupCellsNotContiguousException If the cells of a group are not contiguous.
+	 * @throws TooManyOperandsException If there are too many operands.
+	 */
 	public KenKen proposerGenerate() throws CellAlreadyInGroupException, CellHasNoGroupException, GroupCellsNotContiguousException, TooManyOperandsException {
 		proposer.generateGroups();
 		return proposer.getKenKen();
@@ -61,12 +110,28 @@ public class ModelController {
 
 	/* GENERATE KENKEN */
 
+	/**
+	 * Method to generate a KenKen.
+	 *
+	 * @param size Size of the KenKen.
+	 * @param fixedCells Number of fixed cells.
+	 * @param topology Topology of the KenKen.
+	 * @param operations Operations of the KenKen.
+	 * @return True if the KenKen was generated, false otherwise.
+	 * @throws OperandsDoNotMatchException If the operands do not match.
+	 */
 	public boolean generateKenKen(int size, int fixedCells, Topology topology, List<Class<? extends Operation>> operations) throws OperandsDoNotMatchException {
         return new KenKenGenerator(size, fixedCells, topology, operations).generate();
     }
 
 	/* EXPORT KENKEN */
 
+	/**
+	 * Method to export a KenKen.
+	 *
+	 * @param path Path to export the KenKen.
+	 * @throws IOException If an I/O error occurs.
+	 */
 	public void exportKenKen(String path) throws IOException {
 		if (activeKenKen == null)
 			return;
@@ -75,6 +140,13 @@ public class ModelController {
 
 	/* LOAD KENKEN */
 
+	/**
+	 * Method to load a KenKen.
+	 *
+	 * @param path Path to load the KenKen.
+	 * @return The loaded KenKen.
+	 * @throws CannotLoadKenKenException If the KenKen cannot be loaded.
+	 */
 	public KenKen loadKenKen(String path) throws CannotLoadKenKenException {
 		try {
 			activeKenKen = fromDTO(persistenceController.loadKenKen(path));
@@ -93,16 +165,33 @@ public class ModelController {
 
 	/* AI SOLVE KENKEN */
 
+	/**
+	 * Method to set the AI to solve the KenKen.
+	 */
 	public void setAiSolve() {
 		solver = new KenKenSolver(activeKenKen);
 	}
 
+	/**
+	 * Method to solve the KenKen with the AI.
+	 *
+	 * @return True if the KenKen was solved, false otherwise.
+	 */
 	public boolean aiSolve() {
 		return solver.solve();
 	}
 
 	/* PLAY KENKEN */
 
+	/**
+	 * Method to play a KenKen.
+	 * @param row Row of the cell.
+	 * @param col Column of the cell.
+	 * @param value Value to set.
+	 * @throws EraseFixedValueException If a fixed value is erased.
+	 * @throws RewriteFixedPositionException If a fixed position is rewritten.
+	 * @throws ValueOutOfBoundsException If the value is out of bounds.
+	 */
 	public void makeMove(int row, int col, int value) throws EraseFixedValueException, RewriteFixedPositionException, ValueOutOfBoundsException {
 		if (value == 0)
 			activeKenKen.erasePosition(row, col);
@@ -110,6 +199,11 @@ public class ModelController {
 			activeKenKen.setPosition(row, col, value);
 	}
 
+	/**
+	 * Method to check the KenKen.
+	 *
+	 * @return True if the KenKen is correct, false otherwise.
+	 */
 	public boolean check() {
 		try {
 			return activeKenKen.check();
@@ -118,6 +212,12 @@ public class ModelController {
 		}
 	}
 
+	/**
+	 * Method to get the KenKen.
+	 * @param username Username of the player.
+	 * @throws InvalidUsernameException If the username is invalid.
+	 * @throws IOException If an I/O error occurs.
+	 */
 	public void saveScore(String username) throws InvalidUsernameException, IOException {
 		if (username.contains(" ") || username.isEmpty())
 			throw new InvalidUsernameException();
@@ -126,6 +226,10 @@ public class ModelController {
 
 	/* SAVE GAME */
 
+	/**
+	 * Method to save the game.
+	 * @throws IOException If an I/O error occurs.
+	 */
 	public void saveGame() throws IOException {
 		if (activeKenKen == null)
 			return;
@@ -134,6 +238,12 @@ public class ModelController {
 
 	/* LOAD SAVED GAME */
 
+	/**
+	 * Method to load a saved game.
+	 * @param path Path to load the saved game.
+	 * @return The loaded KenKen.
+	 * @throws CannotLoadKenKenException If the KenKen cannot be loaded.
+	 */
 	public KenKen loadSavedGame(String path) throws CannotLoadKenKenException {
 		try {
 			activeKenKen = fromDTO(persistenceController.loadSavedGame(path));
@@ -152,6 +262,11 @@ public class ModelController {
 
 	/* CHECK RANKING */
 
+	/**
+	 * Method to check the ranking.
+	 * @return The scores of the ranking.
+	 * @throws CannotLoadScoresException If the scores cannot be loaded.
+	 */
 	public List<Score> checkRanking() throws CannotLoadScoresException {
 		List<Score> scores = new ArrayList<>();
 		List<ScoreDTO> scoreDTOS;
@@ -167,11 +282,20 @@ public class ModelController {
 
 	/* PRIVATE METHODS */
 
+	/**
+	 * Method to get the score.
+	 * @return The score.
+	 */
 	private int getScore() {
 		// TODO: think about the implementation
 		return new Random().nextInt(15000);
 	}
 
+	/**
+	 * Method to convert a KenKen to a DTO.
+	 * @param kenKen KenKen to convert.
+	 * @return The converted KenKen.
+	 */
 	private static KenKenDTO toDTO(KenKen kenKen) {
 		KenKenDTO dto = new KenKenDTO(kenKen.getSize(), kenKen.getGroups().size());
 		for (Group group : kenKen.getGroups()) {
@@ -183,6 +307,16 @@ public class ModelController {
 		return dto;
 	}
 
+	/**
+	 * Method to convert a DTO to a KenKen.
+	 * @param dto DTO to convert.
+	 * @return The converted KenKen.
+	 * @throws CannotCreateOperationException If the operation cannot be created.
+	 * @throws CellAlreadyInGroupException If a cell is already in a group.
+	 * @throws TooManyOperandsException If there are too many operands.
+	 * @throws ValueOutOfBoundsException If the value is out of bounds.
+	 * @throws RewriteFixedPositionException If a fixed position is rewritten.
+	 */
 	private static KenKen fromDTO(KenKenDTO dto) throws CannotCreateOperationException, CellAlreadyInGroupException, TooManyOperandsException, ValueOutOfBoundsException, RewriteFixedPositionException {
 		KenKen kenKen = new KenKen(dto.getSize());
 		for (GroupDTO group : dto.getGroups()) {
@@ -200,10 +334,21 @@ public class ModelController {
 		return kenKen;
 	}
 
+	/**
+	 * Method to convert an operation to a DTO.
+	 * @param operation Operation to convert.
+	 * @return The converted operation.
+	 */
 	private static OperationDTO toDTO(Operation operation) {
 		return new OperationDTO(OperationDTO.getOperationId(operation.getSymbol()), operation.getTarget());
 	}
 
+	/**
+	 * Method to convert a DTO to an operation.
+	 * @param dto DTO to convert.
+	 * @return The converted operation.
+	 * @throws CannotCreateOperationException If the operation cannot be created.
+	 */
 	private static Operation fromDTO(OperationDTO dto) throws CannotCreateOperationException {
 		return OperationFactory.createOperation(dto.getSymbol(), dto.getTarget());
 	}

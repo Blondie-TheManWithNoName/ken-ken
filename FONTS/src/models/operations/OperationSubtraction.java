@@ -4,13 +4,20 @@ import exceptions.OperandsDoNotMatchException;
 
 import java.util.Arrays;
 
+/**
+ * OperationSubtraction class is used to represent the subtraction operation in the KenKen puzzle
+ */
 public class OperationSubtraction extends OperationLimitedOperands {
+	/**
+	 * Constructor of the OperationSubtraction class
+	 * @param target target number of the subtraction
+	 */
 	public OperationSubtraction(int target) {
 		super("-", target, 2);
 	}
 
 	/**
-	 * check if the operands the solver write are valid to solve the subtraction
+	 * Check if the operands the solver write are valid to solve the subtraction
 	 * @param operands array of numbers that the solver write
 	 * @param groupSize number of cells of the group
 	 * @param max (only used in LimitedOperands) maximum value allowed to put on the KenKen
@@ -35,7 +42,7 @@ public class OperationSubtraction extends OperationLimitedOperands {
 	}
 
 	/**
-	 * calculate the result of the multiplication
+	 * Calculate the result of the multiplication
 	 * @param operands array of numbers that the solver write
 	 * @return the result of the subtraction
 	 * @throws OperandsDoNotMatchException true if the operands are valid to solve the subtraction, false otherwise

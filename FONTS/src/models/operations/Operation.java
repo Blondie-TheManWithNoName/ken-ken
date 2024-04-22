@@ -5,10 +5,18 @@ import exceptions.OperandsDoNotMatchException;
 
 import java.util.*;
 
+/**
+ * Abstract class to represent the operations that the solver can use to solve the KenKen
+ */
 public abstract class Operation {
 	protected final String symbol;
 	protected final int target;
 
+	/**
+	 * Constructor of the class
+	 * @param symbol symbol of the operation
+	 * @param target target of the operation
+	 */
 	public Operation(String symbol, int target) {
 		this.symbol = symbol;
 		this.target = target;

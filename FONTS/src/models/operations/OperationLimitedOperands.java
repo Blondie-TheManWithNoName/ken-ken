@@ -1,9 +1,8 @@
 package models.operations;
 
-import exceptions.OperandsDoNotMatchException;
-
-import java.util.List;
-
+/**
+ * Class that represents an operation with a limited number of operands
+ */
 public abstract class OperationLimitedOperands extends Operation {
 	protected final int nOperands;
 
@@ -19,12 +18,10 @@ public abstract class OperationLimitedOperands extends Operation {
 	}
 
 	/**
-	 * function to get the maximum of operands
+	 * Method to get the maximum number of operands of the LimitedOperands operation
 	 * @return maximum of operands of the LimitedOperands operation
 	 */
 	public int getNOperands() {
 		return nOperands;
 	}
-
-
 }

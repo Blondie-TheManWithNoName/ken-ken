@@ -5,15 +5,23 @@ import exceptions.OperandsDoNotMatchException;
 
 import java.util.Arrays;
 
+/**
+ * OperationDivision class is a class that extends OperationLimitedOperands class and implements the calculate and isValidCandidate methods
+ * This class is used to represent the division operation
+ */
 public class OperationDivision extends OperationLimitedOperands {
+	/**
+	 * Constructor of the OperationDivision class
+	 * @param target the target value of the division operation
+	 */
 	public OperationDivision(int target) {
 		super("/", target, 2);
 	}
 
-	@Override
 	/**
-	 * check if the operands that the solver write are valid to solve the division
+	 * Check if the operands that the solver write are valid to solve the division
 	 */
+	@Override
 	public boolean isValidCandidate(int[] operands, int groupSize, int max) {
 		if (operands.length == nOperands) {
 			try {
@@ -34,10 +42,10 @@ public class OperationDivision extends OperationLimitedOperands {
 		return false;
 	}
 
-	@Override
 	/**
-	 * calculate the division of the operands the solver write
+	 * Calculate the division of the operands the solver write
 	 */
+	@Override
 	public int calculate(int[] operands) throws OperandsDoNotMatchException, NonIntegerResultException {
 		if (operands.length != nOperands)
 			throw new OperandsDoNotMatchException(symbol, nOperands, operands.length);

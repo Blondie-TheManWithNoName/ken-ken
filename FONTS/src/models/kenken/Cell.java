@@ -3,8 +3,10 @@ package models.kenken;
 import exceptions.EraseFixedValueException;
 import exceptions.RewriteFixedPositionException;
 
+/**
+ * Class to represent a cell in the KenKen puzzle
+ */
 public class Cell {
-
 	// Row index
 	private final int row;
 	// Column index
@@ -16,6 +18,11 @@ public class Cell {
 	// Group which the cell is part of
 	private Group group;
 
+	/**
+	 * Constructor to create a cell
+	 * @param row index
+	 * @param col index
+	 */
 	public Cell(int row, int col) {
 		this.row = row;
 		this.col = col;

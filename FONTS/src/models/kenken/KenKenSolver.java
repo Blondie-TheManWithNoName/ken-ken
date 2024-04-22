@@ -4,9 +4,16 @@ import exceptions.EraseFixedValueException;
 import exceptions.RewriteFixedPositionException;
 import exceptions.ValueOutOfBoundsException;
 
+/**
+ * Class to solve a kenken
+ */
 public class KenKenSolver {
 	private final KenKen kenKen;
 
+	/**
+	 * Constructor method for the KenKenSolver
+	 * @param kenKen the kenken we want to solve
+	 */
 	public KenKenSolver(KenKen kenKen) {
 		this.kenKen = kenKen;
 	}

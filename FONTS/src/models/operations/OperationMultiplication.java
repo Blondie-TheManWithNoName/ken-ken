@@ -1,12 +1,20 @@
 package models.operations;
 
+/**
+ * OperationMultiplication class is a class that extends Operation class and implements the methods of the abstract class.
+ * This class is used to solve the multiplication operation in the KenKen puzzle.
+ */
 public class OperationMultiplication extends Operation {
+	/**
+	 * Constructor of the OperationMultiplication class
+	 * @param target the target value of the operation
+	 */
 	public OperationMultiplication(int target) {
 		super("*", target);
 	}
 
 	/**
-	 * check if the operands that the solver write are valid to solve the multiplication
+	 * Check if the operands that the solver write are valid to solve the multiplication
 	 * @param operands array of numbers that the solver write
 	 * @param groupSize number of cells of the group
 	 * @param max (only used in LimitedOperands) maximum value allowed to put on the KenKen
@@ -20,7 +28,7 @@ public class OperationMultiplication extends Operation {
 	}
 
 	/**
-	 * calculate the result of the multiplication
+	 * Calculate the result of the multiplication
 	 * @param operands array of numbers that the solver write
 	 * @return the result of the multiplication
 	 */

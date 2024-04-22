@@ -10,6 +10,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+/**
+ * Class to propose a KenKen
+ */
 public class KenKenProposer {
 	// Maximum size for a KenKen
 	public static final int MAX_SIZE = 15;
@@ -38,7 +41,7 @@ public class KenKenProposer {
 
 	/**
 	 * Getter for the proposed KenKen
-	 * @returns the KenKen the user is proposing
+	 * @return the KenKen the user is proposing
 	 */
 	public KenKen getKenKen() {
 		return kenKen;
@@ -56,7 +59,7 @@ public class KenKenProposer {
 	}
 
 	/**
-	 *
+	 * Clears a fixed cell
 	 * @param row, defines the row of the KenKen to clear the value from
 	 * @param col, defines the column of the KenKen to clear the value from
 	 */
@@ -65,8 +68,8 @@ public class KenKenProposer {
 	}
 
 	/**
-	 *
-	 * @return
+	 * Method to check if at least one group has been created
+	 * @return true if there is at least one group, false otherwise
 	 */
 	public boolean anyGroup() {
 		return !groupColors.isEmpty();
@@ -84,17 +87,17 @@ public class KenKenProposer {
 	}
 
 	/**
-	 *
-	 * @return
+	 * Method to get the group notations in an array
+	 * @return the group notations in an array
 	 */
 	public String[] getGroupNotationsEnum() {
 		return IntStream.range(0, groupColors.size()).mapToObj(i -> String.format("%d) %s", i+1, ((Group) groupColors.keySet().toArray()[i]).getNotation())).toArray(String[]::new);
 	}
 
 	/**
-	 *
-	 * @param index
-	 * @return
+	 * Getter for a group given an index
+	 * @param index of the group to get
+	 * @return the group at the given index
 	 */
 	public Group getGroup(int index) {
 		return (Group) groupColors.keySet().toArray()[index];
@@ -151,11 +154,11 @@ public class KenKenProposer {
 	}
 
 	/**
-	 *
-	 * @throws TooManyOperandsException
-	 * @throws CellAlreadyInGroupException
-	 * @throws CellHasNoGroupException
-	 * @throws GroupCellsNotContiguousException
+	 * Generates the groups for the KenKen
+	 * @throws TooManyOperandsException when an operation has too many operands
+	 * @throws CellAlreadyInGroupException when a cell is in more than one group
+	 * @throws CellHasNoGroupException when a cell has no group
+	 * @throws GroupCellsNotContiguousException when the cells of a group are not contiguous
 	 */
 	public void generateGroups() throws TooManyOperandsException, CellAlreadyInGroupException, CellHasNoGroupException, GroupCellsNotContiguousException {
 		if (cellGroups.size() < getSize() * getSize())
