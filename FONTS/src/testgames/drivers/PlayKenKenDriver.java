@@ -66,7 +66,11 @@ public class PlayKenKenDriver {
 					}
 					break;
 				case 3:
-					controller.saveGame();
+					try {
+						controller.saveGame();
+					} catch (IOException e) {
+						System.out.println(e.getMessage());
+					}
 				case 4:
 					exit();
 			}

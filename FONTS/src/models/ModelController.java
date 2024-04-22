@@ -147,15 +147,10 @@ public class ModelController {
 
 	/* SAVE GAME */
 
-	public boolean saveGame() {
+	public void saveGame() throws IOException {
 		if (activeKenKen == null)
-			return false;
-		try {
-			persistenceController.saveGame(toDTO(activeKenKen));
-			return true;
-		} catch (IOException e) {
-			return false;
-		}
+			return;
+		persistenceController.saveGame(toDTO(activeKenKen));
 	}
 
 	/* LOAD SAVED GAME */
