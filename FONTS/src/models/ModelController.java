@@ -39,6 +39,14 @@ public class ModelController {
 		this.activeKenKen = activeKenKen;
 	}
 
+	/**
+	 * Method to get the active KenKen.
+	 *
+	 */
+	public KenKen getActiveKenKen() {
+		return this.activeKenKen;
+	}
+
 	/* PROPOSE KENKEN */
 
 	/**

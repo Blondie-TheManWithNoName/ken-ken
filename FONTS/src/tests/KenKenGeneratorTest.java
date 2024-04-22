@@ -2,8 +2,7 @@ package tests;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import exceptions.OperandsDoNotMatchException;
 import models.kenken.KenKen;
@@ -14,13 +13,16 @@ import models.operations.OperationSubtraction;
 import models.topologies.Shape;
 import models.topologies.Topology;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 public class KenKenGeneratorTest {
 	private KenKenGenerator generator;
     private int size;
     private int fixedCells;
     private Topology topology;
     private List<Class<? extends Operation>> allowedOperations;
-    private KenKen kenKen;
+    //private KenKen kenKen;
 
     @Before
     public void init()
@@ -43,7 +45,7 @@ public class KenKenGeneratorTest {
         } catch(OperandsDoNotMatchException e) {
             assert false;
         }
-        assert generator.generate();
+        assertTrue(generator.generate());
         
     }
 
@@ -54,52 +56,15 @@ public class KenKenGeneratorTest {
         } catch(OperandsDoNotMatchException e) {
             assert false;
         }
-        kenKen = generator.getKenKen();
-        if (kenKen != null) {
-            assert true;
-        } else {
-            assert false;
-        }
-
-
-        
+        assertNotNull(generator.getKenKen());
     }
 
     @Test
     public void generateTest(){
-        
-    }
-    @Test
-    public void generateLatinSquareTest(){
-        
-    }
-    @Test
-    public void generateGroupsTest1(){
-        
-    }
-    
-    @Test
-    public void generateGroupsTest2(){
-        
-    }
-
-    @Test
-    public void topologyFitsTest(){
-        
-    }
-    
-    @Test
-    public void createGroupTest(){
-        
-    }
-    
-    @Test
-    public void removeGroupTest(){
-        
-    }
-    
-    @Test
-    public void hasEmptySpacesTest(){
-        
+        if (generator.generate()) {
+            assert true;
+        } else {
+            assert false;
+        }
     }
 }
