@@ -25,12 +25,7 @@ public class ModelController {
 	private KenKen activeKenKen;
 	// TODO: Stopwatch class
 
-	// TODO: delete
-	public KenKen getActiveKenKen() {
-		return activeKenKen;
-	}
-
-	// TODO: delete
+	// TODO: delete method
 	public void setActiveKenKen(KenKen activeKenKen) {
 		this.activeKenKen = activeKenKen;
 	}
@@ -41,7 +36,6 @@ public class ModelController {
 		proposer = new KenKenProposer(size);
 	}
 
-	// TODO: delete
 	public Group proposerCreateGroup(String symbol, int target) {
 		try {
 			return proposer.createGroup(OperationFactory.createOperation(symbol, target));
@@ -89,15 +83,10 @@ public class ModelController {
 
 	/* EXPORT KENKEN */
 
-	public boolean exportKenKen(String path) {
+	public void exportKenKen(String path) throws IOException {
 		if (activeKenKen == null)
-			return false;
-		try {
-			persistenceController.saveKenKen(toDTO(activeKenKen), path);
-			return true;
-		} catch (IOException e) {
-			return false;
-		}
+			return;
+		persistenceController.saveKenKen(toDTO(activeKenKen), path);
 	}
 
 	/* LOAD KENKEN */
