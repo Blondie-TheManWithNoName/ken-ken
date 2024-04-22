@@ -4,6 +4,6 @@ En la primera entrega, aquests són els jocs de prova de dins la subcarpeta test
 
 Arxius:
 
-- testgames/*.jar: executables dels jocs de prova
-- testgames/*.md: explicació de cada joc de prova
-- testgames/data: carpeta amb els arxius necessaris per als jocs de prova
+- testgames/**/*.jar: executables del jocs de prova
+- testgames/**/*.md: explicació del joc de prova
+- testgames/**/data: carpeta amb els arxius necessaris per al jocs de prova
