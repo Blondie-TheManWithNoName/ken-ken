@@ -19,12 +19,13 @@ import java.util.List;
 public class Main {
 	public static void main(String[] args) {
 		ModelController controller = new ModelController();
-		try {
-			controller.saveScore("uriiisegura");
-		} catch (InvalidUsernameException | IOException e) {
-			System.out.println(e.getMessage());
-			return;
-		}
+
+//		try {
+//			controller.saveScore("uriiisegura");
+//		} catch (InvalidUsernameException | IOException e) {
+//			System.out.println(e.getMessage());
+//			return;
+//		}
 
 		try {
 			List<Score> scores = controller.checkRanking();
