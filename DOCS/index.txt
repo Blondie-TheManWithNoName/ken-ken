@@ -1,2 +1,4 @@
+La carpeta DOCS/ inclou la documentació del projecte, com els diagrames (de classes i de casos d'ús) així com el JavaDoc (dins la seva subcarpeta) i l'informe de cada entrega.
+
 Els diagrames han estat fets en Visual Paradigm 17.1 (Community Edition), que es pot descarregar des de la seva web oficial:
 	https://www.visual-paradigm.com/download/community.jsp

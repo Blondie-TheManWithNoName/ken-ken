@@ -1,0 +1,1 @@
+Aquest és el directori arrel del projecte. Inclou els tres directoris principals: DOCS/, EXE/ i FONTS/. Afegidament, hi ha el fitxer EQUIP.txt sol·licitat en la normativa, i un README.md que es recomana llegir.

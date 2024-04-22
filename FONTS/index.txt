@@ -1,0 +1,5 @@
+La carpeta FONTS conté el codi del projecte dins el subdirectori src/ on s'hi troba el Main.java i totes les classes, organitzades en paquets. Inclou el codi dels tests JUnit i els jocs de proba.
+
+També conté la carpeta lib/ amb les llibreries del projecte, la carpeta data/ amb els fitxers utilitzats durant el desenvolupament del project, i la carpeta sprites/ amb les imatges utilitzades en les vistes implementades amb swing.
+
+Inclou un Makefile que ja té un target 'make h' explicant-ne el funcionament.
