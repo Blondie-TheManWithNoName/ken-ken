@@ -43,10 +43,6 @@ public class ModelController {
 		}
 	}
 
-	public String[] proposerGetGroupNotationsEnum() {
-		return proposer.getGroupNotationsEnum();
-	}
-
 	public void proposerDeleteGroup(Group group) {
 		proposer.deleteGroup(group);
 	}
