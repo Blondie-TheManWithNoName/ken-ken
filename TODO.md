@@ -8,7 +8,7 @@
 - [ ] Classes implementades per cadascú
 - [ ] Descripció de les ED i Algoritmes
 - [ ] Tests JUnit
-	- [ ] `OperationAdditionTest`
+	- [X] `OperationAdditionTest`
 	- [X] `KenKenProposerTest`
 	- [ ] `KenKenGeneratorTest`
 - [ ] Jocs de proves &rarr; mirar-ho bé!
