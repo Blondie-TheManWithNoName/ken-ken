@@ -34,7 +34,7 @@ public class KenKenSolver {
 	 * @param col the col of the cell that we want to write a value
 	 * @return true if it's possible to solve the kenken, false otherwise
 	 */
-	boolean solve(int row, int col) {
+	private boolean solve(int row, int col) {
 		if (row == kenKen.getSize()) {
 			row = 0;
 			if (++col == kenKen.getSize())
