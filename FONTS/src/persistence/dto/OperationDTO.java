@@ -34,4 +34,11 @@ public class OperationDTO {
 	public String toString() {
 		return operationId + " " + target;
 	}
+
+	public static int getOperationId(String symbol) {
+		for (Map.Entry<Integer, String> entry : new OperationDTO(0, 0).OPERATION_MAP.entrySet())
+			if (entry.getValue().equals(symbol))
+				return entry.getKey();
+		return -1;
+	}
 }

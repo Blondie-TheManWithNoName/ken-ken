@@ -96,29 +96,74 @@ public class ModelController {
 
 	public KenKen loadKenKen(String path) throws CannotLoadKenKenException {
 		try {
-			return fromDTO(persistenceController.loadKenKen(path));
-		} catch (IOException | CannotCreateOperationException | CellAlreadyInGroupException | TooManyOperandsException e) {
+			activeKenKen = fromDTO(persistenceController.loadKenKen(path));
+			return activeKenKen;
+		} catch (IOException | CannotCreateOperationException | CellAlreadyInGroupException | TooManyOperandsException |
+				 ValueOutOfBoundsException | RewriteFixedPositionException e) {
 			throw new CannotLoadKenKenException();
+		}
+	}
+
+	/* SAVE GAME */
+
+	public boolean saveGame() {
+		if (activeKenKen == null)
+			return false;
+		try {
+			persistenceController.saveGame(toDTO(activeKenKen));
+			return true;
+		} catch (IOException e) {
+			return false;
 		}
 	}
 
 	/* LOAD SAVED GAME */
 
-	// TODO: loadSavedGame();
+	public KenKen loadSavedGame(String path) throws CannotLoadKenKenException {
+		try {
+			activeKenKen = fromDTO(persistenceController.loadSavedGame(path));
+			return activeKenKen;
+		} catch (IOException | CannotCreateOperationException | CellAlreadyInGroupException | TooManyOperandsException |
+				 ValueOutOfBoundsException | RewriteFixedPositionException e) {
+			throw new CannotLoadKenKenException();
+		}
+	}
 
 	private int getScore() {
-		// TODO: Dani
+		// TODO: think about the implementation
 		return 0;
 	}
 
-	private static KenKen fromDTO(KenKenDTO dto) throws CannotCreateOperationException, CellAlreadyInGroupException, TooManyOperandsException {
+	private static KenKenDTO toDTO(KenKen kenKen) {
+		KenKenDTO dto = new KenKenDTO(kenKen.getSize(), kenKen.getGroups().size());
+		for (Group group : kenKen.getGroups()) {
+			GroupDTO groupDTO = new GroupDTO(toDTO(group.getOperation()), group.getCells().size());
+			for (Cell cell : group.getCells())
+				groupDTO.addCell(new CellDTO(cell.getRow() + 1, cell.getCol() + 1, cell.isFixed(), cell.getValue()));
+			dto.addGroup(groupDTO);
+		}
+		return dto;
+	}
+
+	private static KenKen fromDTO(KenKenDTO dto) throws CannotCreateOperationException, CellAlreadyInGroupException, TooManyOperandsException, ValueOutOfBoundsException, RewriteFixedPositionException {
 		KenKen kenKen = new KenKen(dto.getSize());
 		for (GroupDTO group : dto.getGroups()) {
 			kenKen.addGroup(fromDTO(group.getOperation()));
-			for (CellDTO cell : group.getCells())
+			for (CellDTO cell : group.getCells()) {
 				kenKen.addCellToLastGroup(cell.getRow() - 1, cell.getCol() - 1);
+				if (cell.getValue() != 0) {
+					if (cell.isFixed())
+						kenKen.setFixedPosition(cell.getRow() - 1, cell.getCol() - 1, cell.getValue());
+					else
+						kenKen.setPosition(cell.getRow() - 1, cell.getCol() - 1, cell.getValue());
+				}
+			}
 		}
 		return kenKen;
+	}
+
+	private static OperationDTO toDTO(Operation operation) {
+		return new OperationDTO(OperationDTO.getOperationId(operation.getSymbol()), operation.getTarget());
 	}
 
 	private static Operation fromDTO(OperationDTO dto) throws CannotCreateOperationException {

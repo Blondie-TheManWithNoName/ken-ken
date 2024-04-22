@@ -32,6 +32,10 @@ public class Group {
 		return operation;
 	}
 
+	public List<Cell> getCells() {
+		return cells;
+	}
+
 	/**
 	 * Adds a cell to the group
 	 * @param cell, cell to be added to the group

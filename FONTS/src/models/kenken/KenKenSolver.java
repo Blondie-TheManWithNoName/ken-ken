@@ -16,6 +16,7 @@ public class KenKenSolver {
 	}
 
 	public boolean solve() {
+		kenKen.erase();
 		return solve(0, 0);
 	}
 

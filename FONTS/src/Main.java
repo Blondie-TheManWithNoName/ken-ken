@@ -1,5 +1,7 @@
+import exceptions.CannotLoadKenKenException;
 import exceptions.OperandsDoNotMatchException;
 import models.ModelController;
+import models.kenken.KenKen;
 import models.kenken.KenKenSolver;
 import models.operations.*;
 import models.topologies.Shape;
@@ -13,19 +15,30 @@ import java.util.List;
 public class Main {
 	public static void main(String[] args) {
 		ModelController controller = new ModelController();
+
+//		try {
+//			if (!controller.generateKenKen(4, 2, new Topology(Shape.T), List.of(
+//					OperationAddition.class
+//			))) {
+//				System.out.println("Failed to generate KenKen");
+//				return;
+//			}
+//		} catch (OperandsDoNotMatchException e) {
+//			System.out.println(e.getMessage());
+//			return;
+//		}
+//
+//		controller.generatorPlay();
+//		if (!controller.saveGame())
+//			System.out.println("Failed to save game");
+
 		try {
-			if (!controller.generateKenKen(4, 2, new Topology(Shape.T), List.of(
-					OperationAddition.class
-			))) {
-				System.out.println("Failed to generate KenKen");
-				return;
-			}
-		} catch (OperandsDoNotMatchException e) {
+			controller.loadSavedGame("data/example_path.kenken_game");
+		} catch (CannotLoadKenKenException e) {
 			System.out.println(e.getMessage());
 			return;
 		}
 
-		controller.generatorPlay();
 		KenKenView view = new KenKenSolverView(new KenKenSolver(controller.getActiveKenKen()));
 		SwingUtilities.invokeLater(view::start);
 	}
