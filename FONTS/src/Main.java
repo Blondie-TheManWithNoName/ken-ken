@@ -19,6 +19,7 @@ import java.util.List;
 public class Main {
 	public static void main(String[] args) {
 		ModelController controller = new ModelController();
+		KenKen kenKen;
 
 //		try {
 //			controller.saveScore("uriiisegura");
@@ -27,14 +28,14 @@ public class Main {
 //			return;
 //		}
 
-		try {
-			List<Score> scores = controller.checkRanking();
-			for (int i = 0; i < scores.size(); i++)
-				System.out.println((i + 1) + ". " + scores.get(i).getUser() + " - " + scores.get(i).getScore());
-		} catch (CannotLoadScoresException e) {
-			System.out.println(e.getMessage());
-			return;
-		}
+//		try {
+//			List<Score> scores = controller.checkRanking();
+//			for (int i = 0; i < scores.size(); i++)
+//				System.out.println((i + 1) + ". " + scores.get(i).getUser() + " - " + scores.get(i).getScore());
+//		} catch (CannotLoadScoresException e) {
+//			System.out.println(e.getMessage());
+//			return;
+//		}
 
 //		try {
 //			if (!controller.generateKenKen(4, 2, new Topology(Shape.T), List.of(
@@ -59,7 +60,14 @@ public class Main {
 //			return;
 //		}
 
-//		KenKenView view = new KenKenSolverView(new KenKenSolver(controller.getActiveKenKen()));
-//		SwingUtilities.invokeLater(view::start);
+		try {
+			kenKen = controller.loadKenKen("data/test9.kenken");
+		} catch (CannotLoadKenKenException e) {
+			System.out.println(e.getMessage());
+			return;
+		}
+
+		KenKenView view = new KenKenSolverView(new KenKenSolver(kenKen));
+		SwingUtilities.invokeLater(view::start);
 	}
 }
