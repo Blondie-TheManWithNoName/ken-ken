@@ -37,7 +37,7 @@
 	* Backtracking
 
 ### 2024-05-01
-- [ ] Figma &rarr; Oriol + Noah + Brian
+- [ ] Figma &rarr; Oriol + Noah + Dani
 - [ ] Views &rarr; Brian
 
 ### Per la primera entrega (22 d'abril)
