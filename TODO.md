@@ -38,6 +38,15 @@
 
 ### 2024-05-01
 - [ ] Figma &rarr; Oriol + Noah + Dani
+	- [ ] Home
+	- [ ] Ranking
+	- [ ] Menu
+	- [ ] Propose
+	- [X] Generate &rarr; Oriol
+	- [ ] Choose
+	- [ ] AiSolve
+	- [ ] Play
+	- [ ] Pause
 - [ ] Views &rarr; Brian
 
 ### Per la primera entrega (22 d'abril)
