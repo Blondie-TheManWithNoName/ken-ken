@@ -2,6 +2,9 @@
 
 ### Per la segona entrega (27 de maig)
 - [ ] Diagrama UML
+- [ ] Nou cas d'ús &rarr; Play Random ??? Choose dificulty (Easy / Medium / Hard)
+- [ ] Optimitzacions ???
+	- [ ] Caselles amb menys opcions
 
 ### Per la tercera entrega (3 de juny)
 - [ ] Manual d'usuari &rarr; LaTeX
@@ -32,6 +35,9 @@
 		1) Cridar una funció inversa de cada operació que retorni una llista de vectors candidats que la satisfan
 		2) Amb els principis dels Latin Squares i el mètode de Line Reduction anar descartant candidats
 	* Backtracking
+
+### 2024-05-01
+- [ ] Figma
 
 ### Per la primera entrega (22 d'abril)
 - [X] Diagrama de casos d'ús
