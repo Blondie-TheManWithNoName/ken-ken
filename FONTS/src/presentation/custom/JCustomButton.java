@@ -9,4 +9,9 @@ public class JCustomButton extends JButton {
 		setCursor(new Cursor(Cursor.HAND_CURSOR));
 		setFocusable(false);
 	}
+
+	public JCustomButton() {
+		setCursor(new Cursor(Cursor.HAND_CURSOR));
+		setFocusable(false);
+	}
 }
