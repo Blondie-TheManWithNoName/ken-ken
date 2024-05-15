@@ -50,35 +50,36 @@ public class MainMenuView extends JFrame {
 	private void configureWindow() {
 		setTitle("KenKen");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(400, 300);
+		//setSize(600, 500);
 		setResizable(true);
 	}
 
 	private void configureLayout() {
-		setLayout(new BorderLayout());
+		setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 
-		JPanel backPanel = new JPanel(new GridLayout(3, 3, 2, 2));
-		JPanel mainPanel = new JPanel(new GridLayout(2, 2, 2, 2));
-		JPanel buttonPanel1 = new JPanel(new GridLayout(2, 1, 2, 2));
-		JPanel buttonPanel2 = new JPanel(new GridLayout(3, 1, 2, 2));
+		JPanel backPanel = new JPanel(new GridLayout(3, 3));
+		JPanel mainPanel = new JPanel(new GridLayout(2, 2));
+		JPanel buttonPanel1 = new JPanel(new GridLayout(2, 1));
+		JPanel buttonPanel2 = new JPanel(new GridLayout(3, 1));
 		JLabel game = new JLabel("GAME");
 		JLabel kenKen = new JLabel("KENKEN");
 
 
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-		Dimension default1 = new Dimension(120,25);
-		Dimension default2 = new Dimension(120,25);
+		//mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		Dimension default1 = new Dimension(125,45);
+		Dimension default2 = new Dimension(125,30);
 
-		proposeKenKenButton.setPreferredSize(default1);
-        proposeKenKenButton.setMinimumSize(default1);
+		proposeKenKenButton.setPreferredSize(default2);
+        proposeKenKenButton.setMinimumSize(default2);
 		proposeKenKenButton.addActionListener(controller);
 		proposeKenKenButton.setActionCommand(MainMenuController.PROPOSE_KENKEN_AC);
-		generateKenKenButton.setPreferredSize(default1);
-        generateKenKenButton.setMinimumSize(default1);
+		generateKenKenButton.setPreferredSize(default2);
+        generateKenKenButton.setMinimumSize(default2);
 		generateKenKenButton.addActionListener(controller);
 		generateKenKenButton.setActionCommand(MainMenuController.GENERATE_KENKEN_AC);
-		importKenKenButton.setPreferredSize(default1);
-        importKenKenButton.setMinimumSize(default1);
+		importKenKenButton.setPreferredSize(default2);
+        importKenKenButton.setMinimumSize(default2);
 		importKenKenButton.addActionListener(controller);
 		importKenKenButton.setActionCommand(MainMenuController.LOAD_KENKEN_AC);
 		newGameButton.setPreferredSize(default1);
@@ -94,28 +95,52 @@ public class MainMenuView extends JFrame {
 		exitButton.addActionListener(controller);
 		exitButton.setActionCommand(MainMenuController.EXIT_AC);
 
+		
 		buttonPanel1.add(newGameButton);
 		buttonPanel1.add(loadGameButton);
 		buttonPanel2.add(proposeKenKenButton);
 		buttonPanel2.add(generateKenKenButton);
 		buttonPanel2.add(importKenKenButton);
 
-	
 		mainPanel.add(buttonPanel1);	
 		mainPanel.add(game);
 		mainPanel.add(kenKen);
 		mainPanel.add(buttonPanel2);
 
-		backPanel.add(exitButton);
-		backPanel.add(new JLabel());
-		backPanel.add(new JLabel());
-		backPanel.add(new JLabel());
-		backPanel.add(mainPanel);
-		backPanel.add(new JLabel());
-		backPanel.add(new JLabel());
-		backPanel.add(new JLabel());
-		backPanel.add(new JLabel());
+		// Sección 1: Botón de salida
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridwidth = 1;
+        c.gridheight = 1;
+        add(exitButton, c);
 
-		add(backPanel, BorderLayout.CENTER);
+		c.gridx = 1;
+        c.gridy = 1;
+        c.gridwidth = 2;
+        c.gridheight = 2;
+        add(mainPanel, c);
+
+        // Sección vacías
+        for (int x = 0; x < 4; x++) {
+            for (int y = 0; y < 4; y++) {
+                if ((x == 0 && y == 1) || (x == 1 && y == 1) || (x == 2 && y == 1) || (x == 1 && y == 2) || (x == 2 && y == 2)) {
+                    continue; // No crear panel para secciones ya usadas
+                }
+                c.gridx = x;
+                c.gridy = y;
+                c.gridwidth = 1;
+                c.gridheight = 1;
+                JLabel emptyPanel = new JLabel();
+				if ((y == 0) || (y == 3)) {
+                    emptyPanel.setMinimumSize(new Dimension(125,80));
+               		emptyPanel.setPreferredSize(new Dimension(125,80));
+                } else {
+					emptyPanel.setMinimumSize(new Dimension(125,160));
+               		emptyPanel.setPreferredSize(new Dimension(125,160));
+				}                
+                add(emptyPanel, c);
+            }
+        }
+
 	}
 }
