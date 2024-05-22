@@ -98,13 +98,13 @@ public class ChooseView extends JFrame {
 
 	protected void makebutton(String name, GridBagLayout gridbag, GridBagConstraints c) {
 //		Font font = new Font("Spartan", Font.BOLD, 20);
-		Font font = loadFont("fonts/Spartan-Bold.ttf").deriveFont(Font.BOLD, 16);
+//		Font font = loadFont("fonts/Spartan-Bold.ttf").deriveFont(Font.BOLD, 16);
 		JButton button = new JButton(name);
 		button.setForeground(Color.decode("#375281"));
 		button.setBackground(Color.decode("#FAFAFA"));
 		button.setOpaque(true);
 		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		button.setFont(font);
+//		button.setFont(font);
 		button.setFocusPainted(false);
 		button.setPreferredSize(new Dimension(100, 50));
 		gridbag.setConstraints(button, c);
@@ -134,7 +134,7 @@ public class ChooseView extends JFrame {
 
 	protected JButton button(String name, boolean first, int w, int h)
 	{
-		Font font = loadFont("fonts/Spartan-Bold.ttf").deriveFont(Font.BOLD, 16);
+//		Font font = loadFont("fonts/Spartan-Bold.ttf").deriveFont(Font.BOLD, 16);
 		JButton button = new JButton(name);
 		if (first)
 		{
@@ -152,7 +152,7 @@ public class ChooseView extends JFrame {
 		}
 		button.setOpaque(true);
 		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		button.setFont(font);
+//		button.setFont(font);
 		button.setFocusPainted(false);
 		button.setPreferredSize(new Dimension(w, h));
 
@@ -247,8 +247,8 @@ public class ChooseView extends JFrame {
 							 GridBagConstraints c) {
 		JLabel label = new JLabel(name);
 		label.setPreferredSize(new Dimension(100, 30));
-		Font font = loadFont("fonts/Spartan-Bold.ttf").deriveFont(Font.BOLD, 42);
-		label.setFont(font);
+//		Font font = loadFont("fonts/Spartan-Bold.ttf").deriveFont(Font.BOLD, 42);
+//		label.setFont(font);
 		label.setBackground(Color.decode("#775AD8"));
 		label.setOpaque(true);
 		label.setForeground(Color.decode("#FAFAFA"));

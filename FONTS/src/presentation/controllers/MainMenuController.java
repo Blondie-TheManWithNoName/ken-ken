@@ -22,7 +22,7 @@ public class MainMenuController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals(PROPOSE_KENKEN_AC)) {
-			view.proposeKenKen();
+//			view.proposeKenKen();
 		} else if (e.getActionCommand().equals(GENERATE_KENKEN_AC)) {
 			// TODO:
 		} else if (e.getActionCommand().equals(LOAD_KENKEN_AC)) {
