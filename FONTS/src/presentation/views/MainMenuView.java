@@ -1,20 +1,28 @@
 package presentation.views;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.event.*;
 
 import models.kenken.KenKenProposer;
 import presentation.controllers.MainMenuController;
 import presentation.custom.JCustomButton;
+import presentation.custom.JMainButton;
+import presentation.custom.JMainButtonSecond;
+import presentation.custom.JMainButtonFirst;
+import presentation.custom.JSquareLabel;
 
 public class MainMenuView extends JFrame {
-    private final JCustomButton newGameButton = new JCustomButton("New Game");
-    private final JCustomButton loadGameButton = new JCustomButton("Load Game");
-	private final JCustomButton proposeKenKenButton = new JCustomButton("Propose a KenKen");
-    private final JCustomButton generateKenKenButton = new JCustomButton("Generate a KenKen");
-    private final JCustomButton importKenKenButton = new JCustomButton("Import a KenKen");
-    private final JCustomButton exitButton = new JCustomButton("Exit");
+//    private final JCustomButton newGameButton = new JCustomButton("New Game");
+//    private final JCustomButton loadGameButton = new JCustomButton("Load Game");
+//	private final JCustomButton proposeKenKenButton = new JCustomButton("Propose a KenKen");
+//    private final JCustomButton generateKenKenButton = new JCustomButton("Generate a KenKen");
+//    private final JCustomButton importKenKenButton = new JCustomButton("Import a KenKen");
+//    private final JCustomButton exitButton = new JCustomButton("Exit");
 
 	private final MainMenuController controller = new MainMenuController(this);
 
@@ -24,6 +32,7 @@ public class MainMenuView extends JFrame {
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
+		getContentPane().setBackground(Color.decode("#FAFAFA"));
 	}
 
 	public void proposeKenKen() {
@@ -50,72 +59,125 @@ public class MainMenuView extends JFrame {
 	private void configureWindow() {
 		setTitle("KenKen");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(400, 300);
+		setPreferredSize(new Dimension(720,540));
 		setResizable(true);
 	}
 
 	private void configureLayout() {
 		setLayout(new BorderLayout());
+		GridBagLayout gridbag = new GridBagLayout();
+		GridBagConstraints c = new GridBagConstraints();
 
-		JPanel backPanel = new JPanel(new GridLayout(3, 3, 2, 2));
-		JPanel mainPanel = new JPanel(new GridLayout(2, 2, 2, 2));
-		JPanel buttonPanel1 = new JPanel(new GridLayout(2, 1, 2, 2));
-		JPanel buttonPanel2 = new JPanel(new GridLayout(3, 1, 2, 2));
-		JLabel game = new JLabel("GAME");
-		JLabel kenKen = new JLabel("KENKEN");
+		setFont(new Font("", Font.PLAIN, 14));
+		setLayout(gridbag);
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 1.0;
+		c.weighty = 1.0;
+		c.insets = new Insets(3, 3, 3, 3);
+		makelabel("", gridbag, c);
+		makelabel("", gridbag, c);
+		makelabel("", gridbag, c);
+		makelabel("", gridbag, c);
+		c.gridy = 1;
+		makebutton("<html><span style='font-family: Arial Unicode MS; font-size: 24;'>\u2B9C </span> BACK </html>", gridbag, c);
+		makebutton2("NEW", gridbag, c);
+		c.gridheight = 2;
+		makeSquare("<html><p style='margin-bottom: -7;'>GA</p><p style='margin-top: -7;'>ME</p></html>", gridbag, c);
+		makelabel("", gridbag, c);
+
+		c.gridy = 2;
+		c.gridx = 0;
+		c.gridheight = 3;
+		makelabel("", gridbag, c);;
+		c.gridx = 1;
+		c.gridheight = 1;		;
+		makebutton("LOAD", gridbag, c);
+
+		c.gridy = 3;
+		c.gridx = 1;
+		c.gridheight = 2;
+		makeSquare("<html><p style='margin-bottom: -7;'>KEN</p><p style='margin-top: -7;'>KEN</p></html>", gridbag, c);
+		c.gridx = 2;
+//		makelabel("", gridbag, c);
+		createPanelWithButtons("", gridbag, c);
+		c.gridx = 3;
+		c.gridheight = 1;
+		makelabel("", gridbag, c);
+
+		c.gridy = 4;
+		c.gridx = 3;
+		c.gridheight = 1;
+		makelabel("", gridbag, c);
+
+		c.gridheight = 1;
+		c.gridy = 5;
+		c.gridx = 0;
+		makelabel("", gridbag, c);
+		c.gridx = 1;
+		makelabel("", gridbag, c);
+		c.gridx = 2;
+		makelabel("", gridbag, c);
+		c.gridx = 3;
+		makelabel("", gridbag, c);
 
 
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-		Dimension default1 = new Dimension(120,25);
-		Dimension default2 = new Dimension(120,25);
-
-		proposeKenKenButton.setPreferredSize(default1);
-        proposeKenKenButton.setMinimumSize(default1);
-		proposeKenKenButton.addActionListener(controller);
-		proposeKenKenButton.setActionCommand(MainMenuController.PROPOSE_KENKEN_AC);
-		generateKenKenButton.setPreferredSize(default1);
-        generateKenKenButton.setMinimumSize(default1);
-		generateKenKenButton.addActionListener(controller);
-		generateKenKenButton.setActionCommand(MainMenuController.GENERATE_KENKEN_AC);
-		importKenKenButton.setPreferredSize(default1);
-        importKenKenButton.setMinimumSize(default1);
-		importKenKenButton.addActionListener(controller);
-		importKenKenButton.setActionCommand(MainMenuController.LOAD_KENKEN_AC);
-		newGameButton.setPreferredSize(default1);
-        newGameButton.setMinimumSize(default1);
-		newGameButton.addActionListener(controller);
-		newGameButton.setActionCommand(MainMenuController.LOAD_SAVED_GAME_AC);
-		loadGameButton.setPreferredSize(default1);
-        loadGameButton.setMinimumSize(default1);
-		loadGameButton.addActionListener(controller);
-		loadGameButton.setActionCommand(MainMenuController.SEE_RANKING_AC);
-		exitButton.setPreferredSize(default1);
-        exitButton.setMinimumSize(default1);
-		exitButton.addActionListener(controller);
-		exitButton.setActionCommand(MainMenuController.EXIT_AC);
-
-		buttonPanel1.add(newGameButton);
-		buttonPanel1.add(loadGameButton);
-		buttonPanel2.add(proposeKenKenButton);
-		buttonPanel2.add(generateKenKenButton);
-		buttonPanel2.add(importKenKenButton);
-
-	
-		mainPanel.add(buttonPanel1);	
-		mainPanel.add(game);
-		mainPanel.add(kenKen);
-		mainPanel.add(buttonPanel2);
-
-		backPanel.add(exitButton);
-		backPanel.add(new JLabel());
-		backPanel.add(new JLabel());
-		backPanel.add(new JLabel());
-		backPanel.add(mainPanel);
-		backPanel.add(new JLabel());
-		backPanel.add(new JLabel());
-		backPanel.add(new JLabel());
-		backPanel.add(new JLabel());
-
-		add(backPanel, BorderLayout.CENTER);
 	}
+
+	protected void makebutton(String name, GridBagLayout gridbag, GridBagConstraints c) {
+		JMainButton button = new JMainButtonSecond(name);
+		gridbag.setConstraints(button, c);
+		add(button);
+	}
+
+	protected void makebutton2(String name,
+							  GridBagLayout gridbag,
+							  GridBagConstraints c) {
+		JMainButton button = new JMainButtonFirst(name);
+		gridbag.setConstraints(button, c);
+
+		add(button);
+	}
+
+	protected void makelabel(String name,
+							  GridBagLayout gridbag,
+							  GridBagConstraints c) {
+		JSquareLabel label = new JSquareLabel();
+		gridbag.setConstraints(label, c);
+		add(label);
+	}
+
+	protected void createPanelWithButtons(String name,
+											   GridBagLayout gridbag,
+											   GridBagConstraints c) {
+		JPanel panel = new JPanel();
+		GridLayout grid = new GridLayout(3, 1, 0, 15);
+		panel.setLayout(grid);
+
+//		panel.add(button("PROPOSE", false, 50, 25));
+//		panel.add(button("GENERATE", false, 50, 25));
+//		panel.add(button("IMPORT", false, 50, 23));
+
+		gridbag.setConstraints(panel, c);
+		add(panel, c);
+	}
+
+	protected void makeSquare(String name,
+							 GridBagLayout gridbag,
+							 GridBagConstraints c) {
+		JSquareLabel label = new JSquareLabel(name);
+		gridbag.setConstraints(label, c);
+		add(label);
+	}
+
+	private Font loadFont(String fontFileName) {
+		try {
+			// Load the font file
+			File fontFile = new File(fontFileName);
+			return Font.createFont(Font.TRUETYPE_FONT, fontFile);
+		} catch (IOException | FontFormatException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

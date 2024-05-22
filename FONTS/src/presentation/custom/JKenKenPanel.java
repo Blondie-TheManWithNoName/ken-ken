@@ -43,7 +43,7 @@ public class JKenKenPanel extends JPanel {
 
 	private void configureLayout() {
 		setLayout(new GridLayout(kenKen.getSize(), kenKen.getSize()));
-		setBorder(BorderFactory.createMatteBorder(MARGIN, MARGIN, MARGIN, MARGIN, Color.BLACK));
+		setBorder(BorderFactory.createMatteBorder(MARGIN, MARGIN, MARGIN, MARGIN, Color.decode("#375281")));
 		for (int i = 0; i < kenKen.getSize(); i++) {
 			for (int j = 0; j < kenKen.getSize() ; j++) {
 				if (cells[i][j] == null) cells[i][j] = new JKenKenCell(i, j, kenKen.getValue(i, j));

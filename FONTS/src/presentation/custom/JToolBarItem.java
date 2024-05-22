@@ -25,7 +25,7 @@ public class JToolBarItem extends JButton {
 	}
 
 	public void setActive() {
-		setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+		setBorder(BorderFactory.createLineBorder(Color.decode("#375281"), 2));
 		setOpaque(true);
 	}
 

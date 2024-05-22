@@ -10,6 +10,7 @@ public class KenKenView extends JFrame {
 	protected final KenKen kenKen;
 	protected final JKenKenPanel kenKenPanel;
 
+
 	public KenKenView(KenKen kenKen) {
 		this.kenKen = kenKen;
 		this.kenKenPanel = new JKenKenPanel(kenKen);
@@ -27,6 +28,8 @@ public class KenKenView extends JFrame {
 		setTitle("KenKen");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
+//		getContentPane().setBackground(Color.decode("#FAFAFA"));
+		((JPanel) getContentPane()).setOpaque(true);
 	}
 
 	protected void configureLayout() {
@@ -34,8 +37,9 @@ public class KenKenView extends JFrame {
 
 		JPanel marginPanel = new JPanel();
 		marginPanel.setLayout(new BorderLayout());
-		marginPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Margin
+		marginPanel.setBorder(BorderFactory.createEmptyBorder(50, 20, 10, 20)); // Margin
 		marginPanel.add(kenKenPanel, BorderLayout.CENTER);
+		marginPanel.setBackground(Color.decode("#FAFAFA"));
 
 		add(marginPanel, BorderLayout.CENTER);
 	}

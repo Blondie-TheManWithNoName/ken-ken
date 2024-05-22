@@ -10,7 +10,7 @@ import java.awt.*;
 public class KenKenSolverView extends KenKenView {
 	private final KenKenSolver solver;
 
-	private final JCustomButton solveButton = new JCustomButton("Solve");
+//	private final JCustomButton solveButton = new JCustomButton("Solve");
 
 	private final KenKenSolverController controller = new KenKenSolverController(this);
 
@@ -24,7 +24,7 @@ public class KenKenSolverView extends KenKenView {
 			JOptionPane.showMessageDialog(this, "No solution found");
 		else {
 			repaint();
-			solveButton.setEnabled(false);
+//			solveButton.setEnabled(false);
 		}
 	}
 
@@ -40,8 +40,8 @@ public class KenKenSolverView extends KenKenView {
 	protected void configureLayout() {
 		super.configureLayout();
 
-		solveButton.addActionListener(controller);
-		solveButton.setActionCommand(KenKenSolverController.SOLVE_KENKEN_AC);
-		add(solveButton, BorderLayout.SOUTH);
+//		solveButton.addActionListener(controller);
+//		solveButton.setActionCommand(KenKenSolverController.SOLVE_KENKEN_AC);
+//		add(solveButton, BorderLayout.SOUTH);
 	}
 }

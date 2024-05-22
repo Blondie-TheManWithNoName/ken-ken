@@ -80,9 +80,9 @@ public class KenKenGenerator {
 	}
 
 	/**
-     * Generates a Latin square for the KenKen puzzle grid.
-	 * 
-     * @param kenKen the KenKen puzzle grid
+     * Sets the KenKen values by creating a Latin square adding numbers diagonally in the grid
+	 * and shuffling the rows after, so the generated KenKen are not always equal.
+     * @param kenKen the KenKen to set the non-fixed and fixed values on
      */
 	private void generateLatinSquare(KenKen kenKen) {
 		int[][] latinSquare = new int[size][size];
