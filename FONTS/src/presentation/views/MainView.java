@@ -49,6 +49,12 @@ public class MainView extends JFrame {
 	public void makeBackButton() {
 		JMainButton button = new JBackButton();
 		gridbag.setConstraints(button, c);
+		add(button);
+	}
+
+	public void makeNextButton() {
+		JMainButton button = new JNextButton();
+		gridbag.setConstraints(button, c);
 
 		add(button);
 	}
@@ -71,10 +77,15 @@ public class MainView extends JFrame {
 		add(label);
 	}
 
-	public void makeSpinner() {
+	public void makeSpinnerSize() {
 		JMainSpinnerSize spinner = new JMainSpinnerSize();
 		gridbag.setConstraints(spinner, c);
+		add(spinner);
+	}
 
+	public void makeSpinnerFixed() {
+		JMainSpinnerFixed spinner = new JMainSpinnerFixed();
+		gridbag.setConstraints(spinner, c);
 		add(spinner);
 	}
 }
