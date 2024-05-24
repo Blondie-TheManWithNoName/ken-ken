@@ -17,7 +17,7 @@ public class JSquareLabel extends JLabel {
 	public JSquareLabel(String text) {
 		super(text);
 		setPreferredSize(new Dimension(100, 30));
-		Font font = loadFont("fonts/Spartan-Bold.ttf").deriveFont(Font.BOLD, 42);
+		Font font =  getFont().deriveFont(Font.BOLD, 42);
 		setFont(font);
 		setBackground(Color.decode("#775AD8"));
 		setOpaque(true);
@@ -25,15 +25,5 @@ public class JSquareLabel extends JLabel {
 		setHorizontalAlignment(SwingConstants.CENTER);
 	}
 
-	private Font loadFont(String fontFileName) {
-		try {
-			// Load the font file
-			File fontFile = new File(fontFileName);
-			return Font.createFont(Font.TRUETYPE_FONT, fontFile);
-		} catch (IOException | FontFormatException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
 
 }
