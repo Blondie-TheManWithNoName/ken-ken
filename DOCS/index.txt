@@ -3,6 +3,7 @@ La carpeta DOCS/ inclou la documentació del projecte, com els diagrames (de cla
 Arxius:
 
 - kenken.vpp: arxiu Visual Paradigm amb els diagrames.
+- diagrams/: carpeta amb els diagrames en PNG (300 DPI).
 - JavaDoc/: carpeta amb el JavaDoc.
 - entrega_i.pdf: informe de la primera entrega.
 
