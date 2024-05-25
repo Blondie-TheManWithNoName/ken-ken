@@ -3,6 +3,7 @@ package presentation.views;
 import presentation.custom.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class MainView extends JFrame {
@@ -59,8 +60,8 @@ public class MainView extends JFrame {
 		add(button);
 	}
 
-	public void createPanelWithButtons(String name) {
-		JPanel panel = new J3ButtonPanel("PROPOSE", "GENERATE", "IMPORT");
+	public void createPanelWithButtons(String text1, String text2, String text3) {
+		JPanel panel = new J3ButtonPanel(text1, text2, text3);
 
 		gridbag.setConstraints(panel, c);
 		add(panel, c);
@@ -76,6 +77,30 @@ public class MainView extends JFrame {
 		gridbag.setConstraints(label, c);
 		add(label);
 	}
+
+	public void makeTitle() {
+		JLabel title = new JLabel("<html><p style='margin-bottom: -20; color: #375281'>KEN</p><p style='margin-top: -20;  color: #775AD8'>KEN</p></html>");
+		title.setPreferredSize(new Dimension(100, 100));
+		Font font =  getFont().deriveFont(Font.BOLD, 80);
+		title.setFont(font);
+		title.setHorizontalAlignment(SwingConstants.CENTER);
+		gridbag.setConstraints(title, c);
+		add(title);
+	}
+
+	public void makeNumber(String number) {
+		JLabel label = new JLabel(number);
+		label.setPreferredSize(new Dimension(100, 100));
+		Font font =  getFont().deriveFont(Font.BOLD, label.getPreferredSize().height);
+		label.setFont(font);
+		Border border = BorderFactory.createLineBorder(Color.decode("#375281"), 5);
+		label.setBorder(border);
+		label.setForeground(Color.decode("#775AD8"));
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		gridbag.setConstraints(label, c);
+		add(label);
+	}
+
 
 	public void makeSpinnerSize() {
 		JMainSpinnerSize spinner = new JMainSpinnerSize();
