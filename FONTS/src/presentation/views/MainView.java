@@ -5,12 +5,13 @@ import presentation.custom.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class MainView extends JFrame {
 	protected final GridBagLayout gridbag = new GridBagLayout();
 	protected final GridBagConstraints c = new GridBagConstraints();
 
-//	private final MainMenuController controller = new MainMenuController(this);
+	//private final MainMenuController controller = new MainMenuController(this);
 
 	public MainView() {
 		configureWindow();
@@ -34,35 +35,46 @@ public class MainView extends JFrame {
 		setResizable(true);
 	}
 
-	public void makeButtonSecond(String name) {
+	public void makeButtonSecond(String name, ActionListener listener, String actionCommand) {
 		JMainButton button = new JMainButtonSecond(name);
+		button.addActionListenerAndCommand(listener, actionCommand);
 		gridbag.setConstraints(button, c);
 		add(button);
 	}
 
-	public void makeButtonFirst(String name) {
+	public void makeButtonFirst(String name, ActionListener listener, String actionCommand) {
 		JMainButton button = new JMainButtonFirst(name);
+		button.addActionListenerAndCommand(listener, actionCommand);
 		gridbag.setConstraints(button, c);
 
 		add(button);
 	}
 
-	public void makeBackButton() {
+	public void makeBackButton(ActionListener listener, String actionCommand) {
 		JMainButton button = new JBackButton();
+		button.addActionListenerAndCommand(listener, actionCommand);
 		gridbag.setConstraints(button, c);
+
 		add(button);
 	}
 
-	public void makeNextButton() {
+	public void makeNextButton(ActionListener listener, String actionCommand) {
 		JMainButton button = new JNextButton();
+		button.addActionListenerAndCommand(listener, actionCommand);
 		gridbag.setConstraints(button, c);
 
 		add(button);
 	}
 
-	public void createPanelWithButtons(String text1, String text2, String text3) {
-		JPanel panel = new J3ButtonPanel(text1, text2, text3);
-
+	public void createPanelWithButtons(String name1, String name2, String name3, ActionListener listener, String actionCommand1, String actionCommand2, String actionCommand3) {
+		JPanel panel = new J3ButtonPanel(name1, name2, name3);
+		Component[] components = panel.getComponents();
+		JMainButton button = (JMainButton) components[0];
+		button.addActionListenerAndCommand(listener, actionCommand1);
+		button = (JMainButton) components[1];
+		button.addActionListenerAndCommand(listener, actionCommand2);
+		button = (JMainButton) components[2];
+		button.addActionListenerAndCommand(listener, actionCommand3);
 		gridbag.setConstraints(panel, c);
 		add(panel, c);
 	}

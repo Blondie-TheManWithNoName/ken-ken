@@ -1,6 +1,11 @@
 package presentation.views;
 
+import presentation.controllers.ChooseController;
+import presentation.controllers.GenerateController;
+
 public class ChooseView extends MainView {
+	private final ChooseController controller = new ChooseController(this);
+
 	public ChooseView() {
 		super();
 	}
@@ -13,7 +18,7 @@ public class ChooseView extends MainView {
 		makeSquare("");
 		c.gridy = 1;
 
-		makeBackButton();
+		makeBackButton(controller, GenerateController.BACK_AC);
 		c.gridheight = 2;
 		makeSquare("<html><p style='margin-bottom: -7;'>S I</p><p style='margin-top: -7;'>ZE</p></html>");
 		c.gridheight = 1;
@@ -27,7 +32,7 @@ public class ChooseView extends MainView {
 		makeSquare("");;
 		c.gridx = 2;
 		c.gridheight = 1;		;
-		makeButtonFirst("PLAY");
+		makeButtonFirst("PLAY",controller, GenerateController.PLAY_AC);
 
 		c.gridy = 3;
 		c.gridx = 1;

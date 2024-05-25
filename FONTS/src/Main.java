@@ -1,6 +1,9 @@
 import models.ModelController;
 import models.topologies.Shape;
 import presentation.custom.JShapeButton;
+import presentation.views.GenerateView1;
+import presentation.views.HomeView;
+import presentation.views.KenKenView;
 import presentation.views.MainMenuView;
 
 

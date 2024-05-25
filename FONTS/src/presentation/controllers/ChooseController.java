@@ -6,12 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ChooseController implements ActionListener {
-	public final static String PROPOSE_KENKEN_AC = "PROPOSE_KENKEN";
-	public final static String GENERATE_KENKEN_AC = "GENERATE_KENKEN";
-	public final static String LOAD_KENKEN_AC = "LOAD_KENKEN";
-	public final static String LOAD_SAVED_GAME_AC = "LOAD_SAVED_GAME";
-	public final static String SEE_RANKING_AC = "SEE_RANKING";
-	public final static String EXIT_AC = "EXIT";
+	public final static String NEXT_AC = "NEXT";
+	public final static String GENERATE_AC = "GENERATE";
+	public final static String PLAY_AC = "PLAY";
+	public final static String BACK_AC = "BACK";
 
 	private final ChooseView view;
 
@@ -21,18 +19,14 @@ public class ChooseController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		if (e.getActionCommand().equals(PROPOSE_KENKEN_AC)) {
-//			view.proposeKenKen();
-//		} else if (e.getActionCommand().equals(GENERATE_KENKEN_AC)) {
-//			// TODO:
-//		} else if (e.getActionCommand().equals(LOAD_KENKEN_AC)) {
-//			// TODO
-//		} else if (e.getActionCommand().equals(LOAD_SAVED_GAME_AC)) {
-//			// TODO
-//		} else if (e.getActionCommand().equals(SEE_RANKING_AC)) {
-//			// TODO
-//		} else if (e.getActionCommand().equals(EXIT_AC)) {
-//			System.exit(0);
-//		}
+		if (e.getActionCommand().equals(NEXT_AC)) {
+			System.out.println("click next");
+		} else if (e.getActionCommand().equals(GENERATE_AC)) {
+			// next
+		} else if (e.getActionCommand().equals(PLAY_AC)) {
+			// next
+		} else if (e.getActionCommand().equals(BACK_AC)) {
+			System.out.println("click back");
+		}
 	}
 }
