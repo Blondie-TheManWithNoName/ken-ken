@@ -26,7 +26,7 @@ public class Main {
 //		frame.setVisible(true);
 
 		ModelController controller= new ModelController();
-		HomeView view = new HomeView();
+		MainMenuView view = new MainMenuView();
 		SwingUtilities.invokeLater(view::start);
 	}
 

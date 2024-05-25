@@ -1,6 +1,13 @@
-	package presentation.views;
+package presentation.views;
+
+import presentation.controllers.GenerateController;
+import presentation.controllers.MainMenuController;
+
+import java.awt.event.ActionListener;
 
 public class GenerateView1 extends MainView {
+	private final GenerateController controller = new GenerateController(this);
+
 	public GenerateView1() {
 		super();
 	}
@@ -14,7 +21,7 @@ public class GenerateView1 extends MainView {
 		makeSquare("");
 		c.gridy = 1;
 
-		makeBackButton();
+		makeBackButton(controller, GenerateController.BACK_AC);
 		c.gridheight = 2;
 		makeSquare("<html><p style='margin-bottom: -7;'>S I</p><p style='margin-top: -7;'>ZE</p></html>");
 		c.gridheight = 1;
@@ -43,7 +50,7 @@ public class GenerateView1 extends MainView {
 		c.gridheight = 1;
 		makeSquare("");
 		c.gridx = 3;
-		makeNextButton();
+		makeNextButton(controller, GenerateController.NEXT_AC);
 
 		c.gridheight = 1;
 		c.gridy = 5;

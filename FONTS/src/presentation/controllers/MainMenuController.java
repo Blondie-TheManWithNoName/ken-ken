@@ -22,9 +22,9 @@ public class MainMenuController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals(NEW_KENKEN_AC)) {
-			//new random game
+			System.out.println("click new");
 		} else if (e.getActionCommand().equals(LOAD_KENKEN_AC)) {
-			//load saved game and play
+			System.out.println("click load");
 		} else if (e.getActionCommand().equals(PROPOSE_KENKEN_AC)) {
 			//change to propose view
 		} else if (e.getActionCommand().equals(GENERATE_KENKEN_AC)) {
@@ -32,7 +32,7 @@ public class MainMenuController implements ActionListener {
 		} else if (e.getActionCommand().equals(IMPORT_KENKEN_AC)) {
 			//import kenken from file
 		} else if (e.getActionCommand().equals(BACK_AC)) {
-			//return to home
+			System.out.println("click back");
 		}
 	}
 }

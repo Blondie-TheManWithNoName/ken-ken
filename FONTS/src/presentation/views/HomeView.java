@@ -1,10 +1,15 @@
 package presentation.views;
 
+import presentation.controllers.GenerateController;
+import presentation.controllers.HomeController;
+import presentation.controllers.MainMenuController;
 import presentation.custom.J3ButtonPanel;
 
 import javax.swing.*;
 
 public class HomeView extends MainView{
+    private final HomeController controller = new HomeController(this);
+
     public HomeView() {
         super();
     }
@@ -29,10 +34,10 @@ public class HomeView extends MainView{
         c.gridy = 1;
 
         c.gridx = 0;
-        makeBackButton();
+        makeBackButton(controller, HomeController.EXIT_AC);
 
         c.gridx = 1;
-        makeButtonFirst("NEW");
+        makeButtonFirst("NEW", controller, HomeController.START_KENKEN_AC);
 
         c.gridx = 2;
         c.gridheight = 2;
@@ -50,7 +55,7 @@ public class HomeView extends MainView{
 
         c.gridx = 1;
         c.gridheight = 1;
-        makeButtonSecond("LOAD");
+        makeButtonSecond("LOAD", controller, HomeController.SEE_RANKING_AC);
     }
 
     private void addThirdRow() {

@@ -3,6 +3,7 @@ package presentation.custom;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -43,5 +44,10 @@ public class JMainButton extends JButton {
 	public JMainButton(String text, ButtonColors colors, int width, int height) {
 		this(text, colors);
 		setPreferredSize(new Dimension(width, height));
+	}
+
+	public void addActionListenerAndCommand(ActionListener listener, String actionCommand) {
+		this.addActionListener(listener);
+		this.setActionCommand(actionCommand);
 	}
 }

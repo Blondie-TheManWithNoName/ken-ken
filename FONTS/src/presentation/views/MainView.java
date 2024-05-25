@@ -4,12 +4,13 @@ import presentation.custom.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class MainView extends JFrame {
 	protected final GridBagLayout gridbag = new GridBagLayout();
 	protected final GridBagConstraints c = new GridBagConstraints();
 
-//	private final MainMenuController controller = new MainMenuController(this);
+	//private final MainMenuController controller = new MainMenuController(this);
 
 	public MainView() {
 		configureWindow();
@@ -33,27 +34,32 @@ public class MainView extends JFrame {
 		setResizable(true);
 	}
 
-	public void makeButtonSecond(String name) {
+	public void makeButtonSecond(String name, ActionListener listener, String actionCommand) {
 		JMainButton button = new JMainButtonSecond(name);
+		button.addActionListenerAndCommand(listener, actionCommand);
 		gridbag.setConstraints(button, c);
 		add(button);
 	}
 
-	public void makeButtonFirst(String name) {
+	public void makeButtonFirst(String name, ActionListener listener, String actionCommand) {
 		JMainButton button = new JMainButtonFirst(name);
+		button.addActionListenerAndCommand(listener, actionCommand);
 		gridbag.setConstraints(button, c);
 
 		add(button);
 	}
 
-	public void makeBackButton() {
+	public void makeBackButton(ActionListener listener, String actionCommand) {
 		JMainButton button = new JBackButton();
+		button.addActionListenerAndCommand(listener, actionCommand);
 		gridbag.setConstraints(button, c);
+
 		add(button);
 	}
 
-	public void makeNextButton() {
+	public void makeNextButton(ActionListener listener, String actionCommand) {
 		JMainButton button = new JNextButton();
+		button.addActionListenerAndCommand(listener, actionCommand);
 		gridbag.setConstraints(button, c);
 
 		add(button);

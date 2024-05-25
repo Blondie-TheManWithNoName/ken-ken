@@ -1,6 +1,11 @@
 package presentation.views;
 
+import presentation.controllers.MainMenuController;
+
 public class MainMenuView extends MainView {
+
+	private final MainMenuController controller = new MainMenuController(this);
+
 	public MainMenuView() {
 		super();
 	}
@@ -12,8 +17,8 @@ public class MainMenuView extends MainView {
 		makeSquare("");
 		makeSquare("");
 		c.gridy = 1;
-		makeBackButton();
-		makeButtonFirst("NEW");
+		makeBackButton(controller, MainMenuController.BACK_AC);
+		makeButtonFirst("NEW", controller, MainMenuController.NEW_KENKEN_AC);
 		c.gridheight = 2;
 		makeSquare("<html><p style='margin-bottom: -7;'>GA</p><p style='margin-top: -7;'>ME</p></html>");
 		makeSquare("");
@@ -24,7 +29,7 @@ public class MainMenuView extends MainView {
 		makeSquare("");;
 		c.gridx = 1;
 		c.gridheight = 1;		;
-		makeButtonSecond("LOAD");
+		makeButtonSecond("LOAD", controller, MainMenuController.LOAD_KENKEN_AC);
 
 		c.gridy = 3;
 		c.gridx = 1;
