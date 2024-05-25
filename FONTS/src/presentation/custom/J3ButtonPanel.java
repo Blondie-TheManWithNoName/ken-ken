@@ -8,9 +8,9 @@ public class J3ButtonPanel extends JPanel {
 		GridLayout grid = new GridLayout(3, 1, 0, 15);
 		setLayout(grid);
 
-		add(new JMainButton(firstButton, new ButtonColorsSecond(), 50, 25));
-		add(new JMainButton(secondButton, new ButtonColorsSecond(), 50, 25));
-		add(new JMainButton(thirdButton, new ButtonColorsSecond(), 50, 25));
+		add(new JMainButton(firstButton, new ButtonColorsSecond(), 50, 30));
+		add(new JMainButton(secondButton, new ButtonColorsSecond(), 50, 30));
+		add(new JMainButton(thirdButton, new ButtonColorsSecond(), 50, 30));
 	}
 
 }
