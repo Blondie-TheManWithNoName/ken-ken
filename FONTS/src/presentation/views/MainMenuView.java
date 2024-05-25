@@ -36,7 +36,7 @@ public class MainMenuView extends MainView {
 		c.gridheight = 2;
 		makeSquare("<html><p style='margin-bottom: -7;'>KEN</p><p style='margin-top: -7;'>KEN</p></html>");
 		c.gridx = 2;
-		createPanelWithButtons("");
+		createPanelWithButtons("PROPOSE", "GENERATE", "IMPORT", controller, MainMenuController.PROPOSE_KENKEN_AC, MainMenuController.GENERATE_KENKEN_AC, MainMenuController.IMPORT_KENKEN_AC);
 		c.gridx = 3;
 		c.gridheight = 1;
 		makeSquare("");

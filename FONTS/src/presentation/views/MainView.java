@@ -65,9 +65,15 @@ public class MainView extends JFrame {
 		add(button);
 	}
 
-	public void createPanelWithButtons(String name) {
-		JPanel panel = new J3ButtonPanel("PROPOSE", "GENERATE", "IMPORT");
-
+	public void createPanelWithButtons(String name1, String name2, String name3, ActionListener listener, String actionCommand1, String actionCommand2, String actionCommand3) {
+		JPanel panel = new J3ButtonPanel(name1, name2, name3);
+		Component[] components = panel.getComponents();
+		JMainButton button = (JMainButton) components[0];
+		button.addActionListenerAndCommand(listener, actionCommand1);
+		button = (JMainButton) components[1];
+		button.addActionListenerAndCommand(listener, actionCommand2);
+		button = (JMainButton) components[2];
+		button.addActionListenerAndCommand(listener, actionCommand3);
 		gridbag.setConstraints(panel, c);
 		add(panel, c);
 	}

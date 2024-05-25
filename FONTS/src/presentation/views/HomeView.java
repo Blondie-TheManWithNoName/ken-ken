@@ -69,7 +69,7 @@ public class HomeView extends MainView{
         makeSquare("<html><p style='margin-bottom: -7;'>KEN</p><p style='margin-top: -7;'>KEN</p></html>");
 
         c.gridx = 2;
-        createPanelWithButtons("");
+        createPanelWithButtons("START", "RANKING", "EXIT", controller, HomeController.START_KENKEN_AC, HomeController.SEE_RANKING_AC, HomeController.EXIT_AC);
 
         c.gridx = 3;
         c.gridheight = 1;

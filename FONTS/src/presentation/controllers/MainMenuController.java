@@ -26,11 +26,11 @@ public class MainMenuController implements ActionListener {
 		} else if (e.getActionCommand().equals(LOAD_KENKEN_AC)) {
 			System.out.println("click load");
 		} else if (e.getActionCommand().equals(PROPOSE_KENKEN_AC)) {
-			//change to propose view
+			System.out.println("click propose");
 		} else if (e.getActionCommand().equals(GENERATE_KENKEN_AC)) {
-			//change to generate view
+			System.out.println("click generate");
 		} else if (e.getActionCommand().equals(IMPORT_KENKEN_AC)) {
-			//import kenken from file
+			System.out.println("click import");
 		} else if (e.getActionCommand().equals(BACK_AC)) {
 			System.out.println("click back");
 		}
