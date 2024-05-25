@@ -6,10 +6,10 @@ public class HomeController {
     public final static String START_KENKEN_AC = "START_KENKEN";
     public final static String SEE_RANKING_AC = "SEE_RANKING";
     public final static String EXIT_AC = "EXIT";
+    /*
+    private final HomeView view;
 
-    //private final HomeView view;
-
-    //public HomeController(HomeView view) {this.view = view;}
+    public HomeController(HomeView view) {this.view = view;}
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -20,5 +20,5 @@ public class HomeController {
         } else if (e.getActionCommand().equals(EXIT_AC)) {
             System.exit(0);
         }
-    }
+    }*/
 }

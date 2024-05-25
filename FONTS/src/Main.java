@@ -1,6 +1,9 @@
 import models.ModelController;
 import models.topologies.Shape;
 import presentation.custom.JShapeButton;
+import presentation.views.GenerateView1;
+import presentation.views.HomeView;
+import presentation.views.KenKenView;
 import presentation.views.MainMenuView;
 
 
@@ -23,7 +26,7 @@ public class Main {
 //		frame.setVisible(true);
 
 		ModelController controller= new ModelController();
-		MainMenuView view = new MainMenuView();
+		HomeView view = new HomeView();
 		SwingUtilities.invokeLater(view::start);
 	}
 
