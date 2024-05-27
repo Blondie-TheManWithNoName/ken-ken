@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 
 public class MainView extends JFrame {
 	protected final GridBagLayout gridbag = new GridBagLayout();
@@ -66,7 +67,7 @@ public class MainView extends JFrame {
 		add(button);
 	}
 
-	public void createPanelWithButtons(String name1, String name2, String name3, ActionListener listener, String actionCommand1, String actionCommand2, String actionCommand3) {
+		public void createPanelWithButtons(String name1, String name2, String name3, ActionListener listener, String actionCommand1, String actionCommand2, String actionCommand3) {
 		JPanel panel = new J3ButtonPanel(name1, name2, name3);
 		Component[] components = panel.getComponents();
 		JMainButton button = (JMainButton) components[0];
@@ -115,14 +116,23 @@ public class MainView extends JFrame {
 
 
 	public void makeSpinnerSize() {
-		JMainSpinnerSize spinner = new JMainSpinnerSize();
+		JMainSpinner spinner = new JMainSpinner(new SpinnerNumberModel(3, 3, 9, 1)));
 		gridbag.setConstraints(spinner, c);
 		add(spinner);
 	}
 
 	public void makeSpinnerFixed() {
-		JMainSpinnerFixed spinner = new JMainSpinnerFixed();
+		JMainSpinner spinner = new JMainSpinner(new SpinnerNumberModel(0, 0, 10, 1));
 		gridbag.setConstraints(spinner, c);
 		add(spinner);
+	}
+
+	public void makeCheckBoxContainer(String[] sprites) {
+		JPanel panel = new JPanel(new GridLayout(3, 3));
+		for (int i = 0; i < 9*2; i+=2) {
+			panel.add(new JMainCheckBox(sprites[i], sprites[i + 1]));
+		}
+		gridbag.setConstraints(panel, c);
+		add(panel);
 	}
 }
