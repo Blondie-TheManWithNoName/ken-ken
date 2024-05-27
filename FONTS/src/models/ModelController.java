@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
+/**~~
  * ModelController class.
  * <p>
  * Controller class that manages the model of the application.

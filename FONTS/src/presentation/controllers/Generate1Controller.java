@@ -5,7 +5,7 @@ import presentation.views.GenerateView1;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GenerateController implements ActionListener {
+public class Generate1Controller implements ActionListener {
     public final static String NEXT_AC = "NEXT";
     public final static String GENERATE_AC = "GENERATE";
     public final static String PLAY_AC = "PLAY";
@@ -13,7 +13,7 @@ public class GenerateController implements ActionListener {
 
     private final GenerateView1 view;
 
-    public GenerateController(GenerateView1 view) {this.view = view;}
+    public Generate1Controller(GenerateView1 view) {this.view = view;}
 
     @Override
     public void actionPerformed(ActionEvent e) {
