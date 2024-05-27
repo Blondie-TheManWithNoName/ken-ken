@@ -24,6 +24,8 @@ public class JKenKenCell extends JButton {
 		setHorizontalAlignment(SwingConstants.CENTER);
 		setPreferredSize(new Dimension(CELL_SIZE, CELL_SIZE));
 		setOpaque(true);
+		setFocusable(false);
+		setFont(new Font("Arial", Font.PLAIN, 30));
 		notationLabel.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 		notationLabel.setFont(new Font("Arial", Font.PLAIN, 20));
 		setLayout(new BorderLayout());
@@ -89,16 +91,19 @@ public class JKenKenCell extends JButton {
 	}
 
 	public void select() {
-		setBackground(Color.decode("#FAFAFA"));
+		setBackground(Color.decode("#775AD8"));
 	}
 
 	public void deselect() {
-		setBackground(null);
+		setForeground(Color.decode("#375281"));
+		setBackground(Color.decode("#FAFAFA"));
+
 	}
 
 	public void addToGroup(Group group, Color color) {
 		setBackground(color);
 		addGroupLabel(group.getNotation());
+
 	}
 
 	public void removeFromGroup() {

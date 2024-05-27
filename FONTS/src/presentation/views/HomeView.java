@@ -37,7 +37,7 @@ public class HomeView extends MainView {
 		c.gridx = 1;
 		makeNumber("6");
 		c.gridx = 2;
-		createPanelWithButtons("START", "RANKING", "EXIT");
+//		createPanelWithButtons("START", "RANKING", "EXIT");
 		c.gridx = 3;
 		c.gridheight = 1;
 		makeSquare("");

@@ -14,7 +14,7 @@ public class JSquareLabel extends JLabel {
 		setBorder(border);
 	}
 
-	public JSquareLabel(String text) {
+		public JSquareLabel(String text) {
 		super(text);
 		setPreferredSize(new Dimension(100, 30));
 		Font font =  getFont().deriveFont(Font.BOLD, 42);
