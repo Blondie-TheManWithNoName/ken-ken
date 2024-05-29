@@ -1,5 +1,6 @@
-package Presentation;
+package presentation;
 
+import models.ModelController;
 import presentation.views.*;
 
 
@@ -9,6 +10,7 @@ import presentation.views.*;
  */
 public class PresentationController {
     // Atributos privados para las diferentes vistas
+    //private ModelController mController;
     private HomeView homeView;
     private MainMenuView mainMenuView;
     //private RankingView rankingView;
@@ -25,12 +27,13 @@ public class PresentationController {
      */
     public PresentationController() {
         // Inicialización de las vistas
-        homeView = new HomeView();
-        mainMenuView = new MainMenuView();
+        //mController = new ModelController();
+        homeView = new HomeView(this);
+        mainMenuView = new MainMenuView(this);
         //rankingView = new RankingView();
-        chooseView = new ChooseView();
+        //chooseView = new ChooseView();
         //proposeView = new ProposeView();
-        generateView = new GenerateView1();
+        //generateView = new GenerateView1();
         //playView = new PlayView();
         //pauseView = new PauseView();
         //solvedView = new SolvedView();
@@ -40,15 +43,15 @@ public class PresentationController {
     /**
      * Initializes the presentation and makes the main view visible.
      */
-    public void initializePresentation() {
-        //homeView.makeVisible();
+    public void showHomeView() {
+        homeView.makeVisible();
     }
 
     /**
      * Displays the main menu view of the application.
      */
     public void showMenuView() {
-        //mainMenuView.makeVisible();
+        mainMenuView.makeVisible();
     }
 
     /**

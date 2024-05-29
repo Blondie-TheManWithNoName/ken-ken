@@ -1,14 +1,15 @@
 import models.ModelController;
+import models.kenken.KenKen;
 import models.topologies.Shape;
 import presentation.custom.JShapeButton;
-import presentation.views.GenerateView1;
-import presentation.views.HomeView;
-import presentation.views.KenKenView;
-import presentation.views.MainMenuView;
+import presentation.*;
 
 
 import javax.swing.*;
 import javax.swing.SwingUtilities;
+
+import presentation.PresentationController;
+
 import java.awt.*;
 
 public class Main {
@@ -25,9 +26,16 @@ public class Main {
 //
 //		frame.setVisible(true);
 
-		ModelController controller= new ModelController();
-		MainMenuView view = new MainMenuView();
-		SwingUtilities.invokeLater(view::start);
+//		PresentationController controller= new PresentationController();
+//		controller.initializePresentation();
+//		SwingUtilities.invokeLater(view::start);
+
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				PresentationController ctrlPresentacion = new PresentationController();
+				ctrlPresentacion.showHomeView();
+			}
+		  });
 	}
 
 

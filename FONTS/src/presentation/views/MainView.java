@@ -25,7 +25,7 @@ public class MainView extends JFrame {
 		c.insets = new Insets(3, 3, 3, 3);
 		pack();
 		setLocationRelativeTo(null);
-		setVisible(true);
+		//setVisible(true);
 		getContentPane().setBackground(Color.decode("#FAFAFA"));
 	}
 
@@ -135,4 +135,8 @@ public class MainView extends JFrame {
 		gridbag.setConstraints(panel, c);
 		add(panel);
 	}
+
+	public void makeVisible() {
+        setVisible(true);
+    }
 }

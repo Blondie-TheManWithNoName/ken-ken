@@ -1,7 +1,6 @@
 package presentation.views;
 
 import presentation.controllers.ChooseController;
-import presentation.controllers.Generate1Controller;
 
 import javax.swing.*;
 
@@ -20,7 +19,7 @@ public class ChooseView extends MainView {
 		makeSquare("");
 		c.gridy = 1;
 
-		makeBackButton(controller, Generate1Controller.BACK_AC);
+		makeBackButton(controller, ChooseController.BACK_AC);
 		c.gridheight = 2;
 		makeSquare("<html><p style='margin-bottom: -7;'>S I</p><p style='margin-top: -7;'>ZE</p></html>");
 		c.gridheight = 1;
@@ -34,7 +33,7 @@ public class ChooseView extends MainView {
 		makeSquare("");;
 		c.gridx = 2;
 		c.gridheight = 1;		;
-		makeButtonFirst("PLAY",controller, Generate1Controller.PLAY_AC);
+		makeButtonFirst("PLAY",controller, ChooseController.PLAY_AC);
 
 		c.gridy = 3;
 		c.gridx = 1;
