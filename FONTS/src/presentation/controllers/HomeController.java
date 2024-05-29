@@ -30,6 +30,8 @@ public class HomeController implements ActionListener {
             controller.showMenuView();
         } else if (e.getActionCommand().equals(SEE_RANKING_AC)) {
             System.out.println("click ranking");
+            view.setVisible(false);
+            controller.showRankingView();
         } else if (e.getActionCommand().equals(EXIT_AC)) {
             System.out.println("click exit");
             System.exit(0);

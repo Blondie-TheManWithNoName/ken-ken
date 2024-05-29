@@ -32,7 +32,7 @@ public class MainView extends JFrame {
 	private void configureWindow() {
 		setTitle("KenKen");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setPreferredSize(new Dimension(720,540));
+		setPreferredSize(new Dimension(800,600));
 		setResizable(true);
 	}
 
@@ -116,7 +116,7 @@ public class MainView extends JFrame {
 
 
 	public void makeSpinnerSize() {
-		JMainSpinner spinner = new JMainSpinner(new SpinnerNumberModel(3, 3, 9, 1)));
+		JMainSpinner spinner = new JMainSpinner(new SpinnerNumberModel(3, 3, 9, 1));
 		gridbag.setConstraints(spinner, c);
 		add(spinner);
 	}
