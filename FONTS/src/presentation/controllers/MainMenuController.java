@@ -1,5 +1,7 @@
 package presentation.controllers;
 
+import presentation.PresentationController;
+import presentation.views.HomeView;
 import presentation.views.MainMenuView;
 
 import java.awt.event.ActionEvent;
@@ -13,26 +15,34 @@ public class MainMenuController implements ActionListener {
 	public final static String IMPORT_KENKEN_AC = "IMPORT_KENKEN";
 	public final static String BACK_AC = "BACK";
 
+	private final PresentationController controller;
 	private final MainMenuView view;
 
-	public MainMenuController(MainMenuView view) {
-		this.view = view;
+	public MainMenuController(PresentationController controller, MainMenuView view) {
+        this.controller = controller;
+        this.view = view;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals(NEW_KENKEN_AC)) {
 			System.out.println("click new");
+			view.setVisible(false);
+			controller.showChooseView();
 		} else if (e.getActionCommand().equals(LOAD_KENKEN_AC)) {
 			System.out.println("click load");
 		} else if (e.getActionCommand().equals(PROPOSE_KENKEN_AC)) {
 			System.out.println("click propose");
 		} else if (e.getActionCommand().equals(GENERATE_KENKEN_AC)) {
 			System.out.println("click generate");
+			view.setVisible(false);
+			controller.showGenerateView1();
 		} else if (e.getActionCommand().equals(IMPORT_KENKEN_AC)) {
 			System.out.println("click import");
 		} else if (e.getActionCommand().equals(BACK_AC)) {
 			System.out.println("click back");
+            view.setVisible(false);
+            controller.showHomeView();
 		}
 	}
 }

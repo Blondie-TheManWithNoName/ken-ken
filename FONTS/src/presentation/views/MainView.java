@@ -25,14 +25,14 @@ public class MainView extends JFrame {
 		c.insets = new Insets(3, 3, 3, 3);
 		pack();
 		setLocationRelativeTo(null);
-		setVisible(true);
+		//setVisible(true);
 		getContentPane().setBackground(Color.decode("#FAFAFA"));
 	}
 
 	private void configureWindow() {
 		setTitle("KenKen");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setPreferredSize(new Dimension(720,540));
+		setPreferredSize(new Dimension(800,600));
 		setResizable(true);
 	}
 
@@ -188,4 +188,8 @@ public class MainView extends JFrame {
 		gridbag.setConstraints(panel, c);
 		add(panel);
 	}
+
+	public void makeVisible() {
+        setVisible(true);
+    }
 }
