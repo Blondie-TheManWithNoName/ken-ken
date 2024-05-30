@@ -80,6 +80,19 @@ public class MainView extends JFrame {
 		add(panel, c);
 	}
 
+	public void createPanel2WithButtons(String name1, String name2, ActionListener listener, String actionCommand1, String actionCommand2) {
+		JPanel panel = new J2ButtonPanel(name1, name2);
+		Component[] components = panel.getComponents();
+		JMainButton button = (JMainButton) components[0];
+		button.addActionListenerAndCommand(listener, actionCommand1);
+		button = (JMainButton) components[1];
+		button.addActionListenerAndCommand(listener, actionCommand2);
+		gridbag.setConstraints(panel, c);
+		add(panel, c);
+	}
+
+	
+
 	public void makeSquare(String name) {
 		JSquareLabel label;
 		if (name.equals("")) {
@@ -116,7 +129,7 @@ public class MainView extends JFrame {
 
 
 	public void makeSpinnerSize() {
-		JMainSpinner spinner = new JMainSpinner(new SpinnerNumberModel(3, 3, 9, 1)));
+		JMainSpinner spinner = new JMainSpinner(new SpinnerNumberModel(3, 3, 9, 1));
 		gridbag.setConstraints(spinner, c);
 		add(spinner);
 	}
@@ -125,6 +138,46 @@ public class MainView extends JFrame {
 		JMainSpinner spinner = new JMainSpinner(new SpinnerNumberModel(0, 0, 10, 1));
 		gridbag.setConstraints(spinner, c);
 		add(spinner);
+	}
+
+	public void Generate3(JKenKenPanel k) {
+		
+
+		JPanel KenkenPanel = new JPanel();
+		JPanel ButtonsAndKenken = new JPanel();	
+		ButtonsAndKenken.setLayout(new BoxLayout(ButtonsAndKenken, BoxLayout.Y_AXIS));	
+		KenkenPanel.setLayout(new BorderLayout());
+		KenkenPanel.setBorder(BorderFactory.createEmptyBorder(50, 20, 10, 20));
+
+		KenkenPanel.add(k, BorderLayout.CENTER);
+		KenkenPanel.setBackground(Color.decode("#FAFAFA"));
+
+		JPanel Buttons = new JPanel();
+		Buttons.setLayout(new BoxLayout(Buttons, BoxLayout.X_AXIS));
+		
+		JMainButton button = new JMainButtonSecond("REGENERATE");
+		JMainButton button2 = new JMainButtonFirst("PLAY");
+
+		Dimension buttonSize = new Dimension(150, 50); 
+		button.setPreferredSize(buttonSize);
+		button.setMinimumSize(buttonSize);
+		button.setMaximumSize(buttonSize);
+
+		button2.setPreferredSize(buttonSize);
+		button2.setMinimumSize(buttonSize);
+		button2.setMaximumSize(buttonSize);
+
+		Buttons.add(button);
+		Buttons.add(button2);
+
+		ButtonsAndKenken.add(k);
+		ButtonsAndKenken.add(Buttons);
+
+		gridbag.setConstraints(ButtonsAndKenken, c);
+		add(ButtonsAndKenken);
+
+
+
 	}
 
 	public void makeCheckBoxContainer(String[] sprites) {

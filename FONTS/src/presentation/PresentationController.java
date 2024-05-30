@@ -31,7 +31,6 @@ public class PresentationController {
         chooseView = new ChooseView();
         //proposeView = new ProposeView();
         generateView = new GenerateView1();
-        //playView = new PlayView();
         //pauseView = new PauseView();
         //solvedView = new SolvedView();
         //errorView = new ErrorView();
