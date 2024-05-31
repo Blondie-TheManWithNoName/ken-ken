@@ -1,5 +1,6 @@
-package Presentation;
+package presentation;
 
+import models.ModelController;
 import presentation.views.*;
 
 
@@ -8,13 +9,14 @@ import presentation.views.*;
  * interacting with the user interface and delegating tasks to the DomainController.
  */
 public class PresentationController {
-    // Atributos privados para las diferentes vistas
-    private HomeView homeView;
-    private MainMenuView mainMenuView;
-    //private RankingView rankingView;
+    //private ModelController mController;
+    private final HomeView homeView;
+    private final MainMenuView mainMenuView;
+    private final RankingView rankingView;
     private ChooseView chooseView;
     //private ProposeView proposeView;
-    private GenerateView1 generateView;
+    private final GenerateView1 generateView1;
+    private final GenerateView2 generateView2;
     //private PlayView playView;
     //private PauseView pauseView;
     //private SolvedView solvedView;
@@ -24,14 +26,19 @@ public class PresentationController {
      * Constructs a PresentationController and initializes various views.
      */
     public PresentationController() {
-        // Inicialización de las vistas
-        homeView = new HomeView();
-        mainMenuView = new MainMenuView();
-        //rankingView = new RankingView();
-        chooseView = new ChooseView();
-        //proposeView = new ProposeView();
-        generateView = new GenerateView1();
+
+
+        //mController = new ModelController();
+        homeView = new HomeView(this);
+        mainMenuView = new MainMenuView(this);
+        rankingView = new RankingView(this);
+        chooseView = new ChooseView(this);
         //playView = new PlayView();
+        //loadView = new LoadView();
+        //proposeView = new ProposeView();
+        generateView1 = new GenerateView1(this);
+        generateView2 = new GenerateView2(this);
+        //importView = new importView(this);
         //pauseView = new PauseView();
         //solvedView = new SolvedView();
         //errorView = new ErrorView();
@@ -40,29 +47,29 @@ public class PresentationController {
     /**
      * Initializes the presentation and makes the main view visible.
      */
-    public void initializePresentation() {
-        //homeView.makeVisible();
+    public void showHomeView() {
+        homeView.makeVisible();
     }
 
     /**
      * Displays the main menu view of the application.
      */
     public void showMenuView() {
-        //mainMenuView.makeVisible();
+        mainMenuView.makeVisible();
     }
 
     /**
      * Displays the ranking view of the application.
      */
     public void showRankingView() {
-        //rankingView.makeVisible();
+        rankingView.makeVisible();
     }
 
     /**
      * Displays the choose view of the application.
      */
     public void showChooseView() {
-        //chooseView.makeVisible();
+        chooseView.makeVisible();
     }
 
     /**
@@ -75,8 +82,15 @@ public class PresentationController {
     /**
      * Displays the generate view of the application.
      */
-    public void showGenerateView() {
-        //generateView.makeVisible();
+    public void showGenerateView1() {
+        generateView1.makeVisible();
+    }
+
+    /**
+     * Displays the generate view of the application.
+     */
+    public void showGenerateView2() {
+        generateView2.makeVisible();
     }
 
     /**

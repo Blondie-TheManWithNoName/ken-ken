@@ -1,14 +1,18 @@
 package presentation.views;
 
+import presentation.PresentationController;
 import presentation.controllers.HomeController;
 import presentation.controllers.MainMenuController;
 
 public class MainMenuView extends MainView {
+	private final PresentationController pController;
+	private final MainMenuController controller;
 
-	private final MainMenuController controller = new MainMenuController(this);
-
-	public MainMenuView() {
+	public MainMenuView(PresentationController controller) {
 		super();
+		this.pController = controller;
+		this.controller = new MainMenuController(pController,this);
+		start();
 	}
 
 	public void start() {
@@ -17,7 +21,7 @@ public class MainMenuView extends MainView {
 		addThirdRow();
 		addEmptyRow(5);
 
-		this.revalidate();
+		//this.revalidate();
 	}
 
 	private void addEmptyRow(int y) {

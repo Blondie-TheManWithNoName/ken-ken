@@ -1,13 +1,16 @@
 import exceptions.CannotLoadKenKenException;
 import models.ModelController;
-import models.kenken.KenKenSolver;
+import models.kenken.KenKen;
 import models.topologies.Shape;
 import presentation.custom.JShapeButton;
-import presentation.views.*;
+import presentation.*;
 
 
 import javax.swing.*;
 import javax.swing.SwingUtilities;
+
+import presentation.PresentationController;
+
 import java.awt.*;
 
 public class Main {
@@ -24,12 +27,23 @@ public class Main {
 //
 //		frame.setVisible(true);
 //		MainMenuView mainmenu = new MainMenuView();
-		ModelController controller= new ModelController();
+		// ModelController controller= new ModelController();
 //		KenKenView view = new KenKenView(controller.loadKenKen("data/test2.kenken"));
-		KenKenPlayView view = new KenKenPlayView(controller.loadKenKen("data/test9.kenken"));
+		// KenKenPlayView view = new KenKenPlayView(controller.loadKenKen("data/test9.kenken"));
 
 //		KenKenSolverView view = new KenKenSolverView(new KenKenSolver(controller.loadKenKen("data/test2.kenken")));
-		SwingUtilities.invokeLater(view::start);
+		// SwingUtilities.invokeLater(view::start);
+
+//		PresentationController controller= new PresentationController();
+//		controller.initializePresentation();
+//		SwingUtilities.invokeLater(view::start);
+
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				PresentationController ctrlPresentacion = new PresentationController();
+				ctrlPresentacion.showHomeView();
+			}
+		  });
 	}
 
 
