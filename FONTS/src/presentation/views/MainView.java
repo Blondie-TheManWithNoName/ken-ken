@@ -116,7 +116,7 @@ public class MainView extends JFrame {
 
 
 	public void makeSpinnerSize() {
-		JMainSpinner spinner = new JMainSpinner(new SpinnerNumberModel(3, 3, 9, 1)));
+		JMainSpinner spinner = new JMainSpinner(new SpinnerNumberModel(3, 3, 9, 1));
 		gridbag.setConstraints(spinner, c);
 		add(spinner);
 	}
