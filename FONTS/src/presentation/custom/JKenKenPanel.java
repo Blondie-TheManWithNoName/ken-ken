@@ -28,17 +28,17 @@ public class JKenKenPanel extends JPanel {
 		cells[row][col].setActionCommand(actionCommand);
 	}
 
-	public void setValue(int row, int col, int value) {
-		cells[row][col].setValue(value);
+	public void setValue(int row, int col, int value, boolean selected) {
+		cells[row][col].setValue(value, selected);
 	}
 
 	public void setFixedValue(int row, int col, int value) {
-		cells[row][col].setValue(value);
+		cells[row][col].setValue(value, false);
 		cells[row][col].setFixed();
 	}
 
 	public void clearValue(int row, int col) {
-		cells[row][col].setValue(0);
+		cells[row][col].setValue(0, false);
 	}
 
 	private void configureLayout() {

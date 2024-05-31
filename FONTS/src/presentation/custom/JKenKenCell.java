@@ -18,7 +18,7 @@ public class JKenKenCell extends JButton {
 	public JKenKenCell(int row, int col, int value) {
 		this.row = row;
 		this.col = col;
-		setValue(value);
+		setValue(value, false);
 		setForeground(Color.decode("#FAFAFA"));
 		setBackground(Color.WHITE);
 		setHorizontalAlignment(SwingConstants.CENTER);
@@ -40,12 +40,20 @@ public class JKenKenCell extends JButton {
 		return col;
 	}
 
-	public void setValue(int value) {
+	public void setValue(int value, boolean selected) {
 		if (value == 0)
 			setText("");
 		else
 			setText(String.valueOf(value));
-	}
+
+        if (selected) {
+			setBackground(Color.decode("#775AD8"));
+            setForeground(Color.decode("#FAFAFA"));
+        } else {
+			setBackground(Color.decode("#FAFAFA"));
+            setForeground(Color.decode("#375281"));
+        }
+    }
 
 	public void setFixed() {
 		setForeground(Color.BLACK);
@@ -92,11 +100,16 @@ public class JKenKenCell extends JButton {
 
 	public void select() {
 		setBackground(Color.decode("#775AD8"));
+		setForeground(Color.decode("#FAFAFA"));
+		notationLabel.setForeground(Color.decode("#FAFAFA"));
+
+
 	}
 
 	public void deselect() {
 		setForeground(Color.decode("#375281"));
 		setBackground(Color.decode("#FAFAFA"));
+		notationLabel.setForeground(Color.decode("#375281"));
 
 	}
 

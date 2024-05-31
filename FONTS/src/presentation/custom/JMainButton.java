@@ -12,42 +12,63 @@ public class JMainButton extends JButton {
 		super(text);
 //		Font font = loadFont("fonts/Spartan-Bold.ttf").deriveFont(Font.BOLD, 16);
 //		setFont(font);
-		setForeground(Color.decode(colors.getText()));
-		setBackground(Color.decode(colors.getBackground()));
 		setOpaque(true);
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		setFocusPainted(false);
 		setPreferredSize(new Dimension(100, 50));
-		Border border = BorderFactory.createLineBorder(Color.decode(colors.getBorder()), 5);
-		setBorder(border);
+		init(colors);
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				setBackground(Color.decode(colors.getBackgroundHover()));
-				setForeground(Color.decode(colors.getTextHover()));
-				Border border = BorderFactory.createLineBorder(Color.decode(colors.getBorderHover()), 5);
-				setBorder(border);
+				if (isEnabled())
+				{
+					setBackground(Color.decode(colors.getBackgroundHover()));
+					setForeground(Color.decode(colors.getTextHover()));
+					Border border = BorderFactory.createLineBorder(Color.decode(colors.getBorderHover()), 5);
+					setBorder(border);
+				}
+
 
 
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				setBackground(Color.decode(colors.getBackground()));
-				setForeground(Color.decode(colors.getText()));
-				Border border = BorderFactory.createLineBorder(Color.decode(colors.getBorder()), 5);
-				setBorder(border);
-
+				init(colors);
 			}
 		});
 	}
 
 	public JMainButton(String text, ButtonColors colors, int width, int height) {
 		this(text, colors);
+		setFont(new Font("SansSerif", Font.BOLD, 16));
 		setPreferredSize(new Dimension(width, height));
+		setMinimumSize(new Dimension(width, height));
+		setMaximumSize(new Dimension(width, height));
 	}
 
 	public void addActionListenerAndCommand(ActionListener listener, String actionCommand) {
 		this.addActionListener(listener);
 		this.setActionCommand(actionCommand);
 	}
+
+	public void init(ButtonColors colors)
+	{
+
+		if (isSelected())
+		{
+			setBackground(Color.decode(colors.getBackgroundHover()));
+			setForeground(Color.decode(colors.getTextHover()));
+			Border border = BorderFactory.createLineBorder(Color.decode(colors.getBorderHover()), 5);
+			setBorder(border);
+		}
+
+		else{
+			setBackground(Color.decode(colors.getBackground()));
+			setForeground(Color.decode(colors.getText()));
+			Border border = BorderFactory.createLineBorder(Color.decode(colors.getBorder()), 5);
+			setBorder(border);
+		}
+	}
+
+
 }
