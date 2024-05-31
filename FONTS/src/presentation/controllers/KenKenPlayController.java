@@ -35,15 +35,17 @@ public class KenKenPlayController implements ActionListener, KeyListener {
 		}
 		else if (e.getActionCommand().startsWith(SOLVE_KENKEN_AC))
 		{
-			view.solve();
-		}
+            try {
+                view.solve();
+            } catch (RewriteFixedPositionException | ValueOutOfBoundsException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
 		else if (e.getActionCommand().startsWith(HINT_KENKEN_AC))
 		{
             try {
                 view.hint();
-            } catch (RewriteFixedPositionException ex) {
-                throw new RuntimeException(ex);
-            } catch (ValueOutOfBoundsException ex) {
+            } catch (RewriteFixedPositionException | ValueOutOfBoundsException ex) {
                 throw new RuntimeException(ex);
             }
         }

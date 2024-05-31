@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 
 public class KenKenPlayView extends JFrame {
 	private final JSetCellValue setCellValue;
-//	private final JCustomButton checkButton = new JCustomButton("Check");
 	private final KenKenSolver solver;
 	private final KenKenPlayController controller = new KenKenPlayController(this);
 	protected final KenKen kenKen;
@@ -26,6 +25,7 @@ public class KenKenPlayView extends JFrame {
 	private JKenKenCell selected;
 
 	public KenKenPlayView(KenKen kenKen) {
+		System.out.println("HOLA");
 		this.kenKen = kenKen;
 		this.kenKenPanel = new JKenKenPanel(kenKen);
 		this.elapsedTimeLabel = new JLabel("<html><div style='padding: 10px;'>00:00</div></html>");
@@ -37,18 +37,13 @@ public class KenKenPlayView extends JFrame {
 		startTimer();
 		startTime = System.currentTimeMillis();
 		this.solver = new KenKenSolver(kenKen);
-		Runnable runnable = () -> {
-			System.out.println("Thread is running");
-			solver.solve();
-			enableAI();
-		};
-		Thread thread = new Thread(runnable);
-		thread.start();
+
 
 		this.setCellValue = new JSetCellValue(kenKen.getSize(), controller);
 		this.addKeyListener(controller);
 		setFocusable(true);
 		requestFocusInWindow();
+		start();
 	}
 
 	public void start() {
@@ -56,7 +51,7 @@ public class KenKenPlayView extends JFrame {
 		configureLayout();
 		pack();
 		setLocationRelativeTo(null);
-		setVisible(true);
+//		setVisible(true);
 
 	}
 
@@ -99,7 +94,14 @@ public class KenKenPlayView extends JFrame {
 		solve.setEnabled(false);
 		hint.setEnabled(false);
 
-
+		Runnable runnable = () -> {
+			System.out.println("Thread is running");
+			solver.solve();
+			enableAI();
+			System.out.println("Thread is done");
+		};
+		Thread thread = new Thread(runnable);
+		thread.start();
 
 		JPanel PausedPanel = new JPanel();
 		PausedPanel.setLayout(new BoxLayout(PausedPanel, BoxLayout.Y_AXIS)); // Use BoxLayout for stacking buttons vertically
@@ -168,17 +170,19 @@ public class KenKenPlayView extends JFrame {
 		}
 	}
 
-	public void solve() {
-		startTime = startTime - 2000000;
+	public void solve() throws RewriteFixedPositionException, ValueOutOfBoundsException {
+		startTime = startTime - 1800000;
 		for (int row = 0; row < kenKen.getSize(); row++)
 			for (int col = 0; col < kenKen.getSize(); col++)
+			{
 				kenKenPanel.setValue(row, col, kenKen.boardSolved[row][col], false);
+				kenKen.setPosition(row, col, kenKen.boardSolved[row][col]);
+			}
 	}
 
 	public void hint() throws RewriteFixedPositionException, ValueOutOfBoundsException {
 		startTime = startTime - 60000;
 		if (!kenKen.isFull()){
-			System.out.println("ASDSAD");
 			int randomRow = (int) (Math.random() * ((kenKen.getSize() - 1) + 1));
 			int randomCol = (int) (Math.random() * ((kenKen.getSize() - 1) + 1));
 
@@ -200,7 +204,6 @@ public class KenKenPlayView extends JFrame {
 		}
 	}
 
-
 	private void startTimer() {
 		Timer timer = new Timer(1000, new ActionListener() {
 
@@ -215,5 +218,9 @@ public class KenKenPlayView extends JFrame {
 			}
 		});
 		timer.start();
+	}
+
+	public void makeVisible() {
+		setVisible(true);
 	}
 }

@@ -1,7 +1,16 @@
 package presentation;
 
+import exceptions.OperandsDoNotMatchException;
 import models.ModelController;
+import models.kenken.KenKenGenerator;
+import models.operations.*;
+import models.topologies.Shape;
+import models.topologies.Topology;
 import presentation.views.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -9,7 +18,7 @@ import presentation.views.*;
  * interacting with the user interface and delegating tasks to the DomainController.
  */
 public class PresentationController {
-    //private ModelController mController;
+    private ModelController mController;
     private final HomeView homeView;
     private final MainMenuView mainMenuView;
     private final RankingView rankingView;
@@ -17,7 +26,7 @@ public class PresentationController {
     //private ProposeView proposeView;
     private final GenerateView1 generateView1;
     private final GenerateView2 generateView2;
-    //private PlayView playView;
+    private KenKenPlayView playView;
     //private PauseView pauseView;
     //private SolvedView solvedView;
     //private ErrorView errorView;
@@ -28,12 +37,12 @@ public class PresentationController {
     public PresentationController() {
 
 
-        //mController = new ModelController();
+        mController = new ModelController();
         homeView = new HomeView(this);
         mainMenuView = new MainMenuView(this);
         rankingView = new RankingView(this);
         chooseView = new ChooseView(this);
-        //playView = new PlayView();
+//        playView = new KenKenPlayView();
         //loadView = new LoadView();
         //proposeView = new ProposeView();
         generateView1 = new GenerateView1(this);
@@ -96,8 +105,20 @@ public class PresentationController {
     /**
      * Displays the play view of the application.
      */
-    public void showPlayView() {
-        //playView.makeVisible();
+    public void showPlayView(int size) throws OperandsDoNotMatchException {
+        List<Class<? extends Operation>> allowedOperations = new ArrayList<>(
+                Arrays.asList(
+                        OperationAddition.class,
+                        OperationSubtraction.class,
+                        OperationMultiplication.class
+//                        OperationDivision.class
+                )
+        );
+        if (mController.generateKenKen(size, 0, new Topology(Shape.DASH), allowedOperations)){
+
+            playView = new KenKenPlayView(mController.getActiveKenKen());
+            playView.makeVisible();
+        }
     }
 
     /**

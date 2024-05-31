@@ -3,6 +3,7 @@ package presentation.views;
 import presentation.PresentationController;
 import presentation.controllers.ChooseController;
 import presentation.controllers.MainMenuController;
+import presentation.custom.JMainSpinner;
 
 import javax.swing.*;
 
