@@ -109,9 +109,11 @@ public class Group {
 	 * @param size, size of KenKen to determine maximum value that can be written
 	 * @return true if the value fits the KenKen and Group conditions
 	 */
-	public boolean isValidMove(int value, int size) {
-		int[] operands =  cells.stream().filter(cell -> !cell.isEmpty()).mapToInt(Cell::getValue).toArray();
-
+	public boolean isValidMove(int value, int size, int boardSolved[][]) {
+		int[] operands = cells.stream()
+				.filter(cell -> boardSolved[cell.getRow()][cell.getCol()] != 0)
+				.mapToInt(cell -> boardSolved[cell.getRow()][cell.getCol()])
+				.toArray();
 		int[] newOperands = Arrays.copyOf(operands, operands.length + 1);
 		newOperands[operands.length] = value;
 		return operation.isValidCandidate(newOperands, cells.size(), size);

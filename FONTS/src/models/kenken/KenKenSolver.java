@@ -53,15 +53,11 @@ public class KenKenSolver {
 
 		for (int value = 1; value <= kenKen.getSize(); value++) {
 			if (isValidMove(row, col, value)) {
-				try {
-					kenKen.setPosition(row, col, value);
-				} catch (ValueOutOfBoundsException | RewriteFixedPositionException ignored) {}
-				if (solve(row + 1, col))
+                kenKen.setPositoinSolved(row, col, value);
+                if (solve(row + 1, col))
 					return true;
-				try {
-					kenKen.erasePosition(row, col);
-				} catch (EraseFixedValueException ignored) {}
-			}
+				kenKen.setPositoinSolved(row, col, 0);
+            }
 		}
 
 		return false;
@@ -76,10 +72,10 @@ public class KenKenSolver {
 	 */
 	private boolean isValidMove(int row, int col, int value) {
 		for (int i = 0; i < kenKen.getSize(); i++) {
-			if (kenKen.getValue(row, i) == value || kenKen.getValue(i, col) == value)
+			if (kenKen.getValueSolved(row, i) == value || kenKen.getValueSolved(i, col) == value)
 				return false;
 		}
 
-		return kenKen.getGroup(row, col).isValidMove(value, kenKen.getSize());
+		return kenKen.getGroup(row, col).isValidMove(value, kenKen.getSize(), kenKen.getBoardSolved());
 	}
 }

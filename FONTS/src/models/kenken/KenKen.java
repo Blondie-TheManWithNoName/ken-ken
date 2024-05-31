@@ -14,6 +14,9 @@ public class KenKen {
 	private final int size;
 	/* Matrix containing all the KenKen cells*/
 	private final Cell[][] board;
+
+	public final int[][] boardSolved;
+
 	/* List of groups */
 	private final List<Group> groups = new ArrayList<>();
 
@@ -24,10 +27,13 @@ public class KenKen {
 	public KenKen(int size) {
 		this.size = size;
 		this.board = new Cell[size][size];
+		this.boardSolved = new int[size][size];
 		for (int i = 0; i < size; i++)
 			for (int j = 0; j < size; j++)
 				this.board[i][j] = new Cell(i, j);
 	}
+
+	public int[][] getBoardSolved(){return boardSolved;}
 
 	/**
 	 * Consultor method for the KenKen size
@@ -74,7 +80,7 @@ public class KenKen {
 	public int getValue(int row, int col) {
 		return board[row][col].getValue();
 	}
-
+	public int getValueSolved(int row, int col) {return boardSolved[row][col];}
 	/**
 	 * Method to add a new group to the KenKen
 	 * @param operation, operation to be perfomed on the group
@@ -120,6 +126,8 @@ public class KenKen {
 			throw new ValueOutOfBoundsException(value);
 		board[row][col].setValue(value);
 	}
+
+	public void setPositoinSolved(int row, int col, int value) {boardSolved[row][col] = value;}
 
 	/**
 	 * Method to set the value of a cell to 0, if its not fixed
