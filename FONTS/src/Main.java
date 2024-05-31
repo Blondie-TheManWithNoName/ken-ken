@@ -1,10 +1,9 @@
+import exceptions.CannotLoadKenKenException;
 import models.ModelController;
+import models.kenken.KenKenSolver;
 import models.topologies.Shape;
 import presentation.custom.JShapeButton;
-import presentation.views.GenerateView1;
-import presentation.views.HomeView;
-import presentation.views.KenKenView;
-import presentation.views.MainMenuView;
+import presentation.views.*;
 
 
 import javax.swing.*;
@@ -12,7 +11,7 @@ import javax.swing.SwingUtilities;
 import java.awt.*;
 
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws CannotLoadKenKenException {
 //		JFrame frame = new JFrame();
 //		frame.setLayout(new FlowLayout());
 //
@@ -24,9 +23,12 @@ public class Main {
 //		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //
 //		frame.setVisible(true);
-
+//		MainMenuView mainmenu = new MainMenuView();
 		ModelController controller= new ModelController();
-		MainMenuView view = new MainMenuView();
+//		KenKenView view = new KenKenView(controller.loadKenKen("data/test2.kenken"));
+		KenKenPlayView view = new KenKenPlayView(controller.loadKenKen("data/test9.kenken"));
+
+//		KenKenSolverView view = new KenKenSolverView(new KenKenSolver(controller.loadKenKen("data/test2.kenken")));
 		SwingUtilities.invokeLater(view::start);
 	}
 
