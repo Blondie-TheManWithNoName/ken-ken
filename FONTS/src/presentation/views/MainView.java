@@ -67,8 +67,8 @@ public class MainView extends JFrame {
 		add(button);
 	}
 
-		public void createPanelWithButtons(String name1, String name2, String name3, ActionListener listener, String actionCommand1, String actionCommand2, String actionCommand3) {
-		JPanel panel = new J3ButtonPanel(name1, name2, name3);
+	public void createPanelWithButtons(String name1, boolean first, String name2, String name3, ActionListener listener, String actionCommand1, String actionCommand2, String actionCommand3) {
+		JPanel panel = new J3ButtonPanel(name1, first, name2, name3);
 		Component[] components = panel.getComponents();
 		JMainButton button = (JMainButton) components[0];
 		button.addActionListenerAndCommand(listener, actionCommand1);

@@ -75,7 +75,7 @@ public class HomeView extends MainView {
 		makeNumber("6");
 
 		c.gridx = 2;
-		createPanelWithButtons("START", "RANKING", "EXIT", controller, HomeController.START_KENKEN_AC, HomeController.SEE_RANKING_AC, HomeController.EXIT_AC);
+		createPanelWithButtons("START", true,"RANKING", "EXIT", controller, HomeController.START_KENKEN_AC, HomeController.SEE_RANKING_AC, HomeController.EXIT_AC);
 		
 		c.gridx = 3;
 		c.gridheight = 1;
