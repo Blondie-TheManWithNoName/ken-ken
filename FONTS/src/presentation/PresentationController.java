@@ -108,17 +108,29 @@ public class PresentationController {
     public void showPlayView(int size) throws OperandsDoNotMatchException {
         List<Class<? extends Operation>> allowedOperations = new ArrayList<>(
                 Arrays.asList(
-                        OperationAddition.class,
-                        OperationSubtraction.class,
-                        OperationMultiplication.class
+                        OperationAddition.class
+//                        OperationSubtraction.class,
+//                        OperationMultiplication.class,
 //                        OperationDivision.class
                 )
         );
-        if (mController.generateKenKen(size, 0, new Topology(Shape.DASH), allowedOperations)){
+        Topology topology = new Topology(Shape.L);
+//        topology.addShape(Shape.ZIGZAG);
+//        topology.addShape(Shape.CORNER);
+        topology.addShape(Shape.POINT);
+//
+//        topology.addShape(Shape.L);
+//        topology.addShape(Shape.I);
+//        topology.addShape(Shape.BLOCK);
+//        topology.addShape(Shape.J);
+//        topology.addShape(Shape.T);
+
+        if (mController.generateKenKen(size, 0, topology, allowedOperations)){
 
             playView = new KenKenPlayView(mController.getActiveKenKen());
             playView.makeVisible();
         }
+
     }
 
     /**

@@ -25,8 +25,7 @@ public class KenKenPlayView extends JFrame {
 	private JKenKenCell selected;
 
 	public KenKenPlayView(KenKen kenKen) {
-		System.out.println("HOLA");
-		this.kenKen = kenKen;
+			this.kenKen = kenKen;
 		this.kenKenPanel = new JKenKenPanel(kenKen);
 		this.elapsedTimeLabel = new JLabel("<html><div style='padding: 10px;'>00:00</div></html>");
 		this.elapsedTimeLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
@@ -172,12 +171,12 @@ public class KenKenPlayView extends JFrame {
 
 	public void solve() throws RewriteFixedPositionException, ValueOutOfBoundsException {
 		startTime = startTime - 1800000;
-		for (int row = 0; row < kenKen.getSize(); row++)
-			for (int col = 0; col < kenKen.getSize(); col++)
-			{
+		for (int row = 0; row < kenKen.getSize(); row++) {
+			for (int col = 0; col < kenKen.getSize(); col++) {
 				kenKenPanel.setValue(row, col, kenKen.boardSolved[row][col], false);
 				kenKen.setPosition(row, col, kenKen.boardSolved[row][col]);
 			}
+		}
 	}
 
 	public void hint() throws RewriteFixedPositionException, ValueOutOfBoundsException {

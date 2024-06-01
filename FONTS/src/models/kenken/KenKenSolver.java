@@ -75,7 +75,6 @@ public class KenKenSolver {
 			if (kenKen.getValueSolved(row, i) == value || kenKen.getValueSolved(i, col) == value)
 				return false;
 		}
-
 		return kenKen.getGroup(row, col).isValidMove(value, kenKen.getSize(), kenKen.getBoardSolved());
 	}
 }

@@ -28,7 +28,7 @@ public class ChooseController implements ActionListener {
 //			System.out.println("SIZE: " + size);
 			//view.setVisible(false);
             try {
-                controller.showPlayView(4);
+                controller.showPlayView(5);
             } catch (OperandsDoNotMatchException ex) {
                 throw new RuntimeException(ex);
             }
