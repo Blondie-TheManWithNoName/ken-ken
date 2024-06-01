@@ -11,6 +11,8 @@ public enum Shape {
 	T(new int[][]{{1, 1, 1}, {0, 1, 0}}),
 	I(new int[][]{{1}, {1}, {1}, {1}}),
 	DASH(new int[][]{{1, 1}}),
+	CORNER(new int[][]{{1, 1}, {0, 1}}),
+	ZIGZAG(new int[][]{{1, 0}, {1, 1}, {0, 1}}),
 	POINT(new int[][]{{1}});
 
 	private final int[][] shape;
@@ -29,5 +31,14 @@ public enum Shape {
 	 */
 	public int[][] getShape() {
 		return shape;
+	}
+
+	public int getSize(){
+		int size = 0;
+		for (int[] row :shape)
+			for (int cell : row)
+				if (cell != 0)
+					size++;
+		return size;
 	}
 }
