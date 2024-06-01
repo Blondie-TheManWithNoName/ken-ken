@@ -34,11 +34,11 @@ public class OperationFactory {
      * @return The created operation.
      * @throws CannotCreateOperationException If the operation cannot be created.
      */
-	public static Operation createOperation(int[] operands) throws CannotCreateOperationException {
-		List<Class<? extends Operation>> validOperations = new ArrayList<>(List.of(OPERATIONS));
+	public static Operation createOperation(List<Class<? extends Operation>> allowedOperations, int[] operands) throws CannotCreateOperationException {
+		List<Class<? extends Operation>> validOperations = new ArrayList<>();
 
 		Random random = new Random();
-		for (Class<? extends OperationLimitedOperands> operation : OPERATIONS_LIMITED) {
+		for (Class<? extends Operation> operation : allowedOperations) {
 			Operation createdOperation = null;
 			try {
 				createdOperation = createOperation(operation, 0);
@@ -47,8 +47,8 @@ public class OperationFactory {
 			}
 			try {
 				createdOperation.calculate(operands);
-				if (random.nextBoolean())
-					return createOperation(operation, 0);
+//				if (random.nextBoolean())
+//					return createOperation(operation, 0);
 				validOperations.add(operation);
 			} catch (OperandsDoNotMatchException | NonIntegerResultException ignored) {}
 		}
