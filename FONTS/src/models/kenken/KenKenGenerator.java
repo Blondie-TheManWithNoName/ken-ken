@@ -80,9 +80,7 @@ public class KenKenGenerator {
 			System.out.println("OKEY" + e);
 
 			return false;
-		} catch (ShapeCannotFitKenKenException e) {
-            throw new RuntimeException(e);
-        }
+		} 
 
         kenKen.erase();
 		return true;
@@ -135,7 +133,7 @@ public class KenKenGenerator {
      * @throws GroupCellsNotContiguousException if group cells are not contiguous
      * @throws CannotCreateOperationException  if an operation cannot be created
      */
-	private void generateGroups(KenKen kenKen) throws CellHasNoGroupException, GroupCellsNotContiguousException, CannotCreateOperationException, ShapeCannotFitKenKenException {
+	private void generateGroups(KenKen kenKen) throws CellHasNoGroupException, GroupCellsNotContiguousException, CannotCreateOperationException {
         int[][] groupMap = new int[size][size];
 
         if (!generateGroups(groupMap, 0, 0, 1))
@@ -198,21 +196,15 @@ public class KenKenGenerator {
      * @param nextGroup  the index of the next group to be generated
      * @return true if groups are generated successfully, false otherwise
      */
-	private boolean generateGroups(int[][] groupMap, int row, int col, int nextGroup) throws ShapeCannotFitKenKenException {
+	private boolean generateGroups(int[][] groupMap, int row, int col, int nextGroup)  {
 //		System.out.println("cell" +row+", " +col + " nextGroup" + nextGroup);
 
 		if (row == size) {
 			row = 0;
 			if (++col == size) {
 				if (hasEmptySpaces(groupMap))
-				{
-					if (emptySpaces(groupMap))
-						throw new ShapeCannotFitKenKenException(kenKen.getSize());
-					else
-						return false;
-				}
-				else return true;
-
+					fillUp(groupMap, nextGroup);
+				return true;
 			}
 		}
 
@@ -308,6 +300,7 @@ public class KenKenGenerator {
      * @param col      the current column index
      */
 	private void removeGroup(int[][] groupMap, int[][] shape, int row, int col) {
+		System.out.println("CELL: [" + row + ", " + col + "]");
 		for (int i = 0; i < shape.length; i++)
 			for (int j = 0; j < shape[0].length; j++)
 				if (shape[i][j] != 0 && row + i < size && col + j < size)
@@ -328,23 +321,12 @@ public class KenKenGenerator {
 		return false;
 	}
 
-	private boolean emptySpaces(int[][] groupMap) {
-		int emptySpaces = 0;
+	private void fillUp(int[][] groupMap, int group) {
 		for (int i = 0; i < size; i++)
-		{
 			for (int j = 0; j < size; j++)
-			{
 				if (groupMap[i][j] == 0) {
-					++emptySpaces;
+					groupMap[i][j] = ++group;
 				}
-			}
-		}
-
-		int canFit = 0;
-		for (Shape shape : topology.getShapes())
-		{
-			if (emptySpaces < shape.getSize()) ++canFit;
-		}
-		return canFit == topology.getSize();
 	}
+
 }
