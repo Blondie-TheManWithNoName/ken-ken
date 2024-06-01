@@ -29,7 +29,7 @@ public class KenKenGenerator {
      * @param allowedOperations the list of allowed operation for generating the groups
 	 * @throws OperandsDoNotMatchException if the number of operands does not match the topology size
      */
-	public KenKenGenerator(int size, int fixedValues, Topology topology, List<Class<? extends Operation>> allowedOperations) throws OperandsDoNotMatchException {
+	public KenKenGenerator(int size, int fixedValues, Topology topology, List<Class<? extends Operation>> allowedOperations) throws ShapesAndOperationsDoNotMatchException, OperandsDoNotMatchException, CannotCreateOperationException {
         this.size = size;
         this.fixedValues = fixedValues;
         this.topology = topology;
@@ -38,13 +38,20 @@ public class KenKenGenerator {
 				try {
 					OperationLimitedOperands op = (OperationLimitedOperands) OperationFactory.createOperation(operation, 0);
 					int fit = 0;
-					for (int i =0; i < topology.getSize(); ++i) {
+					for (int i = 0; i < topology.getSize(); ++i) {
 						if (op.getNOperands() != topology.getShape(i).getSize()) ++fit;
 					}
-					if (fit == topology.getSize())
-						throw new OperandsDoNotMatchException(op.getSymbol(), topology.getShape(0).getSize(), op.getNOperands());
+					if (fit == topology.getSize()) {
+//						allowedOperations.remove(operation);
+						throw new ShapesAndOperationsDoNotMatchException(op.getSymbol());
+					}
+				} catch (ShapesAndOperationsDoNotMatchException e) {
+					// Handle the exception (e.g., log the message and continue)
+					System.err.println("Warning: " + e.getMessage());
+					// Continue with the next operation
+				}
 
-				} catch (CannotCreateOperationException ignored) {}
+
 			}
         this.allowedOperations = allowedOperations;
     }

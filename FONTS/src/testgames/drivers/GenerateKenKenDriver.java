@@ -28,13 +28,13 @@ public class GenerateKenKenDriver {
     private final ModelController controller = new ModelController();
     private final Scanner scanner = new Scanner(System.in);
 
-    public KenKen generate() throws OperandsDoNotMatchException {
+    public KenKen generate() throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
         parametersKenKen();
 
         return controller.getActiveKenKen();
     }
 
-    public void parametersKenKen() throws OperandsDoNotMatchException {
+    public void parametersKenKen() throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
         int size, fixedValues, choice;
         Topology topology;
         List<String> operationSymbols = new ArrayList<>(operations.keySet());

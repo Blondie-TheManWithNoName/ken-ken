@@ -1,6 +1,8 @@
 package presentation.controllers;
 
+import exceptions.CannotCreateOperationException;
 import exceptions.OperandsDoNotMatchException;
+import exceptions.ShapesAndOperationsDoNotMatchException;
 import presentation.PresentationController;
 import presentation.views.ChooseView;
 
@@ -29,7 +31,9 @@ public class ChooseController implements ActionListener {
 			//view.setVisible(false);
             try {
                 controller.showPlayView(5);
-            } catch (OperandsDoNotMatchException ex) {
+            } catch (ShapesAndOperationsDoNotMatchException ex) {
+                System.out.println("Will not use it");
+            } catch (CannotCreateOperationException | OperandsDoNotMatchException ex) {
                 throw new RuntimeException(ex);
             }
         } else if (e.getActionCommand().equals(BACK_AC)) {

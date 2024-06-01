@@ -47,10 +47,9 @@ public class OperationFactory {
 			}
 			try {
 				createdOperation.calculate(operands);
-//				if (random.nextBoolean())
-//					return createOperation(operation, 0);
 				validOperations.add(operation);
-			} catch (OperandsDoNotMatchException | NonIntegerResultException ignored) {}
+			} catch (OperandsDoNotMatchException | NonIntegerResultException ignored) {
+			}
 		}
 
 		return createOperation(validOperations.get(random.nextInt(validOperations.size())), 0);

@@ -2,6 +2,8 @@ package tests;
 
 import java.util.List;
 
+import exceptions.CannotCreateOperationException;
+import exceptions.ShapesAndOperationsDoNotMatchException;
 import org.junit.*;
 
 import exceptions.OperandsDoNotMatchException;
@@ -38,6 +40,10 @@ public class KenKenGeneratorTest {
             generator = new KenKenGenerator(size, fixedCells, topology, allowedOperations);
         } catch(OperandsDoNotMatchException e) {
             assert false;
+        } catch (CannotCreateOperationException e) {
+            throw new RuntimeException(e);
+        } catch (ShapesAndOperationsDoNotMatchException e) {
+            throw new RuntimeException(e);
         }
         assertTrue(generator.generate());
     }

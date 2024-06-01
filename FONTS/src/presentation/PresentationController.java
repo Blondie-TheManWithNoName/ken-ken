@@ -1,6 +1,8 @@
 package presentation;
 
+import exceptions.CannotCreateOperationException;
 import exceptions.OperandsDoNotMatchException;
+import exceptions.ShapesAndOperationsDoNotMatchException;
 import models.ModelController;
 import models.kenken.KenKenGenerator;
 import models.operations.*;
@@ -105,18 +107,18 @@ public class PresentationController {
     /**
      * Displays the play view of the application.
      */
-    public void showPlayView(int size) throws OperandsDoNotMatchException {
+    public void showPlayView(int size) throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
         List<Class<? extends Operation>> allowedOperations = new ArrayList<>(
                 Arrays.asList(
-                        OperationAddition.class
-//                        OperationSubtraction.class,
-//                        OperationMultiplication.class,
-//                        OperationDivision.class
+                        OperationAddition.class,
+                        OperationSubtraction.class,
+                        OperationMultiplication.class,
+                        OperationDivision.class
                 )
         );
         Topology topology = new Topology(Shape.L);
 //        topology.addShape(Shape.ZIGZAG);
-//        topology.addShape(Shape.CORNER);
+//        topology.addShape(Shape.DASH);
         topology.addShape(Shape.POINT);
 //
 //        topology.addShape(Shape.L);

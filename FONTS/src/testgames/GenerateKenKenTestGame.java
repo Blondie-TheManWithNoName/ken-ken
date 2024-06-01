@@ -1,6 +1,8 @@
 package testgames;
 
+import exceptions.CannotCreateOperationException;
 import exceptions.OperandsDoNotMatchException;
+import exceptions.ShapesAndOperationsDoNotMatchException;
 import models.kenken.KenKen;
 import testgames.drivers.*;
 
@@ -25,9 +27,13 @@ public class GenerateKenKenTestGame {
 		} catch (OperandsDoNotMatchException e) {
             System.out.println(e.getMessage());
             return;
-		}
+		} catch (ShapesAndOperationsDoNotMatchException e) {
+            throw new RuntimeException(e);
+        } catch (CannotCreateOperationException e) {
+            throw new RuntimeException(e);
+        }
 
-		do {
+        do {
             System.out.println("What would you like to do with the KenKen?");
             System.out.println("\t1. AI Solve");
             System.out.println("\t2. Export");
