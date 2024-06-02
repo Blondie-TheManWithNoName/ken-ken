@@ -64,9 +64,12 @@ public class PresentationController {
         //errorView = new ErrorView();
         size = 3;
         fixed = 0;
+        initializeKenKenShapesAndOperations();
 
+    }
 
-        //Aqui habria que inicializar la topologia y las operaciones con un valor por defecto que no de error al crear el kenken
+    public void initializeKenKenShapesAndOperations()
+    {
         topology = new Topology();
         topology.addShape(Shape.ZIGZAG);
         topology.addShape(Shape.DASH);
@@ -78,18 +81,17 @@ public class PresentationController {
         topology.addShape(Shape.T);
 
         allowedOperations = new ArrayList<>(
-                    Arrays.asList(
-                            OperationAddition.class,
-                            OperationSubtraction.class,
-                            OperationMultiplication.class,
-                            OperationDivision.class,
-                            OperationEquality.class,
-                            OperationGCD.class,
-                            OperationLCM.class,
-                            OperationPower.class
-                    )
-            );
-
+                Arrays.asList(
+                        OperationAddition.class,
+                        OperationSubtraction.class,
+                        OperationMultiplication.class,
+                        OperationDivision.class,
+                        OperationEquality.class,
+                        OperationGCD.class,
+                        OperationLCM.class,
+                        OperationPower.class
+                )
+        );
     }
 
     /**
