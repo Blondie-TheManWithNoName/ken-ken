@@ -17,7 +17,6 @@ import java.util.Random;
 public class ChooseProposeController implements ActionListener, ChangeListener {
 	public final static String PROPOSE_AC = "PROPOSE_";
 	public final static String BACK_AC = "BACK";
-	public static final String SIZE_AC = "SIZE";
 
 	private final PresentationController controller;
 	private final ChooseProposeView view;

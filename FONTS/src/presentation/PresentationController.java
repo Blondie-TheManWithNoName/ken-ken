@@ -217,6 +217,13 @@ public class PresentationController {
         //errorView.makeVisible();
     }
 
+    public boolean checkKenKen(KenKen kenKen)
+    {
+        mController.setActiveKenKen(kenKen);
+        mController.setAiSolve();
+        return mController.aiSolve();
+    }
+
     public void setSizeAndFixed ( int size, int fixed){
         this.size = size;
         this.fixed = fixed;

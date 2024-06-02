@@ -6,8 +6,6 @@ import models.kenken.KenKenProposer;
 import models.operations.OperationFactory;
 import presentation.PresentationController;
 import presentation.ProposeKenKenTool;
-import presentation.controllers.ChooseProposeController;
-import presentation.controllers.Generate3Controller;
 import presentation.controllers.ProposeKenKenController;
 import presentation.custom.*;
 
@@ -32,7 +30,7 @@ public class ProposeKenKenView extends MainView {
 		this.kenKenProposer = new KenKenProposer(size);
 //		this.mainMenuView = mainMenuView;
 		this.pController = controller;
-		this.controller = new ProposeKenKenController(pController, this);
+		this.controller = new ProposeKenKenController(pController, this, kenKenProposer);
 		this.toolBar = new JProposeKenKenToolBar(this.controller);
 		this.kenKenPanel = new JKenKenPanel(kenKenProposer.getKenKen());
 		start();
@@ -119,10 +117,16 @@ public class ProposeKenKenView extends MainView {
 			return;
 		}
 
-//		kenKenProposer.getKenKen();
+		if (pController.checkKenKen(kenKenProposer.getKenKen()))
+		{
+
+
+		}
+		else {
+			JOptionPane.showMessageDialog(this, "KenKen cannot be solved.", "Fail", JOptionPane.ERROR_MESSAGE);
+		}
 
 		// TODO: do something with the KenKen
-		JOptionPane.showMessageDialog(this, "KenKen generated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public void exit() {
@@ -151,7 +155,7 @@ public class ProposeKenKenView extends MainView {
 
 		JPanel buttonsPanel = new JPanel(new GridLayout(2, 1));
 		continueButton.addActionListener(controller);
-		continueButton.setActionCommand(ProposeKenKenController.CONTINUE_AC);
+		continueButton.setActionCommand(ProposeKenKenController.PLAY_AC);
 		buttonsPanel.add(continueButton);
 		cancelButton.addActionListener(controller);
 //		cancelButton.setActionCommand(ProposeKenKenController.CANCEL_AC);
@@ -208,7 +212,7 @@ public class ProposeKenKenView extends MainView {
 		gridbag.setConstraints(toolBar, c);
 		add(toolBar);
 		c.gridx = 2;
-		makeButtonFirst("PLAY", controller, ProposeKenKenController.CONTINUE_AC);
+		makeButtonFirst("PLAY", controller, ProposeKenKenController.PLAY_AC);
 
 		c.gridy = 5;
 		c.gridx = 0;
@@ -283,9 +287,5 @@ public class ProposeKenKenView extends MainView {
 		activeTool = null;
 		toolBar.unsetActiveAll();
 		setCursor(Cursor.getDefaultCursor());
-	}
-
-	public void makeVisible() {
-		setVisible(true);
 	}
 }
