@@ -80,7 +80,7 @@ public class KenKenGenerator {
 			System.out.println("OKEY" + e);
 
 			return false;
-		} 
+		}
 
         kenKen.erase();
 		return true;

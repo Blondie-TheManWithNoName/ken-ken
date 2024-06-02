@@ -16,7 +16,9 @@ public class JSquareLabel extends JLabel {
 
 		public JSquareLabel(String text) {
 		super(text);
-		setPreferredSize(new Dimension(100, 30));
+			setPreferredSize(new Dimension(100, 30));
+			setMaximumSize(new Dimension(100, 30));
+			setMinimumSize(new Dimension(100, 30));
 		Font font = getFont().deriveFont(Font.BOLD, 42);
 		setFont(font);
 		setBackground(Color.decode("#775AD8"));

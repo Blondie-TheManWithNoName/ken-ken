@@ -13,9 +13,13 @@ public class JMainCheckBox extends JCheckBox {
 		setFocusPainted(false);
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-		setIcon(new ImageIcon(unselected));
-		setSelectedIcon(new ImageIcon(selected));
-		setPreferredSize(new Dimension(5, 5));
+		ImageIcon unselectedIcon = new ImageIcon(unselected);
+		ImageIcon selectedIcon = new ImageIcon(selected);
+
+		setIcon(new ImageIcon(unselectedIcon.getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT)));
+		setSelectedIcon(new ImageIcon(selectedIcon.getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT)));
+		setPreferredSize(new Dimension(15, 10));
+
 
 	}
 

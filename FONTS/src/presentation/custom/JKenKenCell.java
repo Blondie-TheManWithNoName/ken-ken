@@ -7,7 +7,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class JKenKenCell extends JButton {
-	public static final int CELL_SIZE = 75;
+	public static int CELL_SIZE = 75;
 
 	private final int row;
 	private final int col;

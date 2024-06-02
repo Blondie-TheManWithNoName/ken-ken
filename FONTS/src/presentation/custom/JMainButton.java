@@ -14,6 +14,7 @@ public class JMainButton extends JButton {
 //		setFont(font);
 		setOpaque(true);
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		setFont(new Font("SansSerif", Font.BOLD, 18));
 		setFocusPainted(false);
 		setPreferredSize(new Dimension(100, 50));
 		init(colors);
@@ -24,7 +25,7 @@ public class JMainButton extends JButton {
 				{
 					setBackground(Color.decode(colors.getBackgroundHover()));
 					setForeground(Color.decode(colors.getTextHover()));
-					Border border = BorderFactory.createLineBorder(Color.decode(colors.getBorderHover()), 5);
+					Border border = BorderFactory.createLineBorder(Color.decode(colors.getBorderHover()), 6);
 					setBorder(border);
 				}
 
@@ -40,7 +41,6 @@ public class JMainButton extends JButton {
 
 	public JMainButton(String text, ButtonColors colors, int width, int height) {
 		this(text, colors);
-		setFont(new Font("SansSerif", Font.BOLD, 16));
 		setPreferredSize(new Dimension(width, height));
 		setMinimumSize(new Dimension(width, height));
 		setMaximumSize(new Dimension(width, height));
@@ -58,14 +58,14 @@ public class JMainButton extends JButton {
 		{
 			setBackground(Color.decode(colors.getBackgroundHover()));
 			setForeground(Color.decode(colors.getTextHover()));
-			Border border = BorderFactory.createLineBorder(Color.decode(colors.getBorderHover()), 5);
+			Border border = BorderFactory.createLineBorder(Color.decode(colors.getBorderHover()), 6);
 			setBorder(border);
 		}
 
 		else{
 			setBackground(Color.decode(colors.getBackground()));
 			setForeground(Color.decode(colors.getText()));
-			Border border = BorderFactory.createLineBorder(Color.decode(colors.getBorder()), 5);
+			Border border = BorderFactory.createLineBorder(Color.decode(colors.getBorder()), 6);
 			setBorder(border);
 		}
 	}
