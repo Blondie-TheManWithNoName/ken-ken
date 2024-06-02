@@ -11,6 +11,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class ChooseController implements ActionListener, ChangeListener {
 	public final static String PLAY_AC = "PLAY_";
@@ -29,13 +30,11 @@ public class ChooseController implements ActionListener, ChangeListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().startsWith(PLAY_AC)) {
-//			System.out.println("click play");
-//			String[] parts = e.getActionCommand().split("_");
-//			int size = Integer.parseInt(parts[1]);
-//			System.out.println("SIZE: " + size);
-			//view.setVisible(false);
             try {
-                controller.showPlayView();
+				controller.initializeKenKenShapesAndOperations();
+				controller.setSizeAndFixed(size, new Random().nextInt(size));
+				controller.generateKenKen();
+				controller.showPlayView();
             } catch (ShapesAndOperationsDoNotMatchException ex) {
                 System.out.println("Will not use it");
             } catch (CannotCreateOperationException | OperandsDoNotMatchException ex) {
