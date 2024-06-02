@@ -210,7 +210,8 @@ public class PresentationController {
         this.fixed = fixed;
     }
 
-    public void setTopologyAndOperations () {
-
+    public void setTopologyAndOperations (List<Class<? extends Operation>> allowedOperations, Topology topology) {
+        this.topology = topology;
+        this.allowedOperations = allowedOperations;
     }
 }
