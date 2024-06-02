@@ -35,7 +35,6 @@ public class KenKenGenerator {
         this.topology = topology;
 		for (Class<? extends Operation> operation : allowedOperations)
 			if (OperationLimitedOperands.class.isAssignableFrom(operation)) {
-				try {
 					OperationLimitedOperands op = (OperationLimitedOperands) OperationFactory.createOperation(operation, 0);
 					int fit = 0;
 					for (int i = 0; i < topology.getSize(); ++i) {
@@ -45,11 +44,6 @@ public class KenKenGenerator {
 //						allowedOperations.remove(operation);
 						throw new ShapesAndOperationsDoNotMatchException(op.getSymbol());
 					}
-				} catch (ShapesAndOperationsDoNotMatchException e) {
-					// Handle the exception (e.g., log the message and continue)
-					System.err.println("Warning: " + e.getMessage());
-					// Continue with the next operation
-				}
 
 
 			}

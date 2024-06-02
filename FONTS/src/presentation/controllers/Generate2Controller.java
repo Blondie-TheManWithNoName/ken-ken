@@ -7,8 +7,10 @@ import models.operations.*;
 import models.topologies.Shape;
 import models.topologies.Topology;
 import presentation.PresentationController;
+import presentation.custom.JMainOptionPane;
 import presentation.views.GenerateView2;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -59,7 +61,6 @@ public class Generate2Controller implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(NEXT_AC)) {
             System.out.println("click next");
-            view.setVisible(false);
 
             List<Class<? extends Operation>> allowedOperations = new ArrayList<>();
 
@@ -76,9 +77,14 @@ public class Generate2Controller implements ActionListener {
             }
             try {
                 controller.showGenerateView3(allowedOperations, topology);
+                view.setVisible(false);
+
             } catch (CannotCreateOperationException | OperandsDoNotMatchException |
                      ShapesAndOperationsDoNotMatchException ex) {
-                throw new RuntimeException(ex);
+//                System.err.println("Warning: " + );
+                JMainOptionPane.showMessageDialog(view, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+
+//                throw new RuntimeException(ex);
             }
         } else if (e.getActionCommand().equals(BACK_AC)) {
             System.out.println("click back");

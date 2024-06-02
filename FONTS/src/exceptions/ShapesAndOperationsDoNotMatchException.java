@@ -9,6 +9,6 @@ public class ShapesAndOperationsDoNotMatchException extends Exception {
 	 * @param symbol The symbol that the operands do not match for.
 	 */
 	public ShapesAndOperationsDoNotMatchException(String symbol) {
-		super(String.format("The operation with symbol %s, will not be used because it does not match with any chosen shape.", symbol));
+		super(String.format("The operation with symbol %s, cannot be used because it does not match with any chosen shape.", symbol));
 	}
 }

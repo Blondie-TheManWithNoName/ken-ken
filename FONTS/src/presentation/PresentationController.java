@@ -180,8 +180,6 @@ public class PresentationController {
         mController.generateKenKen(this.size, this.fixed, topology, allowedOperations);
         return mController.getActiveKenKen();
     }
-    // 3 -> 20
-    // 8 -> 10
 
     /**
      * Displays the play view of the application.

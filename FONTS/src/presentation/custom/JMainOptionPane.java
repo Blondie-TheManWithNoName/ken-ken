@@ -18,7 +18,7 @@ public class JMainOptionPane extends JOptionPane {
 
 
         // Set additional customizations
-        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 25));
+        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 15));
         UIManager.put("OptionPane.messageForeground", Color.decode("#375281"));
         UIManager.put("Button.background", Color.decode("#FAFAFA"));
         UIManager.put("Button.foreground", Color.decode("#375281"));
