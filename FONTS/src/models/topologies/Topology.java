@@ -17,7 +17,9 @@ public class Topology {
 //	public Topology(int[][] shape) {
 //		this.shape = shape;
 //	}
-
+	public Topology() {
+		shapes = new ArrayList<>();
+	}
 	/**
 	 * Constructor that receives a Shape object and extracts the matrix of 1s and 0s that represents the shape of the block.
 	 * @param shape Shape object that represents the shape of the block.
