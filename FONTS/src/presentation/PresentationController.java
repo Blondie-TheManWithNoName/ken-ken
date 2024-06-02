@@ -4,6 +4,7 @@ import exceptions.CannotCreateOperationException;
 import exceptions.OperandsDoNotMatchException;
 import exceptions.ShapesAndOperationsDoNotMatchException;
 import models.ModelController;
+import models.kenken.KenKen;
 import models.kenken.KenKenGenerator;
 import models.operations.*;
 import models.topologies.Shape;
@@ -28,6 +29,7 @@ public class PresentationController {
     //private ProposeView proposeView;
     private final GenerateView1 generateView1;
     private final GenerateView2 generateView2;
+    private GenerateView3 generateView3;
     private KenKenPlayView playView;
     //private PauseView pauseView;
     //private SolvedView solvedView;
@@ -49,6 +51,7 @@ public class PresentationController {
         //proposeView = new ProposeView();
         generateView1 = new GenerateView1(this);
         generateView2 = new GenerateView2(this);
+//        generateView3 = new GenerateView3(this);
         //importView = new importView(this);
         //pauseView = new PauseView();
         //solvedView = new SolvedView();
@@ -105,6 +108,23 @@ public class PresentationController {
     }
 
     /**
+     * Displays the generate view of the application.
+     */
+    public void showGenerateView3(List<Class<? extends Operation>> allowedOperations, Topology topology) throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
+
+        if (mController.generateKenKen(9, 0, topology, allowedOperations)){
+
+            generateView3 = new GenerateView3(this, allowedOperations, topology);
+            generateView3.makeVisible();
+        }
+    }
+
+
+    public KenKen generateKenKen(List<Class<? extends Operation>> allowedOperations, Topology topology) throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
+        mController.generateKenKen(3, 0, topology, allowedOperations);
+        return mController.getActiveKenKen();
+    }
+    /**
      * Displays the play view of the application.
      */
     public void showPlayView(int size) throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
@@ -113,13 +133,17 @@ public class PresentationController {
                         OperationAddition.class,
                         OperationSubtraction.class,
                         OperationMultiplication.class,
-                        OperationDivision.class
+                        OperationDivision.class,
+                        OperationEquality.class,
+                        OperationGCD.class,
+                        OperationLCM.class,
+                        OperationPower.class
                 )
         );
-        Topology topology = new Topology(Shape.L);
+        Topology topology = new Topology(Shape.BLOCK);
 //        topology.addShape(Shape.ZIGZAG);
 //        topology.addShape(Shape.DASH);
-        topology.addShape(Shape.POINT);
+//        topology.addShape(Shape.POINT);
 //
 //        topology.addShape(Shape.L);
 //        topology.addShape(Shape.I);
@@ -127,7 +151,7 @@ public class PresentationController {
 //        topology.addShape(Shape.J);
 //        topology.addShape(Shape.T);
 
-        if (mController.generateKenKen(size, 0, topology, allowedOperations)){
+        if (mController.generateKenKen(9, 0, topology, allowedOperations)){
 
             playView = new KenKenPlayView(mController.getActiveKenKen());
             playView.makeVisible();
