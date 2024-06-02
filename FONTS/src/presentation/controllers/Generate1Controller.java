@@ -42,12 +42,16 @@ public class Generate1Controller implements ActionListener, ChangeListener {
     @Override
     public void stateChanged(ChangeEvent e) {
         JMainSpinner spinner = (JMainSpinner) e.getSource();
+        SpinnerNumberModel model = (SpinnerNumberModel) spinner.getModel();
         String spinnerName = spinner.getName();
+        int max = size*size;
 
         if (spinnerName.equals("sizeSpinner")) {
             size = (int) spinner.getValue();
             System.out.println("Nuevo valor del spinner de tamaño: " + size);
         } else if (spinnerName.equals("fixedSpinner")) {
+            model.setMaximum(max);
+            if (fixed > (max)) model.setValue(size*size);
             fixed = (int) spinner.getValue();
             System.out.println("Nuevo valor del spinner fijo: " + fixed);
         }
