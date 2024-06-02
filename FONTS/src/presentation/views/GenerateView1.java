@@ -44,6 +44,7 @@ public class GenerateView1 extends MainView {
 		c.gridx = 3;
 		c.gridwidth = 1;
 		makeSquare("");
+
 	}
 
 	private void addSecondRow() {
@@ -57,6 +58,7 @@ public class GenerateView1 extends MainView {
 		makeSquare("<html><p style='margin-bottom: -7;'>S I</p><p style='margin-top: -7;'>ZE</p></html>");
 
 		c.gridx = 2;
+		c.gridheight = 1;
 		makeSpinnerSize();
 
 		c.gridx = 3;
@@ -67,6 +69,9 @@ public class GenerateView1 extends MainView {
 
 		c.gridx = 0;
 		c.gridheight = 1;
+		makeSquare("");
+
+		c.gridx = 2;
 		makeSquare("");
 	}
 
@@ -81,6 +86,7 @@ public class GenerateView1 extends MainView {
 		makeSquare("FIXED");
 
 		c.gridx = 2;
+		c.gridheight = 1;
 		makeSpinnerFixed();
 
 		c.gridx = 3;
@@ -89,6 +95,9 @@ public class GenerateView1 extends MainView {
 
 		c.gridy = 4;
 		makeNextButton(controller, Generate1Controller.NEXT_AC);
+
+		c.gridx = 2;
+		makeSquare("");
 	}
 
 }
