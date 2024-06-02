@@ -35,7 +35,7 @@ public class Generate3Controller implements ActionListener {
         } else if (e.getActionCommand().equals(PLAY_AC)) {
             view.setVisible(false);
             try {
-                controller.showPlayView(0);
+                controller.showPlayView();
             } catch (OperandsDoNotMatchException | ShapesAndOperationsDoNotMatchException |
                      CannotCreateOperationException ex) {
                 throw new RuntimeException(ex);

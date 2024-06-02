@@ -59,7 +59,7 @@ public class GenerateView1 extends MainView {
 
 		c.gridx = 2;
 		c.gridheight = 1;
-		makeSpinnerSize();
+		makeSpinnerSize(controller);
 
 		c.gridx = 3;
 		c.gridheight = 2;
@@ -87,7 +87,7 @@ public class GenerateView1 extends MainView {
 
 		c.gridx = 2;
 		c.gridheight = 1;
-		makeSpinnerFixed();
+		makeSpinnerFixed(controller);
 
 		c.gridx = 3;
 		c.gridheight = 1;

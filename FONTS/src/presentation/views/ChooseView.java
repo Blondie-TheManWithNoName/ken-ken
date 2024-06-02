@@ -5,7 +5,10 @@ import presentation.controllers.ChooseController;
 import presentation.controllers.MainMenuController;
 import presentation.custom.JMainSpinner;
 
+import presentation.custom.*;
 import javax.swing.*;
+import javax.swing.event.*;
+import java.awt.event.*;
 
 public class ChooseView extends MainView {
 	private final PresentationController pController;
@@ -49,7 +52,7 @@ public class ChooseView extends MainView {
 
 		c.gridx = 2;
 		c.gridheight = 1;
-		makeSpinnerSize();
+		makeSpinnerSize(controller);
 
 		c.gridx = 3;
 		c.gridheight = 2;

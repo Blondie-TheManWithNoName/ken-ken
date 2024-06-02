@@ -3,9 +3,11 @@ package presentation.views;
 import presentation.custom.*;
 
 import javax.swing.*;
+import javax.swing.event.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class MainView extends JFrame {
 	protected final GridBagLayout gridbag = new GridBagLayout();
@@ -128,14 +130,18 @@ public class MainView extends JFrame {
 	}
 
 
-	public void makeSpinnerSize() {
+	public void makeSpinnerSize(ChangeListener listener) {
 		JMainSpinner spinner = new JMainSpinner(new SpinnerNumberModel(3, 3, 9, 1));
+		spinner.setName("sizeSpinner");
+		spinner.addChangeListener(listener);
 		gridbag.setConstraints(spinner, c);
 		add(spinner);
 	}
 
-	public void makeSpinnerFixed() {
+	public void makeSpinnerFixed(ChangeListener listener) {
 		JMainSpinner spinner = new JMainSpinner(new SpinnerNumberModel(0, 0, 10, 1));
+		spinner.setName("fixedSpinner");
+		spinner.addChangeListener(listener);
 		gridbag.setConstraints(spinner, c);
 		add(spinner);
 	}
