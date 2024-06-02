@@ -38,8 +38,8 @@ public class PresentationController {
 
     private int size;
     private int fixed;
-    private final Topology topology;
-    private final List<Class<? extends Operation>> allowedOperations;
+    private Topology topology;
+    private List<Class<? extends Operation>> allowedOperations;
 
     /**
      * Constructs a PresentationController and initializes various views.
@@ -123,15 +123,17 @@ public class PresentationController {
      */
     public void showGenerateView3(List<Class<? extends Operation>> allowedOperations, Topology topology) throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
 
+        this.topology = topology;
+        this.allowedOperations = allowedOperations;
         if (mController.generateKenKen(9, 0, topology, allowedOperations)) {
 
-            generateView3 = new GenerateView3(this, allowedOperations, topology);
+            generateView3 = new GenerateView3(this);
             generateView3.makeVisible();
         }
     }
 
 
-    public KenKen generateKenKen(List<Class<? extends Operation>> allowedOperations, Topology topology) throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
+    public KenKen generateKenKen() throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
         mController.generateKenKen(3, 0, topology, allowedOperations);
         mController.generateKenKen(this.size, this.fixed, topology, allowedOperations);
         return mController.getActiveKenKen();
