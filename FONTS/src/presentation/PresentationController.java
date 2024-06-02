@@ -64,9 +64,32 @@ public class PresentationController {
         //errorView = new ErrorView();
         size = 3;
         fixed = 0;
+
+
         //Aqui habria que inicializar la topologia y las operaciones con un valor por defecto que no de error al crear el kenken
-        //topology;
-        //allowedOperations;
+        topology = new Topology();
+        topology.addShape(Shape.ZIGZAG);
+        topology.addShape(Shape.DASH);
+        topology.addShape(Shape.POINT);
+        topology.addShape(Shape.L);
+        topology.addShape(Shape.I);
+        topology.addShape(Shape.BLOCK);
+        topology.addShape(Shape.J);
+        topology.addShape(Shape.T);
+
+        allowedOperations = new ArrayList<>(
+                    Arrays.asList(
+                            OperationAddition.class,
+                            OperationSubtraction.class,
+                            OperationMultiplication.class,
+                            OperationDivision.class,
+                            OperationEquality.class,
+                            OperationGCD.class,
+                            OperationLCM.class,
+                            OperationPower.class
+                    )
+            );
+
     }
 
     /**
@@ -134,7 +157,6 @@ public class PresentationController {
 
 
     public KenKen generateKenKen() throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
-        mController.generateKenKen(3, 0, topology, allowedOperations);
         mController.generateKenKen(this.size, this.fixed, topology, allowedOperations);
         return mController.getActiveKenKen();
     }
@@ -144,43 +166,10 @@ public class PresentationController {
      */
     public void showPlayView () throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
         JKenKenCell.CELL_SIZE = 75;
-        if (size == 0) {
-            playView = new KenKenPlayView(mController.getActiveKenKen());
-            playView.makeVisible();
-        } else {
+        playView = new KenKenPlayView(mController.getActiveKenKen());
+        playView.makeVisible();
 
 
-            List<Class<? extends Operation>> allowedOperations = new ArrayList<>(
-                    Arrays.asList(
-                            OperationAddition.class,
-                            OperationSubtraction.class,
-                            OperationMultiplication.class,
-                            OperationDivision.class,
-                            OperationEquality.class,
-                            OperationGCD.class,
-                            OperationLCM.class,
-                            OperationPower.class
-                    )
-            );
-            Topology topology = new Topology(Shape.BLOCK);
-//        topology.addShape(Shape.ZIGZAG);
-//        topology.addShape(Shape.DASH);
-//        topology.addShape(Shape.POINT);
-//
-//        topology.addShape(Shape.L);
-//        topology.addShape(Shape.I);
-//        topology.addShape(Shape.BLOCK);
-//        topology.addShape(Shape.J);
-//        topology.addShape(Shape.T);
-
-
-            if (mController.generateKenKen(this.size, this.fixed, topology, allowedOperations)) {
-
-                playView = new KenKenPlayView(mController.getActiveKenKen());
-                playView.makeVisible();
-            }
-
-        }
     }
 
     /**

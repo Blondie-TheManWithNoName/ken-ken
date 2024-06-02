@@ -173,8 +173,11 @@ public class KenKenPlayView extends JFrame {
 		startTime = startTime - 1800000;
 		for (int row = 0; row < kenKen.getSize(); row++) {
 			for (int col = 0; col < kenKen.getSize(); col++) {
-				kenKenPanel.setValue(row, col, kenKen.boardSolved[row][col], false);
-				kenKen.setPosition(row, col, kenKen.boardSolved[row][col]);
+				if (!kenKen.getCell(row, col).isFixed())
+				{
+					kenKenPanel.setValue(row, col, kenKen.boardSolved[row][col], false);
+					kenKen.setPosition(row, col, kenKen.boardSolved[row][col]);
+				}
 			}
 		}
 	}

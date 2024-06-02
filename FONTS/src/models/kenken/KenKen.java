@@ -111,6 +111,8 @@ public class KenKen {
 		if (value < 1 || value > size)
 			throw new ValueOutOfBoundsException(value);
 		board[row][col].setFixedValue(value);
+		boardSolved[row][col] = value;
+
 	}
 
 	/**
