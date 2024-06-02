@@ -1,5 +1,6 @@
 package presentation.controllers;
 
+import presentation.PresentationController;
 import presentation.custom.JToolBarItem;
 import presentation.views.ProposeKenKenView;
 
@@ -11,9 +12,11 @@ public class ProposeKenKenController implements ActionListener {
 	public final static String CONTINUE_AC = "CONTINUE";
 	public final static String BACK_AC = "BACK";
 
+	private final PresentationController controller;
 	private final ProposeKenKenView view;
 
-	public ProposeKenKenController(ProposeKenKenView view) {
+	public ProposeKenKenController(PresentationController controller, ProposeKenKenView view) {
+		this.controller = controller;
 		this.view = view;
 	}
 
@@ -29,7 +32,8 @@ public class ProposeKenKenController implements ActionListener {
 		} else if (e.getActionCommand().equals(CONTINUE_AC)) {
 			view.generateGroups();
 		} else if (e.getActionCommand().equals(BACK_AC)) {
-			view.exit();
+			view.setVisible(false);
+			controller.showChooseProposeView();
 		}
 	}
 }

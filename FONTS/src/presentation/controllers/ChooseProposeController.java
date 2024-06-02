@@ -31,6 +31,7 @@ public class ChooseProposeController implements ActionListener, ChangeListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().startsWith(PROPOSE_AC)) {
+			view.setVisible(false);
             controller.setSizeAndFixed(size, 0);
             controller.showProposeView();
         } else if (e.getActionCommand().equals(BACK_AC)) {

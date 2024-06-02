@@ -135,7 +135,7 @@ public class PresentationController {
      */
     public void showProposeView() {
         JKenKenCell.CELL_SIZE = 25;
-        proposeView = new ProposeKenKenView(this.size);
+        proposeView = new ProposeKenKenView(this, this.size);
         proposeView.makeVisible();
     }
 

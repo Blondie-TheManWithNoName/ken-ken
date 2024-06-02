@@ -4,7 +4,9 @@ import exceptions.*;
 import models.kenken.Group;
 import models.kenken.KenKenProposer;
 import models.operations.OperationFactory;
+import presentation.PresentationController;
 import presentation.ProposeKenKenTool;
+import presentation.controllers.ChooseProposeController;
 import presentation.controllers.Generate3Controller;
 import presentation.controllers.ProposeKenKenController;
 import presentation.custom.*;
@@ -21,15 +23,17 @@ public class ProposeKenKenView extends MainView {
 	private final JCustomButton cancelButton = new JCustomButton("Cancel");
 	private final JCustomButton continueButton = new JCustomButton("Continue");
 
-	private final ProposeKenKenController controller = new ProposeKenKenController(this);
-
+	private final ProposeKenKenController controller;
+	private final PresentationController pController;
 	private ProposeKenKenTool activeTool;
 	private Group selectedGroup;
 
-	public ProposeKenKenView(int size) {
+	public ProposeKenKenView(PresentationController controller, int size) {
 		this.kenKenProposer = new KenKenProposer(size);
 //		this.mainMenuView = mainMenuView;
-		this.toolBar = new JProposeKenKenToolBar(controller);
+		this.pController = controller;
+		this.controller = new ProposeKenKenController(pController, this);
+		this.toolBar = new JProposeKenKenToolBar(this.controller);
 		this.kenKenPanel = new JKenKenPanel(kenKenProposer.getKenKen());
 		start();
 	}
