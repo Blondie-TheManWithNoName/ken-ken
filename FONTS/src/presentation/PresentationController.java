@@ -35,6 +35,8 @@ public class PresentationController {
     private PauseView pauseView;
     //private SolvedView solvedView;
     //private ErrorView errorView;
+    private int minutes;
+    private int seconds;
 
     private int size;
     private int fixed;
@@ -60,7 +62,6 @@ public class PresentationController {
         generateView2 = new GenerateView2(this);
 //        generateView3 = new GenerateView3(this);
         //importView = new importView(this);
-        pauseView = new PauseView(this);
         //solvedView = new SolvedView();
         //errorView = new ErrorView();
         size = 3;
@@ -94,6 +95,16 @@ public class PresentationController {
                 )
         );
     }
+
+    public void setTime(int minutes, int seconds)
+    {
+        this.minutes = minutes;
+        this.seconds = seconds;
+    }
+
+    public int getMinutes(){
+        return this.minutes;}
+    public int getSeconds(){return this.seconds;}
 
     /**
      * Initializes the presentation and makes the main view visible.
@@ -180,8 +191,10 @@ public class PresentationController {
         JKenKenCell.CELL_SIZE = 75;
         playView = new KenKenPlayView(this, mController.getActiveKenKen());
         playView.makeVisible();
+    }
 
-
+    public void resumePlayView () throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
+        playView.makeVisible();
     }
 
     /**
@@ -197,6 +210,7 @@ public class PresentationController {
      * Displays the pause view of the application.
      */
     public void showPauseView () {
+        pauseView = new PauseView(this, minutes, seconds);
         pauseView.makeVisible();
     }
 

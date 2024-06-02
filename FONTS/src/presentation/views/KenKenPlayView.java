@@ -22,6 +22,9 @@ public class KenKenPlayView extends JFrame {
 	protected final JLabel elapsedTimeLabel;
 	private long startTime;
 
+	private int minutes;
+	private int seconds;
+	private Timer timer;
 	protected final  JMainButton solve = new JSmallButton("SOLVE");
 	protected final  JMainButton hint = new JSmallButton("HINT");
 	private JKenKenCell selected;
@@ -213,22 +216,31 @@ public class KenKenPlayView extends JFrame {
 	}
 
 	private void startTimer() {
-		Timer timer = new Timer(1000, new ActionListener() {
+		timer = new Timer(1000, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				long currentTime = System.currentTimeMillis();
 				long elapsedTime = currentTime - startTime;
 				long elapsedSeconds = elapsedTime / 1000;
-				long minutes = elapsedSeconds / 60;
-				long seconds = elapsedSeconds % 60;
+				minutes = (int) (elapsedSeconds / 60);
+				seconds = (int) (elapsedSeconds % 60);
 				elapsedTimeLabel.setText(String.format("<html><div style='padding: 10px;'>%02d:%02d</div></html>", minutes, seconds));
 			}
 		});
 		timer.start();
 	}
 
+	public void stopTime()
+	{
+		timer.stop();
+	}
+
+	public int getMinutes(){return this.minutes;}
+	public int getSeconds(){return this.seconds;}
+
 	public void makeVisible() {
 		setVisible(true);
+		timer.start();
 	}
 }

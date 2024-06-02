@@ -20,6 +20,7 @@ public class KenKenPlayController implements ActionListener, KeyListener {
 	private final KenKenPlayView view;
 	private final PresentationController controller;
 
+
 	public KenKenPlayController(PresentationController controller, KenKenPlayView view) {
 		this.view = view;
 		this.controller = controller;
@@ -53,11 +54,12 @@ public class KenKenPlayController implements ActionListener, KeyListener {
                 throw new RuntimeException(ex);
             }
         }
-		else if (e.getActionCommand().equals(PAUSE_AC))
+		else if (e.getActionCommand().startsWith(PAUSE_AC))
 		{
+			view.stopTime();
+			controller.setTime(view.getMinutes(), view.getSeconds());
 			view.setVisible(false);
 			controller.showPauseView();
-
 		}
 	}
 

@@ -9,11 +9,16 @@ public class PauseView extends MainView {
 
 	private final PauseController controller;
 	private final PresentationController pController;
+	private final int minutes;
+	private final int seconds;
 
-	public PauseView(PresentationController controller) {
+
+	public PauseView(PresentationController controller, int minutes, int seconds) {
 		super();
 		this.pController = controller;
 		this.controller = new PauseController(controller, this);
+		this.minutes = minutes;
+		this.seconds = seconds;
 		start();
 	}
 
@@ -30,7 +35,7 @@ public class PauseView extends MainView {
 		c.gridheight = 1;
 		makeButtonSecond("RESUME", controller, PauseController.RESUME_AC);
 		c.gridheight = 2;
-		makeSquare("1:23");
+		makeSquare(String.format("%02d:%02d", minutes, seconds));
 		makeSquare("");
 
 		c.gridy = 2;

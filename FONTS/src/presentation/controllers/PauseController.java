@@ -30,7 +30,7 @@ public class PauseController implements ActionListener {
 			System.out.println("click resume");
 			view.setVisible(false);
             try {
-                controller.showPlayView();
+                controller.resumePlayView();
             } catch (OperandsDoNotMatchException | ShapesAndOperationsDoNotMatchException |
                      CannotCreateOperationException ex) {
                 throw new RuntimeException(ex);
