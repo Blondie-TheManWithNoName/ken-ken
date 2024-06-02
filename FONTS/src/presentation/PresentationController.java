@@ -88,10 +88,7 @@ public class PresentationController {
                         OperationSubtraction.class,
                         OperationMultiplication.class,
                         OperationDivision.class,
-                        OperationEquality.class,
-                        OperationGCD.class,
-                        OperationLCM.class,
-                        OperationPower.class
+                        OperationEquality.class
                 )
         );
     }
@@ -183,12 +180,15 @@ public class PresentationController {
         mController.generateKenKen(this.size, this.fixed, topology, allowedOperations);
         return mController.getActiveKenKen();
     }
+    // 3 -> 20
+    // 8 -> 10
 
     /**
      * Displays the play view of the application.
      */
     public void showPlayView () throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
         JKenKenCell.CELL_SIZE = 75;
+        JKenKenCell.FONT_SIZE = (-10/3) * size + 40;
         playView = new KenKenPlayView(this, mController.getActiveKenKen());
         playView.makeVisible();
     }

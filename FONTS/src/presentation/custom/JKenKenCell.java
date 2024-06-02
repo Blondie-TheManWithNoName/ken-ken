@@ -8,6 +8,7 @@ import java.awt.*;
 
 public class JKenKenCell extends JButton {
 	public static int CELL_SIZE = 75;
+	public static int FONT_SIZE = 20;
 
 	private final int row;
 	private final int col;
@@ -25,9 +26,9 @@ public class JKenKenCell extends JButton {
 		setPreferredSize(new Dimension(CELL_SIZE, CELL_SIZE));
 		setOpaque(true);
 		setFocusable(false);
-		setFont(new Font("Arial", Font.PLAIN, 30));
+		setFont(new Font("Arial", Font.BOLD, (int) (FONT_SIZE*1.5)));
 		notationLabel.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-		notationLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+		notationLabel.setFont(new Font("Arial", Font.PLAIN, FONT_SIZE));
 		setLayout(new BorderLayout());
 		add(notationLabel, BorderLayout.NORTH);
 	}
