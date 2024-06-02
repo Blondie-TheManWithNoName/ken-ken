@@ -56,7 +56,6 @@ public class KenKenPlayView extends JFrame {
 		configureLayout();
 		pack();
 		setLocationRelativeTo(null);
-//		setVisible(true);
 
 	}
 
@@ -64,7 +63,6 @@ public class KenKenPlayView extends JFrame {
 		setTitle("KenKen");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(true);
-//		getContentPane().setBackground(Color.decode("#FAFAFA"));
 		setPreferredSize(new Dimension(800,600));
 		((JPanel) getContentPane()).setOpaque(true);
 	}
@@ -101,18 +99,15 @@ public class KenKenPlayView extends JFrame {
 		hint.setEnabled(false);
 
 		Runnable runnable = () -> {
-			System.out.println("Thread is running");
 			solver.solve();
 			enableAI();
-			System.out.println("Thread is done");
 		};
 		Thread thread = new Thread(runnable);
 		thread.start();
 
 		JPanel PausedPanel = new JPanel();
-		PausedPanel.setLayout(new BoxLayout(PausedPanel, BoxLayout.Y_AXIS)); // Use BoxLayout for stacking buttons vertically
+		PausedPanel.setLayout(new BoxLayout(PausedPanel, BoxLayout.Y_AXIS));
 		PausedPanel.add(elapsedTimeLabel);
-//		timeLabel.setText();
 		PausedPanel.add(Box.createVerticalStrut(5));
 		JSmallButton pause = new JSmallButton("PAUSE");
 		pause.addActionListenerAndCommand(controller, KenKenPlayController.PAUSE_AC);
@@ -122,8 +117,8 @@ public class KenKenPlayView extends JFrame {
 		marginPanelKenKen.add(kenKenPanel, BorderLayout.CENTER);
 		marginPanel.add(marginPanelKenKen, BorderLayout.CENTER);
 		marginPanel.setBackground(Color.decode("#FAFAFA"));
-		marginPanel.add(AIPanel, BorderLayout.WEST); // Add the button panel to the south of marginPanel
-		marginPanel.add(PausedPanel, BorderLayout.EAST); // Add the button panel to the south of marginPanel
+		marginPanel.add(AIPanel, BorderLayout.WEST);
+		marginPanel.add(PausedPanel, BorderLayout.EAST);
 
 		for (int i = 0; i < kenKen.getSize(); i++)
 			for (int j = 0; j < kenKen.getSize(); j++)
@@ -153,9 +148,10 @@ public class KenKenPlayView extends JFrame {
 				setCellValue.enableAllBut(value);
 			} catch (EraseFixedValueException | ValueOutOfBoundsException ignored) {
 			} catch (RewriteFixedPositionException e) {
-				JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		if (kenKen.isFull()) check();
 	}
 
 	public void check() {
@@ -164,17 +160,14 @@ public class KenKenPlayView extends JFrame {
 			selected = null;
 			setCellValue.disableAll();
 		}
-		if (!kenKen.isFull()) {
-			JOptionPane.showMessageDialog(this, "You must fill all the cells before checking the KenKen!", "Error", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
 		try {
 			if (kenKen.check())
-				JOptionPane.showMessageDialog(this, "Congratulations, you solved the KenKen!", "Success", JOptionPane.INFORMATION_MESSAGE);
-			else
-				JOptionPane.showMessageDialog(this, "Oops... continue trying!", "Failure", JOptionPane.ERROR_MESSAGE);
+			{
+				JMainOptionPane.showMessageDialog(this, "CONGRATULATIONS!\nYOU SOLVED THE KENKEN!", "Success", JOptionPane.INFORMATION_MESSAGE);
+				timer.stop();
+			}
 		} catch (OperandsDoNotMatchException | NonIntegerResultException e) {
-			JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			JMainOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -189,6 +182,9 @@ public class KenKenPlayView extends JFrame {
 				}
 			}
 		}
+
+		JMainOptionPane.showMessageDialog(this, "CONGRATULATIONS!\nTHE AI SOLVED THE KENKEN!", "Success", JOptionPane.PLAIN_MESSAGE);
+		timer.stop();
 	}
 
 	public void hint() throws RewriteFixedPositionException, ValueOutOfBoundsException {
