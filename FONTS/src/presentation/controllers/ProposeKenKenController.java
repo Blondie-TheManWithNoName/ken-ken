@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 public class ProposeKenKenController implements ActionListener {
 	public final static String CELL_CLICKED_AC = "CELL_";
 	public final static String CONTINUE_AC = "CONTINUE";
-	public final static String CANCEL_AC = "CANCEL";
+	public final static String BACK_AC = "BACK";
 
 	private final ProposeKenKenView view;
 
@@ -28,7 +28,7 @@ public class ProposeKenKenController implements ActionListener {
 			view.useToolWithCell(row, col);
 		} else if (e.getActionCommand().equals(CONTINUE_AC)) {
 			view.generateGroups();
-		} else if (e.getActionCommand().equals(CANCEL_AC)) {
+		} else if (e.getActionCommand().equals(BACK_AC)) {
 			view.exit();
 		}
 	}

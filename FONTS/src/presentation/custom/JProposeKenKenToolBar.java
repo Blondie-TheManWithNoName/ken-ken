@@ -4,9 +4,10 @@ import presentation.ProposeKenKenTool;
 import presentation.controllers.ProposeKenKenController;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class JProposeKenKenToolBar extends JToolBar {
-	private final static int GAP = 2;
+	private final static int GAP = 5;
 
 	private final ProposeKenKenController controller;
 
@@ -21,6 +22,7 @@ public class JProposeKenKenToolBar extends JToolBar {
 	public JProposeKenKenToolBar(ProposeKenKenController controller) {
 		this.controller = controller;
 		configureLayout();
+		setBackground(Color.decode("#FAFAFA"));
 	}
 
 	public void unsetActiveAll() {

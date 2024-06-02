@@ -5,7 +5,6 @@ import exceptions.OperandsDoNotMatchException;
 import exceptions.ShapesAndOperationsDoNotMatchException;
 import models.ModelController;
 import models.kenken.KenKen;
-import models.kenken.KenKenGenerator;
 import models.operations.*;
         import models.topologies.Shape;
 import models.topologies.Topology;
@@ -26,8 +25,9 @@ public class PresentationController {
     private final HomeView homeView;
     private final MainMenuView mainMenuView;
     private final RankingView rankingView;
-    private ChooseView chooseView;
-    //private ProposeView proposeView;
+    private ChoosePlayView choosePlayView;
+    private ChooseProposeView chooseProposeView;
+    private ProposeKenKenView proposeView;
     private final GenerateView1 generateView1;
     private final GenerateView2 generateView2;
     private GenerateView3 generateView3;
@@ -51,7 +51,8 @@ public class PresentationController {
         homeView = new HomeView(this);
         mainMenuView = new MainMenuView(this);
         rankingView = new RankingView(this);
-        chooseView = new ChooseView(this);
+        choosePlayView = new ChoosePlayView(this);
+        chooseProposeView = new ChooseProposeView(this);
 //        playView = new KenKenPlayView();
         //loadView = new LoadView();
         //proposeView = new ProposeView();
@@ -118,15 +119,24 @@ public class PresentationController {
     /**
      * Displays the choose view of the application.
      */
-    public void showChooseView() {
-        chooseView.makeVisible();
+    public void showChoosePlayView() {
+        choosePlayView.makeVisible();
+    }
+
+    /**
+     * Displays the choose view of the application.
+     */
+    public void showChooseProposeView() {
+        chooseProposeView.makeVisible();
     }
 
     /**
      * Displays the propose view of the application.
      */
     public void showProposeView() {
-        //proposeView.makeVisible();
+        JKenKenCell.CELL_SIZE = 25;
+        proposeView = new ProposeKenKenView(this.size);
+        proposeView.makeVisible();
     }
 
     /**

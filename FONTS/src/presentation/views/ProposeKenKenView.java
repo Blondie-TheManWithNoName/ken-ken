@@ -5,14 +5,15 @@ import models.kenken.Group;
 import models.kenken.KenKenProposer;
 import models.operations.OperationFactory;
 import presentation.ProposeKenKenTool;
+import presentation.controllers.Generate3Controller;
 import presentation.controllers.ProposeKenKenController;
 import presentation.custom.*;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ProposeKenKenView extends JFrame {
-	private final MainMenuView mainMenuView;
+public class ProposeKenKenView extends MainView {
+//	private final MainMenuView mainMenuView;
 	private final KenKenProposer kenKenProposer;
 	private final JProposeKenKenToolBar toolBar;
 	private final JKenKenPanel kenKenPanel;
@@ -25,20 +26,21 @@ public class ProposeKenKenView extends JFrame {
 	private ProposeKenKenTool activeTool;
 	private Group selectedGroup;
 
-	public ProposeKenKenView(MainMenuView mainMenuView, int size) {
+	public ProposeKenKenView(int size) {
 		this.kenKenProposer = new KenKenProposer(size);
-		this.mainMenuView = mainMenuView;
+//		this.mainMenuView = mainMenuView;
 		this.toolBar = new JProposeKenKenToolBar(controller);
 		this.kenKenPanel = new JKenKenPanel(kenKenProposer.getKenKen());
+		start();
 	}
 
-	public void start() {
-		configureWindow();
-		configureLayout();
-		pack();
-		setLocationRelativeTo(null);
-		setVisible(true);
-	}
+//	public void start() {
+//		configureWindow();
+//		configureLayout();
+//		pack();
+//		setLocationRelativeTo(null);
+//		setVisible(true);
+//	}
 
 	public void setTool(JToolBarItem toolBarItem) {
 		if (activeTool == toolBarItem.getTool() && activeTool != ProposeKenKenTool.ADD_TO_GROUP) {
@@ -113,6 +115,8 @@ public class ProposeKenKenView extends JFrame {
 			return;
 		}
 
+//		kenKenProposer.getKenKen();
+
 		// TODO: do something with the KenKen
 		JOptionPane.showMessageDialog(this, "KenKen generated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
 	}
@@ -124,7 +128,7 @@ public class ProposeKenKenView extends JFrame {
 
 	@Override
 	public void dispose() {
-		mainMenuView.setVisible(true);
+//		mainMenuView.setVisible(true);
 		super.dispose();
 	}
 
@@ -146,12 +150,75 @@ public class ProposeKenKenView extends JFrame {
 		continueButton.setActionCommand(ProposeKenKenController.CONTINUE_AC);
 		buttonsPanel.add(continueButton);
 		cancelButton.addActionListener(controller);
-		cancelButton.setActionCommand(ProposeKenKenController.CANCEL_AC);
+//		cancelButton.setActionCommand(ProposeKenKenController.CANCEL_AC);
 		buttonsPanel.add(cancelButton);
 
 		add(toolBar, BorderLayout.NORTH);
 		add(kenKenPanel, BorderLayout.CENTER);
 		add(buttonsPanel, BorderLayout.SOUTH);
+	}
+	public void start() {
+		for (int i = 0; i < kenKenProposer.getSize(); i++)
+			for (int j = 0; j < kenKenProposer.getSize(); j++)
+				kenKenPanel.addController(i, j, controller, ProposeKenKenController.CELL_CLICKED_AC + i + "_" + j);
+
+		c.gridy = 0;
+		c.gridx = 0;
+		makeSquare("");
+		c.gridwidth = 2;
+		c.gridx = 1;
+		makeSquare("PROPOSE");
+		c.gridwidth = 1;
+		c.gridx = 3;
+		makeSquare("");
+
+		c.gridy = 1;
+		c.gridx = 0;
+		makeBackButton(controller, ProposeKenKenController.BACK_AC);
+		c.gridx = 1;
+		c.gridwidth = 2;
+		c.gridheight = 3;
+		makeKenKenPanel(kenKenPanel);
+		c.gridx = 3;
+		c.gridwidth = 1;
+		c.gridheight = 2;
+		makeSquare("");
+
+		c.gridheight = 1;
+		c.gridy = 2;
+		c.gridx = 0;
+		makeSquare("");
+
+		c.gridy = 3;
+		c.gridx = 0;
+		makeSquare("");
+		c.gridx = 3;
+		c.gridheight = 2;
+		makeSquare("");
+
+		c.gridheight = 1;
+		c.gridy = 4;
+		c.gridx = 0;
+		makeSquare("");
+		c.gridx = 1;
+		gridbag.setConstraints(toolBar, c);
+		add(toolBar);
+		c.gridx = 2;
+		makeButtonFirst("PLAY", controller, ProposeKenKenController.CONTINUE_AC);
+
+		c.gridy = 5;
+		c.gridx = 0;
+		makeSquare("");
+		c.gridx = 1;
+		makeSquare("");
+		c.gridx = 2;
+		makeSquare("");
+		c.gridx = 3;
+		makeSquare("");
+
+		this.revalidate();
+		this.repaint();
+
 	}
 
 	private Group askNewGroup() {
@@ -212,5 +279,9 @@ public class ProposeKenKenView extends JFrame {
 		activeTool = null;
 		toolBar.unsetActiveAll();
 		setCursor(Cursor.getDefaultCursor());
+	}
+
+	public void makeVisible() {
+		setVisible(true);
 	}
 }

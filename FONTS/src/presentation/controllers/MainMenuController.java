@@ -1,7 +1,6 @@
 package presentation.controllers;
 
 import presentation.PresentationController;
-import presentation.views.HomeView;
 import presentation.views.MainMenuView;
 
 import java.awt.event.ActionEvent;
@@ -28,10 +27,13 @@ public class MainMenuController implements ActionListener {
 		if (e.getActionCommand().equals(NEW_KENKEN_AC)) {
 			System.out.println("click new");
 			view.setVisible(false);
-			controller.showChooseView();
+			controller.showChoosePlayView();
 		} else if (e.getActionCommand().equals(LOAD_KENKEN_AC)) {
 			System.out.println("click load");
 		} else if (e.getActionCommand().equals(PROPOSE_KENKEN_AC)) {
+			view.setVisible(false);
+			controller.showChooseProposeView();
+
 			System.out.println("click propose");
 		} else if (e.getActionCommand().equals(GENERATE_KENKEN_AC)) {
 			System.out.println("click generate");

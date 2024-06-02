@@ -1,23 +1,17 @@
 package presentation.views;
 
 import presentation.PresentationController;
-import presentation.controllers.ChooseController;
-import presentation.controllers.MainMenuController;
-import presentation.custom.JMainSpinner;
+import presentation.controllers.ChoosePlayController;
+import presentation.controllers.ChooseProposeController;
 
-import presentation.custom.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.event.*;
-
-public class ChooseView extends MainView {
+public class ChooseProposeView extends MainView {
 	private final PresentationController pController;
-	private final ChooseController controller;
+	private final ChooseProposeController controller;
 
-	public ChooseView(PresentationController controller) {
+	public ChooseProposeView(PresentationController controller) {
 		super();
 		this.pController = controller;
-		this.controller = new ChooseController(pController,this);
+		this.controller = new ChooseProposeController(pController, this);
 		start();
 	}
 
@@ -44,7 +38,7 @@ public class ChooseView extends MainView {
 		c.gridy = 1;
 
 		c.gridx = 0;
-		makeBackButton(controller, ChooseController.BACK_AC);
+		makeBackButton(controller, ChoosePlayController.BACK_AC);
 
 		c.gridx = 1;
 		c.gridheight = 2;
@@ -66,7 +60,7 @@ public class ChooseView extends MainView {
 
 		c.gridx = 2;
 		c.gridheight = 1;
-		makeButtonFirst("PLAY",controller, ChooseController.PLAY_AC);
+		makeButtonFirst("PROPOSE",controller, ChooseProposeController.PROPOSE_AC);
 	}
 
 	private void addThirdRow() {

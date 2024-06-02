@@ -5,7 +5,8 @@ import exceptions.OperandsDoNotMatchException;
 import exceptions.ShapesAndOperationsDoNotMatchException;
 import presentation.PresentationController;
 import presentation.custom.JMainSpinner;
-import presentation.views.ChooseView;
+import presentation.views.ChoosePlayView;
+import presentation.views.ChooseProposeView;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -13,33 +14,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class ChooseController implements ActionListener, ChangeListener {
-	public final static String PLAY_AC = "PLAY_";
+public class ChooseProposeController implements ActionListener, ChangeListener {
+	public final static String PROPOSE_AC = "PROPOSE_";
 	public final static String BACK_AC = "BACK";
 	public static final String SIZE_AC = "SIZE";
 
 	private final PresentationController controller;
-	private final ChooseView view;
+	private final ChooseProposeView view;
 	private int size = 3;
 
-	public ChooseController(PresentationController controller, ChooseView view) {
+	public ChooseProposeController(PresentationController controller, ChooseProposeView view) {
 		this.controller = controller;
 		this.view = view;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().startsWith(PLAY_AC)) {
-            try {
-				controller.initializeKenKenShapesAndOperations();
-				controller.setSizeAndFixed(size, new Random().nextInt(size));
-				controller.generateKenKen();
-				controller.showPlayView();
-            } catch (ShapesAndOperationsDoNotMatchException ex) {
-                System.out.println("Will not use it");
-            } catch (CannotCreateOperationException | OperandsDoNotMatchException ex) {
-                throw new RuntimeException(ex);
-            }
+		if (e.getActionCommand().startsWith(PROPOSE_AC)) {
+            controller.setSizeAndFixed(size, 0);
+            controller.showProposeView();
         } else if (e.getActionCommand().equals(BACK_AC)) {
 			System.out.println("click back");
 			view.setVisible(false);
