@@ -36,6 +36,11 @@ public class PresentationController {
     //private SolvedView solvedView;
     //private ErrorView errorView;
 
+    private int size ;
+    private int fixed;
+    private final Topology topology;
+    private final List<Class<? extends Operation>> allowedOperations;
+
     /**
      * Constructs a PresentationController and initializes various views.
      */
@@ -57,6 +62,11 @@ public class PresentationController {
         //pauseView = new PauseView();
         //solvedView = new SolvedView();
         //errorView = new ErrorView();
+        size = 3;
+        fixed = 0;
+        //Aqui habria que inicializar la topologia y las operaciones con un valor por defecto que no de error al crear el kenken
+        //topology;
+        //allowedOperations;
     }
 
     /**
@@ -122,13 +132,13 @@ public class PresentationController {
 
 
     public KenKen generateKenKen(List<Class<? extends Operation>> allowedOperations, Topology topology) throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
-        mController.generateKenKen(3, 0, topology, allowedOperations);
+        mController.generateKenKen(this.size, this.fixed, topology, allowedOperations);
         return mController.getActiveKenKen();
     }
     /**
      * Displays the play view of the application.
      */
-    public void showPlayView(int size) throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
+    public void showPlayView() throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
         JKenKenCell.CELL_SIZE = 75;
         if (size == 0)
         {
@@ -162,12 +172,20 @@ public class PresentationController {
 //        topology.addShape(Shape.J);
 //        topology.addShape(Shape.T);
 
-        if (mController.generateKenKen(9, 0, topology, allowedOperations)){
+        if (mController.generateKenKen(this.size, this.fixed, topology, allowedOperations)){
 
             playView = new KenKenPlayView(mController.getActiveKenKen());
             playView.makeVisible();
         }
         }
+    }
+
+    /**
+     * Displays the play view of the application from generated kenken.
+     */
+    public void showPlayViewGenerate(kenKen K) throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
+        //Puedes utilizar esta funcion para guardar el kenken generado en el presentation controller y hacer un show play view ya que cuando hagamos el play
+        //random se tendra que utilizar una topologia random y operaciones random y utilizaremos el kenken
     }
 
     /**
@@ -192,5 +210,14 @@ public class PresentationController {
     public void showErrorView(String eMessage) {
         //errorView.update(eMessage);
         //errorView.makeVisible();
+    }
+
+    public void setSizeAndFixed(int size, int fixed) {
+        this.size = size;
+        this.fixed = fixed;
+    }
+
+    public void setTopologyAndOperations() {
+
     }
 }
