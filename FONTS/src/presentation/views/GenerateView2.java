@@ -77,7 +77,7 @@ public class GenerateView2 extends MainView {
 		makeSquare("<html><p style='margin-bottom: -7;'>SHA</p><p style='margin-top: -7;'>PES</p></html>");
 
 		c.gridx = 2;
-		makeCheckBoxContainer(shapeImgs);
+		makeCheckBoxContainer(shapeImgs, controller, Generate2Controller.CHECK_IMG_);
 
 		c.gridx = 3;
 		c.gridheight = 2;
@@ -101,7 +101,7 @@ public class GenerateView2 extends MainView {
 		makeSquare("<html><p style='margin-bottom: -7;'>OPERA</p><p style='margin-top: -7;'>TIONS</p></html>");;
 
 		c.gridx = 2;
-		makeCheckBoxContainer(operationImgs);
+		makeCheckBoxContainer(operationImgs, controller, Generate2Controller.CHECK_OP_);
 
 		c.gridx = 3;
 		c.gridheight = 1;
