@@ -27,7 +27,7 @@ public class PresentationController {
     private final MainMenuView mainMenuView;
     private final RankingView rankingView;
     private ChooseView chooseView;
-    //private ProposeView proposeView;
+    private ProposeKenKenView proposeView;
     private final GenerateView1 generateView1;
     private final GenerateView2 generateView2;
     private GenerateView3 generateView3;
@@ -35,6 +35,9 @@ public class PresentationController {
     //private PauseView pauseView;
     //private SolvedView solvedView;
     //private ErrorView errorView;
+
+    private List<Class<? extends Operation>> allowedOperations;
+    private Topology topology;
 
     /**
      * Constructs a PresentationController and initializes various views.
@@ -91,7 +94,9 @@ public class PresentationController {
      * Displays the propose view of the application.
      */
     public void showProposeView() {
-        //proposeView.makeVisible();
+        JKenKenCell.CELL_SIZE = 25;
+        proposeView = new ProposeKenKenView(3);
+        proposeView.makeVisible();
     }
 
     /**
@@ -113,15 +118,16 @@ public class PresentationController {
      */
     public void showGenerateView3(List<Class<? extends Operation>> allowedOperations, Topology topology) throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
 
+        this.allowedOperations = allowedOperations;
+        this.topology = topology;
         if (mController.generateKenKen(9, 0, topology, allowedOperations)){
-
-            generateView3 = new GenerateView3(this, allowedOperations, topology);
+            generateView3 = new GenerateView3(this);
             generateView3.makeVisible();
         }
     }
 
 
-    public KenKen generateKenKen(List<Class<? extends Operation>> allowedOperations, Topology topology) throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
+    public KenKen generateKenKen() throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
         mController.generateKenKen(3, 0, topology, allowedOperations);
         return mController.getActiveKenKen();
     }
@@ -151,16 +157,15 @@ public class PresentationController {
                         OperationPower.class
                 )
         );
-        Topology topology = new Topology(Shape.BLOCK);
-//        topology.addShape(Shape.ZIGZAG);
-//        topology.addShape(Shape.DASH);
-//        topology.addShape(Shape.POINT);
-//
-//        topology.addShape(Shape.L);
-//        topology.addShape(Shape.I);
-//        topology.addShape(Shape.BLOCK);
-//        topology.addShape(Shape.J);
-//        topology.addShape(Shape.T);
+        Topology topology = new Topology(Shape.DASH);
+        topology.addShape(Shape.ZIGZAG);
+        topology.addShape(Shape.DASH);
+        topology.addShape(Shape.POINT);
+        topology.addShape(Shape.L);
+        topology.addShape(Shape.I);
+        topology.addShape(Shape.BLOCK);
+        topology.addShape(Shape.J);
+        topology.addShape(Shape.T);
 
         if (mController.generateKenKen(9, 0, topology, allowedOperations)){
 

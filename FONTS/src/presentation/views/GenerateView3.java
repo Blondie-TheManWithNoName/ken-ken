@@ -20,13 +20,9 @@ public class GenerateView3 extends MainView {
 	private final PresentationController pController;
 	private  JKenKenPanel kenKenPanel;
 	private  KenKen kenKen;
-	private final Topology topology;
-	private final List<Class<? extends Operation>> allowedOperations;
 
-	public GenerateView3(PresentationController controller, List<Class<? extends Operation>> allowedOperations, Topology topology) throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
+	public GenerateView3(PresentationController controller) throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
 		this.pController = controller;
-		this.topology = topology;
-		this.allowedOperations = allowedOperations;
 		this.controller = new Generate3Controller(pController, this);
 		generateKenKen();
 		start();
@@ -34,7 +30,7 @@ public class GenerateView3 extends MainView {
 		}
 
 	public void generateKenKen() throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
-		this.kenKen = pController.generateKenKen(allowedOperations, topology);
+		this.kenKen = pController.generateKenKen();
 		JKenKenCell.CELL_SIZE = 25;
 		this.kenKenPanel = new JKenKenPanel(kenKen);
 		swapKenKen(kenKenPanel);
