@@ -28,14 +28,18 @@ public class Generate3Controller implements ActionListener {
             System.out.println("click regenerate");
             try {
                 view.generateKenKen();
-            } catch (CannotCreateOperationException ex) {
-                throw new RuntimeException(ex);
-            } catch (OperandsDoNotMatchException ex) {
-                throw new RuntimeException(ex);
-            } catch (ShapesAndOperationsDoNotMatchException ex) {
+            } catch (CannotCreateOperationException | ShapesAndOperationsDoNotMatchException |
+                     OperandsDoNotMatchException ex) {
                 throw new RuntimeException(ex);
             }
         } else if (e.getActionCommand().equals(PLAY_AC)) {
+            view.setVisible(false);
+            try {
+                controller.showPlayView(0);
+            } catch (OperandsDoNotMatchException | ShapesAndOperationsDoNotMatchException |
+                     CannotCreateOperationException ex) {
+                throw new RuntimeException(ex);
+            }
             System.out.println("click play");
         } else if (e.getActionCommand().equals(BACK_AC)) {
             System.out.println("click back");

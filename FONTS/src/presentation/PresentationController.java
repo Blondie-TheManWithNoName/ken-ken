@@ -9,6 +9,7 @@ import models.kenken.KenKenGenerator;
 import models.operations.*;
 import models.topologies.Shape;
 import models.topologies.Topology;
+import presentation.custom.JKenKenCell;
 import presentation.views.*;
 
 import java.util.ArrayList;
@@ -128,6 +129,16 @@ public class PresentationController {
      * Displays the play view of the application.
      */
     public void showPlayView(int size) throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
+        JKenKenCell.CELL_SIZE = 75;
+        if (size == 0)
+        {
+            playView = new KenKenPlayView(mController.getActiveKenKen());
+            playView.makeVisible();
+        }
+
+        else {
+
+
         List<Class<? extends Operation>> allowedOperations = new ArrayList<>(
                 Arrays.asList(
                         OperationAddition.class,
@@ -156,7 +167,7 @@ public class PresentationController {
             playView = new KenKenPlayView(mController.getActiveKenKen());
             playView.makeVisible();
         }
-
+        }
     }
 
     /**
