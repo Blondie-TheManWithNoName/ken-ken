@@ -56,7 +56,7 @@ public class JKenKenCell extends JButton {
     }
 
 	public void setFixed() {
-		setForeground(Color.BLACK);
+		setForeground(Color.decode("#775AD8"));
 	}
 
 	public void setTopBorder() {
