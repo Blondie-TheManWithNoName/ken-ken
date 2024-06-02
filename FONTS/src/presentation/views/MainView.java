@@ -6,18 +6,18 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 
 public class MainView extends JFrame {
 	protected final GridBagLayout gridbag = new GridBagLayout();
-	protected final GridBagConstraints c = new GridBagConstraints();
+	protected GridBagConstraints c = new GridBagConstraints();
 
+	final JPanel KenkenPanel = new JPanel();
 	//private final MainMenuController controller = new MainMenuController(this);
 
 	public MainView() {
 		configureWindow();
 		setLayout(new BorderLayout());
-		setFont(new Font("", Font.PLAIN, 14));
+		setFont(new Font("", Font.BOLD, 16));
 		setLayout(gridbag);
 		this.c.fill = GridBagConstraints.BOTH;
 		this.c.weightx = 1.0;
@@ -107,7 +107,7 @@ public class MainView extends JFrame {
 	public void makeTitle() {
 		JLabel title = new JLabel("<html><p style='margin-bottom: -20; color: #375281'>KEN</p><p style='margin-top: -20;  color: #775AD8'>KEN</p></html>");
 		title.setPreferredSize(new Dimension(100, 100));
-		Font font =  getFont().deriveFont(Font.BOLD, 80);
+		Font font =  getFont().deriveFont(Font.BOLD, 90);
 		title.setFont(font);
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		gridbag.setConstraints(title, c);
@@ -117,9 +117,9 @@ public class MainView extends JFrame {
 	public void makeNumber(String number) {
 		JLabel label = new JLabel(number);
 		label.setPreferredSize(new Dimension(100, 100));
-		Font font =  getFont().deriveFont(Font.BOLD, label.getPreferredSize().height);
+		Font font =  getFont().deriveFont(Font.BOLD, 150);
 		label.setFont(font);
-		Border border = BorderFactory.createLineBorder(Color.decode("#375281"), 5);
+		Border border = BorderFactory.createLineBorder(Color.decode("#375281"), 9);
 		label.setBorder(border);
 		label.setForeground(Color.decode("#775AD8"));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -140,50 +140,32 @@ public class MainView extends JFrame {
 		add(spinner);
 	}
 
-	public void Generate3(JKenKenPanel k) {
-		
-
-		JPanel KenkenPanel = new JPanel();
-		JPanel ButtonsAndKenken = new JPanel();	
-		ButtonsAndKenken.setLayout(new BoxLayout(ButtonsAndKenken, BoxLayout.Y_AXIS));	
-		KenkenPanel.setLayout(new BorderLayout());
-		KenkenPanel.setBorder(BorderFactory.createEmptyBorder(50, 20, 10, 20));
-
-		KenkenPanel.add(k, BorderLayout.CENTER);
-		KenkenPanel.setBackground(Color.decode("#FAFAFA"));
-
-		JPanel Buttons = new JPanel();
-		Buttons.setLayout(new BoxLayout(Buttons, BoxLayout.X_AXIS));
-		
-		JMainButton button = new JMainButtonSecond("REGENERATE");
-		JMainButton button2 = new JMainButtonFirst("PLAY");
-
-		Dimension buttonSize = new Dimension(150, 50); 
-		button.setPreferredSize(buttonSize);
-		button.setMinimumSize(buttonSize);
-		button.setMaximumSize(buttonSize);
-
-		button2.setPreferredSize(buttonSize);
-		button2.setMinimumSize(buttonSize);
-		button2.setMaximumSize(buttonSize);
-
-		Buttons.add(button);
-		Buttons.add(button2);
-
-		ButtonsAndKenken.add(k);
-		ButtonsAndKenken.add(Buttons);
-
-		gridbag.setConstraints(ButtonsAndKenken, c);
-		add(ButtonsAndKenken);
-
-
-
+	public void swapKenKen(JKenKenPanel kenken)
+	{
+		KenkenPanel.removeAll();
+		KenkenPanel.add(kenken, BorderLayout.CENTER);
 	}
 
-	public void makeCheckBoxContainer(String[] sprites) {
+	public void makeKenKenPanel(JKenKenPanel kenken) {
+
+		KenkenPanel.setLayout(new BorderLayout());
+		KenkenPanel.setBorder(BorderFactory.createEmptyBorder(10, 70, 10, 70));
+		KenkenPanel.add(kenken, BorderLayout.CENTER);
+		KenkenPanel.setBackground(Color.decode("#FAFAFA"));
+		gridbag.setConstraints(KenkenPanel, c);
+		add(KenkenPanel);
+	}
+
+
+
+	public void makeCheckBoxContainer(String[] sprites, ActionListener listener, String actionCommand) {
 		JPanel panel = new JPanel(new GridLayout(3, 3));
-		for (int i = 0; i < 9*2; i+=2) {
-			panel.add(new JMainCheckBox(sprites[i], sprites[i + 1]));
+		panel.setBackground(Color.decode("#FAFAFA"));
+		for (int i = 0; i < sprites.length; i+=2) {
+			JMainCheckBox checkBox = new JMainCheckBox(sprites[i], sprites[i + 1]);
+			checkBox.addActionListenerAndCommand(listener, actionCommand + i/2);
+			checkBox.setBackground(Color.decode("#FAFAFA"));
+			panel.add(checkBox);
 		}
 		gridbag.setConstraints(panel, c);
 		add(panel);
