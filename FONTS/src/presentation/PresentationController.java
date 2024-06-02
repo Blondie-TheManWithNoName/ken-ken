@@ -32,7 +32,7 @@ public class PresentationController {
     private final GenerateView2 generateView2;
     private GenerateView3 generateView3;
     private KenKenPlayView playView;
-    //private PauseView pauseView;
+    private PauseView pauseView;
     //private SolvedView solvedView;
     //private ErrorView errorView;
 
@@ -60,7 +60,7 @@ public class PresentationController {
         generateView2 = new GenerateView2(this);
 //        generateView3 = new GenerateView3(this);
         //importView = new importView(this);
-        //pauseView = new PauseView();
+        pauseView = new PauseView(this);
         //solvedView = new SolvedView();
         //errorView = new ErrorView();
         size = 3;
@@ -178,7 +178,7 @@ public class PresentationController {
      */
     public void showPlayView () throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
         JKenKenCell.CELL_SIZE = 75;
-        playView = new KenKenPlayView(mController.getActiveKenKen());
+        playView = new KenKenPlayView(this, mController.getActiveKenKen());
         playView.makeVisible();
 
 
@@ -197,7 +197,7 @@ public class PresentationController {
      * Displays the pause view of the application.
      */
     public void showPauseView () {
-        //pauseView.makeVisible();
+        pauseView.makeVisible();
     }
 
     /**

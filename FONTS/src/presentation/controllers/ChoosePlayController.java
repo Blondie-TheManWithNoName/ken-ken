@@ -31,6 +31,7 @@ public class ChoosePlayController implements ActionListener, ChangeListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().startsWith(PLAY_AC)) {
             try {
+				view.setVisible(false);
 				controller.initializeKenKenShapesAndOperations();
 				controller.setSizeAndFixed(size, new Random().nextInt(size));
 				controller.generateKenKen();

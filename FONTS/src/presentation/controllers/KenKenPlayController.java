@@ -2,6 +2,7 @@ package presentation.controllers;
 
 import exceptions.RewriteFixedPositionException;
 import exceptions.ValueOutOfBoundsException;
+import presentation.PresentationController;
 import presentation.views.KenKenPlayView;
 
 import java.awt.event.ActionEvent;
@@ -14,11 +15,14 @@ public class KenKenPlayController implements ActionListener, KeyListener {
 	public final static String SET_CELL_TO_AC = "SET_CELL_TO_";
 	public final static String SOLVE_KENKEN_AC = "SOLVE_KENKEN_AC";
 	public final static String HINT_KENKEN_AC = "HINT_KENKEN_AC";
+	public final static String PAUSE_AC = "PAUSE_AC";
 
 	private final KenKenPlayView view;
+	private final PresentationController controller;
 
-	public KenKenPlayController(KenKenPlayView view) {
+	public KenKenPlayController(PresentationController controller, KenKenPlayView view) {
 		this.view = view;
+		this.controller = controller;
 	}
 
 	@Override
@@ -49,6 +53,12 @@ public class KenKenPlayController implements ActionListener, KeyListener {
                 throw new RuntimeException(ex);
             }
         }
+		else if (e.getActionCommand().equals(PAUSE_AC))
+		{
+			view.setVisible(false);
+			controller.showPauseView();
+
+		}
 	}
 
 	@Override

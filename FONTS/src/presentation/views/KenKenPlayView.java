@@ -3,6 +3,7 @@ package presentation.views;
 import exceptions.*;
 import models.kenken.KenKen;
 import models.kenken.KenKenSolver;
+import presentation.PresentationController;
 import presentation.controllers.KenKenPlayController;
 import presentation.custom.*;
 
@@ -14,7 +15,8 @@ import java.awt.event.ActionListener;
 public class KenKenPlayView extends JFrame {
 	private final JSetCellValue setCellValue;
 	private final KenKenSolver solver;
-	private final KenKenPlayController controller = new KenKenPlayController(this);
+	private final KenKenPlayController controller;
+	private final PresentationController pController;
 	protected final KenKen kenKen;
 	protected final JKenKenPanel kenKenPanel;
 	protected final JLabel elapsedTimeLabel;
@@ -24,8 +26,8 @@ public class KenKenPlayView extends JFrame {
 	protected final  JMainButton hint = new JSmallButton("HINT");
 	private JKenKenCell selected;
 
-	public KenKenPlayView(KenKen kenKen) {
-			this.kenKen = kenKen;
+	public KenKenPlayView(PresentationController controller, KenKen kenKen) {
+		this.kenKen = kenKen;
 		this.kenKenPanel = new JKenKenPanel(kenKen);
 		this.elapsedTimeLabel = new JLabel("<html><div style='padding: 10px;'>00:00</div></html>");
 		this.elapsedTimeLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
@@ -37,9 +39,10 @@ public class KenKenPlayView extends JFrame {
 		startTime = System.currentTimeMillis();
 		this.solver = new KenKenSolver(kenKen);
 
-
-		this.setCellValue = new JSetCellValue(kenKen.getSize(), controller);
-		this.addKeyListener(controller);
+		pController = controller;
+		this.controller = new KenKenPlayController(controller, this);
+		this.setCellValue = new JSetCellValue(kenKen.getSize(), this.controller);
+		this.addKeyListener(this.controller);
 		setFocusable(true);
 		requestFocusInWindow();
 		start();
@@ -59,6 +62,7 @@ public class KenKenPlayView extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(true);
 //		getContentPane().setBackground(Color.decode("#FAFAFA"));
+		setPreferredSize(new Dimension(800,600));
 		((JPanel) getContentPane()).setOpaque(true);
 	}
 
@@ -107,7 +111,9 @@ public class KenKenPlayView extends JFrame {
 		PausedPanel.add(elapsedTimeLabel);
 //		timeLabel.setText();
 		PausedPanel.add(Box.createVerticalStrut(5));
-		PausedPanel.add(new JSmallButton("PAUSE"));
+		JSmallButton pause = new JSmallButton("PAUSE");
+		pause.addActionListenerAndCommand(controller, KenKenPlayController.PAUSE_AC);
+		PausedPanel.add(pause);
 		PausedPanel.setBackground(Color.decode("#FAFAFA"));
 
 		marginPanelKenKen.add(kenKenPanel, BorderLayout.CENTER);
