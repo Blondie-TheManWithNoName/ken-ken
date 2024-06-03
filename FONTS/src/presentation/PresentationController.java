@@ -101,6 +101,14 @@ public class PresentationController {
         return this.seconds;
     }
 
+    public int getTopologySize() {
+        return this.topology.getSize();
+    }
+
+    public int getOperationsSize() {
+        return this.allowedOperations.size();
+    }
+
     /**
      * Initializes the presentation and makes the home view visible.
      */
@@ -300,7 +308,8 @@ public class PresentationController {
      */
     public void saveScore(String username) {
         try {
-            mController.saveScore(username, getMinutes(), getSeconds());
+
+            mController.saveScore(username, getTopologySize(), getOperationsSize(), getMinutes(), getSeconds());
             showMenuView();
         } catch (InvalidUsernameException | IOException e) {
             showErrorView(e.getMessage());
@@ -363,7 +372,7 @@ public class PresentationController {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + GAME_EXTENSION + ")", GAME_EXTENSION);
         fileChooser.setFileFilter(filter);
 
-        int result = fileChooser.showSaveDialog(null);
+        int result = fileChooser.showSaveDialog(pauseView);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             String fileName = selectedFile.getName();
@@ -391,7 +400,7 @@ public class PresentationController {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + GAME_EXTENSION + ")", GAME_EXTENSION);
         fileChooser.setFileFilter(filter);
 
-        int result = fileChooser.showOpenDialog(null);
+        int result = fileChooser.showOpenDialog(mainMenuView);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             return selectedFile.getAbsolutePath();
@@ -411,7 +420,7 @@ public class PresentationController {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + GAME_EXTENSION + ")", GAME_EXTENSION);
         fileChooser.setFileFilter(filter);
 
-        int result = fileChooser.showSaveDialog(null);
+        int result = fileChooser.showSaveDialog(pauseView);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             String fileName = selectedFile.getName();
@@ -439,7 +448,7 @@ public class PresentationController {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + GAME_EXTENSION + ")", GAME_EXTENSION);
         fileChooser.setFileFilter(filter);
 
-        int result = fileChooser.showOpenDialog(null);
+        int result = fileChooser.showOpenDialog(mainMenuView);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             return selectedFile.getAbsolutePath();
@@ -453,6 +462,6 @@ public class PresentationController {
      * @return The full path of the file to be imported.
      */
     public String showSaveScoreDialog() {
-        return JOptionPane.showInputDialog(null, "Enter your username:", "Save Score", JOptionPane.QUESTION_MESSAGE);
+        return JOptionPane.showInputDialog(playView, "CONGRATULATIONS!\nYOU SOLVED THE KENKEN!\nEnter your username:", "Save Score", JOptionPane.QUESTION_MESSAGE);
     }
 }

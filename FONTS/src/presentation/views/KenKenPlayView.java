@@ -198,8 +198,10 @@ public class KenKenPlayView extends JFrame {
 		try {
 			if (kenKen.check())
 			{
-				JMainOptionPane.showMessageDialog(this, "CONGRATULATIONS!\nYOU SOLVED THE KENKEN!", "Success", JOptionPane.INFORMATION_MESSAGE);
 				timer.stop();
+				//JMainOptionPane.showMessageDialog(this, "CONGRATULATIONS!\nYOU SOLVED THE KENKEN!", "Success", JOptionPane.INFORMATION_MESSAGE);
+				pController.setTime(minutes, seconds);
+				pController.saveScore(pController.showSaveScoreDialog());
 			}
 		} catch (OperandsDoNotMatchException | NonIntegerResultException e) {
 			JMainOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);

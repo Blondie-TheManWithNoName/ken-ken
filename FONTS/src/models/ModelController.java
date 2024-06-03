@@ -231,10 +231,10 @@ public class ModelController {
 	 * @throws InvalidUsernameException If the username is invalid.
 	 * @throws IOException If an I/O error occurs.
 	 */
-	public void saveScore(String username, int minutes, int seconds) throws InvalidUsernameException, IOException {
+	public void saveScore(String username, int topology, int operations, int minutes, int seconds) throws InvalidUsernameException, IOException {
 		if (username.contains(" ") || username.isEmpty())
 			throw new InvalidUsernameException();
-		persistenceController.saveScore(new ScoreDTO(username, getScore(activeKenKen, minutes,seconds)));
+		persistenceController.saveScore(new ScoreDTO(username, getScore(activeKenKen,topology, operations, minutes,seconds)));
 	}
 
 	/* SAVE GAME */
@@ -301,10 +301,10 @@ public class ModelController {
 	 */
 
 
-	private int getScore(KenKen k, int m, int s) {
-		double time = m + s * 0.01;
-		float score = k.getSize() * k.getGroups().size();
-		score /= time;
+	private int getScore(KenKen k,int t, int o, int m, int s) {
+		int time = m * 60 + s;
+		int score = k.getSize() * k.getSize() * k.getGroups().size() * t * o * 100;
+		score -= time;
 		return Math.round(score);
 	}
 
