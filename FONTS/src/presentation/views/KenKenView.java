@@ -1,20 +1,28 @@
 package presentation.views;
 
 import models.kenken.KenKen;
-import presentation.custom.*;
+import presentation.custom.JKenKenPanel;
+import presentation.custom.JSmallButton;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The KenKenView class represents the base view for KenKen puzzles.
+ */
 public class KenKenView extends JFrame {
 	protected final KenKen kenKen;
 	protected final JKenKenPanel kenKenPanel;
 	protected final JLabel elapsedTimeLabel;
-	private long startTime;
+	private final long startTime;
 
-
+	/**
+	 * Constructs a KenKenView object.
+	 *
+	 * @param kenKen The KenKen puzzle instance.
+	 */
 	public KenKenView(KenKen kenKen) {
 		this.kenKen = kenKen;
 		this.kenKenPanel = new JKenKenPanel(kenKen);
@@ -28,6 +36,9 @@ public class KenKenView extends JFrame {
 		startTime = System.currentTimeMillis();
 	}
 
+	/**
+	 * Starts the KenKen puzzle view.
+	 */
 	public void start() {
 		configureWindow();
 		configureLayout();
@@ -36,14 +47,19 @@ public class KenKenView extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Configures the window settings for the KenKen puzzle view.
+	 */
 	private void configureWindow() {
 		setTitle("KenKen");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(true);
-//		getContentPane().setBackground(Color.decode("#FAFAFA"));
 		((JPanel) getContentPane()).setOpaque(true);
 	}
 
+	/**
+	 * Configures the layout of the KenKen puzzle view.
+	 */
 	protected void configureLayout() {
 		setLayout(new BorderLayout());
 
@@ -67,7 +83,6 @@ public class KenKenView extends JFrame {
 		JPanel PausedPanel = new JPanel();
 		PausedPanel.setLayout(new BoxLayout(PausedPanel, BoxLayout.Y_AXIS)); // Use BoxLayout for stacking buttons vertically
 		PausedPanel.add(elapsedTimeLabel);
-//		timeLabel.setText();
 		PausedPanel.add(Box.createVerticalStrut(5));
 		PausedPanel.add(new JSmallButton("PAUSE"));
 		PausedPanel.setBackground(Color.decode("#FAFAFA"));
@@ -78,9 +93,11 @@ public class KenKenView extends JFrame {
 		marginPanel.add(AIPanel, BorderLayout.WEST); // Add the button panel to the south of marginPanel
 		marginPanel.add(PausedPanel, BorderLayout.EAST); // Add the button panel to the south of marginPanel
 		add(marginPanel, BorderLayout.CENTER);
-
 	}
 
+	/**
+	 * Starts the timer for measuring elapsed time.
+	 */
 	private void startTimer() {
 		Timer timer = new Timer(1000, new ActionListener() {
 			@Override
