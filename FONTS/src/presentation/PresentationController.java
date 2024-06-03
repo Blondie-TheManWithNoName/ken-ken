@@ -45,6 +45,7 @@ public class PresentationController {
     private int fixed;
     private Topology topology;
     private List<Class<? extends Operation>> allowedOperations;
+    private int hints;
 
     private static final String SAVE_DIRECTORY = "data/";
     private static final String GAME_EXTENSION = "kenken_game";
@@ -94,6 +95,9 @@ public class PresentationController {
         this.minutes = minutes;
         this.seconds = seconds;
     }
+    public void setHints(int hints) {
+        this.hints = hints;
+    }
 
     public int getMinutes() {
         return this.minutes;
@@ -109,6 +113,14 @@ public class PresentationController {
 
     public int getOperationsSize() {
         return this.allowedOperations.size();
+    }
+
+    public int getFixed() {
+        return this.fixed;
+    }
+
+    public int getHints() {
+        return this.hints;
     }
 
     /**
@@ -314,7 +326,7 @@ public class PresentationController {
     public void saveScore(String username) {
         try {
 
-            mController.saveScore(username, getTopologySize(), getOperationsSize(), getMinutes(), getSeconds());
+            mController.saveScore(username, getTopologySize(), getOperationsSize(), getMinutes(), getSeconds(), getFixed(), getHints());
             showMenuView();
         } catch (InvalidUsernameException | IOException e) {
             showErrorView(e.getMessage());
