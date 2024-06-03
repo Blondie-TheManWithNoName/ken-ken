@@ -17,7 +17,11 @@ import java.util.List;
 import persistence.dto.KenKenDTO;
 
 import javax.swing.*;
+
+import javax.swing.filechooser.*;
 import java.io.IOException;
+
+import java.io.File;
 
 /**
  * The PresentationController class manages the presentation layer of the application,
@@ -46,7 +50,7 @@ public class PresentationController {
     private List<Class<? extends Operation>> allowedOperations;
 
     private static final String SAVE_DIRECTORY = "data/";
-    private static final String FILE_EXTENSION = ".kenken_game";
+    private static final String FILE_EXTENSION = "kenken_game";
 
     /**
      * Constructs a PresentationController and initializes various views.
@@ -316,7 +320,7 @@ public class PresentationController {
     public String showSaveDialog() {
         String fileName = JOptionPane.showInputDialog(null, "Ingrese el nombre del archivo para guardar:", "Guardar KenKen", JOptionPane.QUESTION_MESSAGE);
         if (fileName != null && !fileName.trim().isEmpty()) {
-            return SAVE_DIRECTORY + fileName.trim() + FILE_EXTENSION;
+            return SAVE_DIRECTORY + fileName.trim() + "." + FILE_EXTENSION;
         }
         return null;
     }
@@ -327,9 +331,17 @@ public class PresentationController {
      * @return La ruta completa del archivo que se va a cargar.
      */
     public String showLoadDialog() {
-        String fileName = JOptionPane.showInputDialog(null, "Ingrese el nombre del archivo para cargar:", "Cargar KenKen", JOptionPane.QUESTION_MESSAGE);
-        if (fileName != null && !fileName.trim().isEmpty()) {
-            return SAVE_DIRECTORY + fileName.trim() + FILE_EXTENSION;
+        JFileChooser fileChooser = new JFileChooser(new File(SAVE_DIRECTORY));
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setDialogTitle("Seleccione el archivo para cargar");
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + FILE_EXTENSION + ")", FILE_EXTENSION);
+        fileChooser.setFileFilter(filter);
+
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            return selectedFile.getAbsolutePath();
         }
         return null;
     }
