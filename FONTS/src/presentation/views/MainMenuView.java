@@ -1,13 +1,20 @@
 package presentation.views;
 
 import presentation.PresentationController;
-import presentation.controllers.HomeController;
 import presentation.controllers.MainMenuController;
 
+/**
+ * The MainMenuView class represents the main menu view of the application.
+ */
 public class MainMenuView extends MainView {
 	private final PresentationController pController;
 	private final MainMenuController controller;
 
+	/**
+	 * Constructs a MainMenuView object.
+	 *
+	 * @param controller The PresentationController instance.
+	 */
 	public MainMenuView(PresentationController controller) {
 		super();
 		this.pController = controller;
@@ -15,6 +22,9 @@ public class MainMenuView extends MainView {
 		start();
 	}
 
+	/**
+	 * Initializes and starts the main menu view.
+	 */
 	public void start() {
 		addEmptyRow(0);
 		addSecondRow();
@@ -80,5 +90,4 @@ public class MainMenuView extends MainView {
 		c.gridy = 4;
 		makeSquare("");
 	}
-
 }
