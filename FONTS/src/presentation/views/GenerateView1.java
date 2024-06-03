@@ -1,28 +1,48 @@
 package presentation.views;
 
 import presentation.PresentationController;
-import presentation.controllers.*;
+import presentation.controllers.Generate1Controller;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+
+/**
+ * View for the first step of generating a KenKen puzzle.
+ */
 public class GenerateView1 extends MainView {
 	private final PresentationController pController;
 	private final Generate1Controller controller;
 
+	/**
+	 * Constructs a GenerateView1 with the given PresentationController.
+	 *
+	 * @param controller The PresentationController instance.
+	 */
 	public GenerateView1(PresentationController controller) {
 		super();
 		this.pController = controller;
-		this.controller = new Generate1Controller(pController,this);
+		this.controller = new Generate1Controller(pController, this);
 		start();
 	}
 
+	/**
+	 * Initializes and displays the view components.
+	 */
 	public void start() {
 		addFirstRow();
 		addSecondRow();
 		addThirdRow();
 		addEmptyRow(5);
-
-		//this.revalidate();
 	}
 
+	/**
+	 * Adds an empty row at the specified position.
+	 *
+	 * @param y The vertical position of the row.
+	 */
 	private void addEmptyRow(int y) {
 		c.gridy = y;
 		for (int x = 0; x < 4; x++) {
@@ -31,6 +51,9 @@ public class GenerateView1 extends MainView {
 		}
 	}
 
+	/**
+	 * Adds the first row of components.
+	 */
 	private void addFirstRow() {
 		c.gridy = 0;
 
@@ -44,9 +67,11 @@ public class GenerateView1 extends MainView {
 		c.gridx = 3;
 		c.gridwidth = 1;
 		makeSquare("");
-
 	}
 
+	/**
+	 * Adds the second row of components.
+	 */
 	private void addSecondRow() {
 		c.gridy = 1;
 
@@ -75,6 +100,9 @@ public class GenerateView1 extends MainView {
 		makeSquare("");
 	}
 
+	/**
+	 * Adds the third row of components.
+	 */
 	private void addThirdRow() {
 		c.gridy = 3;
 
@@ -99,5 +127,4 @@ public class GenerateView1 extends MainView {
 		c.gridx = 2;
 		makeSquare("");
 	}
-
 }
