@@ -43,6 +43,7 @@ public class PauseController implements ActionListener {
 			controller.saveGame(path);
 		} else if (e.getActionCommand().equals(EXPORT_AC)) {
 			System.out.println("click export");
+			path = controller.showExportDialog();
 			view.setVisible(false);
 			controller.exportKenKen(path);
 		} else if (e.getActionCommand().equals(EXIT_AC)) {

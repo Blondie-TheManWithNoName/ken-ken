@@ -44,6 +44,8 @@ public class MainMenuController implements ActionListener {
 			controller.showGenerateView1();
 		} else if (e.getActionCommand().equals(IMPORT_KENKEN_AC)) {
 			System.out.println("click import");
+			path = controller.showImportDialog();
+			view.setVisible(false);
 			controller.importKenKen(path);
 		} else if (e.getActionCommand().equals(BACK_AC)) {
 			System.out.println("click back");

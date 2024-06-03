@@ -295,6 +295,7 @@ public class PresentationController {
     public void exportKenKen (String path) {
         try {
             mController.exportKenKen(path);
+            showMenuView();
         } catch (IOException e) {
             showErrorView(e.getMessage());
         }
@@ -308,7 +309,9 @@ public class PresentationController {
     public void importKenKen(String path) {
         try {
             mController.loadKenKen(path);
-        } catch (CannotLoadKenKenException e) {
+            showPlayView();
+        } catch (CannotLoadKenKenException | ShapesAndOperationsDoNotMatchException | CannotCreateOperationException |
+                 OperandsDoNotMatchException  e) {
             showErrorView(e.getMessage());
         }
     }
@@ -351,6 +354,54 @@ public class PresentationController {
         fileChooser.setDialogTitle("Seleccione el archivo para cargar");
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + GAME_EXTENSION + ")", GAME_EXTENSION);
+        fileChooser.setFileFilter(filter);
+
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            return selectedFile.getAbsolutePath();
+        }
+        return null;
+    }
+
+    /**
+     * Muestra un cuadro de diálogo para exportar un KenKen.
+     *
+     * @return La ruta completa del archivo donde se exportará el KenKen.
+     */
+    public String showExportDialog() {
+        JFileChooser fileChooser = new JFileChooser(new File(SAVE_DIRECTORY));
+        fileChooser.setDialogTitle("Exportar KenKen");
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + KENKEN_EXTENSION + ")", KENKEN_EXTENSION);
+        fileChooser.setFileFilter(filter);
+
+        int result = fileChooser.showSaveDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            String fileName = selectedFile.getName();
+            if (!fileName.trim().isEmpty()) {
+                String filePath = selectedFile.getAbsolutePath();
+                if (!filePath.endsWith("." + KENKEN_EXTENSION)) {
+                    filePath += "." + KENKEN_EXTENSION;
+                }
+                return filePath;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Muestra un cuadro de diálogo para importar un KenKen.
+     *
+     * @return La ruta completa del archivo que se importará.
+     */
+    public String showImportDialog() {
+        JFileChooser fileChooser = new JFileChooser(new File(SAVE_DIRECTORY));
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setDialogTitle("Seleccione el archivo para importar");
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + KENKEN_EXTENSION + ")", KENKEN_EXTENSION);
         fileChooser.setFileFilter(filter);
 
         int result = fileChooser.showOpenDialog(null);
