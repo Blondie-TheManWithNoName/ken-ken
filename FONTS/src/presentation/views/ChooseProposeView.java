@@ -4,10 +4,18 @@ import presentation.PresentationController;
 import presentation.controllers.ChoosePlayController;
 import presentation.controllers.ChooseProposeController;
 
+/**
+ * View for choosing to propose a KenKen puzzle.
+ */
 public class ChooseProposeView extends MainView {
 	private final PresentationController pController;
 	private final ChooseProposeController controller;
 
+	/**
+	 * Constructs a ChooseProposeView with the given PresentationController.
+	 *
+	 * @param controller The PresentationController instance.
+	 */
 	public ChooseProposeView(PresentationController controller) {
 		super();
 		this.pController = controller;
@@ -15,17 +23,21 @@ public class ChooseProposeView extends MainView {
 		start();
 	}
 
+	/**
+	 * Initializes the view components.
+	 */
 	public void start() {
-
 		addEmptyRow(0);
 		addSecondRow();
 		addThirdRow();
 		addEmptyRow(5);
-
-		//this.revalidate();
-
 	}
 
+	/**
+	 * Adds an empty row to the layout.
+	 *
+	 * @param y The y-coordinate of the row.
+	 */
 	private void addEmptyRow(int y) {
 		c.gridy = y;
 		for (int x = 0; x < 4; x++) {
@@ -34,6 +46,9 @@ public class ChooseProposeView extends MainView {
 		}
 	}
 
+	/**
+	 * Adds the second row components to the layout.
+	 */
 	private void addSecondRow() {
 		c.gridy = 1;
 
@@ -53,26 +68,26 @@ public class ChooseProposeView extends MainView {
 		makeSquare("");
 
 		c.gridy = 2;
-
 		c.gridx = 0;
 		c.gridheight = 1;
 		makeSquare("");
 
 		c.gridx = 2;
 		c.gridheight = 1;
-		makeButtonFirst("PROPOSE",controller, ChooseProposeController.PROPOSE_AC);
+		makeButtonFirst("PROPOSE", controller, ChooseProposeController.PROPOSE_AC);
 	}
 
+	/**
+	 * Adds the third row components to the layout.
+	 */
 	private void addThirdRow() {
 		c.gridy = 3;
 
 		c.gridx = 0;
 		c.gridheight = 2;
 		makeSquare("");
-
 		c.gridx = 1;
 		makeSquare("");
-
 		c.gridx = 2;
 		makeSquare("");
 
@@ -83,5 +98,4 @@ public class ChooseProposeView extends MainView {
 		c.gridy = 4;
 		makeSquare("");
 	}
-
 }
