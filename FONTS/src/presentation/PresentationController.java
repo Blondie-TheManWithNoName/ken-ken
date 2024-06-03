@@ -40,6 +40,7 @@ public class PresentationController {
     private int seconds;
 
     private int size;
+    private int groups;
     private int fixed;
     private Topology topology;
     private List<Class<? extends Operation>> allowedOperations;
@@ -92,33 +93,6 @@ public class PresentationController {
     public void setTime(int minutes, int seconds) {
         this.minutes = minutes;
         this.seconds = seconds;
-    }
-    public void setHints(int hints) {
-        this.hints = hints;
-    }
-
-    public int getMinutes() {
-        return this.minutes;
-    }
-
-    public int getSeconds() {
-        return this.seconds;
-    }
-
-    public int getTopologySize() {
-        return this.topology.getSize();
-    }
-
-    public int getOperationsSize() {
-        return this.allowedOperations.size();
-    }
-
-    public int getFixed() {
-        return this.fixed;
-    }
-
-    public int getHints() {
-        return this.hints;
     }
 
     /**
@@ -205,6 +179,7 @@ public class PresentationController {
         do {
             g = mController.generateKenKen(this.size, this.fixed, topology, allowedOperations);
         } while (!g);
+        groups = mController.getActiveKenKen().getGroups().size();
         return mController.getActiveKenKen();
     }
 
@@ -304,8 +279,7 @@ public class PresentationController {
      *
      * @param path Path to load the saved game.
      */
-    public void loadGame(String path
-    ) {
+    public void loadGame(String path) {
         try {
             mController.loadSavedGame(path);
             showPlayView();
@@ -316,6 +290,10 @@ public class PresentationController {
         }
     }
 
+    public int getScore() {
+        return mController.getScore(size, groups, topology.getSize(), allowedOperations.size(), minutes, seconds, fixed, hints);
+    }
+
     /**
      * Saves the score for the current game.
      *
@@ -324,7 +302,7 @@ public class PresentationController {
     public void saveScore(String username) {
         try {
 
-            mController.saveScore(username, getTopologySize(), getOperationsSize(), getMinutes(), getSeconds(), getFixed(), getHints());
+            mController.saveScore(username, topology.getSize(), allowedOperations.size(), minutes, seconds, fixed, hints);
             showMenuView();
         } catch (InvalidUsernameException | IOException e) {
             showErrorView(e.getMessage());
@@ -481,6 +459,5 @@ public class PresentationController {
         String user = JOptionPane.showInputDialog(null, "Enter your username:", "Save Score", JOptionPane.QUESTION_MESSAGE);
         saveScore(user);
         return null;
-        
     }
 }
