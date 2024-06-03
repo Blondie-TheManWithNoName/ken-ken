@@ -199,8 +199,9 @@ public class KenKenPlayView extends JFrame {
 			if (kenKen.check())
 			{
 				timer.stop();
-				JMainOptionPane.showMessageDialog(this, "CONGRATULATIONS!\nYOU SOLVED THE KENKEN!", "Success", JOptionPane.INFORMATION_MESSAGE);
-				int res = JOptionPane.showConfirmDialog(this, "Do you want to save your score?", "Save Score?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				//JMainOptionPane.showMessageDialog(this, "Success", JOptionPane.INFORMATION_MESSAGE);
+				String message = String.format("CONGRATULATIONS!\nYOU SOLVED THE KENKEN!\nYour score is: %d\nDo you want to save your score?", pController.getScore());
+				int res = JOptionPane.showConfirmDialog(this, message, "Save Score?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (res == JOptionPane.YES_OPTION) {
 					this.setVisible(false);
 					pController.showSaveScoreDialog();

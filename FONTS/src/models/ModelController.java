@@ -227,6 +227,20 @@ public class ModelController {
 
 	/**
 	 * Method to get the score.
+	 * @return The score.
+	 */
+
+
+	public int getScore(int size, int groups, int num_top, int num_op, int min, int sec,int fixed, int hints) {
+		int time = min * 60 + sec;
+		int score = size * size * groups * num_top * num_op;
+		int penalty = score / (size * size);
+		score = score - time - ((hints + fixed) * penalty);
+		return score;
+	}
+
+	/**
+	 * Method to get the score.
 	 * @param username Username of the player.
 	 * @throws InvalidUsernameException If the username is invalid.
 	 * @throws IOException If an I/O error occurs.
@@ -234,7 +248,7 @@ public class ModelController {
 	public void saveScore(String username, int topology, int operations, int minutes, int seconds, int fixed, int hints) throws InvalidUsernameException, IOException {
 		if (username.contains(" ") || username.isEmpty())
 			throw new InvalidUsernameException();
-		persistenceController.saveScore(new ScoreDTO(username, getScore(activeKenKen,topology, operations, minutes,seconds, fixed, hints)));
+		persistenceController.saveScore(new ScoreDTO(username, getScore(activeKenKen.getSize(), activeKenKen.getGroups().size(),topology, operations, minutes,seconds, fixed, hints)));
 	}
 
 	/* SAVE GAME */
@@ -295,19 +309,6 @@ public class ModelController {
 
 	/* PRIVATE METHODS */
 
-	/**
-	 * Method to get the score.
-	 * @return The score.
-	 */
-
-
-	private int getScore(KenKen kenKen, int numTopologies, int numOperations, int min, int sec, int numFixed, int numHints) {
-		int time = min * 60 + sec;
-		int score = kenKen.getSize() * kenKen.getSize() * kenKen.getGroups().size() * numTopologies * numOperations;
-		int penalty = score / (kenKen.getSize() * kenKen.getSize());
-		score = score - time - ((numHints + numFixed) * penalty);
-		return score;
-	}
 
 	/**
 	 * Method to convert a KenKen to a DTO.
