@@ -159,6 +159,8 @@ public class PresentationController {
      */
     public void showGenerateView3(List<Class<? extends Operation>> allowedOperations, Topology topology) throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
         this.topology = topology;
+        JKenKenCell.CELL_SIZE = 25;
+        JKenKenCell.FONT_SIZE = (-10 / 3) * size + 40;
         this.allowedOperations = allowedOperations;
         if (mController.generateKenKen(9, 0, topology, allowedOperations)) {
             generateView3 = new GenerateView3(this);
