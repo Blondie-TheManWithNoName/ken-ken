@@ -34,7 +34,7 @@ public class PresentationController {
     private KenKenPlayView playView;
     private PauseView pauseView;
     //private SolvedView solvedView;
-    //private ErrorView errorView;
+    private ErrorView errorView;
     private int minutes;
     private int seconds;
 
@@ -63,7 +63,7 @@ public class PresentationController {
 //        generateView3 = new GenerateView3(this);
         //importView = new importView(this);
         //solvedView = new SolvedView();
-        //errorView = new ErrorView();
+        errorView = new ErrorView(this);
         size = 3;
         fixed = 0;
         initializeKenKenShapesAndOperations();
@@ -196,15 +196,6 @@ public class PresentationController {
     }
 
     /**
-     * Displays the play view of the application from generated kenken.
-     */
-    public void showPlayViewGenerate () throws
-    OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
-        //Puedes utilizar esta funcion para guardar el kenken generado en el presentation controller y hacer un show play view ya que cuando hagamos el play
-        //random se tendra que utilizar una topologia random y operaciones random y utilizaremos el kenken
-    }
-
-    /**
      * Displays the pause view of the application.
      */
     public void showPauseView () {
@@ -225,8 +216,8 @@ public class PresentationController {
      * @param eMessage The error message to be displayed.
      */
     public void showErrorView (String eMessage){
-        //errorView.update(eMessage);
-        //errorView.makeVisible();
+        errorView.update(eMessage);
+        errorView.makeVisible();
     }
 
     public boolean checkKenKen(KenKen kenKen)
