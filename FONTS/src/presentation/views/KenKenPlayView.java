@@ -180,7 +180,7 @@ public class KenKenPlayView extends JFrame {
 				setCellValue.enableAllBut(value);
 			} catch (EraseFixedValueException | ValueOutOfBoundsException ignored) {
 			} catch (RewriteFixedPositionException e) {
-				JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+				JMainOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if (kenKen.isFull()) check();
@@ -201,9 +201,9 @@ public class KenKenPlayView extends JFrame {
 				timer.stop();
 				//JMainOptionPane.showMessageDialog(this, "Success", JOptionPane.INFORMATION_MESSAGE);
 				String message = String.format("CONGRATULATIONS!\nYOU SOLVED THE KENKEN!\nYour score is: %d\nDo you want to save your score?", pController.getScore());
-				int res = JOptionPane.showConfirmDialog(this, message, "Save Score?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-				if (res == JOptionPane.YES_OPTION) {
-					this.setVisible(false);
+				int res = JMainOptionPane.showConfirmDialog(this, message, "Save Score?", JMainOptionPane.YES_NO_OPTION, JMainOptionPane.QUESTION_MESSAGE);
+				if (res == JMainOptionPane.YES_OPTION) {
+//					this.setVisible(false);
 					pController.showSaveScoreDialog();
 				}
 				else {
@@ -213,7 +213,7 @@ public class KenKenPlayView extends JFrame {
 
 			}
 		} catch (OperandsDoNotMatchException | NonIntegerResultException e) {
-			JMainOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+//			JMainOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -234,7 +234,7 @@ public class KenKenPlayView extends JFrame {
 			}
 		}
 		timer.stop();
-		JOptionPane.showMessageDialog(this, "CONGRATULATIONS!\nTHE AI SOLVED THE KENKEN!", "Success", JOptionPane.PLAIN_MESSAGE);
+		JMainOptionPane.showMessageDialog(this, "CONGRATULATIONS!\nTHE AI SOLVED THE KENKEN!", "Success", JOptionPane.PLAIN_MESSAGE);
 		this.setVisible(false);
 		pController.showMenuView();
 

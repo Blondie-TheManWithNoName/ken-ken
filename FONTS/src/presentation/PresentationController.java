@@ -8,6 +8,7 @@ import models.operations.*;
 import models.topologies.Shape;
 import models.topologies.Topology;
 import presentation.custom.JKenKenCell;
+import presentation.custom.JMainOptionPane;
 import presentation.views.*;
 
 import javax.swing.*;
@@ -35,7 +36,6 @@ public class PresentationController {
     private GenerateView3 generateView3;
     private KenKenPlayView playView;
     private PauseView pauseView;
-    private final ErrorView errorView;
     private int minutes;
     private int seconds;
 
@@ -65,7 +65,6 @@ public class PresentationController {
         chooseProposeView = new ChooseProposeView(this);
         generateView1 = new GenerateView1(this);
         generateView2 = new GenerateView2(this);
-        errorView = new ErrorView(this);
     }
 
     /**
@@ -173,13 +172,6 @@ public class PresentationController {
         ++hints;
     }
 
-    public void setTopologyAndAllowedOperations(List<Class<? extends Operation>> allowedOperations, Topology topology)
-    {
-        this.topology = topology;
-        this.allowedOperations = allowedOperations;
-
-    }
-
     /**
      * Displays the third generate view of the application.
      */
@@ -245,8 +237,7 @@ public class PresentationController {
      * @param eMessage The error message to be displayed.
      */
     public void showErrorView(String eMessage) {
-        errorView.update(eMessage);
-        errorView.makeVisible();
+        JMainOptionPane.showMessageDialog(null, eMessage, "ERROR", JOptionPane.ERROR_MESSAGE);
     }
 
     /**
@@ -278,7 +269,7 @@ public class PresentationController {
      * @param allowedOperations The allowed operations for the KenKen puzzle.
      * @param topology          The topology for the KenKen puzzle.
      */
-    public void setTopologyAndOperations(List<Class<? extends Operation>> allowedOperations, Topology topology) {
+    public void setTopologyAndAllowedOperations(List<Class<? extends Operation>> allowedOperations, Topology topology) {
         this.topology = topology;
         this.allowedOperations = allowedOperations;
     }
