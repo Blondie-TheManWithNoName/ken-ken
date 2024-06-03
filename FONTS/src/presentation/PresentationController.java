@@ -453,7 +453,6 @@ public class PresentationController {
      * @return The full path of the file to be imported.
      */
     public String showSaveScoreDialog() {
-        String username = JOptionPane.showInputDialog(null, "Enter your username:", "Save Score", JOptionPane.QUESTION_MESSAGE);
-        return username;
+        return JOptionPane.showInputDialog(null, "Enter your username:", "Save Score", JOptionPane.QUESTION_MESSAGE);
     }
 }
