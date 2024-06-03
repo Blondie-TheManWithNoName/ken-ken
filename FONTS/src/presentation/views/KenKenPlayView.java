@@ -21,6 +21,7 @@ public class KenKenPlayView extends JFrame {
 	protected final JKenKenPanel kenKenPanel;
 	protected final JLabel elapsedTimeLabel;
 	private long startTime;
+	private long elapsedTimeWhenStopped;
 
 	private int minutes;
 	private int seconds;
@@ -40,6 +41,7 @@ public class KenKenPlayView extends JFrame {
 		this.elapsedTimeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		startTimer();
 		startTime = System.currentTimeMillis();
+		this.elapsedTimeWhenStopped = 0;
 		this.solver = new KenKenSolver(kenKen);
 
 		pController = controller;
@@ -217,7 +219,7 @@ public class KenKenPlayView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				long currentTime = System.currentTimeMillis();
-				long elapsedTime = currentTime - startTime;
+				long elapsedTime = currentTime - startTime + elapsedTimeWhenStopped;
 				long elapsedSeconds = elapsedTime / 1000;
 				minutes = (int) (elapsedSeconds / 60);
 				seconds = (int) (elapsedSeconds % 60);
@@ -229,6 +231,7 @@ public class KenKenPlayView extends JFrame {
 
 	public void stopTime()
 	{
+		elapsedTimeWhenStopped += System.currentTimeMillis() - startTime;
 		timer.stop();
 	}
 
@@ -237,6 +240,7 @@ public class KenKenPlayView extends JFrame {
 
 	public void makeVisible() {
 		setVisible(true);
+		startTime = System.currentTimeMillis();
 		timer.start();
 	}
 }
