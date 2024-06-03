@@ -39,7 +39,6 @@ public class PresentationController {
     private int minutes;
     private int seconds;
     private int hints;
-    private boolean solved_clicked;
 
     private int size;
     private int fixed;
@@ -456,7 +455,10 @@ public class PresentationController {
      *
      * @return The full path of the file to be imported.
      */
-    public String showSaveScoreDialog() {
-        return JOptionPane.showInputDialog(null, "Enter your username:", "Save Score", JOptionPane.QUESTION_MESSAGE);
+    public void showSaveScoreDialog() {
+        String user = JOptionPane.showInputDialog(null, "Enter your username:", "Save Score", JOptionPane.QUESTION_MESSAGE);
+        saveScore(user);
+
+        
     }
 }

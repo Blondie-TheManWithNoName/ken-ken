@@ -200,7 +200,11 @@ public class KenKenPlayView extends JFrame {
 			{
 				timer.stop();
 				JMainOptionPane.showMessageDialog(this, "CONGRATULATIONS!\nYOU SOLVED THE KENKEN!", "Success", JOptionPane.INFORMATION_MESSAGE);
-				JMainOptionPane.showMessageDialog(this, "You want to save your score?", "Save Score?", JOptionPane.QUESTION_MESSAGE);
+				int res = JOptionPane.showConfirmDialog(this, "Do you want to save your score?", "Save Score?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				if (res == JOptionPane.YES_OPTION) {
+					pController.showSaveScoreDialog();
+				}
+				else pController.showMenuView();
 			}
 		} catch (OperandsDoNotMatchException | NonIntegerResultException e) {
 			JMainOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
