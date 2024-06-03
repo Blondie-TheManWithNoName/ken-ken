@@ -5,23 +5,18 @@ import models.ModelController;
 import models.Score;
 import models.kenken.KenKen;
 import models.operations.*;
-        import models.topologies.Shape;
+import models.topologies.Shape;
 import models.topologies.Topology;
 import presentation.custom.JKenKenCell;
 import presentation.views.*;
 
-        import java.util.ArrayList;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import persistence.dto.KenKenDTO;
-
-import javax.swing.*;
-
-import javax.swing.filechooser.*;
-import java.io.IOException;
-
-import java.io.File;
 
 /**
  * The PresentationController class manages the presentation layer of the application,
@@ -57,8 +52,6 @@ public class PresentationController {
      * Constructs a PresentationController and initializes various views.
      */
     public PresentationController() {
-
-
         mController = new ModelController();
         size = 3;
         fixed = 0;
@@ -68,20 +61,12 @@ public class PresentationController {
         rankingView = new RankingView(this);
         choosePlayView = new ChoosePlayView(this);
         chooseProposeView = new ChooseProposeView(this);
-        //playView = new KenKenPlayView();
-        //loadView = new LoadView();
-        //proposeView = new ProposeView();
         generateView1 = new GenerateView1(this);
         generateView2 = new GenerateView2(this);
-        //generateView3 = new GenerateView3(this);
-        //importView = new importView(this);
         errorView = new ErrorView(this);
-
-
     }
 
-    public void initializeKenKenShapesAndOperations()
-    {
+    public void initializeKenKenShapesAndOperations() {
         topology = new Topology();
         topology.addShape(Shape.ZIGZAG);
         topology.addShape(Shape.DASH);
@@ -103,18 +88,21 @@ public class PresentationController {
         );
     }
 
-    public void setTime(int minutes, int seconds)
-    {
+    public void setTime(int minutes, int seconds) {
         this.minutes = minutes;
         this.seconds = seconds;
     }
 
-    public int getMinutes(){
-        return this.minutes;}
-    public int getSeconds(){return this.seconds;}
+    public int getMinutes() {
+        return this.minutes;
+    }
+
+    public int getSeconds() {
+        return this.seconds;
+    }
 
     /**
-     * Initializes the presentation and makes the main view visible.
+     * Initializes the presentation and makes the home view visible.
      */
     public void showHomeView() {
         homeView.makeVisible();
@@ -135,14 +123,14 @@ public class PresentationController {
     }
 
     /**
-     * Displays the choose view of the application.
+     * Displays the choose play view of the application.
      */
     public void showChoosePlayView() {
         choosePlayView.makeVisible();
     }
 
     /**
-     * Displays the choose view of the application.
+     * Displays the choose propose view of the application.
      */
     public void showChooseProposeView() {
         chooseProposeView.makeVisible();
@@ -158,34 +146,39 @@ public class PresentationController {
     }
 
     /**
-     * Displays the generate view of the application.
+     * Displays the first generate view of the application.
      */
     public void showGenerateView1() {
         generateView1.makeVisible();
     }
 
     /**
-     * Displays the generate view of the application.
+     * Displays the second generate view of the application.
      */
     public void showGenerateView2() {
         generateView2.makeVisible();
     }
 
     /**
-     * Displays the generate view of the application.
+     * Displays the third generate view of the application.
      */
     public void showGenerateView3(List<Class<? extends Operation>> allowedOperations, Topology topology) throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
-
         this.topology = topology;
         this.allowedOperations = allowedOperations;
         if (mController.generateKenKen(9, 0, topology, allowedOperations)) {
-
             generateView3 = new GenerateView3(this);
             generateView3.makeVisible();
         }
     }
 
-
+    /**
+     * Generates a KenKen puzzle.
+     *
+     * @return The generated KenKen puzzle.
+     * @throws CannotCreateOperationException       If the operation cannot be created.
+     * @throws OperandsDoNotMatchException          If operands do not match.
+     * @throws ShapesAndOperationsDoNotMatchException If shapes and operations do not match.
+     */
     public KenKen generateKenKen() throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
         mController.generateKenKen(this.size, this.fixed, topology, allowedOperations);
         return mController.getActiveKenKen();
@@ -193,22 +186,33 @@ public class PresentationController {
 
     /**
      * Displays the play view of the application.
+     *
+     * @throws OperandsDoNotMatchException          If operands do not match.
+     * @throws ShapesAndOperationsDoNotMatchException If shapes and operations do not match.
+     * @throws CannotCreateOperationException       If the operation cannot be created.
      */
-    public void showPlayView () throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
+    public void showPlayView() throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
         JKenKenCell.CELL_SIZE = 75;
-        JKenKenCell.FONT_SIZE = (-10/3) * size + 40;
+        JKenKenCell.FONT_SIZE = (-10 / 3) * size + 40;
         playView = new KenKenPlayView(this, mController.getActiveKenKen());
         playView.makeVisible();
     }
 
-    public void resumePlayView () throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
+    /**
+     * Resumes the play view of the application.
+     *
+     * @throws OperandsDoNotMatchException          If operands do not match.
+     * @throws ShapesAndOperationsDoNotMatchException If shapes and operations do not match.
+     * @throws CannotCreateOperationException       If the operation cannot be created.
+     */
+    public void resumePlayView() throws OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, CannotCreateOperationException {
         playView.makeVisible();
     }
 
     /**
      * Displays the pause view of the application.
      */
-    public void showPauseView () {
+    public void showPauseView() {
         pauseView = new PauseView(this, minutes, seconds);
         pauseView.makeVisible();
     }
@@ -218,35 +222,53 @@ public class PresentationController {
      *
      * @param eMessage The error message to be displayed.
      */
-    public void showErrorView (String eMessage){
+    public void showErrorView(String eMessage) {
         errorView.update(eMessage);
         errorView.makeVisible();
     }
 
-    public boolean checkKenKen(KenKen kenKen)
-    {
+    /**
+     * Checks if the KenKen puzzle is valid.
+     *
+     * @param kenKen The KenKen puzzle to be checked.
+     * @return True if the KenKen puzzle is valid, otherwise false.
+     */
+    public boolean checkKenKen(KenKen kenKen) {
         mController.setActiveKenKen(kenKen);
         mController.setAiSolve();
         return mController.aiSolve();
     }
 
-    public void setSizeAndFixed ( int size, int fixed){
+    /**
+     * Sets the size and fixed number of the KenKen puzzle.
+     *
+     * @param size  The size of the KenKen puzzle.
+     * @param fixed The fixed number of the KenKen puzzle.
+     */
+    public void setSizeAndFixed(int size, int fixed) {
         this.size = size;
         this.fixed = fixed;
     }
 
-    public void setTopologyAndOperations (List<Class<? extends Operation>> allowedOperations, Topology topology) {
+    /**
+     * Sets the topology and operations for the KenKen puzzle.
+     *
+     * @param allowedOperations The allowed operations for the KenKen puzzle.
+     * @param topology          The topology for the KenKen puzzle.
+     */
+    public void setTopologyAndOperations(List<Class<? extends Operation>> allowedOperations, Topology topology) {
         this.topology = topology;
         this.allowedOperations = allowedOperations;
     }
 
     /**
      * Method to save the game.
+     *
+     * @param path Path to save the game.
      */
     public void saveGame(String path) {
         try {
             mController.saveGame(path);
-            //nota: hay que modificar savegame del persistence para que reciba una ruta como el load
             showMenuView();
         } catch (IOException e) {
             showErrorView(e.getMessage());
@@ -255,20 +277,26 @@ public class PresentationController {
 
     /**
      * Method to load a saved game.
+     *
      * @param path Path to load the saved game.
      */
-    public void loadGame(String path) {
+    public void loadGame(String path
+    ) {
         try {
             mController.loadSavedGame(path);
             showPlayView();
         } catch (CannotLoadKenKenException | ShapesAndOperationsDoNotMatchException | CannotCreateOperationException |
                  OperandsDoNotMatchException e) {
             showErrorView(e.getMessage());
-            //Nota: si el valor path es null salta excepción pero no hay mensaje.
+            // Note: If the path value is null, it throws an exception but there's no message.
         }
-
     }
 
+    /**
+     * Saves the score for the current game.
+     *
+     * @param username The username associated with the score.
+     */
     public void saveScore(String username) {
         try {
             mController.saveScore(username);
@@ -278,9 +306,14 @@ public class PresentationController {
 
     }
 
+    /**
+     * Retrieves the ranking of scores.
+     *
+     * @return The list of scores representing the ranking.
+     */
     public List<Score> getRanking() {
         try {
-             return mController.checkRanking();
+            return mController.checkRanking();
         } catch (CannotLoadScoresException e) {
             showErrorView(e.getMessage());
         }
@@ -288,11 +321,11 @@ public class PresentationController {
     }
 
     /**
-     * Method to export a KenKen.
+     * Method to export a KenKen puzzle.
      *
-     * @param path Path to export the KenKen.
+     * @param path Path to export the KenKen puzzle.
      */
-    public void exportKenKen (String path) {
+    public void exportKenKen(String path) {
         try {
             mController.exportKenKen(path);
             showMenuView();
@@ -302,28 +335,28 @@ public class PresentationController {
     }
 
     /**
-     * Method to load a KenKen.
+     * Method to import a KenKen puzzle.
      *
-     * @param path Path to load the KenKen.
+     * @param path Path to import the KenKen puzzle.
      */
     public void importKenKen(String path) {
         try {
             mController.loadKenKen(path);
             showPlayView();
         } catch (CannotLoadKenKenException | ShapesAndOperationsDoNotMatchException | CannotCreateOperationException |
-                 OperandsDoNotMatchException  e) {
+                 OperandsDoNotMatchException e) {
             showErrorView(e.getMessage());
         }
     }
 
     /**
-     * Muestra un cuadro de diálogo para guardar un KenKen.
+     * Displays a dialog box to save a KenKen puzzle.
      *
-     * @return La ruta completa del archivo donde se guardará el KenKen.
+     * @return The full path of the file where the KenKen puzzle will be saved.
      */
     public String showSaveDialog() {
         JFileChooser fileChooser = new JFileChooser(new File(SAVE_DIRECTORY));
-        fileChooser.setDialogTitle("Guardar KenKen");
+        fileChooser.setDialogTitle("Save KenKen");
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + GAME_EXTENSION + ")", GAME_EXTENSION);
         fileChooser.setFileFilter(filter);
@@ -344,14 +377,14 @@ public class PresentationController {
     }
 
     /**
-     * Muestra un cuadro de diálogo para cargar un KenKen.
+     * Displays a dialog box to load a KenKen puzzle.
      *
-     * @return La ruta completa del archivo que se va a cargar.
+     * @return The full path of the file to be loaded.
      */
     public String showLoadDialog() {
         JFileChooser fileChooser = new JFileChooser(new File(SAVE_DIRECTORY));
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        fileChooser.setDialogTitle("Seleccione el archivo para cargar");
+        fileChooser.setDialogTitle("Select the file to load");
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + GAME_EXTENSION + ")", GAME_EXTENSION);
         fileChooser.setFileFilter(filter);
@@ -365,13 +398,13 @@ public class PresentationController {
     }
 
     /**
-     * Muestra un cuadro de diálogo para exportar un KenKen.
+     * Displays a dialog box to export a KenKen puzzle.
      *
-     * @return La ruta completa del archivo donde se exportará el KenKen.
+     * @return The full path of the file where the KenKen puzzle will be exported.
      */
     public String showExportDialog() {
         JFileChooser fileChooser = new JFileChooser(new File(SAVE_DIRECTORY));
-        fileChooser.setDialogTitle("Exportar KenKen");
+        fileChooser.setDialogTitle("Export KenKen");
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + KENKEN_EXTENSION + ")", KENKEN_EXTENSION);
         fileChooser.setFileFilter(filter);
@@ -392,14 +425,14 @@ public class PresentationController {
     }
 
     /**
-     * Muestra un cuadro de diálogo para importar un KenKen.
+     * Displays a dialog box to import a KenKen puzzle.
      *
-     * @return La ruta completa del archivo que se importará.
+     * @return The full path of the file to be imported.
      */
     public String showImportDialog() {
         JFileChooser fileChooser = new JFileChooser(new File(SAVE_DIRECTORY));
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        fileChooser.setDialogTitle("Seleccione el archivo para importar");
+        fileChooser.setDialogTitle("Select the file to import");
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + KENKEN_EXTENSION + ")", KENKEN_EXTENSION);
         fileChooser.setFileFilter(filter);
@@ -411,6 +444,4 @@ public class PresentationController {
         }
         return null;
     }
-
-
 }
