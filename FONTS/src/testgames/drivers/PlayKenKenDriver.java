@@ -60,7 +60,7 @@ public class PlayKenKenDriver {
 							System.out.print("Enter your username (no spaces): ");
 							username = scanner.next();
 							try {
-								controller.saveScore(username, 1,2, 3,4);
+								controller.saveScore(username, 1,2, 3,4,1,1);
 								exit();
 							} catch (InvalidUsernameException e) {
 								System.out.println(e.getMessage());

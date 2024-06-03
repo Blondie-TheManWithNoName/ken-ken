@@ -38,7 +38,6 @@ public class PresentationController {
     private ErrorView errorView;
     private int minutes;
     private int seconds;
-    private int hints;
 
     private int size;
     private int fixed;

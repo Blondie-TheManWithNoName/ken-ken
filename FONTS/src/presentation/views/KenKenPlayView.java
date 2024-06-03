@@ -219,7 +219,6 @@ public class KenKenPlayView extends JFrame {
 	 * @throws ValueOutOfBoundsException       If the value is out of bounds.
 	 */
 	public void solve() throws RewriteFixedPositionException, ValueOutOfBoundsException {
-		//startTime = startTime - 1800000;
 		for (int row = 0; row < kenKen.getSize(); row++) {
 			for (int col = 0; col < kenKen.getSize(); col++) {
 				if (!kenKen.getCell(row, col).isFixed())
@@ -230,7 +229,8 @@ public class KenKenPlayView extends JFrame {
 			}
 		}
 		timer.stop();
-		JMainOptionPane.showMessageDialog(this, "CONGRATULATIONS!\nTHE AI SOLVED THE KENKEN!", "Success", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(this, "CONGRATULATIONS!\nTHE AI SOLVED THE KENKEN!", "Success", JOptionPane.PLAIN_MESSAGE);
+		pController.showMenuView();
 
 	}
 
@@ -241,7 +241,6 @@ public class KenKenPlayView extends JFrame {
 	 * @throws ValueOutOfBoundsException       If the value is out of bounds.
 	 */
 	public void hint() throws RewriteFixedPositionException, ValueOutOfBoundsException {
-		startTime = startTime - 60000;
 		if (!kenKen.isFull()){
 			int randomRow = (int) (Math.random() * ((kenKen.getSize() - 1) + 1));
 			int randomCol = (int) (Math.random() * ((kenKen.getSize() - 1) + 1));
