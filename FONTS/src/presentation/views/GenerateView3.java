@@ -41,7 +41,6 @@ public class GenerateView3 extends MainView {
 	 */
 	public void generateKenKen() throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
 		this.kenKen = pController.generateKenKen();
-		JKenKenCell.CELL_SIZE = 25;
 		this.kenKenPanel = new JKenKenPanel(kenKen);
 		swapKenKen(kenKenPanel);
 		revalidate();
@@ -54,8 +53,8 @@ public class GenerateView3 extends MainView {
 		addFirstRow();
 		addSecondRow();
 		addThirdRow();
-		//addEmptyRow(5);
 		addFourthRow();
+		addEmptyRow(5);
 		revalidate();
 		repaint();
 	}
@@ -97,7 +96,7 @@ public class GenerateView3 extends MainView {
 		makeBackButton(controller, Generate3Controller.BACK_AC);
 		c.gridx = 1;
 		c.gridwidth = 2;
-		c.gridheight = 4;
+		c.gridheight = 3;
 		makeKenKenPanel(kenKenPanel);
 		c.gridx = 3;
 		c.gridwidth = 1;
@@ -119,13 +118,6 @@ public class GenerateView3 extends MainView {
 		makeSquare("");
 		c.gridheight = 1;
 		c.gridy = 3;
-		c.gridx = 1;
-		//makeButtonSecond("REGENERATE", controller, Generate3Controller.REGENERATE_AC);
-		c.gridx = 2;
-		//makeButtonFirst("PLAY", controller, Generate3Controller.PLAY_AC);
-		c.gridx = 3;
-		makeSquare("");
-		c.gridy = 4;
 		c.gridx = 3;
 		makeSquare("");
 
@@ -136,7 +128,7 @@ public class GenerateView3 extends MainView {
 	 */
 	private void addFourthRow() {
 		c.gridheight = 1;
-		c.gridy = 5;
+		c.gridy = 4;
 		c.gridx = 0;
 		makeSquare("");
 		c.gridx = 1;
