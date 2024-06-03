@@ -38,9 +38,11 @@ public class PauseController implements ActionListener {
             }
         } else if (e.getActionCommand().equals(SAVE_AC)) {
 			System.out.println("click save");
-			path = controller.showSaveDialog();
+			//path = controller.showSaveDialog();
+			path = controller.showSaveScoreDialog();//solo es para probar ranking
 			view.setVisible(false);
-			controller.saveGame(path);
+			//controller.saveGame(path);
+			controller.saveScore(path);//solo es para probar ranking
 		} else if (e.getActionCommand().equals(EXPORT_AC)) {
 			System.out.println("click export");
 			path = controller.showExportDialog();

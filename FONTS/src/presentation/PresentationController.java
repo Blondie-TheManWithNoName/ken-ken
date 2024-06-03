@@ -119,6 +119,7 @@ public class PresentationController {
      * Displays the ranking view of the application.
      */
     public void showRankingView() {
+        rankingView.populateRanking();
         rankingView.makeVisible();
     }
 
@@ -300,6 +301,7 @@ public class PresentationController {
     public void saveScore(String username) {
         try {
             mController.saveScore(username);
+            showMenuView();
         } catch (InvalidUsernameException | IOException e) {
             showErrorView(e.getMessage());
         }
@@ -443,5 +445,15 @@ public class PresentationController {
             return selectedFile.getAbsolutePath();
         }
         return null;
+    }
+
+    /**
+     * Displays a dialog box to save a score.
+     *
+     * @return The full path of the file to be imported.
+     */
+    public String showSaveScoreDialog() {
+        String username = JOptionPane.showInputDialog(null, "Enter your username:", "Save Score", JOptionPane.QUESTION_MESSAGE);
+        return username;
     }
 }
