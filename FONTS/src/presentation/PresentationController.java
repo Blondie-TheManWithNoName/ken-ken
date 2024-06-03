@@ -50,7 +50,8 @@ public class PresentationController {
     private List<Class<? extends Operation>> allowedOperations;
 
     private static final String SAVE_DIRECTORY = "data/";
-    private static final String FILE_EXTENSION = "kenken_game";
+    private static final String GAME_EXTENSION = "kenken_game";
+    private static final String KENKEN_EXTENSION = "kenken";
 
     /**
      * Constructs a PresentationController and initializes various views.
@@ -318,9 +319,23 @@ public class PresentationController {
      * @return La ruta completa del archivo donde se guardará el KenKen.
      */
     public String showSaveDialog() {
-        String fileName = JOptionPane.showInputDialog(null, "Ingrese el nombre del archivo para guardar:", "Guardar KenKen", JOptionPane.QUESTION_MESSAGE);
-        if (fileName != null && !fileName.trim().isEmpty()) {
-            return SAVE_DIRECTORY + fileName.trim() + "." + FILE_EXTENSION;
+        JFileChooser fileChooser = new JFileChooser(new File(SAVE_DIRECTORY));
+        fileChooser.setDialogTitle("Guardar KenKen");
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + GAME_EXTENSION + ")", GAME_EXTENSION);
+        fileChooser.setFileFilter(filter);
+
+        int result = fileChooser.showSaveDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            String fileName = selectedFile.getName();
+            if (!fileName.trim().isEmpty()) {
+                String filePath = selectedFile.getAbsolutePath();
+                if (!filePath.endsWith("." + GAME_EXTENSION)) {
+                    filePath += "." + GAME_EXTENSION;
+                }
+                return filePath;
+            }
         }
         return null;
     }
@@ -335,7 +350,7 @@ public class PresentationController {
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileChooser.setDialogTitle("Seleccione el archivo para cargar");
 
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + FILE_EXTENSION + ")", FILE_EXTENSION);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + GAME_EXTENSION + ")", GAME_EXTENSION);
         fileChooser.setFileFilter(filter);
 
         int result = fileChooser.showOpenDialog(null);
