@@ -408,7 +408,7 @@ public class PresentationController {
         JFileChooser fileChooser = new JFileChooser(new File(SAVE_DIRECTORY));
         fileChooser.setDialogTitle("Export KenKen");
 
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + KENKEN_EXTENSION + ")", KENKEN_EXTENSION);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + GAME_EXTENSION + ")", GAME_EXTENSION);
         fileChooser.setFileFilter(filter);
 
         int result = fileChooser.showSaveDialog(null);
@@ -436,7 +436,7 @@ public class PresentationController {
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileChooser.setDialogTitle("Select the file to import");
 
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + KENKEN_EXTENSION + ")", KENKEN_EXTENSION);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("KenKen files (*." + GAME_EXTENSION + ")", GAME_EXTENSION);
         fileChooser.setFileFilter(filter);
 
         int result = fileChooser.showOpenDialog(null);
