@@ -48,6 +48,7 @@ public class KenKenPlayController implements ActionListener, KeyListener {
         }
 		else if (e.getActionCommand().startsWith(HINT_KENKEN_AC))
 		{
+			controller.add1hint();
             try {
                 view.hint();
             } catch (RewriteFixedPositionException | ValueOutOfBoundsException ex) {
