@@ -68,6 +68,10 @@ public class PresentationController {
         errorView = new ErrorView(this);
     }
 
+    /**
+     * initialize the attribute topology and allowedOperations
+     */
+
     public void initializeKenKenShapesAndOperations() {
         topology = new Topology();
         topology.addShape(Shape.ZIGZAG);
@@ -89,6 +93,12 @@ public class PresentationController {
                 )
         );
     }
+
+    /**
+     * set the attributes minutes and seconds
+     * @param minutes spend during the game
+     * @param seconds spend during the game
+     */
 
     public void setTime(int minutes, int seconds) {
         this.minutes = minutes;
@@ -153,6 +163,10 @@ public class PresentationController {
     public void showGenerateView2() {
         generateView2.makeVisible();
     }
+
+    /**
+     *  sum 1 to the hints used by the user
+     */
 
     public void add1hint(){
         ++hints;
@@ -295,6 +309,11 @@ public class PresentationController {
             // Note: If the path value is null, it throws an exception but there's no message.
         }
     }
+
+    /**
+     * get the score of the game
+     * @return score made in the game
+     */
 
     public int getScore() {
         return mController.getScore(size, groups, topology.getSize(), allowedOperations.size(), minutes, seconds, fixed, hints);
