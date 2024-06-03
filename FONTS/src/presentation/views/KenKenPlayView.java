@@ -205,6 +205,7 @@ public class KenKenPlayView extends JFrame {
 					pController.showSaveScoreDialog();
 				}
 				else pController.showMenuView();
+
 			}
 		} catch (OperandsDoNotMatchException | NonIntegerResultException e) {
 			JMainOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
