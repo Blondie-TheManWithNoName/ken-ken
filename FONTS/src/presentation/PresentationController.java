@@ -44,7 +44,7 @@ public class PresentationController {
     private int fixed;
     private Topology topology;
     private List<Class<? extends Operation>> allowedOperations;
-    private int hints;
+    private int hints = 0;
 
     private static final String SAVE_DIRECTORY = "data/";
     private static final String GAME_EXTENSION = "kenken_game";
@@ -152,6 +152,10 @@ public class PresentationController {
      */
     public void showGenerateView2() {
         generateView2.makeVisible();
+    }
+
+    public void add1hint(){
+        ++hints;
     }
 
     /**
