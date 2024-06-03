@@ -3,15 +3,10 @@ package presentation.views;
 import models.Score;
 import presentation.PresentationController;
 import presentation.controllers.*;
-import presentation.custom.ButtonColorsFirst;
-import presentation.custom.ButtonColorsSecond;
-import presentation.custom.JMainButton;
-import presentation.custom.JSquareLabel;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +18,8 @@ public class RankingView extends MainView{
 
     private DefaultListModel<String> top3Model;
     private DefaultListModel<String> ranksModel;
+
+    JScrollPane rankingPane = new JScrollPane();
 
     List<Score> ranking;
 
@@ -81,7 +78,7 @@ public class RankingView extends MainView{
         c.gridheight = 2;
 //        JList<String> top3List = new JList<>(top3Model);
 //        top3List.setCellRenderer(new RankingCellRenderer());
-        JPanel podium = makePodium("Oriol", "Dani", "Brian");
+        JPanel podium = makePodium();
         gridbag.setConstraints(podium, c);
         add(podium, c);
 
@@ -111,19 +108,7 @@ public class RankingView extends MainView{
         c.gridx = 1;
         c.gridheight = 3;
         c.gridwidth= 2;
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); // Set the layout to BoxLayout Y_AXIS
-        JScrollPane panelPane = new JScrollPane(panel);
-        panelPane.setBorder(null);
-
-        for (int i = 0; i < ranking.size(); i++) {
-            Score score = ranking.get(i);
-            panel.add(makeLabelName(i + 1, score.getUser(), score.getScore()));
-        }
-//        JList<String> ranksList = new JList<>(ranksModel);
-//        ranksList.setCellRenderer(new RankingCellRenderer());
-        gridbag.setConstraints(panelPane, c);
-        add(panelPane, c);
+        makeRankingPanel();
 
         c.gridx = 3;
         c.gridheight = 1;
@@ -149,18 +134,6 @@ public class RankingView extends MainView{
      */
     public void populateRanking() {
         this.ranking = pController.getRanking();
-        top3Model.clear();
-        ranksModel.clear();
-        int count = 0;
-        for (Score score : ranking) {
-            String item = formatItem(score.getUser(), score.getScore());
-            if (count < 3) {
-                top3Model.addElement(item);
-            } else {
-                ranksModel.addElement(item);
-            }
-            count++;
-        }
     }
 
     /**
@@ -245,14 +218,19 @@ public class RankingView extends MainView{
         return rowPanel;
     }
 
-    private JPanel makePodium(String name1, String name2, String name3)
+    private JPanel makePodium()
     {
         JPanel podiumPanel = new JPanel();
         GridLayout grid = new GridLayout(3, 1, 0, 15);
         podiumPanel.setLayout(grid);
-        podiumPanel.add(podiumLabel(name1));
-        podiumPanel.add(podiumLabel(name2));
-        podiumPanel.add(podiumLabel(name3));
+        System.out.println(ranking.size());
+        for (int i=0; i < 3; i++)
+        {
+            if (i >= ranking.size())
+                podiumPanel.add(podiumLabel("CARLES"));
+            else
+                podiumPanel.add(podiumLabel(ranking.get(i).getUser()));
+        }
 
         podiumPanel.setPreferredSize(new Dimension(100, 30));
         podiumPanel.setMaximumSize(new Dimension(100, 30));
@@ -271,5 +249,20 @@ public class RankingView extends MainView{
         label.setForeground(Color.decode("#FAFAFA"));
         label.setOpaque(true);
         return label;
+    }
+
+    private void makeRankingPanel()
+    {
+        JPanel rankingPanel = new JPanel();
+        rankingPanel.setLayout(new BoxLayout(rankingPanel, BoxLayout.Y_AXIS));
+        rankingPane = new JScrollPane(rankingPanel);
+        rankingPane.setBorder(null);
+        for (int i = 0; i < ranking.size(); i++) {
+            Score score = ranking.get(i);
+            rankingPanel.add(makeLabelName(i + 1, score.getUser(), score.getScore()));
+        }
+
+        gridbag.setConstraints(rankingPane, c);
+        add(rankingPane, c);
     }
 }
