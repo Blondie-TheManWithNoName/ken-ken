@@ -73,7 +73,9 @@ public class RankingView extends MainView{
         makeSquare("<html><p>RANKING</p></html>");
 
         c.gridx = 2;
+        c.gridheight = 2;
         JList<String> top3List = new JList<>(top3Model);
+        top3List.setCellRenderer(new RankingCellRenderer());
         gridbag.setConstraints(top3List, c);
         add(top3List, c);
 
@@ -99,12 +101,16 @@ public class RankingView extends MainView{
         makeSquare("");
 
         c.gridx = 1;
+        c.gridheight = 2;
+        c.gridwidth= 2;
         JList<String> ranksList = new JList<>(ranksModel);
+        ranksList.setCellRenderer(new RankingCellRenderer());
         gridbag.setConstraints(ranksList, c);
         add(ranksList, c);
 
         c.gridx = 3;
         c.gridheight = 1;
+        c.gridwidth= 1;
         makeSquare("");
 
         c.gridy = 4;
@@ -120,12 +126,49 @@ public class RankingView extends MainView{
         ranksModel.clear();
         int count = 0;
         for (Score score : ranking) {
+            String item = formatItem(score.getUser(), score.getScore());
             if (count < 3) {
-                top3Model.addElement(score.getUser() + "....." + score.getScore());
+                top3Model.addElement(item);
             } else {
-                ranksModel.addElement(score.getUser() + "....." + score.getScore());
+                ranksModel.addElement(item);
             }
             count++;
+        }
+    }
+
+    /**
+     * Formats the name and score for display in the list.
+     */
+    private String formatItem(String name, int score) {
+        return name + " . " + score; // This will be split dynamically by the renderer
+    }
+
+    /**
+     * Custom cell renderer to align name and score.
+     */
+    private static class RankingCellRenderer extends DefaultListCellRenderer {
+        @Override
+        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            String[] parts = value.toString().split(" . ");
+            if (parts.length == 2) {
+                String name = parts[0];
+                String score = parts[1];
+
+                FontMetrics fm = label.getFontMetrics(label.getFont());
+                int listWidth = list.getWidth() - 2 * list.getInsets().left - 2 * list.getInsets().right;
+                int nameWidth = fm.stringWidth(name);
+                int scoreWidth = fm.stringWidth(score);
+
+                int spacesWidth = listWidth - nameWidth - scoreWidth - 50;
+                int spaceCount = spacesWidth / fm.charWidth('_');
+
+                String spaces = new String(new char[Math.max(0, spaceCount)]).replace('\0', '.');
+                label.setText(name + spaces + score);
+                label.setFont(new Font("Monospaced", Font.PLAIN, 12)); // Use monospaced font for alignment
+
+            }
+            return label;
         }
     }
 }
