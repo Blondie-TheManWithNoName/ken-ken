@@ -40,7 +40,7 @@ public class PauseController implements ActionListener {
 			System.out.println("click save");
 			path = controller.showSaveDialog();
 			view.setVisible(false);
-			controller.saveGame();
+			controller.saveGame(path);
 		} else if (e.getActionCommand().equals(EXPORT_AC)) {
 			System.out.println("click export");
 			view.setVisible(false);

@@ -243,10 +243,10 @@ public class ModelController {
 	 * Method to save the game.
 	 * @throws IOException If an I/O error occurs.
 	 */
-	public void saveGame() throws IOException {
+	public void saveGame(String path) throws IOException {
 		if (activeKenKen == null)
 			return;
-		persistenceController.saveGame(toDTO(activeKenKen));
+		persistenceController.saveGame(toDTO(activeKenKen), path);
 	}
 
 	/* LOAD SAVED GAME */

@@ -238,9 +238,9 @@ public class PresentationController {
     /**
      * Method to save the game.
      */
-    public void saveGame() {
+    public void saveGame(String path) {
         try {
-            mController.saveGame();
+            mController.saveGame(path);
             //nota: hay que modificar savegame del persistence para que reciba una ruta como el load
             showMenuView();
         } catch (IOException e) {

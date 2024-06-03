@@ -74,7 +74,7 @@ public class PlayKenKenDriver {
 					break;
 				case 4:
 					try {
-						controller.saveGame();
+						controller.saveGame("data/example_path.kenken_game");
 					} catch (IOException e) {
 						System.out.println(e.getMessage());
 					}

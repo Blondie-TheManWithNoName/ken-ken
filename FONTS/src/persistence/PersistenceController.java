@@ -17,8 +17,8 @@ public class PersistenceController {
 		KenKenDAO.save(kenKenDTO, path);
 	}
 
-	public void saveGame(KenKenDTO kenKenDTO) throws IOException {
-		KenKenDAO.saveGame(kenKenDTO);
+	public void saveGame(KenKenDTO kenKenDTO, String path) throws IOException {
+		KenKenDAO.saveGame(kenKenDTO, path);
 	}
 
 	public KenKenDTO loadSavedGame(String path) throws IOException {

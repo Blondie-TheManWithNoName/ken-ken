@@ -23,8 +23,8 @@ public class KenKenDAO {
 		writer.close();
 	}
 
-	public static void saveGame(KenKenDTO kenKenDTO) throws IOException {
-		BufferedWriter writer = new BufferedWriter(new FileWriter("data/example_path.kenken_game"));
+	public static void saveGame(KenKenDTO kenKenDTO, String path) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter(path));
 		for (String line : kenKenDTO.toLines())
 			writer.write(line + "\n");
 		writer.close();
