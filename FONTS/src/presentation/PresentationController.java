@@ -470,16 +470,17 @@ public class PresentationController {
         }
         return null;
     }
+
     /**
      * Displays a dialog box to save a score.
      *
      * @return The full path of the file to be imported.
      */
 
-    public void showSaveScoreDialog() {
+    public String showSaveScoreDialog() {
         String user = JOptionPane.showInputDialog(null, "Enter your username:", "Save Score", JOptionPane.QUESTION_MESSAGE);
         saveScore(user);
-
+        return null;
         
     }
 }
