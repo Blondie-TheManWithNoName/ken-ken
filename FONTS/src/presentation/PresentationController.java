@@ -23,19 +23,19 @@ import java.util.List;
  * interacting with the user interface and delegating tasks to the DomainController.
  */
 public class PresentationController {
-    private ModelController mController;
+    private final ModelController mController;
     private final HomeView homeView;
     private final MainMenuView mainMenuView;
-    private final RankingView rankingView;
-    private ChoosePlayView choosePlayView;
-    private ChooseProposeView chooseProposeView;
+    private RankingView rankingView;
+    private final ChoosePlayView choosePlayView;
+    private final ChooseProposeView chooseProposeView;
     private ProposeKenKenView proposeView;
     private final GenerateView1 generateView1;
     private final GenerateView2 generateView2;
     private GenerateView3 generateView3;
     private KenKenPlayView playView;
     private PauseView pauseView;
-    private ErrorView errorView;
+    private final ErrorView errorView;
     private int minutes;
     private int seconds;
 
@@ -123,7 +123,8 @@ public class PresentationController {
      * Displays the ranking view of the application.
      */
     public void showRankingView() {
-        rankingView.populateRanking();
+        //rankingView.populateRanking();
+        rankingView = new RankingView(this);
         rankingView.makeVisible();
     }
 
