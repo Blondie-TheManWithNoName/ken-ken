@@ -23,19 +23,19 @@ import java.util.List;
  * interacting with the user interface and delegating tasks to the DomainController.
  */
 public class PresentationController {
-    private ModelController mController;
+    private final ModelController mController;
     private final HomeView homeView;
     private final MainMenuView mainMenuView;
-    private final RankingView rankingView;
-    private ChoosePlayView choosePlayView;
-    private ChooseProposeView chooseProposeView;
+    private RankingView rankingView;
+    private final ChoosePlayView choosePlayView;
+    private final ChooseProposeView chooseProposeView;
     private ProposeKenKenView proposeView;
     private final GenerateView1 generateView1;
     private final GenerateView2 generateView2;
     private GenerateView3 generateView3;
     private KenKenPlayView playView;
     private PauseView pauseView;
-    private ErrorView errorView;
+    private final ErrorView errorView;
     private int minutes;
     private int seconds;
 
@@ -68,6 +68,10 @@ public class PresentationController {
         errorView = new ErrorView(this);
     }
 
+    /**
+     * initialize the attribute topology and allowedOperations
+     */
+
     public void initializeKenKenShapesAndOperations() {
         topology = new Topology();
         topology.addShape(Shape.ZIGZAG);
@@ -89,6 +93,12 @@ public class PresentationController {
                 )
         );
     }
+
+    /**
+     * set the attributes minutes and seconds
+     * @param minutes spend during the game
+     * @param seconds spend during the game
+     */
 
     public void setTime(int minutes, int seconds) {
         this.minutes = minutes;
@@ -113,7 +123,8 @@ public class PresentationController {
      * Displays the ranking view of the application.
      */
     public void showRankingView() {
-        rankingView.populateRanking();
+        //rankingView.populateRanking();
+        rankingView = new RankingView(this);
         rankingView.makeVisible();
     }
 
@@ -153,6 +164,10 @@ public class PresentationController {
     public void showGenerateView2() {
         generateView2.makeVisible();
     }
+
+    /**
+     *  sum 1 to the hints used by the user
+     */
 
     public void add1hint(){
         ++hints;
@@ -297,6 +312,11 @@ public class PresentationController {
             // Note: If the path value is null, it throws an exception but there's no message.
         }
     }
+
+    /**
+     * get the score of the game
+     * @return score made in the game
+     */
 
     public int getScore() {
         return mController.getScore(size, groups, topology.getSize(), allowedOperations.size(), minutes, seconds, fixed, hints);
