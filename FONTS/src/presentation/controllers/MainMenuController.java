@@ -16,6 +16,7 @@ public class MainMenuController implements ActionListener {
 
 	private final PresentationController controller;
 	private final MainMenuView view;
+	private String path = "/data";
 
 	public MainMenuController(PresentationController controller, MainMenuView view) {
         this.controller = controller;
@@ -30,10 +31,12 @@ public class MainMenuController implements ActionListener {
 			controller.showChoosePlayView();
 		} else if (e.getActionCommand().equals(LOAD_KENKEN_AC)) {
 			System.out.println("click load");
+			path = controller.showLoadDialog();
+			view.setVisible(false);
+			controller.loadGame(path);
 		} else if (e.getActionCommand().equals(PROPOSE_KENKEN_AC)) {
 			view.setVisible(false);
 			controller.showChooseProposeView();
-
 			System.out.println("click propose");
 		} else if (e.getActionCommand().equals(GENERATE_KENKEN_AC)) {
 			System.out.println("click generate");
@@ -41,6 +44,7 @@ public class MainMenuController implements ActionListener {
 			controller.showGenerateView1();
 		} else if (e.getActionCommand().equals(IMPORT_KENKEN_AC)) {
 			System.out.println("click import");
+			controller.importKenKen(path);
 		} else if (e.getActionCommand().equals(BACK_AC)) {
 			System.out.println("click back");
             view.setVisible(false);

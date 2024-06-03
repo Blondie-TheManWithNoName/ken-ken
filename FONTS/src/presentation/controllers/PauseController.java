@@ -18,6 +18,7 @@ public class PauseController implements ActionListener {
 
 	private final PresentationController controller;
 	private final PauseView view;
+	private String path = "/data";
 
 	public PauseController(PresentationController controller, PauseView view) {
         this.controller = controller;
@@ -37,8 +38,13 @@ public class PauseController implements ActionListener {
             }
         } else if (e.getActionCommand().equals(SAVE_AC)) {
 			System.out.println("click save");
+			path = controller.showSaveDialog();
+			view.setVisible(false);
+			controller.saveGame();
 		} else if (e.getActionCommand().equals(EXPORT_AC)) {
 			System.out.println("click export");
+			view.setVisible(false);
+			controller.exportKenKen(path);
 		} else if (e.getActionCommand().equals(EXIT_AC)) {
 			System.out.println("click exit");
 			view.setVisible(false);

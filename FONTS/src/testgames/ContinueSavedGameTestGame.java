@@ -15,7 +15,7 @@ public class ContinueSavedGameTestGame {
 		System.out.println("=== ContinueSavedGameTestGame ===\n");
 
 		try {
-			kenKen = loadSavedGameDriver.loadSavedGame("data/example_path.kenken_game");
+			kenKen = loadSavedGameDriver.loadSavedGame("example_path.kenken_game");
 			System.out.println("Loaded game from file: data/example_path.kenken_game\n");
 			playKenKenDriver.play(kenKen);
 		} catch (CannotLoadKenKenException e) {

@@ -59,11 +59,11 @@ public class ErrorView {
     public void update(String errorMessage) {
         errorLabel.setText("Error: " + errorMessage);
         JOptionPane.showMessageDialog(frameView, "Error: " + errorMessage);
+        System.exit(-1);
     }
 
     private void actionPerformed_returnButton(ActionEvent event) {
         System.out.println("Return Button clicked");
-        frameView.setVisible(false);
     }
 
 
