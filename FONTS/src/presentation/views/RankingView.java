@@ -3,9 +3,16 @@ package presentation.views;
 import presentation.PresentationController;
 import presentation.controllers.*;
 
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class RankingView extends MainView{
     private final PresentationController pController;
     private final RankingController controller;
+
+    private ArrayList<String> top3 = new ArrayList<>(List.of(new String[]{"1", "2", "3"}));
+    private ArrayList<String> ranks = new ArrayList<>(List.of(new String[]{"random4", "random2", "random3","random4", "random2", "random3"}));;
 
 
     public RankingView(PresentationController controller) {
@@ -45,7 +52,11 @@ public class RankingView extends MainView{
         makeSquare("<html><p>RANKING</p></html>");
 
         c.gridx = 2;
-        makeNumber("9");
+        DefaultListModel<String> options = new DefaultListModel<>();
+        options.addAll(top3);
+        JList<String> ranksList = new JList<>(options);
+        gridbag.setConstraints(ranksList, c);
+        add(ranksList, c);
 
         c.gridx = 3;
         c.gridheight = 2;
@@ -66,10 +77,11 @@ public class RankingView extends MainView{
         makeSquare("");
 
         c.gridx = 1;
-        makeNumber("6");
-
-        c.gridx = 2;
-        createPanelWithButtons("START", false,"RANKING", "EXIT", controller, HomeController.START_KENKEN_AC, HomeController.SEE_RANKING_AC, HomeController.EXIT_AC);
+        DefaultListModel<String> options2 = new DefaultListModel<>();
+        options2.addAll(ranks);
+        JList<String> ranksList = new JList<>(options2);
+        gridbag.setConstraints(ranksList, c);
+        add(ranksList, c);
 
         c.gridx = 3;
         c.gridheight = 1;
