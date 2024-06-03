@@ -226,15 +226,15 @@ public class ModelController {
 	}
 
 	/**
-	 * Method to get the KenKen.
+	 * Method to get the score.
 	 * @param username Username of the player.
 	 * @throws InvalidUsernameException If the username is invalid.
 	 * @throws IOException If an I/O error occurs.
 	 */
-	public void saveScore(String username) throws InvalidUsernameException, IOException {
+	public void saveScore(String username, int minutes, int seconds) throws InvalidUsernameException, IOException {
 		if (username.contains(" ") || username.isEmpty())
 			throw new InvalidUsernameException();
-		persistenceController.saveScore(new ScoreDTO(username, getScore()));
+		persistenceController.saveScore(new ScoreDTO(username, getScore(activeKenKen, minutes,seconds)));
 	}
 
 	/* SAVE GAME */
@@ -299,9 +299,13 @@ public class ModelController {
 	 * Method to get the score.
 	 * @return The score.
 	 */
-	private int getScore() {
-		// TODO: think about the implementation
-		return new Random().nextInt(15000);
+
+
+	private int getScore(KenKen k, int m, int s) {
+		double time = m + s * 0.01;
+		float score = k.getSize() * k.getGroups().size();
+		score /= time;
+		return Math.round(score);
 	}
 
 	/**

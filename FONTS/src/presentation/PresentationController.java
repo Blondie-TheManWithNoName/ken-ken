@@ -300,7 +300,7 @@ public class PresentationController {
      */
     public void saveScore(String username) {
         try {
-            mController.saveScore(username);
+            mController.saveScore(username, getMinutes(), getSeconds());
             showMenuView();
         } catch (InvalidUsernameException | IOException e) {
             showErrorView(e.getMessage());
