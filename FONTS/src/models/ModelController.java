@@ -303,7 +303,7 @@ public class ModelController {
 
 	private int getScore(KenKen k,int t, int o, int m, int s) {
 		int time = m * 60 + s;
-		int score = k.getSize() * k.getSize() * k.getGroups().size() * t * o * 100;
+		int score = k.getSize() * k.getSize() * k.getGroups().size() * t * o;
 		score -= time;
 		return Math.round(score);
 	}
