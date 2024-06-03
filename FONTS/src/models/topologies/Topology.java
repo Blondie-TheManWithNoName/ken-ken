@@ -11,12 +11,9 @@ public class Topology {
 	private final ArrayList<Shape> shapes;
 
 	/**
-	 * Constructor that receives a matrix of 1s and 0s that represents the shape of the block.
-	 * @param shape Matrix of 1s and 0s that represents the shape of the block.
+	 * Constructor Topology with no shape to add.
 	 */
-//	public Topology(int[][] shape) {
-//		this.shape = shape;
-//	}
+
 	public Topology() {
 		shapes = new ArrayList<>();
 	}
@@ -29,37 +26,37 @@ public class Topology {
 		this.shapes.add(shape);
 	}
 
+	/**
+	 * Add a shape to the topology
+	 * @param newShape
+	 */
 	public void addShape(Shape newShape) {
 		this.shapes.add(newShape);
 	}
+
 
 	public ArrayList<Shape> getShapes() {
 		return shapes;
 	}
 
+	/**
+	 * Get specific shape given an index
+	 * @param index
+	 * @return
+	 */
 	public Shape getShape(int index) {
 		return shapes.get(index);
 	}
 
 
+	/**
+	 * Get number of shapes on the topology.
+	 * @return szie of the ArrayList
+	 */
 	public int getSize()
 	{
 		return shapes.size();
 	}
-
-	/**
-	 * Getter for the shape of the block.
-	 * @return Matrix of 1s and 0s that represents the shape of the block.
-	 */
-//	public int size(int index) {
-//		int size = 0;
-//		int[][] shape = shapes.get(index).getShape();
-//		for (int[] row :shape)
-//			for (int cell : row)
-//				if (cell != 0)
-//					size++;
-//		return size;
-//	}
 
 	/**
 	 * Method that rotates the shape of the block a certain number of quarters.
