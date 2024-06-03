@@ -12,6 +12,9 @@ import presentation.custom.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * ProposeKenKenView represents the GUI window for proposing a KenKen puzzle.
+ */
 public class ProposeKenKenView extends MainView {
 //	private final MainMenuView mainMenuView;
 	private final KenKenProposer kenKenProposer;
@@ -26,6 +29,11 @@ public class ProposeKenKenView extends MainView {
 	private ProposeKenKenTool activeTool;
 	private Group selectedGroup;
 
+	/**
+	 * Constructor for ProposeKenKenView.
+	 * @param controller Presentation controller
+	 * @param size Size of the KenKen puzzle
+	 */
 	public ProposeKenKenView(PresentationController controller, int size) {
 		this.kenKenProposer = new KenKenProposer(size);
 //		this.mainMenuView = mainMenuView;
@@ -44,6 +52,10 @@ public class ProposeKenKenView extends MainView {
 //		setVisible(true);
 //	}
 
+	/**
+	 * Sets the active tool for the user.
+	 * @param toolBarItem The tool to be set as active
+	 */
 	public void setTool(JToolBarItem toolBarItem) {
 		if (activeTool == toolBarItem.getTool() && activeTool != ProposeKenKenTool.ADD_TO_GROUP) {
 			selectNoTools();
@@ -72,6 +84,11 @@ public class ProposeKenKenView extends MainView {
 		}
 	}
 
+	/**
+	 * Performs an action with the selected tool on a given cell.
+	 * @param row Row of the cell
+	 * @param col Column of the cell
+	 */
 	public void useToolWithCell(int row, int col) {
 		if (activeTool == null) {
 			JOptionPane.showMessageDialog(this, "Please select a tool first", "No tool selected", JOptionPane.WARNING_MESSAGE);
@@ -109,6 +126,9 @@ public class ProposeKenKenView extends MainView {
 		}
 	}
 
+	/**
+	 * Generates groups in the proposed KenKen puzzle.
+	 */
 	public void generateGroups() {
 		try {
 			kenKenProposer.generateGroups();
@@ -129,23 +149,35 @@ public class ProposeKenKenView extends MainView {
 		// TODO: do something with the KenKen
 	}
 
+	/**
+	 * Exits the proposal process.
+	 */
 	public void exit() {
 		if (JOptionPane.showConfirmDialog(this, "Are you sure you want to exit? All progress will be lost", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION)
 			dispose();
 	}
 
+	/**
+	 * Exits the proposal process.
+	 */
 	@Override
 	public void dispose() {
 //		mainMenuView.setVisible(true);
 		super.dispose();
 	}
 
+	/**
+	 * Configures the window settings.
+	 */
 	private void configureWindow() {
 		setTitle("Propose a KenKen");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setResizable(false);
 	}
 
+	/**
+	 * Configures the layout of the ProposeKenKenView.
+	 */
 	private void configureLayout() {
 		setLayout(new BorderLayout());
 
@@ -165,6 +197,10 @@ public class ProposeKenKenView extends MainView {
 		add(kenKenPanel, BorderLayout.CENTER);
 		add(buttonsPanel, BorderLayout.SOUTH);
 	}
+
+	/**
+	 * Initializes the ProposeKenKenView.
+	 */
 	public void start() {
 		for (int i = 0; i < kenKenProposer.getSize(); i++)
 			for (int j = 0; j < kenKenProposer.getSize(); j++)
@@ -229,6 +265,10 @@ public class ProposeKenKenView extends MainView {
 
 	}
 
+	/**
+	 * Prompts the user to create a new group.
+	 * @return The newly created group
+	 */
 	private Group askNewGroup() {
 		JPanel askOperationPane = new JPanel(new GridLayout(2, 2));
 		JComboBox<String> comboBox = new JComboBox<>(new String[]{"+", "-", "*", "/", "gcd", "lcm", "^", "="});
@@ -252,6 +292,10 @@ public class ProposeKenKenView extends MainView {
 		return null;
 	}
 
+	/**
+	 * Prompts the user to select a group.
+	 * @return The selected group
+	 */
 	private Group selectGroup() {
 		if (!kenKenProposer.anyGroup()) {
 			JOptionPane.showMessageDialog(this, "No groups have been created", "No groups", JOptionPane.ERROR_MESSAGE);
@@ -271,6 +315,10 @@ public class ProposeKenKenView extends MainView {
 		return null;
 	}
 
+	/**
+	 * Deletes a group from the KenKen puzzle.
+	 * @param group The group to be deleted
+	 */
 	private void deleteGroup(Group group) {
 		for (int i = 0; i < kenKenProposer.getSize(); i++)
 			for (int j = 0; j < kenKenProposer.getSize(); j++)
@@ -283,6 +331,9 @@ public class ProposeKenKenView extends MainView {
 			selectNoTools();
 	}
 
+	/**
+	 * Deselects all tools.
+	 */
 	private void selectNoTools() {
 		activeTool = null;
 		toolBar.unsetActiveAll();

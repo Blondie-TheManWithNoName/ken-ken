@@ -1,10 +1,11 @@
 package presentation.views;
 
-
 import presentation.PresentationController;
-import presentation.controllers.KenKenPlayController;
 import presentation.controllers.PauseController;
 
+/**
+ * PauseView represents the GUI window for the pause menu.
+ */
 public class PauseView extends MainView {
 
 	private final PauseController controller;
@@ -12,7 +13,12 @@ public class PauseView extends MainView {
 	private final int minutes;
 	private final int seconds;
 
-
+	/**
+	 * Constructor for PauseView.
+	 * @param controller Presentation controller
+	 * @param minutes Minutes remaining
+	 * @param seconds Seconds remaining
+	 */
 	public PauseView(PresentationController controller, int minutes, int seconds) {
 		super();
 		this.pController = controller;
@@ -22,6 +28,9 @@ public class PauseView extends MainView {
 		start();
 	}
 
+	/**
+	 * Initializes the pause menu.
+	 */
 	public void start() {
 
 		makeSquare("");
@@ -40,7 +49,7 @@ public class PauseView extends MainView {
 
 		c.gridy = 2;
 		c.gridx = 1;
-		c.gridheight = 1;		;
+		c.gridheight = 1;
 		makeButtonSecond("SAVE", controller, PauseController.SAVE_AC);
 
 		c.gridy = 3;
@@ -51,7 +60,6 @@ public class PauseView extends MainView {
 		makeSquare("<html><p style='margin-bottom: -7;'>KEN</p><p style='margin-top: -7;'>KEN</p></html>");
 		c.gridx = 2;
 		c.gridheight = 1;
-//		createPanelWithButtons("");
 		makeButtonSecond("EXPORT", controller, PauseController.EXPORT_AC);
 		c.gridx = 3;
 		c.gridheight = 2;
@@ -61,7 +69,6 @@ public class PauseView extends MainView {
 		c.gridx = 2;
 		c.gridheight = 1;
 		makeButtonSecond("EXIT", controller, PauseController.EXIT_AC);
-
 
 		c.gridheight = 1;
 		c.gridy = 5;
