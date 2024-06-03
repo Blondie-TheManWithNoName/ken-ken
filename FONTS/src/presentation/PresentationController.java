@@ -38,6 +38,8 @@ public class PresentationController {
     private ErrorView errorView;
     private int minutes;
     private int seconds;
+    private int hints;
+    private boolean solved_clicked;
 
     private int size;
     private int fixed;
@@ -181,7 +183,10 @@ public class PresentationController {
      * @throws ShapesAndOperationsDoNotMatchException If shapes and operations do not match.
      */
     public KenKen generateKenKen() throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
-        mController.generateKenKen(this.size, this.fixed, topology, allowedOperations);
+        boolean g = false;
+        do {
+            g = mController.generateKenKen(this.size, this.fixed, topology, allowedOperations);
+        } while (!g);
         return mController.getActiveKenKen();
     }
 
@@ -446,7 +451,6 @@ public class PresentationController {
         }
         return null;
     }
-
     /**
      * Displays a dialog box to save a score.
      *

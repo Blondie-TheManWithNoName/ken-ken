@@ -198,8 +198,9 @@ public class KenKenPlayView extends JFrame {
 		try {
 			if (kenKen.check())
 			{
-				JMainOptionPane.showMessageDialog(this, "CONGRATULATIONS!\nYOU SOLVED THE KENKEN!", "Success", JOptionPane.INFORMATION_MESSAGE);
 				timer.stop();
+				JMainOptionPane.showMessageDialog(this, "CONGRATULATIONS!\nYOU SOLVED THE KENKEN!", "Success", JOptionPane.INFORMATION_MESSAGE);
+				JMainOptionPane.showMessageDialog(this, "You want to save your score?", "Save Score?", JOptionPane.QUESTION_MESSAGE);
 			}
 		} catch (OperandsDoNotMatchException | NonIntegerResultException e) {
 			JMainOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -213,7 +214,7 @@ public class KenKenPlayView extends JFrame {
 	 * @throws ValueOutOfBoundsException       If the value is out of bounds.
 	 */
 	public void solve() throws RewriteFixedPositionException, ValueOutOfBoundsException {
-		startTime = startTime - 1800000;
+		//startTime = startTime - 1800000;
 		for (int row = 0; row < kenKen.getSize(); row++) {
 			for (int col = 0; col < kenKen.getSize(); col++) {
 				if (!kenKen.getCell(row, col).isFixed())
@@ -223,9 +224,9 @@ public class KenKenPlayView extends JFrame {
 				}
 			}
 		}
-
-		JMainOptionPane.showMessageDialog(this, "CONGRATULATIONS!\nTHE AI SOLVED THE KENKEN!", "Success", JOptionPane.PLAIN_MESSAGE);
 		timer.stop();
+		JMainOptionPane.showMessageDialog(this, "CONGRATULATIONS!\nTHE AI SOLVED THE KENKEN!", "Success", JOptionPane.PLAIN_MESSAGE);
+
 	}
 
 	/**
