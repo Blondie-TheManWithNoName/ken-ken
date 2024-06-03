@@ -9,6 +9,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RankingView represents the GUI window for displaying the game ranking.
+ */
 public class RankingView extends MainView{
     private final PresentationController pController;
     private final RankingController controller;
@@ -18,7 +21,10 @@ public class RankingView extends MainView{
 
     List<Score> ranking;
 
-
+    /**
+     * Constructor for RankingView.
+     * @param controller Presentation controller
+     */
     public RankingView(PresentationController controller) {
         super();
         this.pController = controller;
@@ -28,6 +34,9 @@ public class RankingView extends MainView{
         start();
     }
 
+    /**
+     * Initializes the ranking view.
+     */
     public void start() {
         populateRanking();
         addEmptyRow(0);
@@ -38,7 +47,10 @@ public class RankingView extends MainView{
 
     }
 
-
+    /**
+     * Adds an empty row to the layout.
+     * @param y The vertical position of the row
+     */
     private void addEmptyRow(int y) {
         c.gridy = y;
         for (int x = 0; x < 4; x++) {
@@ -47,6 +59,9 @@ public class RankingView extends MainView{
         }
     }
 
+    /**
+     * Adds the second row of components.
+     */
     private void addSecondRow() {
         c.gridy = 1;
 
@@ -73,6 +88,9 @@ public class RankingView extends MainView{
         makeSquare("");
     }
 
+    /**
+     * Adds the third row of components.
+     */
     private void addThirdRow() {
         c.gridy = 3;
 
@@ -93,6 +111,9 @@ public class RankingView extends MainView{
         makeSquare("");
     }
 
+    /**
+     * Populates the ranking list with scores.
+     */
     public void populateRanking() {
         this.ranking = pController.getRanking();
         top3Model.clear();
