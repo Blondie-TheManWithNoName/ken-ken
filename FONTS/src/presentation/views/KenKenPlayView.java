@@ -12,6 +12,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The KenKenPlayView class represents the view for playing KenKen puzzles.
+ */
 public class KenKenPlayView extends JFrame {
 	private final JSetCellValue setCellValue;
 	private final KenKenSolver solver;
@@ -26,10 +29,16 @@ public class KenKenPlayView extends JFrame {
 	private int minutes;
 	private int seconds;
 	private Timer timer;
-	protected final  JMainButton solve = new JSmallButton("SOLVE");
-	protected final  JMainButton hint = new JSmallButton("HINT");
+	protected final JMainButton solve = new JSmallButton("SOLVE");
+	protected final JMainButton hint = new JSmallButton("HINT");
 	private JKenKenCell selected;
 
+	/**
+	 * Constructs a KenKenPlayView object.
+	 *
+	 * @param controller The PresentationController instance.
+	 * @param kenKen     The KenKen puzzle instance.
+	 */
 	public KenKenPlayView(PresentationController controller, KenKen kenKen) {
 		this.kenKen = kenKen;
 		this.kenKenPanel = new JKenKenPanel(kenKen);
@@ -53,6 +62,9 @@ public class KenKenPlayView extends JFrame {
 		start();
 	}
 
+	/**
+	 * Initializes and configures the components of the KenKenPlayView.
+	 */
 	public void start() {
 		configureWindow();
 		configureLayout();
@@ -61,6 +73,9 @@ public class KenKenPlayView extends JFrame {
 
 	}
 
+	/**
+	 * Configures the layout of the KenKenPlayView.
+	 */
 	private void configureWindow() {
 		setTitle("KenKen");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -74,6 +89,9 @@ public class KenKenPlayView extends JFrame {
 		hint.setEnabled(true);
 	}
 
+	/**
+	 * Configures the layout of the KenKenPlayView.
+	 */
 	protected void configureLayout() {
 		setLayout(new BorderLayout());
 
@@ -131,6 +149,13 @@ public class KenKenPlayView extends JFrame {
 		add(marginPanel, BorderLayout.CENTER);
 
 	}
+
+	/**
+	 * Selects a cell in the KenKen puzzle.
+	 *
+	 * @param row The row index of the cell.
+	 * @param col The column index of the cell.
+	 */
 	public void selectCell(int row, int col) {
 		if (selected != null)
 			selected.deselect();
@@ -139,6 +164,11 @@ public class KenKenPlayView extends JFrame {
 		setCellValue.enableAllBut(kenKen.getValue(row, col));
 	}
 
+	/**
+	 * Sets the value of the selected cell in the KenKen puzzle.
+	 *
+	 * @param value The value to set.
+	 */
 	public void setValue(int value) {
 		if (selected != null) {
 			try {
@@ -156,6 +186,9 @@ public class KenKenPlayView extends JFrame {
 		if (kenKen.isFull()) check();
 	}
 
+	/**
+	 * Checks the solution of the KenKen puzzle.
+	 */
 	public void check() {
 		if (selected != null) {
 			selected.deselect();
@@ -173,6 +206,12 @@ public class KenKenPlayView extends JFrame {
 		}
 	}
 
+	/**
+	 * Solves the KenKen puzzle.
+	 *
+	 * @throws RewriteFixedPositionException    If attempting to rewrite a fixed position.
+	 * @throws ValueOutOfBoundsException       If the value is out of bounds.
+	 */
 	public void solve() throws RewriteFixedPositionException, ValueOutOfBoundsException {
 		startTime = startTime - 1800000;
 		for (int row = 0; row < kenKen.getSize(); row++) {
@@ -189,6 +228,12 @@ public class KenKenPlayView extends JFrame {
 		timer.stop();
 	}
 
+	/**
+	 * Provides a hint for solving the KenKen puzzle.
+	 *
+	 * @throws RewriteFixedPositionException    If attempting to rewrite a fixed position.
+	 * @throws ValueOutOfBoundsException       If the value is out of bounds.
+	 */
 	public void hint() throws RewriteFixedPositionException, ValueOutOfBoundsException {
 		startTime = startTime - 60000;
 		if (!kenKen.isFull()){
@@ -213,6 +258,9 @@ public class KenKenPlayView extends JFrame {
 		}
 	}
 
+	/**
+	 * Starts the timer for measuring elapsed time.
+	 */
 	private void startTimer() {
 		timer = new Timer(1000, new ActionListener() {
 
@@ -229,15 +277,32 @@ public class KenKenPlayView extends JFrame {
 		timer.start();
 	}
 
+	/**
+	 * Stops the timer.
+	 */
 	public void stopTime()
 	{
 		elapsedTimeWhenStopped += System.currentTimeMillis() - startTime;
 		timer.stop();
 	}
 
+	/**
+	 * Gets the elapsed minutes.
+	 *
+	 * @return The elapsed minutes.
+	 */
 	public int getMinutes(){return this.minutes;}
+
+	/**
+	 * Gets the elapsed seconds.
+	 *
+	 * @return The elapsed seconds.
+	 */
 	public int getSeconds(){return this.seconds;}
 
+	/**
+	 * Makes the KenKenPlayView visible.
+	 */
 	public void makeVisible() {
 		setVisible(true);
 		startTime = System.currentTimeMillis();
