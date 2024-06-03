@@ -20,8 +20,7 @@ public class JKenKenCell extends JButton {
 		this.row = row;
 		this.col = col;
 		setValue(value, false);
-		setForeground(Color.decode("#FAFAFA"));
-		setBackground(Color.WHITE);
+		setBackground(Color.decode("#FAFAFA"));
 		setHorizontalAlignment(SwingConstants.CENTER);
 		setPreferredSize(new Dimension(CELL_SIZE, CELL_SIZE));
 		setOpaque(true);
@@ -46,7 +45,6 @@ public class JKenKenCell extends JButton {
 			setText("");
 		else
 			setText(String.valueOf(value));
-
         if (selected) {
 			setBackground(Color.decode("#775AD8"));
             setForeground(Color.decode("#FAFAFA"));
@@ -103,7 +101,6 @@ public class JKenKenCell extends JButton {
 		setBackground(Color.decode("#775AD8"));
 		setForeground(Color.decode("#FAFAFA"));
 		notationLabel.setForeground(Color.decode("#FAFAFA"));
-
 
 	}
 

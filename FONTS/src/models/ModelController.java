@@ -301,11 +301,11 @@ public class ModelController {
 	 */
 
 
-	private int getScore(KenKen k,int t, int o, int m, int s,int f, int h) {
-		int time = m * 60 + s;
-		int score = k.getSize() * k.getSize() * k.getGroups().size() * t * o;
-		int penalty = score / (k.getSize() * k.getSize());
-		score = score - time - ((h + f) * penalty);
+	private int getScore(KenKen kenKen, int numTopologies, int numOperations, int min, int sec, int numFixed, int numHints) {
+		int time = min * 60 + sec;
+		int score = kenKen.getSize() * kenKen.getSize() * kenKen.getGroups().size() * numTopologies * numOperations;
+		int penalty = score / (kenKen.getSize() * kenKen.getSize());
+		score = score - time - ((numHints + numFixed) * penalty);
 		return score;
 	}
 
