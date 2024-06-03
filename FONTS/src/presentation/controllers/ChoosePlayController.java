@@ -1,8 +1,6 @@
 package presentation.controllers;
 
-import exceptions.CannotCreateOperationException;
-import exceptions.OperandsDoNotMatchException;
-import exceptions.ShapesAndOperationsDoNotMatchException;
+import exceptions.*;
 import presentation.PresentationController;
 import presentation.custom.JMainSpinner;
 import presentation.views.ChoosePlayView;
@@ -34,11 +32,17 @@ public class ChoosePlayController implements ActionListener, ChangeListener {
 				view.setVisible(false);
 				controller.initializeKenKenShapesAndOperations();
 				controller.setSizeAndFixed(size, new Random().nextInt(size));
-				controller.generateKenKen();
+				boolean g = false;
+				do {
+					if (controller.generateKenKen() != null)
+						g = true;
+				} while (!g);
 				controller.showPlayView();
             } catch (ShapesAndOperationsDoNotMatchException ex) {
                 System.out.println("Will not use it");
-            } catch (CannotCreateOperationException | OperandsDoNotMatchException ex) {
+            } catch (CannotCreateOperationException | OperandsDoNotMatchException | ChooseTopologyException ex) {
+                throw new RuntimeException(ex);
+            } catch (ChooseOperationException ex) {
                 throw new RuntimeException(ex);
             }
         } else if (e.getActionCommand().equals(BACK_AC)) {

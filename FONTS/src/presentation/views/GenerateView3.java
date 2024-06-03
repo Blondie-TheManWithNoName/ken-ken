@@ -24,7 +24,7 @@ public class GenerateView3 extends MainView {
 	 * @throws OperandsDoNotMatchException         If operands do not match the operation.
 	 * @throws ShapesAndOperationsDoNotMatchException If shapes and operations do not match.
 	 */
-	public GenerateView3(PresentationController controller) throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
+	public GenerateView3(PresentationController controller) throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, ChooseTopologyException, ChooseOperationException {
 		super();
 		this.pController = controller;
 		this.controller = new Generate3Controller(pController, this);
@@ -39,8 +39,9 @@ public class GenerateView3 extends MainView {
 	 * @throws OperandsDoNotMatchException         If operands do not match the operation.
 	 * @throws ShapesAndOperationsDoNotMatchException If shapes and operations do not match.
 	 */
-	public void generateKenKen() throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
-		this.kenKen = pController.generateKenKen();
+	public void generateKenKen() throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, ChooseTopologyException, ChooseOperationException {
+		pController.generateKenKen();
+		this.kenKen = pController.getActiveKenKen();
 		this.kenKenPanel = new JKenKenPanel(kenKen);
 		swapKenKen(kenKenPanel);
 		revalidate();

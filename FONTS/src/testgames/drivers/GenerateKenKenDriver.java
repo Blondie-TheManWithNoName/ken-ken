@@ -96,6 +96,6 @@ public class GenerateKenKenDriver {
             }
         } while (choice != 0);
 
-        controller.generateKenKen(size, fixedValues, topology, allowedOperations);
+//        controller.generateKenKen(size, fixedValues, topology, allowedOperations);
     }
 }

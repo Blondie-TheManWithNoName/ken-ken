@@ -1,8 +1,6 @@
 package presentation.controllers;
 
-import exceptions.CannotCreateOperationException;
-import exceptions.OperandsDoNotMatchException;
-import exceptions.ShapesAndOperationsDoNotMatchException;
+import exceptions.*;
 import presentation.PresentationController;
 import presentation.views.GenerateView3;
 
@@ -30,6 +28,10 @@ public class Generate3Controller implements ActionListener {
                 view.generateKenKen();
             } catch (CannotCreateOperationException | ShapesAndOperationsDoNotMatchException |
                      OperandsDoNotMatchException ex) {
+                throw new RuntimeException(ex);
+            } catch (ChooseTopologyException ex) {
+                throw new RuntimeException(ex);
+            } catch (ChooseOperationException ex) {
                 throw new RuntimeException(ex);
             }
         } else if (e.getActionCommand().equals(PLAY_AC)) {

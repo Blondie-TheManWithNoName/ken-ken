@@ -129,7 +129,7 @@ public class ModelController {
 	 * @return True if the KenKen was generated, false otherwise.
 	 * @throws OperandsDoNotMatchException If the operands do not match.
 	 */
-	public boolean generateKenKen(int size, int fixedCells, Topology topology, List<Class<? extends Operation>> operations) throws OperandsDoNotMatchException, CannotCreateOperationException, ShapesAndOperationsDoNotMatchException {
+	public boolean generateKenKen(int size, int fixedCells, Topology topology, List<Class<? extends Operation>> operations) throws OperandsDoNotMatchException, CannotCreateOperationException, ShapesAndOperationsDoNotMatchException, ChooseTopologyException, ChooseOperationException {
 		KenKenGenerator generator = new KenKenGenerator(size, fixedCells, topology, operations);
 		boolean generated = generator.generate();
 		if (generated)

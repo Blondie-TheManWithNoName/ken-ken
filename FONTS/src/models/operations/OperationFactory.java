@@ -3,6 +3,7 @@ package models.operations;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -38,6 +39,8 @@ public class OperationFactory {
 		List<Class<? extends Operation>> validOperations = new ArrayList<>();
 
 		Random random = new Random();
+//		System.out.println("allowedOperations" + allowedOperations + " " + Arrays.toString(operands));
+		System.out.println();
 		for (Class<? extends Operation> operation : allowedOperations) {
 			Operation createdOperation = null;
 			try {
@@ -51,7 +54,8 @@ public class OperationFactory {
 			} catch (OperandsDoNotMatchException | NonIntegerResultException ignored) {
 			}
 		}
-
+		if (validOperations.isEmpty())
+			throw new CannotCreateOperationException();
 		return createOperation(validOperations.get(random.nextInt(validOperations.size())), 0);
 	}
 

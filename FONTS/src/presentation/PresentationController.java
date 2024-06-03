@@ -158,18 +158,21 @@ public class PresentationController {
         ++hints;
     }
 
+    public void setTopologyAndAllowedOperations(List<Class<? extends Operation>> allowedOperations, Topology topology)
+    {
+        this.topology = topology;
+        this.allowedOperations = allowedOperations;
+
+    }
+
     /**
      * Displays the third generate view of the application.
      */
-    public void showGenerateView3(List<Class<? extends Operation>> allowedOperations, Topology topology) throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
-        this.topology = topology;
+    public void showGenerateView3(List<Class<? extends Operation>> allowedOperations, Topology topology) throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, ChooseTopologyException, ChooseOperationException {
         JKenKenCell.CELL_SIZE = 25;
         JKenKenCell.FONT_SIZE = (-10 / 3) * size + 40;
-        this.allowedOperations = allowedOperations;
-        if (mController.generateKenKen(9, 0, topology, allowedOperations)) {
-            generateView3 = new GenerateView3(this);
-            generateView3.makeVisible();
-        }
+        generateView3 = new GenerateView3(this);
+        generateView3.makeVisible();
     }
 
     /**
@@ -180,12 +183,11 @@ public class PresentationController {
      * @throws OperandsDoNotMatchException          If operands do not match.
      * @throws ShapesAndOperationsDoNotMatchException If shapes and operations do not match.
      */
-    public KenKen generateKenKen() throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException {
-        boolean g = false;
-        do {
-            g = mController.generateKenKen(this.size, this.fixed, topology, allowedOperations);
-        } while (!g);
-        groups = mController.getActiveKenKen().getGroups().size();
+    public KenKen generateKenKen() throws CannotCreateOperationException, OperandsDoNotMatchException, ShapesAndOperationsDoNotMatchException, ChooseTopologyException, ChooseOperationException {
+        if (mController.generateKenKen(this.size, this.fixed, topology, allowedOperations))
+        {
+            groups = mController.getActiveKenKen().getGroups().size();
+        }
         return mController.getActiveKenKen();
     }
 
@@ -465,5 +467,10 @@ public class PresentationController {
         String user = JOptionPane.showInputDialog(null, "Enter your username:", "Save Score", JOptionPane.QUESTION_MESSAGE);
         saveScore(user);
         return null;
+    }
+
+    public KenKen getActiveKenKen()
+    {
+        return mController.getActiveKenKen();
     }
 }

@@ -1,8 +1,6 @@
 package presentation.controllers;
 
-import exceptions.CannotCreateOperationException;
-import exceptions.OperandsDoNotMatchException;
-import exceptions.ShapesAndOperationsDoNotMatchException;
+import exceptions.*;
 import models.operations.*;
 import models.topologies.Shape;
 import models.topologies.Topology;
@@ -36,9 +34,9 @@ public class Generate2Controller implements ActionListener {
             new OperationMapping(false, OperationMultiplication.class),
             new OperationMapping(false, OperationDivision.class),
             new OperationMapping(false, OperationEquality.class),
+            new OperationMapping(false, OperationPower.class),
             new OperationMapping(false, OperationGCD.class),
-            new OperationMapping(false, OperationLCM.class),
-            new OperationMapping(false, OperationPower.class)
+            new OperationMapping(false, OperationLCM.class)
     };
 
     private ShapeMapping[] shapeMappings = new ShapeMapping[]{
@@ -76,12 +74,14 @@ public class Generate2Controller implements ActionListener {
                 }
             }
             try {
+                controller.setTopologyAndAllowedOperations(allowedOperations, topology);
+                controller.generateKenKen();
                 controller.showGenerateView3(allowedOperations, topology);
                 view.setVisible(false);
 
-            } catch (CannotCreateOperationException | OperandsDoNotMatchException |
-                     ShapesAndOperationsDoNotMatchException ex) {
-//                System.err.println("Warning: " + );
+            } catch (CannotCreateOperationException | OperandsDoNotMatchException  |
+                     ShapesAndOperationsDoNotMatchException | ChooseOperationException | ChooseTopologyException ex) {
+                System.err.println("Warning: " + ex);
                 JMainOptionPane.showMessageDialog(view, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
 
 //                throw new RuntimeException(ex);

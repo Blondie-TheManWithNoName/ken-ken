@@ -10,6 +10,8 @@ import models.operations.OperationLimitedOperands;
 import models.topologies.Shape;
 import models.topologies.Topology;
 
+import javax.swing.*;
+
 /**
  * A class for generating KenKen puzzles.
  */
@@ -29,7 +31,7 @@ public class KenKenGenerator {
      * @param allowedOperations the list of allowed operation for generating the groups
 	 * @throws OperandsDoNotMatchException if the number of operands does not match the topology size
      */
-	public KenKenGenerator(int size, int fixedValues, Topology topology, List<Class<? extends Operation>> allowedOperations) throws ShapesAndOperationsDoNotMatchException, OperandsDoNotMatchException, CannotCreateOperationException {
+	public KenKenGenerator(int size, int fixedValues, Topology topology, List<Class<? extends Operation>> allowedOperations) throws ShapesAndOperationsDoNotMatchException, OperandsDoNotMatchException, CannotCreateOperationException, ChooseOperationException {
         this.size = size;
         this.fixedValues = fixedValues;
         this.topology = topology;
@@ -48,6 +50,8 @@ public class KenKenGenerator {
 
 			}
         this.allowedOperations = allowedOperations;
+		if (allowedOperations.isEmpty())
+			throw new ChooseOperationException();
     }
 
 	/**
@@ -64,14 +68,14 @@ public class KenKenGenerator {
 	 * 
      * @return true if the puzzle is generated successfully, false otherwise
      */
-	public boolean generate() {
+	public boolean generate() throws ChooseTopologyException {
 		kenKen = new KenKen(size);
 		generateLatinSquare(kenKen);
 		try {
 			generateGroups(kenKen);
 		} catch (CellHasNoGroupException | GroupCellsNotContiguousException | CannotCreateOperationException e) {
 			kenKen = null;
-			System.out.println("OKEY" + e);
+			System.out.println("OKEY " + e);
 
 			return false;
 		}
@@ -127,7 +131,7 @@ public class KenKenGenerator {
      * @throws GroupCellsNotContiguousException if group cells are not contiguous
      * @throws CannotCreateOperationException  if an operation cannot be created
      */
-	private void generateGroups(KenKen kenKen) throws CellHasNoGroupException, GroupCellsNotContiguousException, CannotCreateOperationException {
+	private void generateGroups(KenKen kenKen) throws CellHasNoGroupException, GroupCellsNotContiguousException, CannotCreateOperationException, ChooseTopologyException {
         int[][] groupMap = new int[size][size];
 
         if (!generateGroups(groupMap, 0, 0, 1))
@@ -145,28 +149,31 @@ public class KenKenGenerator {
         for (int group : groups.keySet()) {
             List<Integer> groupValues = new ArrayList<>();
             for (int[] position : groups.get(group))
-                groupValues.add(kenKen.getValue(position[0], position[1]));
-            int[] operands = groupValues.stream().mapToInt(i -> i).toArray();
+			{
+				groupValues.add(kenKen.getValue(position[0], position[1]));
+			}
+			int[] operands = groupValues.stream().mapToInt(i -> i).toArray();
 
-			Operation operation = OperationFactory.createOperation(allowedOperations, operands);
 
-            int result = 0;
-            try {
+			Operation operation;
+			int result = 0;
+			try {
 				if (operands.length == 1)
 				{
 					result = operands[0];
 					operation = OperationFactory.createOperation("=", result);
 				}
 				else {
+					operation = OperationFactory.createOperation(allowedOperations, operands);
 					result = operation.calculate(operands);
 				}
-			} catch (OperandsDoNotMatchException | NonIntegerResultException e) {
+				groupOperations.put(
+						group,
+						OperationFactory.createOperation(operation.getClass(), result)
+				);
+			} catch (OperandsDoNotMatchException | NonIntegerResultException | CannotCreateOperationException e) {
 				System.out.println("result" + e);
 			}
-            groupOperations.put(
-                    group,
-                    OperationFactory.createOperation(operation.getClass(), result)
-            );
         }
 
         for (int group : groups.keySet()) {
@@ -190,7 +197,7 @@ public class KenKenGenerator {
      * @param nextGroup  the index of the next group to be generated
      * @return true if groups are generated successfully, false otherwise
      */
-	private boolean generateGroups(int[][] groupMap, int row, int col, int nextGroup)  {
+	private boolean generateGroups(int[][] groupMap, int row, int col, int nextGroup) throws ChooseTopologyException {
 //		System.out.println("cell" +row+", " +col + " nextGroup" + nextGroup);
 
 		if (row == size) {
@@ -206,6 +213,9 @@ public class KenKenGenerator {
 			return generateGroups(groupMap, row + 1, col, nextGroup);
 
 		int lowRand = new Random().nextInt(3);
+		if (topology.getSize() < 1)
+			throw new ChooseTopologyException();
+
 		int topRand = new Random().nextInt(topology.getSize());
 //		for (int j = 0; j < topRand + 4; j++)
 		int j = 0;
