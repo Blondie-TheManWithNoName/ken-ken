@@ -235,7 +235,7 @@ public class KenKenPlayView extends JFrame {
 		}
 		timer.stop();
 		JMainOptionPane.showMessageDialog(this, "CONGRATULATIONS!\nTHE AI SOLVED THE KENKEN!", "Success", JOptionPane.PLAIN_MESSAGE);
-		this.setVisible(false);
+//		this.setVisible(false);
 		pController.showMenuView();
 
 	}
